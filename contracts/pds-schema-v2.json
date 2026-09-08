@@ -1,0 +1,606 @@
+{
+  "schema_version": "2.0",
+  "document_type": "database_design_contract",
+  "status": "design",
+  "verified_against_database": false,
+  "verified_at": null,
+  "deployed_commit": null,
+  "design_review": {
+    "document_version": "1.3",
+    "reviewed_on": "2026-09-08",
+    "basis": "사용자 Next.js/TypeScript 및 Android 네이티브 결정, 최신 Next.js·Android 공식 문서; 기존 백엔드·DB Context7 기록 유지",
+    "application_runtime_proposal": "Next.js / React / TypeScript / Node.js 24 LTS + Android Kotlin / Jetpack Compose + Spring Boot 4.1.x / Java 21 LTS",
+    "hosting_proposal": "Lightsail Seoul Linux IPv4 VPS, Caddy + Next.js Node.js + Spring Boot + MariaDB. 4GB 잠정 예산, 2GB는 실제 부하 시험 통과 후 절약 후보",
+    "database_region_proposal": "ap-northeast-2, 동일 VPS 내부 MariaDB",
+    "database_plan_proposal": "MariaDB 12.3 LTS, 호환·migration 실험 후 정확한 patch/digest 고정",
+    "runtime_connection": "내부 Docker 네트워크, MariaDB JDBC 제한 계정, HikariCP 제한 풀, UTC 명시",
+    "transactions": "Spring @Transactional, 같은 DataSource/연결로 InnoDB 작업. 예외 시 전체 rollback",
+    "testing_database": "로컬 또는 CI Testcontainers, 운영과 동일 MariaDB patch/digest",
+    "purchase_or_provisioning_performed": false,
+    "compatibility_verified": false,
+    "flyway_caveat": "공식 지원표는 MariaDB 10.11까지 명시. 12.3 동작은 구현 첫 단계의 실제 migration 시험 대상"
+  },
+  "database": {
+    "engine": "MariaDB",
+    "version_proposal": "12.3 LTS",
+    "version_deployed": null,
+    "storage_engine": "InnoDB",
+    "provider_proposal": "AWS Lightsail VPS self-managed",
+    "application_schema": "pds",
+    "application_access": "Spring Boot 서버만 JDBC 제한 DB 계정 사용",
+    "browser_direct_database_access": false,
+    "public_data_api": "Spring Boot /api/v1, DB 3306 외부 미노출",
+    "migration_access": "런타임과 분리한 DDL 계정, Flyway 실행 단계에만 제공",
+    "charset": "utf8mb4",
+    "text_collation": "utf8mb4_unicode_ci",
+    "id_storage": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin, canonical lowercase UUID",
+    "sql_modes": [
+      "STRICT_TRANS_TABLES",
+      "NO_ZERO_DATE",
+      "NO_ZERO_IN_DATE",
+      "ERROR_FOR_DIVISION_BY_ZERO"
+    ],
+    "session_timezone": "+00:00",
+    "session_timezone_note": "DATETIME은 자동 시간대 변환을 하지 않음. JDBC 경계에서 UTC로 직렬화·역직렬화"
+  },
+  "tables": [
+    {
+      "name": "plans",
+      "purpose": "계획의 고정 식별자. 현재 내용은 plan_revisions의 최대 revision으로 도출",
+      "fields": [
+        {
+          "name": "id",
+          "type": "char(36) ascii_bin",
+          "nullable": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime(6) UTC",
+          "nullable": false
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY(id)"
+      ],
+      "current_version_rule": "SELECT 최대 revision via (plan_id, revision) UNIQUE 인덱스. 계획 생성 시 base row + v1 원자 저장"
+    },
+    {
+      "name": "plan_revisions",
+      "purpose": "최초·수정 후 계획 전체 내용의 불변 이력",
+      "fields": [
+        {
+          "name": "id",
+          "type": "char(36) ascii_bin",
+          "nullable": false
+        },
+        {
+          "name": "plan_id",
+          "type": "char(36) ascii_bin",
+          "nullable": false
+        },
+        {
+          "name": "revision",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "title",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "start_date",
+          "type": "date",
+          "nullable": false
+        },
+        {
+          "name": "end_date",
+          "type": "date",
+          "nullable": false
+        },
+        {
+          "name": "priority",
+          "type": "smallint",
+          "nullable": false
+        },
+        {
+          "name": "success_criteria",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "estimated_minutes",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "improvement_text",
+          "type": "text",
+          "nullable": true
+        },
+        {
+          "name": "created_at",
+          "type": "datetime(6) UTC",
+          "nullable": false
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY(id)",
+        "FOREIGN KEY(plan_id) REFERENCES plans(id)",
+        "UNIQUE(plan_id, revision)",
+        "CHECK(revision >= 1)",
+        "CHECK(start_date <= end_date)",
+        "CHECK(priority IN (1,2,3))",
+        "CHECK(estimated_minutes >= 0)",
+        "CHECK(trim(title) <> '' AND trim(success_criteria) <> '')"
+      ],
+      "immutability": "앱 역할 INSERT/SELECT만. plans 행 SELECT FOR UPDATE 후 현재 MAX(revision)을 expected_revision과 비교, 다음 revision INSERT, 한 트랜잭션 commit. 불일치 409. 과거 내용 변경·삭제 금지."
+    },
+    {
+      "name": "tasks",
+      "purpose": "계획에 딸린 할 일의 현재 상태",
+      "fields": [
+        {
+          "name": "id",
+          "type": "char(36) ascii_bin",
+          "nullable": false
+        },
+        {
+          "name": "plan_id",
+          "type": "char(36) ascii_bin",
+          "nullable": false
+        },
+        {
+          "name": "title",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "due_date",
+          "type": "date",
+          "nullable": false
+        },
+        {
+          "name": "priority",
+          "type": "smallint",
+          "nullable": false
+        },
+        {
+          "name": "estimated_minutes",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "status",
+          "type": "varchar(64)",
+          "nullable": false
+        },
+        {
+          "name": "cycle",
+          "type": "int",
+          "nullable": false,
+          "note": "초기 1, 완료를 되돌릴 때만 +1"
+        },
+        {
+          "name": "row_version",
+          "type": "int",
+          "nullable": false,
+          "note": "모든 변경 시 +1"
+        },
+        {
+          "name": "deleted_at",
+          "type": "datetime(6) UTC",
+          "nullable": true
+        },
+        {
+          "name": "created_at",
+          "type": "datetime(6) UTC",
+          "nullable": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime(6) UTC",
+          "nullable": false
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY(id)",
+        "FOREIGN KEY(plan_id) REFERENCES plans(id)",
+        "CHECK(priority IN (1,2,3))",
+        "CHECK(estimated_minutes >= 0)",
+        "CHECK(status IN ('in_progress','done'))",
+        "CHECK(cycle >= 1 AND row_version >= 1)",
+        "CHECK(trim(title) <> '')"
+      ],
+      "delete_policy": "deleted_at 설정. 기본 목록과 모든 집계에서 제외; 관련 이력은 유지, 내보내기에 삭제 표시 포함.",
+      "tags_rule": "생성·편집 API가 정규화 후 태그 1개 이상을 검증하고 task_tags 교체를 같은 트랜잭션에 포함. 교차 표 최소 개수는 CHECK로 주장하지 않음."
+    },
+    {
+      "name": "task_tags",
+      "purpose": "할 일별 태그 저장과 검색",
+      "fields": [
+        {
+          "name": "task_id",
+          "type": "char(36) ascii_bin",
+          "nullable": false
+        },
+        {
+          "name": "tag",
+          "type": "varchar(64) utf8mb4_bin",
+          "nullable": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime(6) UTC",
+          "nullable": false
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY(task_id, tag)",
+        "FOREIGN KEY(task_id) REFERENCES tasks(id)",
+        "CHECK(trim(tag) <> '')"
+      ],
+      "normalization": "서버에서 NFC 정규화·trim·Locale.ROOT 소문자. 원문이 아니라 정규화한 표시값을 저장.",
+      "indexes": [
+        "INDEX(tag, task_id)"
+      ]
+    },
+    {
+      "name": "execution_logs",
+      "purpose": "계획과 분리된 실제 실행",
+      "fields": [
+        {
+          "name": "id",
+          "type": "char(36) ascii_bin",
+          "nullable": false
+        },
+        {
+          "name": "task_id",
+          "type": "char(36) ascii_bin",
+          "nullable": false
+        },
+        {
+          "name": "started_at",
+          "type": "datetime(6) UTC",
+          "nullable": false
+        },
+        {
+          "name": "ended_at",
+          "type": "datetime(6) UTC",
+          "nullable": false
+        },
+        {
+          "name": "actual_minutes",
+          "type": "int",
+          "nullable": false,
+          "note": "DB 생성식으로 (ended_at-started_at)의 초/60; 시간은 분 정밀도",
+          "generated": "TIMESTAMPDIFF(MINUTE, started_at, ended_at) PERSISTENT"
+        },
+        {
+          "name": "blocker_reason",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "note",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "completion_event_id",
+          "type": "char(36) ascii_bin",
+          "nullable": true
+        },
+        {
+          "name": "request_key",
+          "type": "char(36) ascii_bin",
+          "nullable": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime(6) UTC",
+          "nullable": false
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY(id)",
+        "FOREIGN KEY(task_id) REFERENCES tasks(id)",
+        "FOREIGN KEY(completion_event_id, task_id) REFERENCES completion_events(id, task_id)",
+        "UNIQUE(completion_event_id)",
+        "UNIQUE(request_key)",
+        "CHECK(ended_at >= started_at)",
+        "CHECK(SECOND(started_at)=0 AND MICROSECOND(started_at)=0 AND SECOND(ended_at)=0 AND MICROSECOND(ended_at)=0)",
+        "CHECK(actual_minutes >= 0)"
+      ],
+      "policy": "실제 수행한 연속 구간을 수동 입력한다. 휴식은 구간을 나누어 기록한다. 독립 실행 저장은 완료 상태를 바꾸지 않는다. 같은 할 일의 겹친 시간은 저장 전 사용자에게 표시하고 중복 입력인지 확인한다."
+    },
+    {
+      "name": "completion_events",
+      "purpose": "완료 전환의 불변 사건",
+      "fields": [
+        {
+          "name": "id",
+          "type": "char(36) ascii_bin",
+          "nullable": false
+        },
+        {
+          "name": "task_id",
+          "type": "char(36) ascii_bin",
+          "nullable": false
+        },
+        {
+          "name": "cycle",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "request_key",
+          "type": "char(36) ascii_bin",
+          "nullable": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime(6) UTC",
+          "nullable": false
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY(id)",
+        "UNIQUE(id, task_id)",
+        "FOREIGN KEY(task_id) REFERENCES tasks(id)",
+        "UNIQUE(task_id, cycle)",
+        "UNIQUE(request_key)",
+        "CHECK(cycle >= 1)"
+      ],
+      "policy": "tasks 행 잠금 및 cycle 검증 후 사건 생성과 done 전환을 원자 처리한다. 이미 done이면 기존 사건 반환. 실행 포함 완료인 경우 동일 트랜잭션 안에서 이벤트와 실행 1건을 연결한다."
+    },
+    {
+      "name": "reflections",
+      "purpose": "돌아보기에서 사람이 작성한 판단과 개선점",
+      "fields": [
+        {
+          "name": "id",
+          "type": "char(36) ascii_bin",
+          "nullable": false
+        },
+        {
+          "name": "source_plan_id",
+          "type": "char(36) ascii_bin",
+          "nullable": false
+        },
+        {
+          "name": "period_start",
+          "type": "date",
+          "nullable": false
+        },
+        {
+          "name": "period_end",
+          "type": "date",
+          "nullable": false
+        },
+        {
+          "name": "note",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "improvement_text",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime(6) UTC",
+          "nullable": false
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY(id)",
+        "FOREIGN KEY(source_plan_id) REFERENCES plans(id)",
+        "CHECK(period_start <= period_end)",
+        "CHECK(trim(improvement_text) <> '')"
+      ],
+      "policy": "저장된 회고는 원문을 보존한다. 새로운 회고는 새 행. 집계는 원천 데이터에서 계산하며 별도 증가 카운터를 두지 않는다."
+    },
+    {
+      "name": "carry_forwards",
+      "purpose": "개선 한 줄을 다음 계획에 연결",
+      "fields": [
+        {
+          "name": "id",
+          "type": "char(36) ascii_bin",
+          "nullable": false
+        },
+        {
+          "name": "reflection_id",
+          "type": "char(36) ascii_bin",
+          "nullable": false
+        },
+        {
+          "name": "target_plan_id",
+          "type": "char(36) ascii_bin",
+          "nullable": false
+        },
+        {
+          "name": "improvement_snapshot",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime(6) UTC",
+          "nullable": false
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY(id)",
+        "FOREIGN KEY(reflection_id) REFERENCES reflections(id)",
+        "FOREIGN KEY(target_plan_id) REFERENCES plans(id)",
+        "UNIQUE(reflection_id)",
+        "UNIQUE(target_plan_id)"
+      ],
+      "policy": "source_plan_id와 target_plan_id는 달라야 한다. 회고 1건의 전송은 1회만. 새 계획 v1의 improvement_text와 원문이 같아야 한다. 새 계획·v1·연결을 같은 트랜잭션에서 저장."
+    },
+    {
+      "name": "mutation_requests",
+      "purpose": "중복 요청 식별용 내부 메타데이터",
+      "fields": [
+        {
+          "name": "request_key",
+          "type": "char(36) ascii_bin",
+          "nullable": false
+        },
+        {
+          "name": "operation",
+          "type": "varchar(64)",
+          "nullable": false
+        },
+        {
+          "name": "payload_hash",
+          "type": "char(64) ascii_bin",
+          "nullable": false
+        },
+        {
+          "name": "response_status",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "response_json",
+          "type": "json",
+          "nullable": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime(6) UTC",
+          "nullable": false
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY(request_key)"
+      ],
+      "policy": "도메인 쓰기와 같은 트랜잭션에 최종 응답을 기록한다. 동일 키·동일 작업·동일 본문은 기존 응답, 동일 키로 다른 작업/본문은 409. 실패 트랜잭션은 요청 행도 롤백. 응답에는 비밀값을 넣지 않는다."
+    }
+  ],
+  "relationships": [
+    "plans 1:N plan_revisions",
+    "plans 1:N tasks",
+    "tasks 1:N task_tags",
+    "tasks 1:N execution_logs",
+    "tasks 1:N completion_events",
+    "completion_events 1:0..1 execution_logs",
+    "plans 1:N reflections",
+    "reflections 1:0..1 carry_forwards",
+    "carry_forwards N:1 plans (대상 계획은 UNIQUE로 0..1 연결)"
+  ],
+  "date_rules": {
+    "calendar_timezone": "Asia/Seoul",
+    "date_fields": "start_date/end_date/due_date/period_start/period_end: DATE, YYYY-MM-DD",
+    "instant_storage": "DATETIME(6)에 UTC 정규화 값 저장. Java Instant는 DB 쓰기 전에 microsecond 정밀도로 고정. API/export는 UTC ISO 8601 Z.",
+    "display": "Asia/Seoul (UTC+09:00)",
+    "precision": "실행 시작/종료는 분 정밀도, 초는 00. 기타 생성/변경 시각은 원래 정밀도 보존.",
+    "range_boundaries": "계획/조회 시작일·종료일 모두 포함",
+    "overdue": "deleted_at IS NULL AND status <> 'done' AND due_date < today_seoul",
+    "today_server": "LocalDate.now(injected Clock.withZone(ZoneId.of(\"Asia/Seoul\")))를 요청당 한 번 계산; today_seoul DATE 바인딩",
+    "jdbc_mapping": "offset 입력 -> Instant -> LocalDateTime.ofInstant(instant, UTC) -> DATETIME(6); 조회는 LocalDateTime -> toInstant(UTC). DATE는 LocalDate. OS 기본 시간대 사용 금지."
+  },
+  "units": {
+    "duration": "integer minutes",
+    "display": "기본 분, 보조 h 표시는 분에서 변환; 합계는 원래 분으로 계산",
+    "actual": "INT GENERATED ALWAYS AS (TIMESTAMPDIFF(MINUTE, started_at, ended_at)) PERSISTENT; SECOND/MICROSECOND 모두 0, end >= start",
+    "zero": "빈 합계는 COALESCE(SUM(...),0)",
+    "difference": "actual_minutes_sum - estimated_minutes_sum"
+  },
+  "review_contract": {
+    "period_scope": "선택한 조회 기간과 현재 계획 기간이 겹치는 계획들의 미삭제 할 일. plan_id 선택 시 교집합.",
+    "cohort_predicate": "plan.start_date <= filter.end AND plan.end_date >= filter.start; tasks.deleted_at IS NULL",
+    "execution_scope": "대상 할 일에 연결된 전체 실행. 실행 일자로 추가 잘라내지 않는다.",
+    "state": "현재 상태 기준; 과거 특정 시점의 상태 복원이 아님",
+    "label": "계획 기간 기준 · 현재 상태 · 대상 할 일의 전체 실행",
+    "planned_count": "COUNT(target_tasks)",
+    "done_count": "COUNT(target_tasks WHERE status='done')",
+    "delayed_count": "COUNT(target_tasks WHERE status<>'done' AND due_date < today_seoul)",
+    "blocked_count": "COUNT(target_tasks WHERE EXISTS(execution WHERE trim(blocker_reason) <> ''))",
+    "estimated_minutes": "SUM(target_tasks.estimated_minutes)",
+    "actual_minutes": "SUM(execution_logs.actual_minutes WHERE task_id IN target_tasks)",
+    "difference": "actual_minutes - estimated_minutes",
+    "join_safety": "실행은 task_id별 선집계하고 태그 필터는 EXISTS. 실행/태그 JOIN으로 예상·할 일 수를 곱하지 않음.",
+    "drilldown": "동일 읽기 스냅샷에서 생성한 집계와 근거 레코드/ID를 반환. 클릭 시 해당 목록, 상세 ID 링크. 재조회 시 숫자와 근거를 함께 갱신.",
+    "snapshot": "@Transactional(readOnly=true, isolation=REPEATABLE_READ)의 일관 읽기. aggregate와 근거 SELECT에 locking read를 혼합하지 않음."
+  },
+  "list_contract": {
+    "execution": "서버 검색·필터·정렬",
+    "search": "제목·설명·태그 부분 문자열; 대소문자 무시; %/_는 문자로 escape; SQL 파라미터 바인딩",
+    "filters": [
+      "plan_id",
+      "status",
+      "priority",
+      "tag",
+      "due_from",
+      "due_to",
+      "overdue",
+      "blocked"
+    ],
+    "filter_composition": "서로 다른 조건은 AND, 선택한 복수 태그는 OR",
+    "sorts": {
+      "due": "due_date ASC, priority ASC, created_at ASC, id ASC",
+      "priority": "priority ASC, due_date ASC, created_at ASC, id ASC",
+      "estimate": "estimated_minutes DESC, due_date ASC, created_at ASC, id ASC",
+      "newest": "created_at DESC, id ASC"
+    },
+    "default_sort": "due",
+    "visible": "주 기준 및 전체 동률 처리 순서를 화면에 표시"
+  },
+  "export": {
+    "format": "UTF-8 JSON 단일 파일",
+    "read": "REPEATABLE READ 트랜잭션의 일관된 스냅샷",
+    "include": [
+      "schema_version",
+      "exported_at",
+      "timezone",
+      "duration_unit",
+      "plans",
+      "plan_revisions",
+      "tasks (deleted_at 포함)",
+      "task_tags",
+      "execution_logs",
+      "completion_events",
+      "reflections",
+      "carry_forwards",
+      "현재 집계와 집계 조건"
+    ],
+    "exclude": "DB 자격증명·환경변수·mutation_requests 내부 응답 캐시. 사용자 도메인 자료는 전부 포함.",
+    "sort": "개체 배열 ID 기준, task_tags는 (task_id, tag) 기준 결정 정렬",
+    "restore_verification": "exported_at 같은 생성 메타데이터만 제외하고 ID·날짜·값·단위·FK 재대조"
+  },
+  "finalization_gate": [
+    "실제 migration 파일과 표/필드/제약/FK를 비교",
+    "날짜·단위·집계 경계 테스트 통과",
+    "최종 배포 커밋 기록",
+    "verified_against_database=true 및 verified_at 실제 확인값 설정 후 status=verified"
+  ],
+  "deployed_commits": null,
+  "repositories": {
+    "specification": "PDC_Diary",
+    "backend": "PDC_Diary_Backend",
+    "infrastructure": "PDC_Diary_Infra",
+    "created_remotely": false,
+    "contract_source_of_truth": "구현 시작 시 Backend/contracts로 이관, 명세 저장소는 특정 릴리스 링크만 유지",
+    "web": "PDC_Diary_Web",
+    "android": "PDC_Diary_Android"
+  },
+  "api_contract": {
+    "base_path": "/api/v1",
+    "protocol": "HTTPS JSON REST",
+    "authentication_current": "none; all assignment operations public",
+    "source_of_truth": "PDC_Diary_Backend/contracts/openapi.yaml",
+    "future_native": "현재 Android는 동일 HTTPS API 사용. iOS 보류, Windows/macOS 네이티브 향후 검토. 초기 오프라인 쓰기 큐 없음.",
+    "web_rendering": "Next.js SSR -> 내부 Spring API, Client Component -> 같은 출처 /api/v1. DB 직접 접속·업무 규칙 중복 금지, 자료 조회 no-store",
+    "android": "Kotlin / Jetpack Compose / ViewModel / Coroutines-Flow / Repository. 재진입·저장 후 서버 재조회, export JSON은 Storage Access Framework로 파일 저장"
+  }
+}

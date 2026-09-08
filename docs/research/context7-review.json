@@ -1,0 +1,53 @@
+{
+  "reviewed_on": "2026-09-08",
+  "document_version": "1.2",
+  "status": "design_sources_retrieved_not_runtime_verified",
+  "endpoint": "https://mcp.context7.com/mcp",
+  "transport": "Direct official MCP JSON-RPC over HTTPS; tools not exposed in active plugin list",
+  "resolve_calls": 3,
+  "query_calls": 3,
+  "queries": [
+    {
+      "library_id": "/spring-projects/spring-boot",
+      "scope": "JDBC DataSource / Flyway migration",
+      "success": true,
+      "source_urls": [
+        "https://github.com/spring-projects/spring-boot/blob/main/documentation/spring-boot-docs/src/docs/antora/modules/reference/pages/data/sql.adoc",
+        "https://github.com/spring-projects/spring-boot/blob/main/documentation/spring-boot-docs/src/docs/antora/modules/how-to/pages/data-initialization.adoc"
+      ]
+    },
+    {
+      "library_id": "/flutter/website",
+      "scope": "shared layers / platform-specific services / conditional imports",
+      "success": true,
+      "source_urls": [
+        "https://github.com/flutter/website/blob/main/sites/docs/src/content/app-architecture/guide.md",
+        "https://github.com/flutter/website/blob/main/sites/docs/src/data/architectureRecommendations.yml",
+        "https://github.com/flutter/website/blob/main/sites/docs/src/content/platform-integration/web/faq.md",
+        "https://github.com/flutter/website/blob/main/sites/docs/src/content/platform-integration/macos/platform-views.md",
+        "https://github.com/flutter/website/blob/main/sites/www/content/blog/do-flutter-apps-dream-of-platform-aware-widgets/index.md"
+      ]
+    },
+    {
+      "library_id": "/mariadb-corporation/mariadb-docs",
+      "scope": "InnoDB locking / UNIQUE / generated columns",
+      "success": true,
+      "source_urls": [
+        "https://github.com/mariadb-corporation/mariadb-docs/blob/main/server/reference/sql-functions/special-functions/json-functions/json_normalize.md",
+        "https://github.com/mariadb-corporation/mariadb-docs/blob/main/server/server-usage/storage-engines/innodb/innodb-online-ddl/instant-add-column-for-innodb.md",
+        "https://github.com/mariadb-corporation/mariadb-docs/blob/main/agent-skills/topical/mariadb-query-optimization/SKILL.md",
+        "https://github.com/mariadb-corporation/mariadb-docs/blob/main/agent-skills/granular/statements/mariadb-create-index/SKILL.md",
+        "https://github.com/mariadb-corporation/mariadb-docs/blob/main/agent-skills/granular/statements/mariadb-select/SKILL.md"
+      ]
+    }
+  ],
+  "interpretation_limits": [
+    "Context7 snippets do not certify latest release, compatibility, prices or capacity.",
+    "Current versions, maintenance, prices and stock were cross-checked on official web pages.",
+    "Original 44 requirement IDs/texts preserved; C34 verification hint changed to MariaDB.",
+    "Application, native platform builds, live database and performance unverified."
+  ],
+  "supersedes": "v1.1 Next.js/Supabase/Vercel recommendation",
+  "current_design_version": "1.3",
+  "current_design_note": "Historical Context7 queries from v1.2. Flutter proposal superseded by user-selected Next.js/TypeScript and native Android. v1.3 checked official Next.js and Android docs without a new Context7 call."
+}

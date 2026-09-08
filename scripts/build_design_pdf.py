@@ -1,0 +1,409 @@
+from pathlib import Path
+import json
+from html import escape
+from reportlab.pdfgen import canvas
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.styles import ParagraphStyle
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak, Flowable, KeepTogether
+
+ROOT = Path(__file__).resolve().parents[1]
+OUT = ROOT / 'output/pdf/pds-diary-design.pdf'
+OUT.parent.mkdir(parents=True, exist_ok=True)
+pdfmetrics.registerFont(TTFont('Malgun', 'C:/Windows/Fonts/malgun.ttf'))
+pdfmetrics.registerFont(TTFont('MalgunBold', 'C:/Windows/Fonts/malgunbd.ttf'))
+pdfmetrics.registerFontFamily('Malgun', normal='Malgun', bold='MalgunBold')
+NAVY = colors.HexColor('#172C42')
+TEAL = colors.HexColor('#147D80')
+INK = colors.HexColor('#23374A')
+MUTED = colors.HexColor('#627184')
+PALE = colors.HexColor('#EEF5F5')
+LINE = colors.HexColor('#DDE5EA')
+GOLD = colors.HexColor('#AA713C')
+WIDTH = A4[0] - 88
+
+styles = {
+ 'h1': ParagraphStyle('h1', fontName='MalgunBold', fontSize=23, leading=32, textColor=NAVY, spaceAfter=8, wordWrap='CJK'),
+ 'h2': ParagraphStyle('h2', fontName='MalgunBold', fontSize=13, leading=20, textColor=TEAL, spaceBefore=11, spaceAfter=5, wordWrap='CJK'),
+ 'body': ParagraphStyle('body', fontName='Malgun', fontSize=10.4, leading=17, textColor=INK, spaceAfter=7, wordWrap='CJK'),
+ 'small': ParagraphStyle('small', fontName='Malgun', fontSize=8.9, leading=14, textColor=MUTED, spaceAfter=5, wordWrap='CJK'),
+ 'cell': ParagraphStyle('cell', fontName='Malgun', fontSize=9.25, leading=14.4, textColor=INK, wordWrap='CJK'),
+ 'head': ParagraphStyle('head', fontName='MalgunBold', fontSize=9.1, leading=14, textColor=colors.white, wordWrap='CJK'),
+ 'call': ParagraphStyle('call', fontName='MalgunBold', fontSize=11, leading=18, textColor=NAVY, wordWrap='CJK'),
+ 'label': ParagraphStyle('label', fontName='MalgunBold', fontSize=9, leading=14, textColor=TEAL, spaceAfter=8),
+}
+story=[]
+md=['# PDS Diary 기능·구현 설계서', '', '2026-09-08 / v1.3 / Context7 및 공식 문서 재검토 완료, 구현·배포 검증 전', '']
+sections=[]
+
+def para(text, style='body'):
+    return Paragraph(escape(text).replace('\n','<br/>'), styles[style])
+
+def p(text, style='body'):
+    story.append(para(text, style)); md.extend([text,''])
+
+def h(text):
+    story.append(para(text,'h2')); md.extend(['### '+text,''])
+
+def start(kicker,title,subtitle):
+    if story: story.append(PageBreak())
+    sections.append(title)
+    story.extend([para(kicker,'label'),para(title,'h1'),para(subtitle,'small'),Spacer(1,9)])
+    md.extend(['## '+title,'',subtitle,''])
+
+def call(text):
+    t=Table([[para(text,'call')]],colWidths=[WIDTH])
+    t.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,-1),PALE),('BOX',(0,0),(-1,-1),0.6,LINE),('LEFTPADDING',(0,0),(-1,-1),14),('RIGHTPADDING',(0,0),(-1,-1),14),('TOPPADDING',(0,0),(-1,-1),11),('BOTTOMPADDING',(0,0),(-1,-1),11)]))
+    story.extend([t,Spacer(1,9)]); md.extend(['> '+text.replace('\n',' '),''])
+
+def table(headers,rows,widths):
+    data=[[para(x,'head') for x in headers]]+[[para(str(x),'cell') for x in row] for row in rows]
+    t=Table(data,colWidths=[WIDTH*x/sum(widths) for x in widths],repeatRows=1,hAlign='LEFT')
+    t.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,0),NAVY),('ROWBACKGROUNDS',(0,1),(-1,-1),[colors.white,colors.HexColor('#F5F8FA')]),('VALIGN',(0,0),(-1,-1),'TOP'),('LEFTPADDING',(0,0),(-1,-1),9),('RIGHTPADDING',(0,0),(-1,-1),9),('TOPPADDING',(0,0),(-1,-1),7),('BOTTOMPADDING',(0,0),(-1,-1),7),('LINEBELOW',(0,0),(-1,0),0.5,NAVY),('LINEBELOW',(0,1),(-1,-1),0.3,LINE)]))
+    story.extend([t,Spacer(1,9)])
+    md.append('| '+' | '.join(headers)+' |');md.append('| '+' | '.join(['---']*len(headers))+' |')
+    for row in rows: md.append('| '+' | '.join(str(x).replace('\n','<br>') for x in row)+' |')
+    md.append('')
+
+class Diagram(Flowable):
+    def __init__(self,kind):
+        Flowable.__init__(self);self.width=WIDTH;self.height=160 if kind=='infra' else 108;self.kind=kind
+    def draw(self):
+        c=self.canv
+        def box(x,y,w,height,title,lines):
+            c.setFillColor(PALE);c.setStrokeColor(LINE);c.roundRect(x,y,w,height,8,fill=1,stroke=1)
+            c.setFillColor(NAVY);c.setFont('MalgunBold',11);c.drawCentredString(x+w/2,y+height-23,title)
+            c.setFont('Malgun',8.6);c.setFillColor(MUTED)
+            for j,line in enumerate(lines):c.drawCentredString(x+w/2,y+height-42-j*14,line)
+        def arrow(x,y,x2):
+            c.setStrokeColor(TEAL);c.setLineWidth(1.6);c.line(x,y,x2,y);c.line(x2-5,y+3,x2,y);c.line(x2-5,y-3,x2,y)
+        if self.kind=='infra':
+            w=148;gap=(WIDTH-3*w)/2
+            box(0,57,w,95,'웹 + Android',['Next.js + TypeScript','Kotlin + Jetpack Compose','공통 REST API 사용'])
+            box(w+gap,57,w,95,'Spring Boot API',['입력 검증 · 집계 · 트랜잭션','HTTPS /api/v1','DB 자격증명은 서버에만'])
+            box(2*(w+gap),57,w,95,'MariaDB · InnoDB',['계획 · 할 일 · 실행 · 회고','이력 · 관계 · 중복 제약','서버 디스크에 영구 저장'])
+            arrow(w+2,101,w+gap-3);arrow(2*w+gap+2,101,2*(w+gap)-3)
+            c.setFont('Malgun',9);c.setFillColor(MUTED);c.drawString(0,30,'웹 · Android · 백엔드 · 인프라 저장소 분리  →  CI 검사  →  버전 조합을 지정해 배포')
+            c.drawString(0,12,'VPS: Caddy + Next.js(Node.js) + Spring Boot + MariaDB. DB 포트 비공개.')
+        else:
+            w=148;gap=(WIDTH-3*w)/2
+            box(0,24,w,76,'01  Plan',['기간 · 성공 기준 · 예상','최초 계획과 수정 이력'])
+            box(w+gap,24,w,76,'02  Do',['시작 · 종료 · 실제 시간','어디서 막혔는지 기록'])
+            box(2*(w+gap),24,w,76,'03  See',['예상과 실제의 차이','숫자에서 근거로 이동'])
+            arrow(w+2,64,w+gap-3);arrow(2*w+gap+2,64,2*(w+gap)-3)
+            c.setFont('MalgunBold',9);c.setFillColor(TEAL);c.drawCentredString(WIDTH/2,6,'See에서 고친 한 줄을 다음 Plan으로 연결')
+
+start('PROJECT BRIEF  /  01','계획을 고치는 다이어리','PDS Diary · 기능 명세 / 필수 RULE / 인프라 제안 · 2026.09.08 · v1.3')
+p('내가 세운 계획과 실제로 한 일을 비교하고, 어긋난 이유 한 가지를 다음 계획에 반영하는 공개 웹 다이어리입니다. 완료 체크와 함께 시간 차이와 근거 기록을 보여 줍니다.')
+story.extend([Diagram('flow'),Spacer(1,12)])
+call('44개 평가 항목 + 번호 없는 제출·증거 조건을 모두 필수 RULE로 고정합니다. 한 항목이라도 미검증 또는 실패이면 과제 완료로 표시하지 않습니다.')
+table(['결정할 것','이 설계의 권장안'],[
+ ('프레임워크','웹 Next.js + TypeScript / Android Kotlin + Jetpack Compose / Spring Boot API.'),
+ ('저장 / 배포','MariaDB 12.3 LTS + Docker Compose. SSR 운영 예산은 서울 4GB·백업 포함 월 $25부터.'),
+ ('실제 사용 자료','본인 계획 1개 이상 / 그 계획의 할 일 5개 이상 / 실제 실행 3건 이상.'),
+ ('범위와 시간','로그인 없이 전체 기능 제공. 준비된 환경 기준 8~10시간 계획.'),
+], [1,3.3])
+h('현재 확정한 것과 아직 확인하지 않은 것')
+p('웹 Next.js·TypeScript와 Android 네이티브 방향을 사용자 결정으로 반영했습니다. Android 도구는 Kotlin·Jetpack Compose를 채택합니다. iOS는 현재 배포 대상에서 제외합니다. 원문 44개 조건은 유지하며 앱·운영 DB·신규 원격 저장소·본인 자료는 아직 만들지 않았습니다.')
+p('읽는 순서: 2~3쪽 구성·화면 / 4~8쪽 기능·DB·날짜 / 9~11쪽 검증·일정 / 12~15쪽 필수 조건 / 16쪽 기본 출처 / 17~20쪽 웹·Android·저장소·비용·최신 근거.','small')
+
+start('ARCHITECTURE  /  02','웹과 앱, 하나의 업무 API','웹과 Android의 화면 구현은 분리하고, 저장·집계·중복 방지 규칙은 서버에서 공유합니다.')
+story.extend([Diagram('infra'),Spacer(1,7)])
+table(['계층','선택','책임'],[
+ ('웹','Next.js / React / TypeScript','App Router, 기본 Turbopack. 초기 조회는 SSR, 폼·편집·DnD는 Client Component. [4][10]'),
+ ('Android','Kotlin / Jetpack Compose','네이티브 화면, ViewModel·상태 흐름·Repository. 앱도 같은 HTTPS API 사용. [11][12]'),
+ ('백엔드','Spring Boot 4.1.x / Java 21','Spring MVC + Validation + JDBC. 집계·완료 트랜잭션·날짜 판정의 최종 책임. [1][2][20]'),
+ ('DB','MariaDB 12.3 LTS / Flyway','InnoDB 영구 저장. SQL migration과 실제 DB 통합 시험. [3][17][22]'),
+ ('배포','Caddy / Docker Compose','Caddy → Next.js Node.js 웹 또는 /api/v1 Spring Boot. DB·내부 포트 비공개. [19]'),
+], [0.7,1.5,2.8])
+h('웹 SSR과 서버 API의 경계')
+p('Next.js 서버는 초기 화면을 만들기 위해 Spring API를 호출합니다. 브라우저의 쓰기도 Spring API로 보내고, Next.js에 별도 DB 저장·집계 로직을 복제하지 않습니다. 업무 자료는 캐시하지 않고 저장 후 목록·집계·근거를 함께 재조회합니다.')
+p('Next.js SSR에는 Node.js 런타임이 필요합니다. 정적 웹만 있던 이전 구상보다 메모리 사용 주체가 늘어나므로 서버 예산과 부하 검증을 갱신했습니다. UI 소스는 웹·Android 각각 관리하고 API 계약·DB·계산 규칙을 공유합니다. [4][19]')
+p('Spring Boot 공식 문서는 4.1.1이며 Java 21은 지원 범위입니다. MariaDB 12.3은 LTS입니다. Flyway 표에는 MariaDB 10.11까지만 명시되어 있으므로, 정확한 버전 조합은 첫 구현 단계에서 migration·JDBC·트랜잭션을 시험해 고정합니다. [1][17][22]','small')
+
+start('USER EXPERIENCE  /  03','화면은 다섯 곳으로 연결','모든 화면과 저장·수정·삭제 기능은 로그인 없이 사용할 수 있어야 합니다.')
+call('지금은 로그인이 없어 링크를 아는 사람은 누구나 볼 수 있습니다. 남이 봐도 괜찮은 내용만 넣으세요')
+table(['화면 / 경로','화면에서 하는 일','항상 보이는 정보'],[
+ ('홈 /','공개 안내를 읽고 현재 계획·진행 상황으로 이동. 전체 자료 내보내기.','Plan · Do · See 메뉴, 공개 안내, 저장 오류'),
+ ('계획 /plans','계획 생성, 현재 계획 편집, 최초/과거 버전 비교.','ID, 기간, 우선순위, 성공 기준, 예상 분'),
+ ('할 일 /plans/:id','할 일 생성·편집·완료·되돌리기·삭제. 검색·필터·정렬.','소속 계획, 마감, 태그, 예상 분, 정렬 기준'),
+ ('실행 /tasks/:id','시작·종료 시각과 막힌 이유를 입력. 기존 실행 확인.','할 일/계획 링크, 실행별 실제 분, 완료 이력'),
+ ('돌아보기 /review','조회 기간·계획 선택, 숫자 클릭, 개선점 저장 및 다음 계획 생성.','대상 범위, 예상/실제/차이, 근거 목록, 개선 출처'),
+], [1.05,2.15,1.65])
+h('주요 동선')
+p('계획 상세에서 할 일을 열고 실제 실행을 저장합니다. 돌아보기에서 예상·실제 차이를 누르면 그 계산에 쓰인 할 일과 실행 기록을 확인할 수 있습니다. 이어서 개선점 한 줄을 적고 새 계획에 가져옵니다.')
+h('정상·빈 자료·실패를 구분')
+p('저장 성공은 서버 커밋 뒤 표시합니다. 빈 목록은 “조건에 맞는 기록이 없습니다”와 합계 0, 저장 실패는 “저장하지 못했습니다. 입력은 유지됩니다. 다시 시도해 주세요”로 구분합니다. 조회 실패를 합계 0으로 표시하지 않습니다.')
+p('필드 이름과 오류 메시지를 연결하고 키보드로 폼과 숫자 링크를 이동할 수 있게 합니다. 모바일에서도 공개 안내·시간 단위·표의 핵심 값이 가려지지 않도록 구성합니다.','small')
+
+start('PLAN & TASKS  /  04','처음 계획을 지키며 수정','T06-C04~C20 · 계획 버전과 할 일 관리')
+table(['대상','저장할 항목','수정 원칙'],[
+ ('계획','고정 UUID, 제목, 시작일/종료일, 우선순위, 성공 기준, 예상 분','생성 시 v1 저장. 수정은 새 전체 버전을 추가. 현재 값은 가장 큰 버전에서 조회.'),
+ ('할 일','UUID, 계획 ID, 제목/내용, 마감일, 우선순위, 태그, 예상 분, 현재 상태','직접 편집만 예상값을 변경. 실행 기록 저장으로 계획값이 바뀌지 않음.'),
+], [0.6,2.2,2.3])
+p('우선순위는 높음=1, 보통=2, 낮음=3입니다. 계획의 기간·성공 기준·예상 시간과 할 일의 마감·예상 시간·태그는 필수입니다. 태그는 1개 이상, 기간은 시작일 ≤ 종료일, 시간은 0 이상의 정수 분으로 검증합니다.')
+h('최초 계획과 이전 버전을 보존하는 방법')
+p('plans에는 고정 ID, plan_revisions에는 매 버전 전체 내용을 둡니다. plans 행을 잠근 뒤 최신 버전 확인·충돌 검사·새 버전 추가를 한 트랜잭션에서 처리합니다. 최신 값은 최대 revision으로 조회합니다. 이력 행의 수정·삭제는 앱 DB 권한으로 금지하고 화면에서 v1·직전·현재를 비교합니다.')
+h('검색·필터·정렬은 서버에서 동일하게')
+p('제목·내용·태그를 부분 문자열로 검색합니다. 상태·우선순위·태그·마감 범위·지연·막힘 필터를 제공하며 서로 다른 조건은 AND, 선택한 복수 태그는 OR로 결합합니다. URL에 조건을 담아 새로고침해도 유지합니다.')
+table(['화면의 정렬 이름','실제 순서: 앞의 값이 같으면 다음 값 적용'],[
+ ('마감 빠른 순 · 기본','마감일 오름차순 → 우선순위 1·2·3 → 생성 시각 오름차순 → ID 오름차순'),
+ ('우선순위 높은 순','우선순위 1·2·3 → 마감일 오름차순 → 생성 시각 오름차순 → ID 오름차순'),
+ ('예상 시간 긴 순','예상 분 내림차순 → 마감일 오름차순 → 생성 시각 오름차순 → ID 오름차순'),
+ ('최근 만든 순','생성 시각 내림차순 → ID 오름차순'),
+], [1.15,3.85])
+p('삭제는 deleted_at 표시로 목록·모든 집계에서 제외하고 기록은 보존합니다. 직접 편집 충돌은 버전 번호로 감지해 409와 새로고침 안내를 표시합니다.','small')
+
+start('DO & CONSISTENCY  /  05','실행은 따로, 완료는 한 번','T06-C21~C27 · 버튼 잠금과 별개로 DB에서 보장해야 합니다.')
+h('실행 기록')
+p('할 일에 시작·종료 시각, 실제 분, 막힌 이유, 메모를 연결합니다. 실제 분은 서버 DB가 두 시각의 차이로 계산해 저장합니다. 실제 작업 구간을 수동 입력하고 휴식은 구간을 나눕니다. 입력한 사실을 자동으로 꾸며 넣지 않습니다.')
+p('“실행 저장”은 실행만 남깁니다. “실행 저장 후 완료”는 실행 1건과 완료 사건 1건을 함께 저장합니다. 목록의 “완료”는 완료 사건만 만들며, 수행 시각을 임의 생성하지 않습니다. 두 방식 모두 현재 상태를 일관되게 갱신합니다.')
+table(['처리 순서','서버와 DB의 동작'],[
+ ('1. 요청 식별','폼 한 번 제출에 UUID 요청 키를 만들고 재시도에 재사용. 요청 키와 본문 해시를 DB에 기록.'),
+ ('2. 상태 잠금','트랜잭션에서 해당 tasks 행을 SELECT FOR UPDATE. 요청 cycle 확인 후 현재 완료 여부를 판별. 편집 충돌은 별도 버전으로 검증.'),
+ ('3. 중복 판별','동일 요청은 기존 응답 반환. 이미 완료된 같은 cycle도 기존 사건 반환. 같은 키로 다른 본문이면 409.'),
+ ('4. 원자 저장','UNIQUE(task_id, cycle)로 완료 사건 중복 금지. 실행 포함 시 이벤트 연결 UNIQUE로 실행도 한 건만. done 전환과 함께 커밋.'),
+ ('5. 응답과 재조회','커밋된 ID·현재 상태·집계를 반환. 연결이 끊기면 같은 키로 재시도하며 새 사건을 만들지 않음.'),
+], [1,4])
+h('완료 되돌리기와 다시 완료하기')
+p('진행 중(cycle=1) → 완료(cycle=1) → 되돌리기(진행 중, cycle=2) → 완료(cycle=2)입니다. 과거 사건과 실행은 남기고 현재 완료 수는 tasks.status에서 계산합니다. 되돌린 뒤 도착한 옛 cycle 요청은 새 완료로 처리하지 않습니다.')
+call('검증: 미완료 할 일에 완료를 연속 두 번 실행 → 완료 사건 +1, 현재 완료 수 +1. 실행 포함 완료라면 실행도 +1. 같은 키뿐 아니라 서로 다른 키의 동시 요청도 시험합니다.')
+p('Spring 서비스의 @Transactional 범위 안에서 InnoDB 행 잠금과 UNIQUE를 함께 사용합니다. 예외 시 전체 롤백을 보장하고, 충돌 후 응답 복구는 새 트랜잭션으로 처리합니다. 이 보장은 실제 DB 동시 요청으로 검증합니다. [5][6][20]','small')
+
+start('SEE & EVIDENCE  /  06','모든 숫자에는 근거가 있다','T06-C28~C33, C83 · 대상 집합과 계산식을 먼저 고정합니다.')
+p('조회 시작·종료일과 기간이 겹치는 계획을 선택합니다. 계획 ID로도 좁힐 수 있습니다. 대상 T는 그 계획들에 딸린 미삭제 할 일 전체, E는 T에 연결된 전체 실행 기록입니다. 화면에는 “계획 기간 기준 · 현재 상태 · 대상 할 일의 전체 실행”을 표시합니다.')
+table(['집계 숫자','정확한 계산','누르면 보이는 근거'],[
+ ('계획 수','T의 할 일 수. 계획 카드 개수가 아님.','대상 할 일 전체'),
+ ('완료 수','T 중 지금 status=done인 수.','완료 상태 할 일'),
+ ('지연 수','T 중 미완료이며 마감일 < 서울 오늘.','해당 마감·상태의 할 일'),
+ ('막힘 수','공백을 뺀 막힌 이유가 하나 이상 있는 T의 고유 할 일 수.','할 일과 이유 있는 실행'),
+ ('예상 시간','T의 estimated_minutes 합.','할 일별 예상 분과 합계'),
+ ('실제 시간','E의 actual_minutes 합.','할 일별 실행 목록과 분'),
+ ('차이','실제 합 - 예상 합. 부호를 표시. 빈 자료는 모두 0.','같은 대상의 예상·실제 대조'),
+], [0.8,2.55,1.65])
+p('완료와 지연은 겹치지 않습니다. 완료된 일도 막힌 이유가 있으면 막힘에 포함됩니다. 실행이 여러 건이어도 할 일 수와 예상 시간을 반복해서 더하지 않도록 실행을 먼저 할 일별로 합칩니다.')
+h('숫자에서 기록으로')
+p('한 서버 읽기 스냅샷에서 집계와 근거 ID·레코드를 함께 만듭니다. 숫자를 누르면 같은 조건의 근거 패널로 이동하고 개별 할 일·실행을 열 수 있습니다. 0을 눌러도 빈 근거와 조건을 보여 줍니다. 새로 조회하면 숫자와 근거를 함께 갱신합니다.')
+h('다음 계획으로 돌아가는 한 줄')
+p('회고에서 본인이 개선점 한 줄을 정합니다. “다음 계획 만들기”를 누르면 그 문장이 새 계획 v1에 들어갑니다. 새 기간·성공 기준은 본인이 채우며, 원문 회고와 새 계획을 연결합니다. 회고 1건당 전송 1회 제약으로 중복 생성을 막습니다.')
+p('기간은 계획 묶음을 고르는 기준입니다. 실행일만 기간으로 잘라 합산하거나 과거 시점의 상태를 복원하는 통계는 이 설계의 집계 정의가 아닙니다. [18: 서버 시계·시간대 처리 근거]','small')
+
+start('DATABASE CONTRACT  /  07','아홉 표로 관계를 명확하게','contracts/pds-schema-v2.json · 현재 status=design, 실제 DB 대조 전')
+table(['표','핵심 항목','관계·보장'],[
+ ('plans','id, created_at','계획 ID 고정. 최신 revision을 조회해 현재 내용 표시.'),
+ ('plan_revisions','plan_id, revision, title, 기간, priority, success_criteria, estimated_minutes, improvement_text','계획 1:N 이력. (plan_id, revision) UNIQUE. 과거 행 불변.'),
+ ('tasks','plan_id, title, description, due_date, priority, estimated_minutes, status, cycle, row_version, deleted_at','계획 1:N 할 일. 삭제 표시·현재 상태의 기준.'),
+ ('task_tags','task_id, tag, created_at','할 일 1:N 태그. (task_id, tag) 복합 기본 키.'),
+ ('execution_logs','task_id, started_at, ended_at, actual_minutes, blocker_reason, note, completion_event_id','할 일 1:N 실행. 실제 분은 계산 저장. 완료와 연결하면 이벤트당 1건.'),
+ ('completion_events','task_id, cycle, request_key, created_at','(task_id, cycle) UNIQUE. 완료 사건 불변.'),
+ ('reflections','source_plan_id, period_start/end, note, improvement_text','계획 1:N 회고. 사람이 작성한 판단을 DB 보존.'),
+ ('carry_forwards','reflection_id, target_plan_id, improvement_snapshot','회고 원문과 다음 계획 연결. 각 회고의 전송은 최대 1회.'),
+ ('mutation_requests','request_key, operation, payload_hash, response_status/json','내부 요청 중복 방지. 동일 키의 최종 응답 보존.'),
+], [1.24,2.13,1.7])
+h('DB에서 지키는 규칙')
+p('개체 ID는 UUID 문자열 CHAR(36), 태그는 복합 키를 씁니다. 관계에는 외래 키, 기간·음수 시간·우선순위·시작 ≤ 종료에는 CHECK를 둡니다. 실행의 완료 사건도 같은 할 일인지 복합 외래 키로 확인합니다.')
+p('회고 숫자는 원천 행에서 재계산하고 회고 글·개선점·전송 관계는 DB에 저장합니다. 증가 카운터나 localStorage를 최종 자료로 사용하지 않습니다. 최종 구현 뒤 migration과 실제 DB를 계약 파일에 대조해야 합니다. [5]','small')
+
+start('DATES, API & EXPORT  /  08','날짜와 단위를 바꾸지 않는다','T06-C34~C36 · 새로고침과 내보내기의 동일성')
+table(['항목','일관된 규칙'],[
+ ('기간·마감','서울 달력의 DATE. YYYY-MM-DD 문자열 그대로 저장·표시. 시작일과 종료일은 모두 포함.'),
+ ('실행 시각','DATETIME(6)에 UTC 값 저장. API/내보내기는 ISO 8601 Z, 화면은 Asia/Seoul. 날짜형 자체에 시간대가 없으므로 변환을 명시. [7]'),
+ ('시간 단위','예상·실제는 정수 분. 실행 입력은 분 정밀도, 초는 00. 실제 분=(종료-시작)의 초/60. 합계 후 보조 h 표시.'),
+ ('지연의 오늘','서버 Clock과 Asia/Seoul로 LocalDate를 한 번 계산하고 쿼리에 전달. 단말기·OS 기본 시간대에 의존하지 않음. [18]'),
+], [1,4])
+h('API의 공통 계약')
+p('/api/v1 아래 JSON REST API를 둡니다. 서버에서 타입·길이·필수값을 검증하고 DB 조회 응답은 Cache-Control: no-store로 반환합니다. 저장 커밋 후 목록·집계·근거를 함께 재조회합니다. OpenAPI를 백엔드 저장소에서 관리하고 클라이언트는 계약 버전을 고정합니다.')
+table(['경로 · 공통 접두사 /api/v1','역할'],[
+ ('/plans, /plans/:id/revisions','계획 생성·수정·버전 조회'),
+ ('/tasks, /tasks/:id','할 일 CRUD, 서버 검색·필터·정렬'),
+ ('/tasks/:id/complete, /tasks/:id/reopen','요청 키·cycle 기반 완료와 되돌리기'),
+ ('/tasks/:id/executions','실제 실행 저장·조회'),
+ ('/review, /reflections, /carry-forwards','집계·근거, 회고 저장, 다음 계획 연결'),
+ ('/export','전체 도메인 자료를 JSON 파일 한 개로 반환'),
+], [2.4,2.6])
+h('내보내기와 복원 확인')
+p('한 REPEATABLE READ 트랜잭션에서 계획·모든 버전·할 일(삭제 표시 포함)·태그·실행·완료 사건·회고·전송 관계·현재 집계 조건을 UTF-8 JSON으로 내보냅니다. schema_version, exported_at, timezone, duration_unit을 포함하고 자격증명·환경변수·내부 응답 캐시는 제외합니다.')
+p('새로고침 전후와 새 브라우저에서 같은 ID·날짜·값·분 단위를 비교합니다. 내보낸 JSON도 생성 메타데이터를 제외하고 같은 자료인지 확인합니다.','small')
+
+start('PUBLICATION & SECURITY  /  09','공개 상태를 사실대로 알린다','T06-C01, C57, C58, C82 · 공개 데이터와 비밀 자격증명을 분리합니다.')
+h('로그인 없는 기능과 공개 범위')
+p('결과물은 계정 없이 열리고 요구된 쓰기 기능도 모두 동작합니다. 이 단계에는 사용자별 소유권 보호가 없어 다른 방문자도 내용을 바꿀 수 있습니다. 첫 화면의 지정 문구 아래에 편집도 공개됨을 알립니다. 민감한 일기나 타인의 이름·연락처는 입력하지 않습니다.')
+p('브라우저·네이티브 앱은 공개 API만 호출합니다. DB 3306 포트를 외부에 열지 않고, Spring Boot의 최소 권한 DB 계정과 migration 계정을 분리합니다. 공개 진입점은 Caddy의 HTTPS이며 관리 기능·DB·백업은 비공개로 둡니다. 로그인을 요구하는 Spring Security 기본 설정을 그대로 적용하지 않습니다.')
+h('문자열은 그대로 보이고 스크립트는 실행되지 않게')
+p('웹 자유 입력은 React의 일반 텍스트 출력, Android는 Compose Text로 표시합니다. 사용자 문자열을 HTML 직접 삽입·JavaScript·WebView 실행 코드로 전달하지 않습니다. SQL은 파라미터 바인딩하고 정렬 컬럼은 허용 목록으로 고정합니다.')
+call('검사 문자열: <script>alert("T06")</script>\n저장 후 본문·수정 이력·근거 화면에 같은 글자가 보이고, 경고창이나 스크립트 실행은 없어야 합니다.')
+h('비밀값 점검: 다섯 표면을 모두 검사')
+table(['표면','검사와 증거'],[
+ ('브라우저 코드 / 배포 파일','클라이언트 번들·HTML·소스맵·배포 산출물에 비밀값 원문이 없는지 검사.'),
+ ('네트워크 응답 / 콘솔','초기 화면·저장·실패 응답과 브라우저/서버 로그에서 노출 검사. 원문은 결과 로그에 출력하지 않음.'),
+ ('Git 기록','현재 파일뿐 아니라 모든 브랜치·태그의 과거 커밋을 검사. 발견 시 폐기·교체와 이력 정리 후 재검사.'),
+], [1.6,3.4])
+p('DB 비밀번호는 Spring 서버 비공개 설정에만 둡니다. NEXT_PUBLIC_ 변수·브라우저 번들·Android APK에는 비밀값을 넣지 않습니다. 공개 repo에는 변수 이름만 두고, 이미지 레이어·로그·응답에도 원문을 포함하지 않습니다. 오류는 안전한 코드와 안내로 반환합니다.','small')
+
+start('VERIFICATION  /  10','통과는 실제 결과로 판단','검증 그룹은 전체 조건표와 연결됩니다. 현재 실행 결과는 모두 미확인입니다.')
+table(['검사','최소 수행과 통과 기준'],[
+ ('V01 계획·이력','본인 계획 저장 → 1회 수정 → DB/화면 v1·v2 비교. 같은 ID, 최초 값 보존. 기간·우선순위·기준·분 모두 확인.'),
+ ('V02 할 일','생성·편집·완료·되돌리기·삭제를 순서대로 수행. 각 필드 재조회. 삭제한 항목은 목록·집계 제외, 실제 할 일 5개 이상 유지.'),
+ ('V03 목록','동률 값을 포함한 검사용 자료로 검색·복합 필터·네 정렬을 대조. 새로고침해도 화면에 밝힌 순서가 같아야 함.'),
+ ('V04 중복 완료','두 클릭, 같은 키 재시도, 다른 키 동시 요청, 완료 후 되돌리기/재완료 시험. 각 cycle 사건 1건·현재 완료 증가 +1. DB로 확인.'),
+ ('V05 실행 분리','실행 저장 전후 계획 버전·예상 분 대조. 시작·종료·실제 분·이유·할 일 ID 보존. 종료가 더 이르면 저장 거부.'),
+ ('V06 집계·근거','빈 집합, 실행 다건, 완료/미완료, 삭제, 공백 이유, 서울 자정·오늘 마감 경계를 DB 테스트. 숫자와 근거 ID·합계 일치.'),
+ ('V07 다음 계획','개선점 저장 후 다음 계획 생성. 원문·출처 ID 유지. 재요청해도 새 계획·연결 중복 없음.'),
+ ('V08 실제·영속·내보내기','본인 계획 ≥1·할 일 ≥5·실행 ≥3 확인. 새로고침/새 브라우저/DB/단일 JSON의 ID·날짜·값·단위 대조. 집계 전부 0 아님.'),
+ ('V09 공개·제출','결과물과 제출한 모든 소스 URL을 각각 새 시크릿 창에서 열기. 인증·CAPTCHA 없음. 공개 안내와 확인 4줄·판단 3줄 확인.'),
+ ('V10 삽입·비밀·최종 소스','스크립트 문자열 표시/무실행 및 비밀값 다섯 표면 확인. 백엔드·프론트·인프라 커밋을 배포 명세와 대조, DB 계약 확인.'),
+], [1.2,3.8])
+h('증거를 남기는 방식')
+p('evidence/manifest.json에 T06 ID, 검사 그룹, 저장소별 커밋과 배포 버전 조합, 수행 시각, 기대값·실제값, 통과 여부, 스크린샷/DB 결과 파일 경로를 기록합니다. 비밀값은 증거에 복사하지 않습니다. 실제 자료와 검사용 자료를 분리합니다.')
+p('수치 예시나 자동 테스트 자료만으로 “내 실제 기록” 조건을 통과시키지 않습니다. 실제 자료의 사실 여부는 본인이 확인하고, 화면 캡처만으로 DB 저장을 입증하지 않습니다.','small')
+
+start('DELIVERY PLAN  /  11','8~10시간 안의 구현 순서','Next.js·Java·Docker 경험과 환경·본인 자료 준비가 전제입니다. 8~10h는 웹 과제 목표이며 Android 개발은 별도입니다.')
+table(['시간','작업','완료 관문'],[
+ ('0.75h','RULE·필드·화면·본인 자료 확정','44개 조건과 번호 없는 조건 연결'),
+ ('1.00h','저장소·MariaDB 호환 시험·배포 기반','실제 서버 DB 읽기/쓰기 확인'),
+ ('1.75h','Plan·이력·할 일 CRUD·검색/필터/정렬','V01~V03'),
+ ('1.50h','Do·실행 분리·완료 중복 방지','V04~V05'),
+ ('1.25h','See·집계·근거·다음 계획','V06~V07'),
+ ('0.75h','내보내기·오류·실제 자료 입력','V08'),
+ ('1.00h','전체 회귀·보안·공개·제출문','V09~V10, 전체 증거 점검'),
+ ('0~2.00h','실패 수정과 재검증 여유','웹 과제 총 8~10h 목표. 초과 시 시간을 늘리고 조건은 유지'),
+], [0.8,2.6,1.7])
+h('실제 기록을 받기 위한 입력 항목')
+p('본인이 고른 활동 / 계획 제목·기간·우선순위·성공 기준·예상 분 / 실제 할 일 5개 각각의 마감·우선순위·태그·예상 분 / 실제 실행 3건의 할 일·시작·종료·막힌 이유 / 다음 계획에 반영할 한 줄을 준비합니다. 아직 제공받지 않은 사실은 비워 둡니다.')
+h('짧은 확인 방법 4줄 - 도메인 확정, 배포 후 동선 검증')
+p('① 어디로 가나요: https://plandosee.app의 돌아보기 화면으로 갑니다(배포 연결 미확인).\n② 세 단계 안에 무엇을 하나요: 계획 선택 → 실제 시간 숫자 클릭 → 근거 실행 기록 열기.\n③ 무엇이 보이면 통과인가요: 본인 실행 기록과 합계가 일치하고 새로고침 후 같은 값이 보입니다.\n④ 안 될 때는 무엇이 보이나요: 조회 실패 안내와 재시도 버튼, 또는 불일치한 값이 보입니다.','small')
+h('AI와 내 판단 3줄 - 본인 사실 확인 후 제출')
+p('① AI에게 맡긴 일: 요구사항 구조화, 최신 문서·비용 비교, 설계 PDF 작성.\n② 내가 직접 판단한 일: Spring Boot·MariaDB, Next.js·TypeScript와 Android 네이티브 우선, 저장소 분리를 선택함. 실제 활동·공개 범위·개선점은 추후 작성.\n③ AI 제안을 따르지 않은 일: Supabase 대신 Spring Boot·MariaDB를 제안하고, Flutter 대신 웹 Next.js와 Android 네이티브를 선택함. iOS는 배포 부담으로 보류함.','small')
+
+requirements=json.loads((ROOT/'docs/requirements.json').read_text(encoding='utf-8'))['requirements']
+assert len(requirements)==44 and len({r['id'] for r in requirements})==44
+chunks=[requirements[i:i+11] for i in range(0,44,11)]
+for j,chunk in enumerate(chunks):
+    start(f'ACCEPTANCE RULES  /  {12+j:02d}',f'전체 조건표 {j+1} / 4','사용자 제공 ID를 그대로 보존했습니다. 각 행은 필수이며, 현재 상태는 모두 미구현·미검증입니다.')
+    table(['조건 ID','반드시 충족할 조건','검증 연결'],[(r['id'],r['text'],r['verify']) for r in chunk],[0.91,2.9,1.95])
+    p('원문 전체와 검증 연결: docs/requirements.json. 번호 없는 기능·제출·증거 조건은 RULES.md에 함께 고정했습니다.','small')
+
+start('REFERENCES & HANDOFF  /  16','구현 전에 남겨 둘 기준','공식 문서 확인일: 2026-09-08. 사용자 과제 조건은 제품의 최우선 요구사항입니다.')
+sources=[
+ ('1','Spring Boot · System Requirements','https://docs.spring.io/spring-boot/system-requirements.html','4.1.1과 Java 지원 범위'),
+ ('2','Spring Boot · SQL Databases','https://docs.spring.io/spring-boot/reference/data/sql.html','JDBC DataSource와 DB 접근'),
+ ('3','Spring Boot · Database Initialization','https://docs.spring.io/spring-boot/how-to/data-initialization.html','Flyway 마이그레이션 관리'),
+ ('4','Next.js · Server and Client Components','https://nextjs.org/docs/app/getting-started/server-and-client-components','SSR과 사용자 상호작용 경계'),
+ ('5','MariaDB · CONSTRAINT','https://mariadb.com/docs/server/reference/sql-statements/data-definition/constraint','고유·외래 키·CHECK 제약'),
+ ('6','MariaDB · FOR UPDATE','https://mariadb.com/docs/server/reference/sql-statements/data-manipulation/selecting-data/for-update','트랜잭션 안의 InnoDB 행 잠금'),
+ ('7','MariaDB · DATETIME','https://mariadb.com/docs/server/reference/data-types/date-and-time-data-types/datetime','시간대 없는 날짜·시각과 소수 초 정밀도'),
+ ('8','MariaDB · Generated Columns','https://mariadb.com/docs/server/reference/sql-statements/data-definition/create/generated-columns','실제 분 계산 열의 설계 근거'),
+ ('9','GitHub · About Repositories','https://docs.github.com/en/repositories/creating-and-managing-repositories/about-repositories','독립 저장소와 공개 소스 범위'),
+]
+for n,label,url,desc in sources:
+    story.append(Paragraph(f'<b>[{n}] <link href="{escape(url)}" color="#147D80">{escape(label)}</link></b> · {escape(desc)}',styles['small']))
+    md.extend([f'[{n}] [{label}]({url}) · {desc}',''])
+h('이번 문서에 연결되는 파일')
+table(['파일','용도와 상태'],[
+ ('AGENTS.md / RULES.md','후속 작업의 필수 규칙. 원문 44개 조건 유지.'),
+ ('docs/requirements.json','원문 조건과 V01~V10 검증 연결.'),
+ ('contracts/pds-schema-v2.json','MariaDB 표·항목·관계·날짜·집계 설계. 실제 DB 대조 전.'),
+ ('docs/repository-layout.md','프론트·백엔드·인프라·명세 저장소의 책임과 배포 계약.'),
+], [2.35,2.65])
+p('제출 때에는 공개 결과물 URL, 모든 공개 소스 URL, 본인 실제 자료, 단일 내보내기 파일, 검증 증거, 확인 방법 4줄과 판단 3줄이 필요합니다. 앱 배포와 신규 원격 저장소 생성은 아직 실행하지 않았습니다.')
+call('한 조건이라도 실패 또는 미검증이면 완료로 표시하지 않습니다. 설계 문서의 점검과 실제 앱의 통과 증거는 별도로 관리합니다.')
+
+start('WEB & ANDROID  /  17','웹은 Next.js, 앱은 Android','사용자 결정: 웹 TypeScript, 앱 네이티브. Android를 먼저 만들고 iOS 배포는 현재 범위에서 제외합니다.')
+table(['대상','프로그램 구성','검증할 사용성'],[
+ ('웹','Next.js App Router + React + TypeScript. 기본 Turbopack 사용. Vite를 별도 결합하지 않음.','초기 조회 SSR, 직접 URL·새로고침·뒤로 가기, 한글 입력, 텍스트 선택·복사, 키보드·접근성.'),
+ ('Android','Kotlin + Jetpack Compose. ViewModel·Coroutines/Flow·Repository로 화면과 API 접근을 분리.','작은 화면·터치·시스템 뒤로 가기·화면 회전·재진입, 오류 시 입력 유지, 파일 내보내기.'),
+ ('공통 API','/api/v1, 같은 서버 DB·시간 단위·날짜·완료 요청 키·충돌 규칙. OpenAPI로 각각 TS·Kotlin 계약 연결.','웹 저장 후 앱 재조회 및 반대 방향에서 ID·날짜·값·집계가 같은지 비교.'),
+], [0.7,2.15,2.15])
+h('SSR과 DnD는 각각 구현')
+p('SSR은 초기 조회 내용을 서버에서 렌더링하는 방식입니다. 드래그·폼 편집·즉시 상태 갱신은 Client Component가 담당합니다. 먼저 화면을 갱신하는 기능은 저장 실패 시 복구하고, 완료 중복 방지는 서버 DB가 유지합니다. DnD 도입 시 기존 정렬 기준과 충돌하지 않게 동작을 정의합니다. [4][10]')
+h('Android도 서버 자료를 그대로 사용')
+p('Android 화면은 웹 화면과 별도로 구현합니다. 전체 JSON은 동일한 export API에서 받아 Storage Access Framework로 사용자가 고른 위치에 저장합니다. 앱 재시작·다른 클라이언트의 변경 후에는 서버를 재조회합니다. 초기에는 오프라인 쓰기 큐를 추가하지 않습니다. [11][12][24]')
+h('현재 범위와 이후 확장')
+p('웹의 44개 과제 조건 통과 후 Android에서 같은 기능과 자료를 검증합니다. Android 개발·기기 시험·서명 배포는 웹 8~10시간 예상과 별도입니다. 앱의 공개 안내도 유지하며 로그인은 7번 과제에서 다룹니다.')
+p('iOS는 현재 개발·배포 대상에서 제외합니다. Windows·macOS에서는 먼저 웹을 사용하고, 데스크톱 네이티브 앱은 이후 별도 범위로 결정합니다. 공통 REST API를 유지하므로 향후 클라이언트를 추가할 수 있습니다. n8n은 확정 구성에 넣지 않고 외부 자동화가 필요할 때 검토합니다.','small')
+
+start('REPOSITORY BOUNDARIES  /  18','웹과 Android도 별도 저장소','명세·백엔드·웹·Android·인프라의 다섯 저장소로 책임을 나눕니다. 신규 이름은 제안 상태입니다.')
+table(['저장소','책임과 산출물'],[
+ ('PDC_Diary','기존 명세 저장소: RULE, 44개 조건, 설계 PDF, 증거와 제출 URL.'),
+ ('PDC_Diary_Backend','Spring Boot 서비스·SQL·migration·OpenAPI·DB 계약 정본. API 컨테이너 이미지.'),
+ ('PDC_Diary_Web','Next.js·React·TypeScript, SSR·Client Component·웹 테스트. Node.js 컨테이너 이미지.'),
+ ('PDC_Diary_Android','Kotlin·Compose·API 접근·네이티브 파일 저장·앱 테스트. Android 빌드 산출물.'),
+ ('PDC_Diary_Infra','Caddy·Compose·배포·백업·복구·release.json. 실제 secret·DB 파일·백업은 Git 제외.'),
+], [1.4,3.6])
+h('API·DB 계약의 정본은 백엔드에')
+p('백엔드 contracts/openapi.yaml과 contracts/pds-schema-v2.json을 릴리스에 포함합니다. 웹과 Android는 각각 특정 계약 버전을 소비합니다. 현 명세 저장소의 DB 계약은 구현 시작 시 백엔드로 옮기고 이후 특정 릴리스 링크로 참조합니다.')
+h('기존 앱과 호환되는 독립 배포')
+p('초기 API는 /api/v1입니다. 필드 추가처럼 호환되는 변경을 우선하고, 기존 앱을 깨는 변경은 /api/v2로 분리합니다. release.json에 다섯 저장소 commit, 웹·API 이미지 digest, Android 버전·빌드 checksum, API 계약·DB migration 버전을 기록합니다.')
+p('백엔드는 MariaDB 통합 검사, 웹은 타입·컴포넌트·브라우저 검사와 next build, Android는 단위·Compose UI·기기 검사, 인프라는 설정 검증을 수행합니다. CI에서 빌드하고 운영에는 완성 이미지를 배포합니다.')
+call('웹·Android 화면 코드를 따로 관리하되, 저장·집계·중복 방지·날짜 판정은 하나의 Spring Boot API에서 처리합니다. 저장소 수만큼 운영 서버를 늘리지 않습니다.')
+p('기존 origin은 SKT-ALEPH/PDC_Diary입니다. 신규 원격 저장소 생성·공개 설정·push는 아직 실행하지 않았습니다. 제출하는 모든 소스 URL은 비로그인 접근을 실제 확인합니다. [9]','small')
+
+start('DEPLOYMENT & COST  /  19','소형 서버 하나로 시작','2026-09-08 공식 가격표 기준. 한국 사용자를 우선한다는 가정의 월 운영비 비교입니다.')
+p('도메인: plandosee.app 구매 완료(사용자 진술). 웹 https://plandosee.app, 공통 API https://plandosee.app/api/v1로 계획합니다. DNS·HTTPS·배포 연결과 실제 결제액·갱신 가격은 미확인입니다.','small')
+table(['선택','서버 + 백업 기본액','이 프로젝트의 판단'],[
+ ('절약 후보 · 검증 후\nLightsail 서울 2GB','Linux 2 vCPU / 60GB SSD\n서버 $12 + 객체 저장소 $1\n= 월 $13부터','Next.js SSR·Spring·DB를 함께 실행. 부하 시험 통과 시 채택할 절약안. 충분한 용량으로 확정하지 않음. [13][14]'),
+ ('잠정 예산 기준\nLightsail 서울 4GB','Linux 2 vCPU / 80GB SSD\n서버 $24 + 객체 저장소 $1\n= 월 $25부터','Node.js 런타임 추가를 고려한 예산안. 4GB도 성능 측정 전이며 더 비싼 구성을 구매한 것은 아님. [13]'),
+ ('저가 해외 대안\nHetzner CX23 4GB','유럽 서버 기본 €5.49\nIPv4·백업·세금 별도','공식 상품 페이지에 현재 구매 불가로 표시. 지금의 배포 기준으로 채택하지 않음. 한국 지연도 미측정. [15][16]'),
+], [1.16,1.74,2.1])
+p('$1 객체 저장소는 5GB 저장·25GB 전송 한도입니다. 기본액은 이 한도와 서버 번들 전송량 내 사용 가정이며 세금·환율·도메인·초과량은 별도입니다. 스냅샷은 과금 대상 GB당 월 $0.05 추가: 20GB면 $1입니다. 무료 체험은 정상 월 비용에서 빼지 않았습니다. [13]','small')
+h('작은 서버를 효율적으로 쓰는 방법')
+p('Caddy는 /api/v1을 Spring Boot에, 나머지 웹 요청을 Next.js Node.js 서버에 전달합니다. Next.js SSR은 내부 Spring API를 조회하고 브라우저는 같은 출처 API를 사용합니다. 정적 자산은 버전별 캐시, 업무 자료는 no-store로 처리합니다. 웹 경로는 Next.js 라우터가 담당합니다. [19]')
+p('CI에서 빌드하고 서버는 완성 이미지로 실행합니다. Node.js·JVM·DB 메모리와 연결 수를 제한하고 SSR·저장·집계·동시 JSON 내보내기의 응답·RSS·CPU·디스크를 측정합니다. 2GB 시험이 통과하면 월 $13 절약안을, 부족하면 4GB 이상을 선택합니다.')
+h('백업과 확장')
+p('InnoDB 일관 덤프를 매일 서버 밖 비공개 객체 저장소에 보관합니다. 7일 보존을 기본으로 하고 5GB 한도를 점검합니다. 운영 시작 전 다른 DB에 실제 복구합니다. 단일 서버 장애 시 앱과 DB가 함께 멈추므로 복구가 필요한 구성입니다.')
+p('사용량이 늘면 정적 파일/CDN → API·DB 분리 순으로 측정에 맞춰 조정합니다. 지금은 별도 상시 검증 서버나 관리형 DB를 추가하지 않고 로컬·CI의 MariaDB로 검사합니다. 네이티브 앱도 같은 API를 사용하므로 플랫폼 수만큼 서버를 복제하지 않습니다.','small')
+
+start('LATEST REVIEW & SOURCES  /  20','최신 근거와 아직 남은 검증','기존 Context7 기록을 보존하고, 이번 웹·Android 변경은 최신 Next.js·Android 공식 문서로 확인했습니다.')
+table(['자료','확인 범위와 적용 한계'],[
+ ('/spring-projects/spring-boot','JDBC 설정·Flyway. 검색 예제의 DB 종류·main 브랜치를 실제 버전 호환 증명으로 삼지 않음.'),
+ ('Next.js / Android 공식 문서','SSR·Client Component·배포, Kotlin·Compose·앱 구조와 파일 저장. 이번에는 해당 공식 문서로 확인.'),
+ ('/mariadb-corporation/mariadb-docs','InnoDB 잠금·생성 열. 정확한 완료 알고리즘과 시간 식은 우리 DB 테스트로 검증해야 함.'),
+], [1.95,3.05])
+p('Context7 조회는 이전 백엔드·DB 검토 근거입니다. 이번 웹·Android 결정에 새 Context7 조회를 수행했다고 표시하지 않습니다. 서버 구매·앱 빌드·성능·Flyway 12.3 호환·실제 자료는 미검증입니다. 원문 44개 조건은 보존했습니다.','small')
+extra_sources=[
+ ('10','Next.js · Turbopack','https://nextjs.org/docs/app/api-reference/turbopack','기본 빌드 도구'),
+ ('11','Android · Jetpack Compose','https://developer.android.com/compose','Kotlin 기반 네이티브 UI'),
+ ('12','Android · App Architecture','https://developer.android.com/topic/architecture','화면·상태·데이터 계층'),
+ ('13','AWS · Lightsail Pricing','https://aws.amazon.com/lightsail/pricing/','서버·백업·스냅샷 가격'),
+ ('14','AWS · Lightsail Regions','https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-regions-and-availability-zones-in-amazon-lightsail.html','서울 리전'),
+ ('15','Hetzner · June 2026 Prices','https://docs.hetzner.com/general/infrastructure-and-availability/price-adjustment/','변경된 CX23 요금'),
+ ('16','Hetzner · Cost Optimized','https://www.hetzner.com/cloud/cost-optimized/','구매 불가 표시 확인'),
+ ('17','MariaDB · Maintenance Policy','https://mariadb.org/about/','12.3 LTS 유지보수'),
+ ('18','Java 21 · Clock','https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Clock.html','테스트 가능한 시계·시간대'),
+ ('19','Next.js · Self Hosting','https://nextjs.org/docs/app/guides/self-hosting','Node.js 서버와 프록시'),
+ ('20','Spring · Declarative Transactions','https://docs.spring.io/spring-framework/reference/data-access/transaction/declarative.html','서비스 트랜잭션 범위'),
+ ('21','MariaDB · JSON','https://mariadb.com/docs/server/reference/data-types/string-data-types/json','JSON 자료형'),
+ ('22','Flyway · Supported Databases','https://documentation.red-gate.com/flyway/getting-started-with-flyway/system-requirements/supported-databases-and-versions','12.3 명시 검증은 없음'),
+ ('23','Context7 · Official Repository','https://github.com/upstash/context7','MCP 조회 절차'),
+ ('24','Android · Storage Access Framework','https://developer.android.com/training/data-storage/shared/documents-files','사용자 지정 JSON 파일 저장'),
+]
+for n,label,url,desc in extra_sources:
+    story.append(Paragraph(f'<b>[{n}] <link href="{escape(url)}" color="#147D80">{escape(label)}</link></b> · {escape(desc)}',styles['small']))
+    md.extend([f'[{n}] [{label}]({url}) · {desc}',''])
+
+class NumberedCanvas(canvas.Canvas):
+    def __init__(self,*args,**kwargs):
+        super().__init__(*args,**kwargs);self.saved=[]
+    def showPage(self):
+        self.saved.append(dict(self.__dict__));self._startPage()
+    def save(self):
+        count=len(self.saved)
+        for s in self.saved:
+            self.__dict__.update(s)
+            self.setStrokeColor(LINE);self.setLineWidth(.6);self.line(44,46,A4[0]-44,46)
+            self.setFont('Malgun',8);self.setFillColor(MUTED)
+            self.drawString(44,31,'PDS DIARY  /  설계 v1.3  /  2026.09.08')
+            self.drawRightString(A4[0]-44,31,f'{self._pageNumber:02d} / {count:02d}')
+            super().showPage()
+        super().save()
+
+def header(c,doc):
+    c.setFillColor(TEAL);c.rect(44,A4[1]-32,24,3,fill=1,stroke=0)
+    c.setFont('MalgunBold',8);c.setFillColor(MUTED);c.drawRightString(A4[0]-44,A4[1]-33,'PLAN  /  DO  /  SEE')
+
+doc=SimpleDocTemplate(str(OUT),pagesize=A4,rightMargin=44,leftMargin=44,topMargin=53,bottomMargin=62,title='PDS Diary - 기능·구현 설계서',author='PDS Diary 프로젝트',subject='44개 과제 조건과 기능·DB·배포·검증 설계')
+doc.build(story,onFirstPage=header,onLaterPages=header,canvasmaker=NumberedCanvas)
+(ROOT/'docs/pds-design.md').write_text('\n'.join(md),encoding='utf-8')
+print(json.dumps({'pdf':str(OUT),'sections':len(sections),'requirements':len(requirements)},ensure_ascii=False))
