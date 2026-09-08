@@ -1,6 +1,10 @@
 /tmp/
+/.local/
+/workspaces/
 __pycache__/
 *.pyc
 .env
 .env.*
 !.env.example
+/node_modules/
+/.pnpm-store/

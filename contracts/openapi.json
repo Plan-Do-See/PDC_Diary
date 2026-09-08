@@ -1,0 +1,5626 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "PDS Diary · 프론트 연동 API",
+    "version": "0.2.0",
+    "description": "현재 백엔드 소스와 대조한 OpenAPI 3.1 문서. 공개 과제는 익명, 개인 공간은 PDS_SESSION으로 접근합니다. 모든 변경 요청은 익명 사용자도 CSRF 토큰과 같은 세션 쿠키가 필요합니다. 각 경로에 /api/v1이 포함됩니다. 소셜 외부 등록·통합 검증은 프론트 완성 후 진행합니다. 백엔드·DB 배포, 공개 HTTPS·Swagger와 SMTP 시험수신은 확인했습니다. 이메일 인증 전체 동선·소셜 외부 연동은 미검증입니다. 예시는 가상 자료이며 사용자 실제 기록이 아닙니다."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "로컬 API. HTTP 개발은 COOKIE_SECURE=false 필요."
+    },
+    {
+      "url": "https://plandosee.app",
+      "description": "운영 백엔드 주소. 2026-09-08 HTTPS 응답 확인. 프론트는 준비 중."
+    }
+  ],
+  "paths": {
+    "/api/v1/public/plans": {
+      "get": {
+        "summary": "공개 · 계획 목록",
+        "description": "최신 revision 목록. id는 revision ID, 고정 계획 ID는 plan_id. start_date·plan_id 오름차순.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/plan_revisions"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [],
+        "operationId": "get_api_v1_public_plans",
+        "tags": [
+          "공개 공간"
+        ]
+      },
+      "post": {
+        "summary": "공개 · 계획 생성",
+        "description": "계획과 최초 revision 저장. 성공 HTTP 200.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/plan_revisions"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanInput"
+              },
+              "example": {
+                "title": "문서용 계획 예시",
+                "start_date": "2026-09-08",
+                "end_date": "2026-09-14",
+                "priority": 2,
+                "success_criteria": "직접 정한 성공 기준",
+                "estimated_minutes": 120,
+                "improvement_text": ""
+              }
+            }
+          }
+        },
+        "operationId": "post_api_v1_public_plans",
+        "tags": [
+          "공개 공간"
+        ]
+      }
+    },
+    "/api/v1/me/plans": {
+      "get": {
+        "summary": "개인 · 계획 목록",
+        "description": "최신 revision 목록. id는 revision ID, 고정 계획 ID는 plan_id. start_date·plan_id 오름차순.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/plan_revisions"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "operationId": "get_api_v1_me_plans",
+        "tags": [
+          "개인 공간"
+        ]
+      },
+      "post": {
+        "summary": "개인 · 계획 생성",
+        "description": "계획과 최초 revision 저장. 성공 HTTP 200.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/plan_revisions"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "session": [],
+            "csrf": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanInput"
+              },
+              "example": {
+                "title": "문서용 계획 예시",
+                "start_date": "2026-09-08",
+                "end_date": "2026-09-14",
+                "priority": 2,
+                "success_criteria": "직접 정한 성공 기준",
+                "estimated_minutes": 120,
+                "improvement_text": ""
+              }
+            }
+          }
+        },
+        "operationId": "post_api_v1_me_plans",
+        "tags": [
+          "개인 공간"
+        ]
+      }
+    },
+    "/api/v1/public/plans/{id}/revisions": {
+      "get": {
+        "summary": "공개 · 계획 수정 이력",
+        "description": "id는 plan_id. revision 오름차순.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "고정 plan_id. revision 행 id를 사용하지 않음."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/plan_revisions"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [],
+        "operationId": "get_api_v1_public_plans_id_revisions",
+        "tags": [
+          "공개 공간"
+        ]
+      },
+      "post": {
+        "summary": "공개 · 계획 새 버전",
+        "description": "전체 계획 필드와 expected_revision 필요. 낡은 버전 409 REVISION_CONFLICT. 과거 버전 불변.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "고정 plan_id. revision 행 id를 사용하지 않음."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/plan_revisions"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanRevisionInput"
+              },
+              "example": {
+                "title": "문서용 계획 예시",
+                "start_date": "2026-09-08",
+                "end_date": "2026-09-14",
+                "priority": 2,
+                "success_criteria": "직접 정한 성공 기준",
+                "estimated_minutes": 120,
+                "improvement_text": "",
+                "expected_revision": 1
+              }
+            }
+          }
+        },
+        "operationId": "post_api_v1_public_plans_id_revisions",
+        "tags": [
+          "공개 공간"
+        ]
+      }
+    },
+    "/api/v1/me/plans/{id}/revisions": {
+      "get": {
+        "summary": "개인 · 계획 수정 이력",
+        "description": "id는 plan_id. revision 오름차순.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "고정 plan_id. revision 행 id를 사용하지 않음."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/plan_revisions"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "operationId": "get_api_v1_me_plans_id_revisions",
+        "tags": [
+          "개인 공간"
+        ]
+      },
+      "post": {
+        "summary": "개인 · 계획 새 버전",
+        "description": "전체 계획 필드와 expected_revision 필요. 낡은 버전 409 REVISION_CONFLICT. 과거 버전 불변.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "고정 plan_id. revision 행 id를 사용하지 않음."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/plan_revisions"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "session": [],
+            "csrf": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanRevisionInput"
+              },
+              "example": {
+                "title": "문서용 계획 예시",
+                "start_date": "2026-09-08",
+                "end_date": "2026-09-14",
+                "priority": 2,
+                "success_criteria": "직접 정한 성공 기준",
+                "estimated_minutes": 120,
+                "improvement_text": "",
+                "expected_revision": 1
+              }
+            }
+          }
+        },
+        "operationId": "post_api_v1_me_plans_id_revisions",
+        "tags": [
+          "개인 공간"
+        ]
+      }
+    },
+    "/api/v1/public/plans/{id}/duplicate": {
+      "post": {
+        "summary": "공개 · 계획·할 일 틀 복제",
+        "description": "새 기간과 모든 미삭제 원본 할 일의 새 마감일 확인. 실행·완료·회고 미복제. 반환 plan_id로 새 할 일 목록 조회.\n변경 의도마다 소문자 UUID 키를 생성. 통신 재시도에는 본문·키 유지. 같은 키의 다른 경로/본문은 409. 과거 응답 재사용 후에는 최신 상태 재조회.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "고정 plan_id. revision 행 id를 사용하지 않음."
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "Reuse for retries with the same body; scope checked before cached response. Mismatch returns 409."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/plan_revisions"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DuplicateInput"
+              },
+              "example": {
+                "start_date": "2026-09-15",
+                "end_date": "2026-09-21",
+                "task_due_dates": {
+                  "22222222-2222-4222-8222-222222222222": "2026-09-16"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post_api_v1_public_plans_id_duplicate",
+        "tags": [
+          "공개 공간"
+        ]
+      }
+    },
+    "/api/v1/me/plans/{id}/duplicate": {
+      "post": {
+        "summary": "개인 · 계획·할 일 틀 복제",
+        "description": "새 기간과 모든 미삭제 원본 할 일의 새 마감일 확인. 실행·완료·회고 미복제. 반환 plan_id로 새 할 일 목록 조회.\n변경 의도마다 소문자 UUID 키를 생성. 통신 재시도에는 본문·키 유지. 같은 키의 다른 경로/본문은 409. 과거 응답 재사용 후에는 최신 상태 재조회.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "고정 plan_id. revision 행 id를 사용하지 않음."
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "Reuse for retries with the same body; scope checked before cached response. Mismatch returns 409."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/plan_revisions"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "session": [],
+            "csrf": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DuplicateInput"
+              },
+              "example": {
+                "start_date": "2026-09-15",
+                "end_date": "2026-09-21",
+                "task_due_dates": {
+                  "22222222-2222-4222-8222-222222222222": "2026-09-16"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post_api_v1_me_plans_id_duplicate",
+        "tags": [
+          "개인 공간"
+        ]
+      }
+    },
+    "/api/v1/public/tasks": {
+      "get": {
+        "summary": "공개 · 할 일 검색·필터·정렬",
+        "description": "필터 간 AND, 반복 tag 간 OR. 페이지네이션 없음. trash=true는 삭제 행만. tags 포함.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "plan_id",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "고정 계획 ID"
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "in_progress",
+                "done"
+              ]
+            },
+            "description": "현재 상태"
+          },
+          {
+            "in": "query",
+            "name": "priority",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 3
+            },
+            "description": "높음=1, 보통=2, 낮음=3"
+          },
+          {
+            "in": "query",
+            "name": "q",
+            "schema": {
+              "type": "string",
+              "maxLength": 500
+            },
+            "description": "제목·설명·태그 부분 검색. % _도 문자 그대로."
+          },
+          {
+            "in": "query",
+            "name": "due_from",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "description": "마감일 하한 포함"
+          },
+          {
+            "in": "query",
+            "name": "due_to",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "description": "마감일 상한 포함"
+          },
+          {
+            "in": "query",
+            "name": "overdue",
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "서울 오늘 이전 마감인 미완료만"
+          },
+          {
+            "in": "query",
+            "name": "blocked",
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "막힌 이유 있는 할 일만"
+          },
+          {
+            "in": "query",
+            "name": "trash",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "description": "true는 삭제 행만, 기본은 미삭제 행만"
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "due",
+                "priority",
+                "estimate",
+                "newest"
+              ],
+              "default": "due"
+            },
+            "description": "due: due_date↑ priority↑ created_at↑ id↑ / priority: priority↑ due_date↑ created_at↑ id↑ / estimate: estimated_minutes↓ due_date↑ created_at↑ id↑ / newest: created_at↓ id↑"
+          },
+          {
+            "in": "query",
+            "name": "tag",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": true,
+            "description": "Repeated tag parameters OR; different filters AND"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Task"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [],
+        "operationId": "get_api_v1_public_tasks",
+        "tags": [
+          "공개 공간"
+        ]
+      },
+      "post": {
+        "summary": "공개 · 할 일 생성",
+        "description": "초기 in_progress, cycle=1, row_version=1. tags 1개 이상.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskInput"
+              },
+              "example": {
+                "plan_id": "11111111-1111-4111-8111-111111111111",
+                "title": "문서용 할 일 예시",
+                "description": "",
+                "due_date": "2026-09-09",
+                "priority": 2,
+                "estimated_minutes": 30,
+                "tags": [
+                  "예시"
+                ]
+              }
+            }
+          }
+        },
+        "operationId": "post_api_v1_public_tasks",
+        "tags": [
+          "공개 공간"
+        ]
+      }
+    },
+    "/api/v1/me/tasks": {
+      "get": {
+        "summary": "개인 · 할 일 검색·필터·정렬",
+        "description": "필터 간 AND, 반복 tag 간 OR. 페이지네이션 없음. trash=true는 삭제 행만. tags 포함.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "plan_id",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "고정 계획 ID"
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "in_progress",
+                "done"
+              ]
+            },
+            "description": "현재 상태"
+          },
+          {
+            "in": "query",
+            "name": "priority",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 3
+            },
+            "description": "높음=1, 보통=2, 낮음=3"
+          },
+          {
+            "in": "query",
+            "name": "q",
+            "schema": {
+              "type": "string",
+              "maxLength": 500
+            },
+            "description": "제목·설명·태그 부분 검색. % _도 문자 그대로."
+          },
+          {
+            "in": "query",
+            "name": "due_from",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "description": "마감일 하한 포함"
+          },
+          {
+            "in": "query",
+            "name": "due_to",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "description": "마감일 상한 포함"
+          },
+          {
+            "in": "query",
+            "name": "overdue",
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "서울 오늘 이전 마감인 미완료만"
+          },
+          {
+            "in": "query",
+            "name": "blocked",
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "막힌 이유 있는 할 일만"
+          },
+          {
+            "in": "query",
+            "name": "trash",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "description": "true는 삭제 행만, 기본은 미삭제 행만"
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "due",
+                "priority",
+                "estimate",
+                "newest"
+              ],
+              "default": "due"
+            },
+            "description": "due: due_date↑ priority↑ created_at↑ id↑ / priority: priority↑ due_date↑ created_at↑ id↑ / estimate: estimated_minutes↓ due_date↑ created_at↑ id↑ / newest: created_at↓ id↑"
+          },
+          {
+            "in": "query",
+            "name": "tag",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": true,
+            "description": "Repeated tag parameters OR; different filters AND"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Task"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "operationId": "get_api_v1_me_tasks",
+        "tags": [
+          "개인 공간"
+        ]
+      },
+      "post": {
+        "summary": "개인 · 할 일 생성",
+        "description": "초기 in_progress, cycle=1, row_version=1. tags 1개 이상.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "session": [],
+            "csrf": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskInput"
+              },
+              "example": {
+                "plan_id": "11111111-1111-4111-8111-111111111111",
+                "title": "문서용 할 일 예시",
+                "description": "",
+                "due_date": "2026-09-09",
+                "priority": 2,
+                "estimated_minutes": 30,
+                "tags": [
+                  "예시"
+                ]
+              }
+            }
+          }
+        },
+        "operationId": "post_api_v1_me_tasks",
+        "tags": [
+          "개인 공간"
+        ]
+      }
+    },
+    "/api/v1/public/tasks/{id}": {
+      "get": {
+        "summary": "공개 · 할 일 상세·전체 이력",
+        "description": "삭제된 할 일도 해당 공간에서 조회 가능. tags·executions·completion_events 포함.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "할 일 id."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskDetail"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [],
+        "operationId": "get_api_v1_public_tasks_id",
+        "tags": [
+          "공개 공간"
+        ]
+      },
+      "put": {
+        "summary": "공개 · 할 일 전체 수정",
+        "description": "전체 TaskInput과 expected_version 필요. 낡은 버전 409 VERSION_CONFLICT.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "할 일 id."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskEditInput"
+              },
+              "example": {
+                "plan_id": "11111111-1111-4111-8111-111111111111",
+                "title": "문서용 할 일 예시",
+                "description": "",
+                "due_date": "2026-09-09",
+                "priority": 2,
+                "estimated_minutes": 30,
+                "tags": [
+                  "예시"
+                ],
+                "expected_version": 1
+              }
+            }
+          }
+        },
+        "operationId": "put_api_v1_public_tasks_id",
+        "tags": [
+          "공개 공간"
+        ]
+      },
+      "delete": {
+        "summary": "공개 · 휴지통 이동",
+        "description": "DELETE 본문 expected_version 필요. soft delete 결과 행을 200 반환.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "할 일 id."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VersionInput"
+              },
+              "example": {
+                "expected_version": 1
+              }
+            }
+          }
+        },
+        "operationId": "delete_api_v1_public_tasks_id",
+        "tags": [
+          "공개 공간"
+        ]
+      }
+    },
+    "/api/v1/me/tasks/{id}": {
+      "get": {
+        "summary": "개인 · 할 일 상세·전체 이력",
+        "description": "삭제된 할 일도 해당 공간에서 조회 가능. tags·executions·completion_events 포함.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "할 일 id."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskDetail"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "operationId": "get_api_v1_me_tasks_id",
+        "tags": [
+          "개인 공간"
+        ]
+      },
+      "put": {
+        "summary": "개인 · 할 일 전체 수정",
+        "description": "전체 TaskInput과 expected_version 필요. 낡은 버전 409 VERSION_CONFLICT.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "할 일 id."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "session": [],
+            "csrf": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskEditInput"
+              },
+              "example": {
+                "plan_id": "11111111-1111-4111-8111-111111111111",
+                "title": "문서용 할 일 예시",
+                "description": "",
+                "due_date": "2026-09-09",
+                "priority": 2,
+                "estimated_minutes": 30,
+                "tags": [
+                  "예시"
+                ],
+                "expected_version": 1
+              }
+            }
+          }
+        },
+        "operationId": "put_api_v1_me_tasks_id",
+        "tags": [
+          "개인 공간"
+        ]
+      },
+      "delete": {
+        "summary": "개인 · 휴지통 이동",
+        "description": "DELETE 본문 expected_version 필요. soft delete 결과 행을 200 반환.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "할 일 id."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "session": [],
+            "csrf": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VersionInput"
+              },
+              "example": {
+                "expected_version": 1
+              }
+            }
+          }
+        },
+        "operationId": "delete_api_v1_me_tasks_id",
+        "tags": [
+          "개인 공간"
+        ]
+      }
+    },
+    "/api/v1/public/tasks/{id}/restore": {
+      "post": {
+        "summary": "공개 · 할 일 복원",
+        "description": "최신 expected_version 필요. 상태 불일치 409 DELETION_STATE_CONFLICT.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "할 일 id."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VersionInput"
+              },
+              "example": {
+                "expected_version": 1
+              }
+            }
+          }
+        },
+        "operationId": "post_api_v1_public_tasks_id_restore",
+        "tags": [
+          "공개 공간"
+        ]
+      }
+    },
+    "/api/v1/me/tasks/{id}/restore": {
+      "post": {
+        "summary": "개인 · 할 일 복원",
+        "description": "최신 expected_version 필요. 상태 불일치 409 DELETION_STATE_CONFLICT.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "할 일 id."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "session": [],
+            "csrf": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VersionInput"
+              },
+              "example": {
+                "expected_version": 1
+              }
+            }
+          }
+        },
+        "operationId": "post_api_v1_me_tasks_id_restore",
+        "tags": [
+          "개인 공간"
+        ]
+      }
+    },
+    "/api/v1/public/tasks/{id}/complete": {
+      "post": {
+        "summary": "공개 · 할 일 완료",
+        "description": "같은 cycle 사건은 하나. 완료 사건 행 반환. 같은 cycle이 이미 done이면 기존 사건 반환. 최신 할 일·집계를 다시 조회.\n변경 의도마다 소문자 UUID 키를 생성. 통신 재시도에는 본문·키 유지. 같은 키의 다른 경로/본문은 409. 과거 응답 재사용 후에는 최신 상태 재조회.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "할 일 id."
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "Reuse for retries with the same body; scope checked before cached response. Mismatch returns 409."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/completion_events"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompletionInput"
+              },
+              "example": {
+                "cycle": 1
+              }
+            }
+          }
+        },
+        "operationId": "post_api_v1_public_tasks_id_complete",
+        "tags": [
+          "공개 공간"
+        ]
+      }
+    },
+    "/api/v1/me/tasks/{id}/complete": {
+      "post": {
+        "summary": "개인 · 할 일 완료",
+        "description": "같은 cycle 사건은 하나. 완료 사건 행 반환. 같은 cycle이 이미 done이면 기존 사건 반환. 최신 할 일·집계를 다시 조회.\n변경 의도마다 소문자 UUID 키를 생성. 통신 재시도에는 본문·키 유지. 같은 키의 다른 경로/본문은 409. 과거 응답 재사용 후에는 최신 상태 재조회.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "할 일 id."
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "Reuse for retries with the same body; scope checked before cached response. Mismatch returns 409."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/completion_events"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "session": [],
+            "csrf": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompletionInput"
+              },
+              "example": {
+                "cycle": 1
+              }
+            }
+          }
+        },
+        "operationId": "post_api_v1_me_tasks_id_complete",
+        "tags": [
+          "개인 공간"
+        ]
+      }
+    },
+    "/api/v1/public/tasks/{id}/reopen": {
+      "post": {
+        "summary": "공개 · 완료 되돌리기",
+        "description": "현재 done과 cycle 확인 후 in_progress, cycle+1. 과거 이력 보존. 할 일 반환.\n변경 의도마다 소문자 UUID 키를 생성. 통신 재시도에는 본문·키 유지. 같은 키의 다른 경로/본문은 409. 과거 응답 재사용 후에는 최신 상태 재조회.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "할 일 id."
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "Reuse for retries with the same body; scope checked before cached response. Mismatch returns 409."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CycleInput"
+              },
+              "example": {
+                "cycle": 1
+              }
+            }
+          }
+        },
+        "operationId": "post_api_v1_public_tasks_id_reopen",
+        "tags": [
+          "공개 공간"
+        ]
+      }
+    },
+    "/api/v1/me/tasks/{id}/reopen": {
+      "post": {
+        "summary": "개인 · 완료 되돌리기",
+        "description": "현재 done과 cycle 확인 후 in_progress, cycle+1. 과거 이력 보존. 할 일 반환.\n변경 의도마다 소문자 UUID 키를 생성. 통신 재시도에는 본문·키 유지. 같은 키의 다른 경로/본문은 409. 과거 응답 재사용 후에는 최신 상태 재조회.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "할 일 id."
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "Reuse for retries with the same body; scope checked before cached response. Mismatch returns 409."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "session": [],
+            "csrf": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CycleInput"
+              },
+              "example": {
+                "cycle": 1
+              }
+            }
+          }
+        },
+        "operationId": "post_api_v1_me_tasks_id_reopen",
+        "tags": [
+          "개인 공간"
+        ]
+      }
+    },
+    "/api/v1/public/tasks/{id}/executions": {
+      "get": {
+        "summary": "공개 · 실행 기록 목록",
+        "description": "started_at·id 오름차순. 삭제된 할 일도 조회 가능.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "할 일 id."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/execution_logs"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [],
+        "operationId": "get_api_v1_public_tasks_id_executions",
+        "tags": [
+          "공개 공간"
+        ]
+      },
+      "post": {
+        "summary": "공개 · 실행 기록 저장",
+        "description": "예상 시간·계획 이력 불변. 실제 분은 서버 계산. 중복 시간 409 OVERLAP_CONFIRMATION_REQUIRED.\n변경 의도마다 소문자 UUID 키를 생성. 통신 재시도에는 본문·키 유지. 같은 키의 다른 경로/본문은 409. 과거 응답 재사용 후에는 최신 상태 재조회.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "할 일 id."
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "Reuse for retries with the same body; scope checked before cached response. Mismatch returns 409."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/execution_logs"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExecutionInput"
+              },
+              "example": {
+                "started_at": "2026-09-08T01:00:00Z",
+                "ended_at": "2026-09-08T01:30:00Z",
+                "blocker_reason": "",
+                "note": "문서 예시",
+                "confirm_overlap": false
+              }
+            }
+          }
+        },
+        "operationId": "post_api_v1_public_tasks_id_executions",
+        "tags": [
+          "공개 공간"
+        ]
+      }
+    },
+    "/api/v1/me/tasks/{id}/executions": {
+      "get": {
+        "summary": "개인 · 실행 기록 목록",
+        "description": "started_at·id 오름차순. 삭제된 할 일도 조회 가능.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "할 일 id."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/execution_logs"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "operationId": "get_api_v1_me_tasks_id_executions",
+        "tags": [
+          "개인 공간"
+        ]
+      },
+      "post": {
+        "summary": "개인 · 실행 기록 저장",
+        "description": "예상 시간·계획 이력 불변. 실제 분은 서버 계산. 중복 시간 409 OVERLAP_CONFIRMATION_REQUIRED.\n변경 의도마다 소문자 UUID 키를 생성. 통신 재시도에는 본문·키 유지. 같은 키의 다른 경로/본문은 409. 과거 응답 재사용 후에는 최신 상태 재조회.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "할 일 id."
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "Reuse for retries with the same body; scope checked before cached response. Mismatch returns 409."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/execution_logs"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "session": [],
+            "csrf": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExecutionInput"
+              },
+              "example": {
+                "started_at": "2026-09-08T01:00:00Z",
+                "ended_at": "2026-09-08T01:30:00Z",
+                "blocker_reason": "",
+                "note": "문서 예시",
+                "confirm_overlap": false
+              }
+            }
+          }
+        },
+        "operationId": "post_api_v1_me_tasks_id_executions",
+        "tags": [
+          "개인 공간"
+        ]
+      }
+    },
+    "/api/v1/public/reflections": {
+      "get": {
+        "summary": "공개 · 돌아보기 목록",
+        "description": "created_at·id 오름차순.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/reflections"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [],
+        "operationId": "get_api_v1_public_reflections",
+        "tags": [
+          "공개 공간"
+        ]
+      },
+      "post": {
+        "summary": "공개 · 돌아보기 저장",
+        "description": "개선점은 본인이 작성. source_plan_id와 기간 필수.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/reflections"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReflectionInput"
+              },
+              "example": {
+                "source_plan_id": "11111111-1111-4111-8111-111111111111",
+                "period_start": "2026-09-08",
+                "period_end": "2026-09-14",
+                "note": "문서 예시",
+                "improvement_text": "사용자가 직접 작성할 개선점"
+              }
+            }
+          }
+        },
+        "operationId": "post_api_v1_public_reflections",
+        "tags": [
+          "공개 공간"
+        ]
+      }
+    },
+    "/api/v1/me/reflections": {
+      "get": {
+        "summary": "개인 · 돌아보기 목록",
+        "description": "created_at·id 오름차순.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/reflections"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "operationId": "get_api_v1_me_reflections",
+        "tags": [
+          "개인 공간"
+        ]
+      },
+      "post": {
+        "summary": "개인 · 돌아보기 저장",
+        "description": "개선점은 본인이 작성. source_plan_id와 기간 필수.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/reflections"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "session": [],
+            "csrf": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReflectionInput"
+              },
+              "example": {
+                "source_plan_id": "11111111-1111-4111-8111-111111111111",
+                "period_start": "2026-09-08",
+                "period_end": "2026-09-14",
+                "note": "문서 예시",
+                "improvement_text": "사용자가 직접 작성할 개선점"
+              }
+            }
+          }
+        },
+        "operationId": "post_api_v1_me_reflections",
+        "tags": [
+          "개인 공간"
+        ]
+      }
+    },
+    "/api/v1/public/carry-forwards": {
+      "get": {
+        "summary": "공개 · 다음 계획 연결 목록",
+        "description": "reflection_id와 target_plan_id로 출처/다음 계획 연결.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/carry_forwards"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [],
+        "operationId": "get_api_v1_public_carry_forwards",
+        "tags": [
+          "공개 공간"
+        ]
+      },
+      "post": {
+        "summary": "공개 · 개선점을 다음 계획으로",
+        "description": "새 계획 생성·개선점 복사·출처 보존. 같은 reflection은 기존 결과 반환. target_plan_id로 새 계획 조회.\n변경 의도마다 소문자 UUID 키를 생성. 통신 재시도에는 본문·키 유지. 같은 키의 다른 경로/본문은 409. 과거 응답 재사용 후에는 최신 상태 재조회.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "Reuse for retries with the same body; scope checked before cached response. Mismatch returns 409."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/carry_forwards"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CarryInput"
+              },
+              "example": {
+                "reflection_id": "33333333-3333-4333-8333-333333333333",
+                "plan": {
+                  "title": "문서용 계획 예시",
+                  "start_date": "2026-09-08",
+                  "end_date": "2026-09-14",
+                  "priority": 2,
+                  "success_criteria": "직접 정한 성공 기준",
+                  "estimated_minutes": 120,
+                  "improvement_text": ""
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post_api_v1_public_carry_forwards",
+        "tags": [
+          "공개 공간"
+        ]
+      }
+    },
+    "/api/v1/me/carry-forwards": {
+      "get": {
+        "summary": "개인 · 다음 계획 연결 목록",
+        "description": "reflection_id와 target_plan_id로 출처/다음 계획 연결.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/carry_forwards"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "operationId": "get_api_v1_me_carry_forwards",
+        "tags": [
+          "개인 공간"
+        ]
+      },
+      "post": {
+        "summary": "개인 · 개선점을 다음 계획으로",
+        "description": "새 계획 생성·개선점 복사·출처 보존. 같은 reflection은 기존 결과 반환. target_plan_id로 새 계획 조회.\n변경 의도마다 소문자 UUID 키를 생성. 통신 재시도에는 본문·키 유지. 같은 키의 다른 경로/본문은 409. 과거 응답 재사용 후에는 최신 상태 재조회.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "Reuse for retries with the same body; scope checked before cached response. Mismatch returns 409."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/carry_forwards"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "session": [],
+            "csrf": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CarryInput"
+              },
+              "example": {
+                "reflection_id": "33333333-3333-4333-8333-333333333333",
+                "plan": {
+                  "title": "문서용 계획 예시",
+                  "start_date": "2026-09-08",
+                  "end_date": "2026-09-14",
+                  "priority": 2,
+                  "success_criteria": "직접 정한 성공 기준",
+                  "estimated_minutes": 120,
+                  "improvement_text": ""
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post_api_v1_me_carry_forwards",
+        "tags": [
+          "개인 공간"
+        ]
+      }
+    },
+    "/api/v1/public/review": {
+      "get": {
+        "summary": "공개 · 돌아보기 집계·근거",
+        "description": "계획 기간 기준 · 현재 상태 · 대상 할 일의 전체 실행. planned는 할 일 수. delayed는 서울 오늘 이전 마감의 미완료. blocked는 비어 있지 않은 막힌 이유가 있는 고유 할 일 수.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "from",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "in": "query",
+            "name": "to",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "in": "query",
+            "name": "plan_id",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "고정 계획 ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Review"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [],
+        "operationId": "get_api_v1_public_review",
+        "tags": [
+          "공개 공간"
+        ]
+      }
+    },
+    "/api/v1/me/review": {
+      "get": {
+        "summary": "개인 · 돌아보기 집계·근거",
+        "description": "계획 기간 기준 · 현재 상태 · 대상 할 일의 전체 실행. planned는 할 일 수. delayed는 서울 오늘 이전 마감의 미완료. blocked는 비어 있지 않은 막힌 이유가 있는 고유 할 일 수.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "from",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "in": "query",
+            "name": "to",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "in": "query",
+            "name": "plan_id",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "고정 계획 ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Review"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "operationId": "get_api_v1_me_review",
+        "tags": [
+          "개인 공간"
+        ]
+      }
+    },
+    "/api/v1/public/export": {
+      "get": {
+        "summary": "공개 · 공간 전체 JSON 내보내기",
+        "description": "기간·plan_id는 review만 제한. 원천 배열은 한 공간 전체, 삭제·이력 포함. attachment; filename=\"pds-diary.json\".",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "from",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "in": "query",
+            "name": "to",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "in": "query",
+            "name": "plan_id",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "고정 계획 ID (review에만 적용)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Export"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [],
+        "operationId": "get_api_v1_public_export",
+        "tags": [
+          "공개 공간"
+        ]
+      }
+    },
+    "/api/v1/me/export": {
+      "get": {
+        "summary": "개인 · 공간 전체 JSON 내보내기",
+        "description": "기간·plan_id는 review만 제한. 원천 배열은 한 공간 전체, 삭제·이력 포함. attachment; filename=\"pds-diary.json\".",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "from",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "in": "query",
+            "name": "to",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "in": "query",
+            "name": "plan_id",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "고정 계획 ID (review에만 적용)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Export"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "operationId": "get_api_v1_me_export",
+        "tags": [
+          "개인 공간"
+        ]
+      }
+    },
+    "/api/v1/auth/signup": {
+      "post": {
+        "summary": "이메일 가입 신청",
+        "description": "202는 접수만 의미, 계정 여부를 구분하지 않음. 인증 전 로그인 불가.\n메일 요청 세 경로가 이메일별 15분 5회, IP별 15분 30회 한도 공유. 초과 429 RATE_LIMITED.",
+        "parameters": [],
+        "responses": {
+          "202": {
+            "description": "성공",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Accepted"
+                },
+                "example": {
+                  "message": "요청을 접수했습니다. 해당하는 계정이 있으면 메일을 보냅니다."
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignupInput"
+              },
+              "example": {
+                "email": "reader@example.com",
+                "password": "documentation-only-password",
+                "display_name": "문서 예시"
+              }
+            }
+          }
+        },
+        "operationId": "post_api_v1_auth_signup",
+        "tags": [
+          "이메일 인증"
+        ]
+      }
+    },
+    "/api/v1/auth/login": {
+      "post": {
+        "summary": "이메일 로그인",
+        "description": "이메일 확인 필요. Set-Cookie 보존 후 CSRF 새로 조회. 미가입·비밀번호 오류·미인증 모두 401 INVALID_CREDENTIALS. 15분 이메일별 10회/IP별 30회.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "성공",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Account"
+                },
+                "example": {
+                  "id": "44444444-4444-4444-8444-444444444444",
+                  "display_name": "문서 예시",
+                  "workspace": {
+                    "id": "55555555-5555-4555-8555-555555555555",
+                    "kind": "personal"
+                  },
+                  "providers": [
+                    {
+                      "provider": "email"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Credentials"
+              },
+              "example": {
+                "email": "reader@example.com",
+                "password": "documentation-only-password"
+              }
+            }
+          }
+        },
+        "operationId": "post_api_v1_auth_login",
+        "tags": [
+          "이메일 인증"
+        ]
+      }
+    },
+    "/api/v1/auth/verification-email": {
+      "post": {
+        "summary": "이메일 인증 재발송",
+        "description": "인증 전 계정에만 발송. 기존 verify 토큰 무효화, 새 토큰 30분.\n메일 요청 세 경로가 이메일별 15분 5회, IP별 15분 30회 한도 공유. 초과 429 RATE_LIMITED.",
+        "parameters": [],
+        "responses": {
+          "202": {
+            "description": "성공",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Accepted"
+                },
+                "example": {
+                  "message": "요청을 접수했습니다. 해당하는 계정이 있으면 메일을 보냅니다."
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailInput"
+              },
+              "example": {
+                "email": "reader@example.com"
+              }
+            }
+          }
+        },
+        "operationId": "post_api_v1_auth_verification_email",
+        "tags": [
+          "이메일 인증"
+        ]
+      }
+    },
+    "/api/v1/auth/reset-email": {
+      "post": {
+        "summary": "비밀번호 재설정 메일",
+        "description": "검증된 이메일 계정에만 발송. 202 공통 문구. 토큰 15분.\n메일 요청 세 경로가 이메일별 15분 5회, IP별 15분 30회 한도 공유. 초과 429 RATE_LIMITED.",
+        "parameters": [],
+        "responses": {
+          "202": {
+            "description": "성공",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Accepted"
+                },
+                "example": {
+                  "message": "요청을 접수했습니다. 해당하는 계정이 있으면 메일을 보냅니다."
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailInput"
+              },
+              "example": {
+                "email": "reader@example.com"
+              }
+            }
+          }
+        },
+        "operationId": "post_api_v1_auth_reset_email",
+        "tags": [
+          "이메일 인증"
+        ]
+      }
+    },
+    "/api/v1/auth/verify": {
+      "post": {
+        "summary": "이메일 인증 완료",
+        "description": "/account/verify#token=...에서 fragment를 읽고 POST. 일회성/30분. 성공 204 후 로그인 필요.\n토큰 소비 두 경로가 IP별 15분 30회 한도 공유.",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Success, empty response"
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TokenInput"
+              },
+              "example": {
+                "token": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            }
+          }
+        },
+        "operationId": "post_api_v1_auth_verify",
+        "tags": [
+          "이메일 인증"
+        ]
+      }
+    },
+    "/api/v1/auth/reset-password": {
+      "post": {
+        "summary": "비밀번호 재설정",
+        "description": "/account/reset#token=...에서 token과 새 password를 POST. 일회성/15분. 기존 JDBC 세션 모두 삭제. 성공 204 후 로그인.\n토큰 소비 두 경로가 IP별 15분 30회 한도 공유.",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Success, empty response"
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResetInput"
+              },
+              "example": {
+                "token": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "password": "documentation-only-password"
+              }
+            }
+          }
+        },
+        "operationId": "post_api_v1_auth_reset_password",
+        "tags": [
+          "이메일 인증"
+        ]
+      }
+    },
+    "/api/v1/auth/logout": {
+      "post": {
+        "summary": "로그아웃",
+        "description": "POST+CSRF. 세션 무효화·PDS_SESSION 삭제. 성공 204 본문 없음. 이후 변경 전 CSRF 새로 조회.",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Success, empty response"
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          }
+        ],
+        "operationId": "post_api_v1_auth_logout",
+        "tags": [
+          "이메일 인증"
+        ]
+      }
+    },
+    "/api/v1/auth/csrf": {
+      "get": {
+        "summary": "CSRF 발급",
+        "description": "익명도 사용. 같은 세션 쿠키와 token을 모든 POST/PUT/DELETE에 전달. 로그인·로그아웃 후 재발급.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "성공",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Csrf"
+                },
+                "example": {
+                  "header": "X-CSRF-TOKEN",
+                  "token": "documentation-only-csrf-token"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [],
+        "operationId": "get_api_v1_auth_csrf",
+        "tags": [
+          "이메일 인증"
+        ]
+      }
+    },
+    "/api/v1/auth/providers": {
+      "get": {
+        "summary": "소셜 활성 상태",
+        "description": "설정된 제공자만 true. 프론트 완성 전 외부 설정 보류. false이면 준비 중 표시 또는 비활성화.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "성공",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Providers"
+                },
+                "example": {
+                  "google": false,
+                  "kakao": false,
+                  "naver": false
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [],
+        "operationId": "get_api_v1_auth_providers",
+        "tags": [
+          "이메일 인증"
+        ]
+      }
+    },
+    "/api/v1/me/account": {
+      "get": {
+        "summary": "내 계정",
+        "description": "providers는 {provider} 객체 배열. 이메일 주소·이메일 인증 여부는 현재 응답에 없음.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "성공",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Account"
+                },
+                "example": {
+                  "id": "44444444-4444-4444-8444-444444444444",
+                  "display_name": "문서 예시",
+                  "workspace": {
+                    "id": "55555555-5555-4555-8555-555555555555",
+                    "kind": "personal"
+                  },
+                  "providers": [
+                    {
+                      "provider": "email"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "operationId": "get_api_v1_me_account",
+        "tags": [
+          "계정·알림"
+        ]
+      }
+    },
+    "/api/v1/me/notifications": {
+      "get": {
+        "summary": "내 알림 설정 조회",
+        "description": "최초 수신 거부. enabled=true는 검증된 이메일 필요. local_time=서울 HH:mm, days_before=0~30. SMTP 시험수신은 확인했으며, 알림 전체 동선은 미검증.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "성공",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotificationPreferences"
+                },
+                "example": {
+                  "enabled": false,
+                  "reflection_enabled": false,
+                  "local_time": "20:00",
+                  "days_before": 1
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "operationId": "get_api_v1_me_notifications",
+        "tags": [
+          "계정·알림"
+        ]
+      },
+      "put": {
+        "summary": "내 알림 설정 저장",
+        "description": "최초 수신 거부. enabled=true는 검증된 이메일 필요. local_time=서울 HH:mm, days_before=0~30. SMTP 시험수신은 확인했으며, 알림 전체 동선은 미검증.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "성공",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotificationPreferences"
+                },
+                "example": {
+                  "enabled": false,
+                  "reflection_enabled": false,
+                  "local_time": "20:00",
+                  "days_before": 1
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "session": [],
+            "csrf": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NotificationInput"
+              },
+              "example": {
+                "enabled": false,
+                "reflection_enabled": false,
+                "local_time": "20:00",
+                "days_before": 1
+              }
+            }
+          }
+        },
+        "operationId": "put_api_v1_me_notifications",
+        "tags": [
+          "계정·알림"
+        ]
+      }
+    },
+    "/api/v1/me/link/{provider}": {
+      "post": {
+        "summary": "소셜 계정 명시적 연결",
+        "description": "로그인+CSRF 필요. authorization_url로 브라우저 이동. 이메일 일치로 자동 합치지 않음. 외부 연동은 프론트 완성 후.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "provider",
+            "required": true,
+            "schema": {
+              "enum": [
+                "google",
+                "kakao",
+                "naver"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthorizationLink"
+                },
+                "example": {
+                  "authorization_url": "/oauth2/authorization/google"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "session": [],
+            "csrf": []
+          }
+        ],
+        "operationId": "post_api_v1_me_link_provider",
+        "tags": [
+          "소셜 로그인 · 프론트 이후"
+        ]
+      }
+    },
+    "/api/v1/meta": {
+      "get": {
+        "summary": "서비스 메타·공개 안내",
+        "description": "첫 화면에 public_notice를 그대로 표시.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "성공",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Meta"
+                },
+                "example": {
+                  "public_notice": "지금은 로그인이 없어 링크를 아는 사람은 누구나 볼 수 있습니다. 남이 봐도 괜찮은 내용만 넣으세요",
+                  "public_api": "/api/v1/public",
+                  "personal_api": "/api/v1/me",
+                  "timezone": "Asia/Seoul",
+                  "duration_unit": "minutes",
+                  "schema_version": "2.1"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [],
+        "operationId": "get_api_v1_meta",
+        "tags": [
+          "서비스 정보"
+        ]
+      }
+    },
+    "/oauth2/authorization/{provider}": {
+      "get": {
+        "operationId": "startSocialAuthorization",
+        "tags": [
+          "소셜 로그인 · 프론트 이후"
+        ],
+        "summary": "소셜 로그인 브라우저 이동",
+        "description": "활성 제공자만 사용. state·redirect_uri는 Spring Security 관리. fetch JSON API로 호출하지 않음. 외부 등록·검증은 프론트 완성 후.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "provider",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "google",
+                "kakao",
+                "naver"
+              ]
+            }
+          }
+        ],
+        "security": [],
+        "responses": {
+          "302": {
+            "description": "브라우저 리다이렉트",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "제공자 미설정/잘못된 요청"
+          },
+          "401": {
+            "description": "설정되지 않은 경로/인증 실패"
+          }
+        }
+      }
+    },
+    "/login/oauth2/code/{provider}": {
+      "get": {
+        "operationId": "socialCallback",
+        "tags": [
+          "소셜 로그인 · 프론트 이후"
+        ],
+        "summary": "소셜 제공자 콜백",
+        "description": "제공자가 호출. 성공 /account, 실패 /account/login?error=oauth. 프론트는 코드 교환을 구현하지 않음. 등록 URI https://plandosee.app/login/oauth2/code/{provider}. 외부 연동 미검증.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "provider",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "google",
+                "kakao",
+                "naver"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "name": "code",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "state",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "error",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "error_description",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [],
+        "responses": {
+          "302": {
+            "description": "브라우저 리다이렉트",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "잘못된 콜백"
+          },
+          "401": {
+            "description": "제공자 미설정/인증 실패"
+          }
+        }
+      }
+    },
+    "/actuator/health": {
+      "get": {
+        "operationId": "getHealth",
+        "tags": [
+          "서비스 정보"
+        ],
+        "summary": "내부 운영 헬스체크",
+        "description": "Spring 내부 경로. 현재 Caddy 공개 경로에 포함하지 않음.",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "정상",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Health"
+                },
+                "example": {
+                  "status": "UP"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "비정상/서비스 중단",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Health"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "session": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "PDS_SESSION",
+        "description": "HttpOnly·Secure·SameSite=Lax, PDS_SESSION, 유휴 30분. 브라우저가 자동 전송. 로그인 후 쿠키 보존."
+      },
+      "csrf": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-CSRF-TOKEN",
+        "description": "GET /api/v1/auth/csrf의 token을 같은 세션의 변경 요청 헤더로 전달. 로그인·로그아웃 후 다시 조회."
+      }
+    },
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "string",
+            "maxLength": 128
+          }
+        }
+      },
+      "PlanInput": {
+        "type": "object",
+        "required": [
+          "title",
+          "start_date",
+          "end_date",
+          "priority",
+          "success_criteria",
+          "estimated_minutes"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "end_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "priority": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 3
+          },
+          "success_criteria": {
+            "type": "string",
+            "maxLength": 10000,
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "estimated_minutes": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647
+          },
+          "improvement_text": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 10000
+          }
+        },
+        "description": "end_date >= start_date. 서울 달력 날짜. 필수 텍스트는 공백만 입력 불가."
+      },
+      "PlanRevisionInput": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PlanInput"
+          },
+          {
+            "type": "object",
+            "required": [
+              "expected_revision"
+            ],
+            "properties": {
+              "expected_revision": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 2147483647
+              }
+            }
+          }
+        ]
+      },
+      "TaskInput": {
+        "type": "object",
+        "required": [
+          "plan_id",
+          "title",
+          "due_date",
+          "priority",
+          "estimated_minutes",
+          "tags"
+        ],
+        "properties": {
+          "plan_id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "description": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 10000
+          },
+          "due_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "priority": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 3
+          },
+          "estimated_minutes": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647
+          },
+          "tags": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 30,
+            "items": {
+              "type": "string",
+              "description": "정규화 결과 길이 1~64."
+            }
+          }
+        },
+        "description": "같은 공간의 계획 필요. tags 1~30개. NFC·앞뒤 공백 제거·소문자화 후 중복 제거."
+      },
+      "TaskEditInput": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TaskInput"
+          },
+          {
+            "type": "object",
+            "required": [
+              "expected_version"
+            ],
+            "properties": {
+              "expected_version": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 2147483647
+              }
+            }
+          }
+        ]
+      },
+      "VersionInput": {
+        "type": "object",
+        "required": [
+          "expected_version"
+        ],
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647
+          }
+        }
+      },
+      "ExecutionInput": {
+        "type": "object",
+        "required": [
+          "started_at",
+          "ended_at"
+        ],
+        "properties": {
+          "started_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "UTC Z, seconds=00, no fractional seconds"
+          },
+          "ended_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "UTC Z, minute precision, >= started_at"
+          },
+          "blocker_reason": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 10000
+          },
+          "note": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 10000
+          },
+          "confirm_overlap": {
+            "type": "boolean",
+            "default": false
+          }
+        },
+        "description": "UTC Z, 초=00, 소수 초 없음. 종료 >= 시작. actual_minutes는 서버 계산. 시간 중복 409 후 사용자 확인 시 confirm_overlap=true."
+      },
+      "CompletionInput": {
+        "type": "object",
+        "required": [
+          "cycle"
+        ],
+        "properties": {
+          "cycle": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647
+          },
+          "execution": {
+            "$ref": "#/components/schemas/ExecutionInput"
+          }
+        },
+        "description": "최신 task.cycle 사용. 선택 execution도 같은 트랜잭션. 응답은 완료 사건."
+      },
+      "CycleInput": {
+        "type": "object",
+        "required": [
+          "cycle"
+        ],
+        "properties": {
+          "cycle": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647
+          }
+        }
+      },
+      "ReflectionInput": {
+        "type": "object",
+        "required": [
+          "source_plan_id",
+          "period_start",
+          "period_end",
+          "improvement_text"
+        ],
+        "properties": {
+          "source_plan_id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
+          },
+          "period_start": {
+            "type": "string",
+            "format": "date"
+          },
+          "period_end": {
+            "type": "string",
+            "format": "date"
+          },
+          "note": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 10000
+          },
+          "improvement_text": {
+            "type": "string",
+            "maxLength": 10000,
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        }
+      },
+      "CarryInput": {
+        "type": "object",
+        "required": [
+          "reflection_id",
+          "plan"
+        ],
+        "properties": {
+          "reflection_id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
+          },
+          "plan": {
+            "$ref": "#/components/schemas/PlanInput"
+          }
+        }
+      },
+      "DuplicateInput": {
+        "type": "object",
+        "required": [
+          "start_date",
+          "end_date",
+          "task_due_dates"
+        ],
+        "properties": {
+          "start_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "end_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "task_due_dates": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "format": "date"
+            },
+            "description": "Exactly one confirmed due date for each non-deleted source task ID. No actual execution, completion or reflection is copied."
+          }
+        }
+      },
+      "NotificationInput": {
+        "type": "object",
+        "required": [
+          "enabled",
+          "reflection_enabled",
+          "local_time",
+          "days_before"
+        ],
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          },
+          "reflection_enabled": {
+            "type": "boolean"
+          },
+          "local_time": {
+            "type": "string",
+            "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
+            "description": "Asia/Seoul; one daily email after this time"
+          },
+          "days_before": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 30
+          }
+        },
+        "description": "enabled 기본 false. true는 검증된 이메일 필요. 현재 일일 1회 알림 큐. SMTP 시험수신은 확인했으며, 알림 전체 동선은 미검증."
+      },
+      "plans": {
+        "type": "object",
+        "properties": {
+          "workspace_id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "workspace_id",
+          "id",
+          "created_at"
+        ]
+      },
+      "plan_revisions": {
+        "type": "object",
+        "properties": {
+          "workspace_id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
+          },
+          "plan_id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
+          },
+          "revision": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "end_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "priority": {
+            "type": "integer"
+          },
+          "success_criteria": {
+            "type": "string"
+          },
+          "estimated_minutes": {
+            "type": "integer"
+          },
+          "improvement_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "workspace_id",
+          "id",
+          "plan_id",
+          "revision",
+          "title",
+          "start_date",
+          "end_date",
+          "priority",
+          "success_criteria",
+          "estimated_minutes",
+          "improvement_text",
+          "created_at"
+        ]
+      },
+      "tasks": {
+        "type": "object",
+        "properties": {
+          "workspace_id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
+          },
+          "plan_id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "due_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "priority": {
+            "type": "integer"
+          },
+          "estimated_minutes": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "in_progress",
+              "done"
+            ]
+          },
+          "cycle": {
+            "type": "integer"
+          },
+          "row_version": {
+            "type": "integer"
+          },
+          "deleted_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "workspace_id",
+          "id",
+          "plan_id",
+          "title",
+          "description",
+          "due_date",
+          "priority",
+          "estimated_minutes",
+          "status",
+          "cycle",
+          "row_version",
+          "deleted_at",
+          "created_at",
+          "updated_at"
+        ]
+      },
+      "task_tags": {
+        "type": "object",
+        "properties": {
+          "workspace_id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
+          },
+          "task_id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
+          },
+          "tag": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "workspace_id",
+          "task_id",
+          "tag",
+          "created_at"
+        ]
+      },
+      "execution_logs": {
+        "type": "object",
+        "properties": {
+          "workspace_id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
+          },
+          "task_id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
+          },
+          "started_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ended_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "actual_minutes": {
+            "type": "integer"
+          },
+          "blocker_reason": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          },
+          "completion_event_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid",
+                "pattern": "^[0-9a-f-]{36}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "request_key": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "workspace_id",
+          "id",
+          "task_id",
+          "started_at",
+          "ended_at",
+          "actual_minutes",
+          "blocker_reason",
+          "note",
+          "completion_event_id",
+          "request_key",
+          "created_at"
+        ]
+      },
+      "completion_events": {
+        "type": "object",
+        "properties": {
+          "workspace_id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
+          },
+          "task_id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
+          },
+          "cycle": {
+            "type": "integer"
+          },
+          "request_key": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "workspace_id",
+          "id",
+          "task_id",
+          "cycle",
+          "request_key",
+          "created_at"
+        ]
+      },
+      "reflections": {
+        "type": "object",
+        "properties": {
+          "workspace_id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
+          },
+          "source_plan_id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
+          },
+          "period_start": {
+            "type": "string",
+            "format": "date"
+          },
+          "period_end": {
+            "type": "string",
+            "format": "date"
+          },
+          "note": {
+            "type": "string"
+          },
+          "improvement_text": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "workspace_id",
+          "id",
+          "source_plan_id",
+          "period_start",
+          "period_end",
+          "note",
+          "improvement_text",
+          "created_at"
+        ]
+      },
+      "carry_forwards": {
+        "type": "object",
+        "properties": {
+          "workspace_id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
+          },
+          "reflection_id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
+          },
+          "target_plan_id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
+          },
+          "improvement_snapshot": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "workspace_id",
+          "id",
+          "reflection_id",
+          "target_plan_id",
+          "improvement_snapshot",
+          "created_at"
+        ]
+      },
+      "TaskDetail": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Task"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "executions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/execution_logs"
+                }
+              },
+              "completion_events": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/completion_events"
+                }
+              }
+            },
+            "required": [
+              "executions",
+              "completion_events"
+            ]
+          }
+        ]
+      },
+      "Review": {
+        "type": "object",
+        "required": [
+          "counts",
+          "conditions",
+          "evidence"
+        ],
+        "properties": {
+          "counts": {
+            "type": "object",
+            "properties": {
+              "planned": {
+                "type": "integer",
+                "description": "계획 문서 수가 아닌 대상 미삭제 할 일 수."
+              },
+              "completed": {
+                "type": "integer"
+              },
+              "delayed": {
+                "type": "integer"
+              },
+              "blocked": {
+                "type": "integer"
+              },
+              "estimated_minutes": {
+                "type": "integer"
+              },
+              "actual_minutes": {
+                "type": "integer"
+              },
+              "difference_minutes": {
+                "type": "integer",
+                "description": "actual_minutes - estimated_minutes, 음수 가능."
+              }
+            },
+            "required": [
+              "planned",
+              "completed",
+              "delayed",
+              "blocked",
+              "estimated_minutes",
+              "actual_minutes",
+              "difference_minutes"
+            ]
+          },
+          "conditions": {
+            "type": "object",
+            "properties": {
+              "period_start": {
+                "type": "string",
+                "format": "date"
+              },
+              "period_end": {
+                "type": "string",
+                "format": "date"
+              },
+              "today_seoul": {
+                "type": "string",
+                "format": "date"
+              },
+              "timezone": {
+                "type": "string",
+                "const": "Asia/Seoul"
+              },
+              "duration_unit": {
+                "type": "string",
+                "const": "minutes"
+              },
+              "execution_scope": {
+                "type": "string",
+                "const": "all_executions_of_target_tasks"
+              },
+              "plan_id": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "period_start",
+              "period_end",
+              "today_seoul",
+              "timezone",
+              "duration_unit",
+              "execution_scope",
+              "plan_id"
+            ]
+          },
+          "evidence": {
+            "type": "object",
+            "properties": {
+              "tasks": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/tasks"
+                }
+              },
+              "completed": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/tasks"
+                }
+              },
+              "delayed": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/tasks"
+                }
+              },
+              "blocked": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/tasks"
+                }
+              },
+              "blocker_executions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/execution_logs"
+                }
+              },
+              "executions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/execution_logs"
+                }
+              }
+            },
+            "required": [
+              "tasks",
+              "completed",
+              "delayed",
+              "blocked",
+              "blocker_executions",
+              "executions"
+            ]
+          }
+        },
+        "description": "현재 계획 기간과 조회 기간이 겹치는 계획의 미삭제 할 일 기준. plan_id로 좁힐 수 있음. 대상 할 일의 기간 밖 실행까지 전부 합산. 집계와 근거는 같은 읽기 스냅샷."
+      },
+      "Export": {
+        "type": "object",
+        "properties": {
+          "schema_version": {
+            "const": "2.1",
+            "type": "string"
+          },
+          "exported_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "timezone": {
+            "const": "Asia/Seoul",
+            "type": "string"
+          },
+          "duration_unit": {
+            "const": "minutes",
+            "type": "string"
+          },
+          "review": {
+            "$ref": "#/components/schemas/Review"
+          },
+          "plans": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/plans"
+            }
+          },
+          "plan_revisions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/plan_revisions"
+            }
+          },
+          "tasks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/tasks"
+            }
+          },
+          "task_tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/task_tags"
+            }
+          },
+          "execution_logs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/execution_logs"
+            }
+          },
+          "completion_events": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/completion_events"
+            }
+          },
+          "reflections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/reflections"
+            }
+          },
+          "carry_forwards": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/carry_forwards"
+            }
+          }
+        },
+        "required": [
+          "schema_version",
+          "exported_at",
+          "timezone",
+          "duration_unit",
+          "review",
+          "plans",
+          "plan_revisions",
+          "tasks",
+          "task_tags",
+          "execution_logs",
+          "completion_events",
+          "reflections",
+          "carry_forwards"
+        ],
+        "description": "한 공간의 전체 도메인 자료. 삭제·이력 포함. 기간·plan_id는 review에만 적용. 계정·세션·토큰·메일·요청 응답 캐시 제외."
+      },
+      "Credentials": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 254
+          },
+          "password": {
+            "type": "string",
+            "description": "로그인 입력. UTF-8 최대 72바이트."
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "TokenInput": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{43}$",
+            "minLength": 43,
+            "maxLength": 43
+          }
+        },
+        "required": [
+          "token"
+        ]
+      },
+      "EmailInput": {
+        "type": "object",
+        "required": [
+          "email"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email"
+          }
+        }
+      },
+      "SignupInput": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 254
+          },
+          "password": {
+            "type": "string",
+            "minLength": 12,
+            "description": "12 UTF-16 코드 단위 이상, UTF-8 72바이트 이하. JS string.length와 TextEncoder로 확인."
+          },
+          "display_name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "\\S"
+          }
+        },
+        "required": [
+          "email",
+          "password",
+          "display_name"
+        ]
+      },
+      "ResetInput": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{43}$",
+            "minLength": 43,
+            "maxLength": 43
+          },
+          "password": {
+            "type": "string",
+            "minLength": 12,
+            "description": "12 UTF-16 코드 단위 이상, UTF-8 72바이트 이하. JS string.length와 TextEncoder로 확인."
+          }
+        },
+        "required": [
+          "token",
+          "password"
+        ]
+      },
+      "Task": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/tasks"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "tags"
+            ]
+          }
+        ]
+      },
+      "Account": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "display_name": {
+            "type": "string"
+          },
+          "workspace": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "kind": {
+                "type": "string",
+                "const": "personal"
+              }
+            },
+            "required": [
+              "id",
+              "kind"
+            ]
+          },
+          "providers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "provider": {
+                  "type": "string",
+                  "enum": [
+                    "email",
+                    "google",
+                    "kakao",
+                    "naver"
+                  ]
+                }
+              },
+              "required": [
+                "provider"
+              ]
+            }
+          }
+        },
+        "required": [
+          "id",
+          "display_name",
+          "workspace",
+          "providers"
+        ]
+      },
+      "Csrf": {
+        "type": "object",
+        "properties": {
+          "header": {
+            "type": "string",
+            "const": "X-CSRF-TOKEN"
+          },
+          "token": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "header",
+          "token"
+        ]
+      },
+      "Providers": {
+        "type": "object",
+        "properties": {
+          "google": {
+            "type": "boolean"
+          },
+          "kakao": {
+            "type": "boolean"
+          },
+          "naver": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "google",
+          "kakao",
+          "naver"
+        ]
+      },
+      "Accepted": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "접수 문구. 실제 발송·도착을 보장하지 않음."
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "AuthorizationLink": {
+        "type": "object",
+        "properties": {
+          "authorization_url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "authorization_url"
+        ]
+      },
+      "Meta": {
+        "type": "object",
+        "properties": {
+          "public_notice": {
+            "type": "string"
+          },
+          "public_api": {
+            "type": "string",
+            "const": "/api/v1/public"
+          },
+          "personal_api": {
+            "type": "string",
+            "const": "/api/v1/me"
+          },
+          "timezone": {
+            "type": "string",
+            "const": "Asia/Seoul"
+          },
+          "duration_unit": {
+            "type": "string",
+            "const": "minutes"
+          },
+          "schema_version": {
+            "type": "string",
+            "const": "2.1"
+          }
+        },
+        "required": [
+          "public_notice",
+          "public_api",
+          "personal_api",
+          "timezone",
+          "duration_unit",
+          "schema_version"
+        ]
+      },
+      "NotificationPreferences": {
+        "type": "object",
+        "required": [
+          "enabled",
+          "reflection_enabled",
+          "local_time",
+          "days_before"
+        ],
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          },
+          "reflection_enabled": {
+            "type": "boolean"
+          },
+          "local_time": {
+            "type": "string",
+            "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
+            "description": "Asia/Seoul 시각 HH:mm. PUT도 동일 형식."
+          },
+          "days_before": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 30
+          }
+        }
+      },
+      "Health": {
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "UP",
+              "DOWN",
+              "OUT_OF_SERVICE",
+              "UNKNOWN"
+            ]
+          }
+        }
+      }
+    },
+    "responses": {
+      "Http400": {
+        "description": "Invalid input",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "invalid": {
+                "value": {
+                  "error": "INVALID_INPUT"
+                }
+              },
+              "token": {
+                "value": {
+                  "error": "INVALID_TOKEN"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Http401": {
+        "description": "Authentication required",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Http403": {
+        "description": "CSRF or authorization denied",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Http404": {
+        "description": "Resource unavailable in this scope",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Http409": {
+        "description": "Version/cycle/idempotency/overlap conflict",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "version": {
+                "value": {
+                  "error": "VERSION_CONFLICT"
+                }
+              },
+              "overlap": {
+                "value": {
+                  "error": "OVERLAP_CONFIRMATION_REQUIRED"
+                }
+              },
+              "idempotency": {
+                "value": {
+                  "error": "IDEMPOTENCY_CONFLICT"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Http429": {
+        "description": "Rate limited",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-source": {
+    "repository": "https://github.com/Plan-Do-See/PDC_Diary_Spring",
+    "path": "contracts/openapi.yaml",
+    "revision": "uncommitted-working-tree",
+    "date": "2026-09-08"
+  },
+  "tags": [
+    {
+      "name": "공개 공간"
+    },
+    {
+      "name": "개인 공간"
+    },
+    {
+      "name": "이메일 인증"
+    },
+    {
+      "name": "계정·알림"
+    },
+    {
+      "name": "소셜 로그인 · 프론트 이후"
+    },
+    {
+      "name": "서비스 정보"
+    }
+  ]
+}

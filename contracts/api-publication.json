@@ -1,0 +1,120 @@
+{
+  "version": 1,
+  "synced_at": "2026-09-08T10:36:38.297Z",
+  "source_repository": "https://github.com/Plan-Do-See/PDC_Diary_Spring",
+  "source_path": "contracts/openapi.yaml",
+  "source_commit": null,
+  "source_state": "deployed_API_source_unchanged_documentation_status_updated",
+  "openapi_version": "0.2.0",
+  "sha256": "55531ca542facef18a898826becd4b817e82b99f5b59c98c82f096a080895cf9",
+  "paths": 42,
+  "operations": 59,
+  "source_files": [
+    {
+      "path": "src/main/java/app/plandosee/diary/MetaController.java",
+      "sha256": "25beb97373765eb4a26a4adc2cab6d753031606fe913ec3e30126fd8f0270e41"
+    },
+    {
+      "path": "src/main/java/app/plandosee/diary/PdsDiaryApplication.java",
+      "sha256": "40b394e48c201fc53762b2ee7b82ea0ff7141e5e802ea3338a1cc04a1c3f4d88"
+    },
+    {
+      "path": "src/main/java/app/plandosee/diary/WorkspaceAccess.java",
+      "sha256": "c9902bae510b3549071987e6f3191ac55243bfcf8f96e52249c659c7cfad8e84"
+    },
+    {
+      "path": "src/main/java/app/plandosee/diary/auth/Accounts.java",
+      "sha256": "1c520e4dd460d0a9c26acf4b5882482965436aebb4c1b3bb5e13388984972290"
+    },
+    {
+      "path": "src/main/java/app/plandosee/diary/auth/AuthController.java",
+      "sha256": "44a0b8dba1f0748dd12e15d0248d7ee9766418483102b3cb337be64eae93da6f"
+    },
+    {
+      "path": "src/main/java/app/plandosee/diary/auth/Crypto.java",
+      "sha256": "fb3ea4c290284e6277c8d1bd4c9499784357551eb4e76494d471113e5cce58f0"
+    },
+    {
+      "path": "src/main/java/app/plandosee/diary/auth/MailQueue.java",
+      "sha256": "17be0923d70122a0b5acf03fa95bf00ad918e262d4a44f0ba8ac96e340c3b1fc"
+    },
+    {
+      "path": "src/main/java/app/plandosee/diary/auth/RateLimiter.java",
+      "sha256": "40a8765fdd753450053d176badf58d743a97fbef268ec045b1abc58c85ad2947"
+    },
+    {
+      "path": "src/main/java/app/plandosee/diary/auth/Registrations.java",
+      "sha256": "5a693e9608e61caec08afc629d59b4bb6a8bcd33112f23f3e8b21ce972d7e88e"
+    },
+    {
+      "path": "src/main/java/app/plandosee/diary/auth/ReminderController.java",
+      "sha256": "ef02a5bf97bcbdb6c31fba40044e48e352cabd535a00cd6f64c8782ad522150e"
+    },
+    {
+      "path": "src/main/java/app/plandosee/diary/auth/Reminders.java",
+      "sha256": "006146a2d6140d65f83927db7adc7f298b9aa32665d4ba75c822dc7118f43d5e"
+    },
+    {
+      "path": "src/main/java/app/plandosee/diary/auth/SecurityConfig.java",
+      "sha256": "16b0ea043df245687c5a512c054d2e9cb1f6ef5dae70c20087a8b600957da1cb"
+    },
+    {
+      "path": "src/main/java/app/plandosee/diary/auth/WebSessions.java",
+      "sha256": "4d66bae646edf482e95355267d09df6aed5178167cd5c61c096f70c30a52c72f"
+    },
+    {
+      "path": "src/main/java/app/plandosee/diary/common/ApiError.java",
+      "sha256": "71c4e98f47650eb69ae8a1a3f2fb87c73445b30320e8f2f5ccf290a13c8a4187"
+    },
+    {
+      "path": "src/main/java/app/plandosee/diary/common/ErrorHandler.java",
+      "sha256": "28b30838df9da0f98000dd054abb41a90d86f8648e585bcb02ba86d8e8978d8c"
+    },
+    {
+      "path": "src/main/java/app/plandosee/diary/common/Sql.java",
+      "sha256": "594f0a22b693b13e5616cb15912a03c38fd2156e411a0454c8bc2939b17a100b"
+    },
+    {
+      "path": "src/main/java/app/plandosee/diary/diary/DiaryController.java",
+      "sha256": "214c160bc0dd936d30a019f9b3a7767c0f128ba931a80a198f7edbde700c700c"
+    },
+    {
+      "path": "src/main/java/app/plandosee/diary/diary/DiaryService.java",
+      "sha256": "eb4a79bedd1cf7971be8c6546c5ebb3d94aaddf7ef5c37fbd5788c48bfbb158a"
+    },
+    {
+      "path": "src/main/java/app/plandosee/diary/diary/Inputs.java",
+      "sha256": "a37d0d0b43d50469084d7591e15079785a31b4556218821dea2d6e75a483d531"
+    },
+    {
+      "path": "src/main/java/app/plandosee/diary/diary/ReviewService.java",
+      "sha256": "646d0b7f424af7607fb83e3ae69d96f5256457fb15f844f61614223ca849361d"
+    },
+    {
+      "path": "src/main/resources/application.yaml",
+      "sha256": "8e91aedf9a6b7c1430139cd763adaccd0e52500608e51bbc99cdbdbb10a46f19"
+    },
+    {
+      "path": "src/main/resources/db/migration/V1__accounts_workspaces_and_sessions.sql",
+      "sha256": "e69225790fc131f17c1484b6004019b284963671b6d19650296b52ed9fd09114"
+    },
+    {
+      "path": "src/main/resources/db/migration/V2__scoped_diary.sql",
+      "sha256": "d512b5eb795eba999859e98f84e5a1277ad3db9ec6a844b3f07e87dc1459d37b"
+    },
+    {
+      "path": "src/main/resources/db/migration/V3__opt_in_reminders.sql",
+      "sha256": "5b65f71c3c9f2cea7bd29b92b7d388522afcb045e7929b0150df90a429eae0db"
+    }
+  ],
+  "deployment": {
+    "image_digest": "sha256:5f9394bdd9d0c752df23beaeb4a212b7e5c669bf72a063b2467d9e02e76f45f0",
+    "documentation_files_installed": true,
+    "public_docs_url": "https://plandosee.app/docs/",
+    "public_docs_verified": true,
+    "api_contract_unchanged": true,
+    "public_https_verified": true,
+    "verified_at": "2026-09-08T10:37:45.780Z",
+    "documentation_only_changes": true
+  }
+}

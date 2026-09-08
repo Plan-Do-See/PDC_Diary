@@ -1,0 +1,16 @@
+{
+  "name": "pds-diary-specification",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "docs:serve": "node scripts/serve-api-docs.mjs",
+    "docs:sync": "node scripts/sync-api-contract.mjs",
+    "docs:check": "node scripts/check-api-docs.mjs"
+  },
+  "devDependencies": {
+    "@apidevtools/swagger-parser": "13.0.0",
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1",
+    "swagger-ui-dist": "5.32.11"
+  }
+}

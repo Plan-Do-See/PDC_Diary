@@ -1,31 +1,100 @@
 {
-  "schema_version": "2.0",
+  "schema_version": "2.1",
   "document_type": "database_design_contract",
   "status": "design",
   "verified_against_database": false,
   "verified_at": null,
   "deployed_commit": null,
+  "access_scope_extension": {
+    "decision_date": "2026-09-08",
+    "decision_source": "user_explicit_choice",
+    "scope": "public_assignment_and_authenticated_personal_area_in_current_implementation",
+    "status": "implemented_local_tests_passed_external_provider_tests_pending",
+    "decision_document": "https://github.com/Plan-Do-See/PDC_Diary/blob/main/docs/backend-decisions.md",
+    "public_assignment_rule": "기존 44개와 번호 없는 필수 조건 유지; 공개 과제의 모든 필수 기능과 제출 접근은 무인증",
+    "personal_area": "현재 본인만 조회·수정; 공개 과제 자료와 분리. 향후 공동 편집 확장 고려, 현재 공유·초대 기능 제외",
+    "email_signup_required": true,
+    "login_providers": [
+      "kakao",
+      "naver",
+      "google"
+    ],
+    "session_or_token_strategy": "web_spring_session_jdbc_secure_httponly_lax_cookie_csrf; android_handoff_pending",
+    "sharing_policy": "private_owner_only_now_collaborative_editing_future",
+    "implementation_recommendations": {
+      "status": "user_adopted_2026_09_08",
+      "document": "https://github.com/Plan-Do-See/PDC_Diary/blob/main/docs/backend-recommendations.md",
+      "security": "Spring Security + OAuth2 Client; internal user ID separate from provider subject",
+      "email_signup": "email ownership verification + password; PasswordEncoder one-way hash",
+      "web_session": "Spring Session JDBC + Secure/HttpOnly cookie + CSRF checks",
+      "native_authentication": "Android credential handoff and API authentication contract pending; not certified by web session proposal",
+      "email_delivery": "Spring Mail -> Brevo SMTP. Sender domain registration reported complete by user; authenticated status, sender, SMTP credentials and actual delivery unverified.",
+      "n8n": "optional later reminder/operations workflow, not adopted for authentication",
+      "workspace_model": "user / login identity / workspace / workspace member; one owner in each personal workspace for now",
+      "physical_ddl": "PDC_Diary_Spring/src/main/resources/db/migration/V1__accounts_workspaces_and_sessions.sql; V2 scoped domain; V3 opt-in reminders"
+    },
+    "physical_schema_status": "V1-V3 migrated on isolated MariaDB 12.3.3; observed schema in mariadb-12.3.3-observed.json; production not verified",
+    "invariants": [
+      "서버에서 공개/개인 자료 범위와 인증된 주체의 권한 결정; 클라이언트 계정 ID를 신뢰하지 않음",
+      "목록·검색·상세·이력·변경·완료·실행·집계·근거·다음 계획 관계·내보내기에 같은 접근 경계 적용",
+      "권한 없는 공간/계정 사이의 도메인 관계 생성 금지",
+      "요청 키 응답 재사용 전 권한 검사; 다른 계정/공간에 개인 응답 노출 금지",
+      "공개 export는 공개 자료만, 개인 export는 해당 권한 범위만 포함; 인증·계정 비밀정보 제외"
+    ],
+    "verification_ids": [
+      "AUTH-01",
+      "AUTH-02",
+      "AUTH-03",
+      "AUTH-04",
+      "AUTH-05",
+      "AUTH-06",
+      "AUTH-07"
+    ],
+    "verification_status": "local_backend_tests_passed; deployed public/private UI and external OAuth/SMTP pending",
+    "adopted_features": [
+      "REC-01 trash_restore",
+      "REC-02 plan_task_template_copy_without_execution_completion_reflection",
+      "REC-03 opt_in_email_due_and_reflection_reminders"
+    ],
+    "social_external_integration_phase": "after_frontend_complete_per_user_instruction_2026_09_08"
+  },
   "design_review": {
-    "document_version": "1.3",
+    "document_version": "1.4",
     "reviewed_on": "2026-09-08",
-    "basis": "사용자 Next.js/TypeScript 및 Android 네이티브 결정, 최신 Next.js·Android 공식 문서; 기존 백엔드·DB Context7 기록 유지",
+    "basis": "User adopted recommendations/cloud first, official Spring/Flyway/Brevo docs, actual isolated MariaDB 12.3.3 integration tests",
     "application_runtime_proposal": "Next.js / React / TypeScript / Node.js 24 LTS + Android Kotlin / Jetpack Compose + Spring Boot 4.1.x / Java 21 LTS",
-    "hosting_proposal": "Lightsail Seoul Linux IPv4 VPS, Caddy + Next.js Node.js + Spring Boot + MariaDB. 4GB 잠정 예산, 2GB는 실제 부하 시험 통과 후 절약 후보",
-    "database_region_proposal": "ap-northeast-2, 동일 VPS 내부 MariaDB",
-    "database_plan_proposal": "MariaDB 12.3 LTS, 호환·migration 실험 후 정확한 patch/digest 고정",
+    "hosting_proposal": "cloud first; portable Docker images, environment configuration, full MariaDB dump/restore for later WTR Pro migration",
+    "database_region_proposal": "cloud account/provider/region unselected; Seoul candidate",
+    "user_reported_hardware": {
+      "model": "WTR Pro",
+      "cpu": "AMD Ryzen 7 5825U",
+      "ram_gb": 32,
+      "disks_tb": [
+        6,
+        6,
+        2
+      ],
+      "disk_type": "surveillance HDD (user-reported)",
+      "continuous_operation": "user states 24h capable; availability not measured",
+      "os": null,
+      "verified_on_device": false
+    },
+    "user_estimated_initial_users": 10,
+    "user_monthly_budget_cap": null,
+    "database_plan_proposal": "MariaDB 12.3.3, matching observed localhost:3919 greeting; deployment digest pending",
     "runtime_connection": "내부 Docker 네트워크, MariaDB JDBC 제한 계정, HikariCP 제한 풀, UTC 명시",
     "transactions": "Spring @Transactional, 같은 DataSource/연결로 InnoDB 작업. 예외 시 전체 rollback",
-    "testing_database": "로컬 또는 CI Testcontainers, 운영과 동일 MariaDB patch/digest",
+    "testing_database": "Isolated Windows MariaDB 12.3.3 on localhost:3307; existing localhost:3919 left unchanged; Linux container verification pending",
     "purchase_or_provisioning_performed": false,
-    "compatibility_verified": false,
-    "flyway_caveat": "공식 지원표는 MariaDB 10.11까지 명시. 12.3 동작은 구현 첫 단계의 실제 migration 시험 대상"
+    "compatibility_verified": true,
+    "flyway_caveat": "Official MariaDB page updated 2026-09-03 lists verified 12.3.2; project verification is separate"
   },
   "database": {
     "engine": "MariaDB",
-    "version_proposal": "12.3 LTS",
+    "version_proposal": "12.3.3",
     "version_deployed": null,
     "storage_engine": "InnoDB",
-    "provider_proposal": "AWS Lightsail VPS self-managed",
+    "provider_proposal": "cloud first, later self-hosted WTR Pro",
     "application_schema": "pds",
     "application_access": "Spring Boot 서버만 JDBC 제한 DB 계정 사용",
     "browser_direct_database_access": false,
@@ -41,13 +110,19 @@
       "ERROR_FOR_DIVISION_BY_ZERO"
     ],
     "session_timezone": "+00:00",
-    "session_timezone_note": "DATETIME은 자동 시간대 변환을 하지 않음. JDBC 경계에서 UTC로 직렬화·역직렬화"
+    "session_timezone_note": "DATETIME은 자동 시간대 변환을 하지 않음. JDBC 경계에서 UTC로 직렬화·역직렬화",
+    "local_port": 3919
   },
   "tables": [
     {
       "name": "plans",
       "purpose": "계획의 고정 식별자. 현재 내용은 plan_revisions의 최대 revision으로 도출",
       "fields": [
+        {
+          "name": "workspace_id",
+          "type": "char(36) ascii_bin",
+          "nullable": false
+        },
         {
           "name": "id",
           "type": "char(36) ascii_bin",
@@ -60,7 +135,9 @@
         }
       ],
       "constraints": [
-        "PRIMARY KEY(id)"
+        "PRIMARY KEY(id)",
+        "UNIQUE(workspace_id, id)",
+        "FOREIGN KEY(workspace_id) REFERENCES workspaces(id)"
       ],
       "current_version_rule": "SELECT 최대 revision via (plan_id, revision) UNIQUE 인덱스. 계획 생성 시 base row + v1 원자 저장"
     },
@@ -68,6 +145,11 @@
       "name": "plan_revisions",
       "purpose": "최초·수정 후 계획 전체 내용의 불변 이력",
       "fields": [
+        {
+          "name": "workspace_id",
+          "type": "char(36) ascii_bin",
+          "nullable": false
+        },
         {
           "name": "id",
           "type": "char(36) ascii_bin",
@@ -126,7 +208,8 @@
       ],
       "constraints": [
         "PRIMARY KEY(id)",
-        "FOREIGN KEY(plan_id) REFERENCES plans(id)",
+        "UNIQUE(workspace_id, id)",
+        "FOREIGN KEY(workspace_id, plan_id) REFERENCES plans(workspace_id, id)",
         "UNIQUE(plan_id, revision)",
         "CHECK(revision >= 1)",
         "CHECK(start_date <= end_date)",
@@ -140,6 +223,11 @@
       "name": "tasks",
       "purpose": "계획에 딸린 할 일의 현재 상태",
       "fields": [
+        {
+          "name": "workspace_id",
+          "type": "char(36) ascii_bin",
+          "nullable": false
+        },
         {
           "name": "id",
           "type": "char(36) ascii_bin",
@@ -210,7 +298,8 @@
       ],
       "constraints": [
         "PRIMARY KEY(id)",
-        "FOREIGN KEY(plan_id) REFERENCES plans(id)",
+        "UNIQUE(workspace_id, id)",
+        "FOREIGN KEY(workspace_id, plan_id) REFERENCES plans(workspace_id, id)",
         "CHECK(priority IN (1,2,3))",
         "CHECK(estimated_minutes >= 0)",
         "CHECK(status IN ('in_progress','done'))",
@@ -224,6 +313,11 @@
       "name": "task_tags",
       "purpose": "할 일별 태그 저장과 검색",
       "fields": [
+        {
+          "name": "workspace_id",
+          "type": "char(36) ascii_bin",
+          "nullable": false
+        },
         {
           "name": "task_id",
           "type": "char(36) ascii_bin",
@@ -242,7 +336,7 @@
       ],
       "constraints": [
         "PRIMARY KEY(task_id, tag)",
-        "FOREIGN KEY(task_id) REFERENCES tasks(id)",
+        "FOREIGN KEY(workspace_id, task_id) REFERENCES tasks(workspace_id, id)",
         "CHECK(trim(tag) <> '')"
       ],
       "normalization": "서버에서 NFC 정규화·trim·Locale.ROOT 소문자. 원문이 아니라 정규화한 표시값을 저장.",
@@ -254,6 +348,11 @@
       "name": "execution_logs",
       "purpose": "계획과 분리된 실제 실행",
       "fields": [
+        {
+          "name": "workspace_id",
+          "type": "char(36) ascii_bin",
+          "nullable": false
+        },
         {
           "name": "id",
           "type": "char(36) ascii_bin",
@@ -309,10 +408,11 @@
       ],
       "constraints": [
         "PRIMARY KEY(id)",
-        "FOREIGN KEY(task_id) REFERENCES tasks(id)",
-        "FOREIGN KEY(completion_event_id, task_id) REFERENCES completion_events(id, task_id)",
+        "UNIQUE(workspace_id, id)",
+        "FOREIGN KEY(workspace_id, task_id) REFERENCES tasks(workspace_id, id)",
+        "FOREIGN KEY(workspace_id, completion_event_id, task_id) REFERENCES completion_events(workspace_id, id, task_id)",
         "UNIQUE(completion_event_id)",
-        "UNIQUE(request_key)",
+        "UNIQUE(workspace_id, request_key)",
         "CHECK(ended_at >= started_at)",
         "CHECK(SECOND(started_at)=0 AND MICROSECOND(started_at)=0 AND SECOND(ended_at)=0 AND MICROSECOND(ended_at)=0)",
         "CHECK(actual_minutes >= 0)"
@@ -323,6 +423,11 @@
       "name": "completion_events",
       "purpose": "완료 전환의 불변 사건",
       "fields": [
+        {
+          "name": "workspace_id",
+          "type": "char(36) ascii_bin",
+          "nullable": false
+        },
         {
           "name": "id",
           "type": "char(36) ascii_bin",
@@ -351,11 +456,13 @@
       ],
       "constraints": [
         "PRIMARY KEY(id)",
+        "UNIQUE(workspace_id, id)",
         "UNIQUE(id, task_id)",
-        "FOREIGN KEY(task_id) REFERENCES tasks(id)",
+        "FOREIGN KEY(workspace_id, task_id) REFERENCES tasks(workspace_id, id)",
         "UNIQUE(task_id, cycle)",
-        "UNIQUE(request_key)",
-        "CHECK(cycle >= 1)"
+        "UNIQUE(workspace_id, request_key)",
+        "CHECK(cycle >= 1)",
+        "UNIQUE(workspace_id, id, task_id)"
       ],
       "policy": "tasks 행 잠금 및 cycle 검증 후 사건 생성과 done 전환을 원자 처리한다. 이미 done이면 기존 사건 반환. 실행 포함 완료인 경우 동일 트랜잭션 안에서 이벤트와 실행 1건을 연결한다."
     },
@@ -363,6 +470,11 @@
       "name": "reflections",
       "purpose": "돌아보기에서 사람이 작성한 판단과 개선점",
       "fields": [
+        {
+          "name": "workspace_id",
+          "type": "char(36) ascii_bin",
+          "nullable": false
+        },
         {
           "name": "id",
           "type": "char(36) ascii_bin",
@@ -401,7 +513,8 @@
       ],
       "constraints": [
         "PRIMARY KEY(id)",
-        "FOREIGN KEY(source_plan_id) REFERENCES plans(id)",
+        "UNIQUE(workspace_id, id)",
+        "FOREIGN KEY(workspace_id, source_plan_id) REFERENCES plans(workspace_id, id)",
         "CHECK(period_start <= period_end)",
         "CHECK(trim(improvement_text) <> '')"
       ],
@@ -411,6 +524,11 @@
       "name": "carry_forwards",
       "purpose": "개선 한 줄을 다음 계획에 연결",
       "fields": [
+        {
+          "name": "workspace_id",
+          "type": "char(36) ascii_bin",
+          "nullable": false
+        },
         {
           "name": "id",
           "type": "char(36) ascii_bin",
@@ -439,8 +557,9 @@
       ],
       "constraints": [
         "PRIMARY KEY(id)",
-        "FOREIGN KEY(reflection_id) REFERENCES reflections(id)",
-        "FOREIGN KEY(target_plan_id) REFERENCES plans(id)",
+        "UNIQUE(workspace_id, id)",
+        "FOREIGN KEY(workspace_id, reflection_id) REFERENCES reflections(workspace_id, id)",
+        "FOREIGN KEY(workspace_id, target_plan_id) REFERENCES plans(workspace_id, id)",
         "UNIQUE(reflection_id)",
         "UNIQUE(target_plan_id)"
       ],
@@ -450,6 +569,11 @@
       "name": "mutation_requests",
       "purpose": "중복 요청 식별용 내부 메타데이터",
       "fields": [
+        {
+          "name": "workspace_id",
+          "type": "char(36) ascii_bin",
+          "nullable": false
+        },
         {
           "name": "request_key",
           "type": "char(36) ascii_bin",
@@ -482,7 +606,8 @@
         }
       ],
       "constraints": [
-        "PRIMARY KEY(request_key)"
+        "PRIMARY KEY(workspace_id, request_key)",
+        "FOREIGN KEY(workspace_id) REFERENCES workspaces(id)"
       ],
       "policy": "도메인 쓰기와 같은 트랜잭션에 최종 응답을 기록한다. 동일 키·동일 작업·동일 본문은 기존 응답, 동일 키로 다른 작업/본문은 409. 실패 트랜잭션은 요청 행도 롤백. 응답에는 비밀값을 넣지 않는다."
     }
@@ -517,6 +642,7 @@
     "difference": "actual_minutes_sum - estimated_minutes_sum"
   },
   "review_contract": {
+    "access_scope": "서버가 허용한 공개/개인 자료 집합에 아래 기간·계획·할 일 조건을 적용; 상세·근거도 같은 범위",
     "period_scope": "선택한 조회 기간과 현재 계획 기간이 겹치는 계획들의 미삭제 할 일. plan_id 선택 시 교집합.",
     "cohort_predicate": "plan.start_date <= filter.end AND plan.end_date >= filter.start; tasks.deleted_at IS NULL",
     "execution_scope": "대상 할 일에 연결된 전체 실행. 실행 일자로 추가 잘라내지 않는다.",
@@ -534,6 +660,7 @@
     "snapshot": "@Transactional(readOnly=true, isolation=REPEATABLE_READ)의 일관 읽기. aggregate와 근거 SELECT에 locking read를 혼합하지 않음."
   },
   "list_contract": {
+    "access_scope": "검색·필터·정렬 이전에 서버의 공개/개인 접근 범위를 적용",
     "execution": "서버 검색·필터·정렬",
     "search": "제목·설명·태그 부분 문자열; 대소문자 무시; %/_는 문자로 escape; SQL 파라미터 바인딩",
     "filters": [
@@ -557,6 +684,7 @@
     "visible": "주 기준 및 전체 동률 처리 순서를 화면에 표시"
   },
   "export": {
+    "access_scope": "공개 과제 또는 인증된 계정에 허용된 해당 공간의 도메인 자료 전체; 다른 공간·계정 자료는 제외",
     "format": "UTF-8 JSON 단일 파일",
     "read": "REPEATABLE READ 트랜잭션의 일관된 스냅샷",
     "include": [
@@ -574,11 +702,13 @@
       "carry_forwards",
       "현재 집계와 집계 조건"
     ],
-    "exclude": "DB 자격증명·환경변수·mutation_requests 내부 응답 캐시. 사용자 도메인 자료는 전부 포함.",
+    "exclude": "DB 자격증명·환경변수·mutation_requests 내부 응답 캐시·계정/인증 비밀정보·권한 없는 개인 자료. 해당 공간에 허용된 도메인 자료는 전부 포함.",
     "sort": "개체 배열 ID 기준, task_tags는 (task_id, tag) 기준 결정 정렬",
     "restore_verification": "exported_at 같은 생성 메타데이터만 제외하고 ID·날짜·값·단위·FK 재대조"
   },
   "finalization_gate": [
+    "확정된 이메일·카카오·네이버·구글 로그인과 개인 전용 범위에 맞춰 계정/인증/소유 범위/요청 키 분리의 물리 스키마 확정",
+    "AUTH-01~07 공개/개인 접근 분리·각 로그인 수단·개인 전용 범위 검증 결과와 실제 증거 확인",
     "실제 migration 파일과 표/필드/제약/FK를 비교",
     "날짜·단위·집계 경계 테스트 통과",
     "최종 배포 커밋 기록",
@@ -587,20 +717,879 @@
   "deployed_commits": null,
   "repositories": {
     "specification": "PDC_Diary",
-    "backend": "PDC_Diary_Backend",
+    "backend": "PDC_Diary_Spring",
     "infrastructure": "PDC_Diary_Infra",
     "created_remotely": false,
-    "contract_source_of_truth": "구현 시작 시 Backend/contracts로 이관, 명세 저장소는 특정 릴리스 링크만 유지",
+    "contract_source_of_truth": "PDC_Diary_Spring/contracts/pds-schema-v2.json; specification generated mirror, release pin pending",
     "web": "PDC_Diary_Web",
     "android": "PDC_Diary_Android"
   },
   "api_contract": {
     "base_path": "/api/v1",
     "protocol": "HTTPS JSON REST",
-    "authentication_current": "none; all assignment operations public",
-    "source_of_truth": "PDC_Diary_Backend/contracts/openapi.yaml",
+    "authentication_current": "Web JDBC sessions, email ownership verification/password/reset, social identity adapters and explicit authenticated linking implemented; local backend tests passed; real Google/Kakao/Naver callbacks and SMTP delivery pending",
+    "source_of_truth": "PDC_Diary_Spring/contracts/openapi.yaml",
     "future_native": "현재 Android는 동일 HTTPS API 사용. iOS 보류, Windows/macOS 네이티브 향후 검토. 초기 오프라인 쓰기 큐 없음.",
     "web_rendering": "Next.js SSR -> 내부 Spring API, Client Component -> 같은 출처 /api/v1. DB 직접 접속·업무 규칙 중복 금지, 자료 조회 no-store",
-    "android": "Kotlin / Jetpack Compose / ViewModel / Coroutines-Flow / Repository. 재진입·저장 후 서버 재조회, export JSON은 Storage Access Framework로 파일 저장"
+    "android": "Kotlin / Jetpack Compose / ViewModel / Coroutines-Flow / Repository. 재진입·저장 후 서버 재조회, export JSON은 Storage Access Framework로 파일 저장",
+    "scope_paths": {
+      "public": "/api/v1/public",
+      "personal": "/api/v1/me",
+      "auth": "/api/v1/auth"
+    },
+    "documentation_version": "0.2.0",
+    "specification_mirrors": [
+      "PDC_Diary/contracts/openapi.yaml",
+      "PDC_Diary/contracts/openapi.json"
+    ],
+    "frontend_guide": "PDC_Diary/docs/frontend-integration.md",
+    "documentation_status": "42 paths, 59 operations, 38 schemas; source and examples checked; local Swagger rendered; not a deployed API certification"
+  },
+  "canonical_repository": "PDC_Diary_Spring",
+  "canonical_path": "contracts/pds-schema-v2.json",
+  "mirror_policy": "Specification copy is generated from the backend canonical contract until a published release can be pinned. Never edit the two independently.",
+  "physical_schema_observation": {
+    "file": "mariadb-12.3.3-observed.json",
+    "database_version": "12.3.3-MariaDB",
+    "tables_including_flyway": 21,
+    "columns": 131,
+    "source": "information_schema queried by BackendIntegrationTests.physicalSchemaEvidenceComesFromMariaDb",
+    "platform_note": "Windows lower_case_table_names folds SPRING_SESSION names; production Linux container verification remains separate"
+  },
+  "account_and_infrastructure_tables": [
+    {
+      "name": "auth_tokens",
+      "fields": [
+        {
+          "name": "token_hash",
+          "type": "char(64)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "user_id",
+          "type": "char(36)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "purpose",
+          "type": "varchar(16)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "expires_at",
+          "type": "datetime(6)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "used_at",
+          "type": "datetime(6)",
+          "nullable": true,
+          "default": "NULL",
+          "extra": ""
+        }
+      ],
+      "keys": [
+        {
+          "TABLE_NAME": "auth_tokens",
+          "CONSTRAINT_NAME": "1",
+          "COLUMN_NAME": "user_id",
+          "ORDINAL_POSITION": 1,
+          "REFERENCED_TABLE_NAME": "users",
+          "REFERENCED_COLUMN_NAME": "id"
+        },
+        {
+          "TABLE_NAME": "auth_tokens",
+          "CONSTRAINT_NAME": "PRIMARY",
+          "COLUMN_NAME": "token_hash",
+          "ORDINAL_POSITION": 1,
+          "REFERENCED_TABLE_NAME": null,
+          "REFERENCED_COLUMN_NAME": null
+        }
+      ],
+      "checks": [
+        {
+          "TABLE_NAME": "auth_tokens",
+          "CONSTRAINT_NAME": "CONSTRAINT_1",
+          "CHECK_CLAUSE": "`purpose` in ('verify','reset')"
+        }
+      ]
+    },
+    {
+      "name": "email_credentials",
+      "fields": [
+        {
+          "name": "user_id",
+          "type": "char(36)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "email",
+          "type": "varchar(254)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "password_hash",
+          "type": "varchar(255)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "verified_at",
+          "type": "datetime(6)",
+          "nullable": true,
+          "default": "NULL",
+          "extra": ""
+        }
+      ],
+      "keys": [
+        {
+          "TABLE_NAME": "email_credentials",
+          "CONSTRAINT_NAME": "1",
+          "COLUMN_NAME": "user_id",
+          "ORDINAL_POSITION": 1,
+          "REFERENCED_TABLE_NAME": "users",
+          "REFERENCED_COLUMN_NAME": "id"
+        },
+        {
+          "TABLE_NAME": "email_credentials",
+          "CONSTRAINT_NAME": "email",
+          "COLUMN_NAME": "email",
+          "ORDINAL_POSITION": 1,
+          "REFERENCED_TABLE_NAME": null,
+          "REFERENCED_COLUMN_NAME": null
+        },
+        {
+          "TABLE_NAME": "email_credentials",
+          "CONSTRAINT_NAME": "PRIMARY",
+          "COLUMN_NAME": "user_id",
+          "ORDINAL_POSITION": 1,
+          "REFERENCED_TABLE_NAME": null,
+          "REFERENCED_COLUMN_NAME": null
+        }
+      ],
+      "checks": []
+    },
+    {
+      "name": "flyway_schema_history",
+      "fields": [
+        {
+          "name": "installed_rank",
+          "type": "int(11)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "version",
+          "type": "varchar(50)",
+          "nullable": true,
+          "default": "NULL",
+          "extra": ""
+        },
+        {
+          "name": "description",
+          "type": "varchar(200)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "type",
+          "type": "varchar(20)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "script",
+          "type": "varchar(1000)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "checksum",
+          "type": "int(11)",
+          "nullable": true,
+          "default": "NULL",
+          "extra": ""
+        },
+        {
+          "name": "installed_by",
+          "type": "varchar(100)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "installed_on",
+          "type": "timestamp",
+          "nullable": false,
+          "default": "current_timestamp()",
+          "extra": ""
+        },
+        {
+          "name": "execution_time",
+          "type": "int(11)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "success",
+          "type": "tinyint(1)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        }
+      ],
+      "keys": [
+        {
+          "TABLE_NAME": "flyway_schema_history",
+          "CONSTRAINT_NAME": "PRIMARY",
+          "COLUMN_NAME": "installed_rank",
+          "ORDINAL_POSITION": 1,
+          "REFERENCED_TABLE_NAME": null,
+          "REFERENCED_COLUMN_NAME": null
+        }
+      ],
+      "checks": []
+    },
+    {
+      "name": "login_identities",
+      "fields": [
+        {
+          "name": "id",
+          "type": "char(36)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "user_id",
+          "type": "char(36)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "provider",
+          "type": "varchar(16)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "subject",
+          "type": "varchar(255)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "created_at",
+          "type": "datetime(6)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        }
+      ],
+      "keys": [
+        {
+          "TABLE_NAME": "login_identities",
+          "CONSTRAINT_NAME": "1",
+          "COLUMN_NAME": "user_id",
+          "ORDINAL_POSITION": 1,
+          "REFERENCED_TABLE_NAME": "users",
+          "REFERENCED_COLUMN_NAME": "id"
+        },
+        {
+          "TABLE_NAME": "login_identities",
+          "CONSTRAINT_NAME": "PRIMARY",
+          "COLUMN_NAME": "id",
+          "ORDINAL_POSITION": 1,
+          "REFERENCED_TABLE_NAME": null,
+          "REFERENCED_COLUMN_NAME": null
+        },
+        {
+          "TABLE_NAME": "login_identities",
+          "CONSTRAINT_NAME": "provider",
+          "COLUMN_NAME": "provider",
+          "ORDINAL_POSITION": 1,
+          "REFERENCED_TABLE_NAME": null,
+          "REFERENCED_COLUMN_NAME": null
+        },
+        {
+          "TABLE_NAME": "login_identities",
+          "CONSTRAINT_NAME": "provider",
+          "COLUMN_NAME": "subject",
+          "ORDINAL_POSITION": 2,
+          "REFERENCED_TABLE_NAME": null,
+          "REFERENCED_COLUMN_NAME": null
+        }
+      ],
+      "checks": [
+        {
+          "TABLE_NAME": "login_identities",
+          "CONSTRAINT_NAME": "CONSTRAINT_1",
+          "CHECK_CLAUSE": "`provider` in ('email','google','kakao','naver')"
+        }
+      ]
+    },
+    {
+      "name": "mail_outbox",
+      "fields": [
+        {
+          "name": "id",
+          "type": "char(36)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "encrypted_message",
+          "type": "longtext",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "attempts",
+          "type": "int(11)",
+          "nullable": false,
+          "default": "0",
+          "extra": ""
+        },
+        {
+          "name": "state",
+          "type": "varchar(16)",
+          "nullable": false,
+          "default": "'pending'",
+          "extra": ""
+        },
+        {
+          "name": "next_attempt_at",
+          "type": "datetime(6)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "created_at",
+          "type": "datetime(6)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "sent_at",
+          "type": "datetime(6)",
+          "nullable": true,
+          "default": "NULL",
+          "extra": ""
+        }
+      ],
+      "keys": [
+        {
+          "TABLE_NAME": "mail_outbox",
+          "CONSTRAINT_NAME": "PRIMARY",
+          "COLUMN_NAME": "id",
+          "ORDINAL_POSITION": 1,
+          "REFERENCED_TABLE_NAME": null,
+          "REFERENCED_COLUMN_NAME": null
+        }
+      ],
+      "checks": [
+        {
+          "TABLE_NAME": "mail_outbox",
+          "CONSTRAINT_NAME": "CONSTRAINT_1",
+          "CHECK_CLAUSE": "`state` in ('pending','sent','failed')"
+        }
+      ]
+    },
+    {
+      "name": "notification_preferences",
+      "fields": [
+        {
+          "name": "user_id",
+          "type": "char(36)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "enabled",
+          "type": "tinyint(1)",
+          "nullable": false,
+          "default": "0",
+          "extra": ""
+        },
+        {
+          "name": "reflection_enabled",
+          "type": "tinyint(1)",
+          "nullable": false,
+          "default": "0",
+          "extra": ""
+        },
+        {
+          "name": "local_time",
+          "type": "time",
+          "nullable": false,
+          "default": "'09:00:00'",
+          "extra": ""
+        },
+        {
+          "name": "days_before",
+          "type": "smallint(6)",
+          "nullable": false,
+          "default": "1",
+          "extra": ""
+        },
+        {
+          "name": "last_local_date",
+          "type": "date",
+          "nullable": true,
+          "default": "NULL",
+          "extra": ""
+        }
+      ],
+      "keys": [
+        {
+          "TABLE_NAME": "notification_preferences",
+          "CONSTRAINT_NAME": "1",
+          "COLUMN_NAME": "user_id",
+          "ORDINAL_POSITION": 1,
+          "REFERENCED_TABLE_NAME": "users",
+          "REFERENCED_COLUMN_NAME": "id"
+        },
+        {
+          "TABLE_NAME": "notification_preferences",
+          "CONSTRAINT_NAME": "PRIMARY",
+          "COLUMN_NAME": "user_id",
+          "ORDINAL_POSITION": 1,
+          "REFERENCED_TABLE_NAME": null,
+          "REFERENCED_COLUMN_NAME": null
+        }
+      ],
+      "checks": [
+        {
+          "TABLE_NAME": "notification_preferences",
+          "CONSTRAINT_NAME": "CONSTRAINT_1",
+          "CHECK_CLAUSE": "`enabled` in (0,1) and `reflection_enabled` in (0,1)"
+        },
+        {
+          "TABLE_NAME": "notification_preferences",
+          "CONSTRAINT_NAME": "CONSTRAINT_2",
+          "CHECK_CLAUSE": "`local_time` >= '00:00:00' and `local_time` < '24:00:00' and second(`local_time`) = 0"
+        },
+        {
+          "TABLE_NAME": "notification_preferences",
+          "CONSTRAINT_NAME": "CONSTRAINT_3",
+          "CHECK_CLAUSE": "`days_before` between 0 and 30"
+        }
+      ]
+    },
+    {
+      "name": "rate_limits",
+      "fields": [
+        {
+          "name": "bucket",
+          "type": "char(64)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "window_start",
+          "type": "datetime(6)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "attempts",
+          "type": "int(11)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        }
+      ],
+      "keys": [
+        {
+          "TABLE_NAME": "rate_limits",
+          "CONSTRAINT_NAME": "PRIMARY",
+          "COLUMN_NAME": "bucket",
+          "ORDINAL_POSITION": 1,
+          "REFERENCED_TABLE_NAME": null,
+          "REFERENCED_COLUMN_NAME": null
+        }
+      ],
+      "checks": []
+    },
+    {
+      "name": "spring_session",
+      "fields": [
+        {
+          "name": "PRIMARY_ID",
+          "type": "char(36)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "SESSION_ID",
+          "type": "char(36)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "CREATION_TIME",
+          "type": "bigint(20)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "LAST_ACCESS_TIME",
+          "type": "bigint(20)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "MAX_INACTIVE_INTERVAL",
+          "type": "int(11)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "EXPIRY_TIME",
+          "type": "bigint(20)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "PRINCIPAL_NAME",
+          "type": "varchar(100)",
+          "nullable": true,
+          "default": "NULL",
+          "extra": ""
+        }
+      ],
+      "keys": [
+        {
+          "TABLE_NAME": "spring_session",
+          "CONSTRAINT_NAME": "PRIMARY",
+          "COLUMN_NAME": "PRIMARY_ID",
+          "ORDINAL_POSITION": 1,
+          "REFERENCED_TABLE_NAME": null,
+          "REFERENCED_COLUMN_NAME": null
+        },
+        {
+          "TABLE_NAME": "spring_session",
+          "CONSTRAINT_NAME": "SESSION_ID",
+          "COLUMN_NAME": "SESSION_ID",
+          "ORDINAL_POSITION": 1,
+          "REFERENCED_TABLE_NAME": null,
+          "REFERENCED_COLUMN_NAME": null
+        }
+      ],
+      "checks": []
+    },
+    {
+      "name": "spring_session_attributes",
+      "fields": [
+        {
+          "name": "SESSION_PRIMARY_ID",
+          "type": "char(36)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "ATTRIBUTE_NAME",
+          "type": "varchar(200)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "ATTRIBUTE_BYTES",
+          "type": "blob",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        }
+      ],
+      "keys": [
+        {
+          "TABLE_NAME": "spring_session_attributes",
+          "CONSTRAINT_NAME": "1",
+          "COLUMN_NAME": "SESSION_PRIMARY_ID",
+          "ORDINAL_POSITION": 1,
+          "REFERENCED_TABLE_NAME": "spring_session",
+          "REFERENCED_COLUMN_NAME": "PRIMARY_ID"
+        },
+        {
+          "TABLE_NAME": "spring_session_attributes",
+          "CONSTRAINT_NAME": "PRIMARY",
+          "COLUMN_NAME": "SESSION_PRIMARY_ID",
+          "ORDINAL_POSITION": 1,
+          "REFERENCED_TABLE_NAME": null,
+          "REFERENCED_COLUMN_NAME": null
+        },
+        {
+          "TABLE_NAME": "spring_session_attributes",
+          "CONSTRAINT_NAME": "PRIMARY",
+          "COLUMN_NAME": "ATTRIBUTE_NAME",
+          "ORDINAL_POSITION": 2,
+          "REFERENCED_TABLE_NAME": null,
+          "REFERENCED_COLUMN_NAME": null
+        }
+      ],
+      "checks": []
+    },
+    {
+      "name": "users",
+      "fields": [
+        {
+          "name": "id",
+          "type": "char(36)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "display_name",
+          "type": "varchar(100)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "created_at",
+          "type": "datetime(6)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        }
+      ],
+      "keys": [
+        {
+          "TABLE_NAME": "users",
+          "CONSTRAINT_NAME": "PRIMARY",
+          "COLUMN_NAME": "id",
+          "ORDINAL_POSITION": 1,
+          "REFERENCED_TABLE_NAME": null,
+          "REFERENCED_COLUMN_NAME": null
+        }
+      ],
+      "checks": []
+    },
+    {
+      "name": "workspaces",
+      "fields": [
+        {
+          "name": "id",
+          "type": "char(36)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "kind",
+          "type": "varchar(16)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "owner_user_id",
+          "type": "char(36)",
+          "nullable": true,
+          "default": "NULL",
+          "extra": ""
+        },
+        {
+          "name": "created_at",
+          "type": "datetime(6)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        }
+      ],
+      "keys": [
+        {
+          "TABLE_NAME": "workspaces",
+          "CONSTRAINT_NAME": "1",
+          "COLUMN_NAME": "owner_user_id",
+          "ORDINAL_POSITION": 1,
+          "REFERENCED_TABLE_NAME": "users",
+          "REFERENCED_COLUMN_NAME": "id"
+        },
+        {
+          "TABLE_NAME": "workspaces",
+          "CONSTRAINT_NAME": "id",
+          "COLUMN_NAME": "id",
+          "ORDINAL_POSITION": 1,
+          "REFERENCED_TABLE_NAME": null,
+          "REFERENCED_COLUMN_NAME": null
+        },
+        {
+          "TABLE_NAME": "workspaces",
+          "CONSTRAINT_NAME": "id",
+          "COLUMN_NAME": "owner_user_id",
+          "ORDINAL_POSITION": 2,
+          "REFERENCED_TABLE_NAME": null,
+          "REFERENCED_COLUMN_NAME": null
+        },
+        {
+          "TABLE_NAME": "workspaces",
+          "CONSTRAINT_NAME": "owner_user_id",
+          "COLUMN_NAME": "owner_user_id",
+          "ORDINAL_POSITION": 1,
+          "REFERENCED_TABLE_NAME": null,
+          "REFERENCED_COLUMN_NAME": null
+        },
+        {
+          "TABLE_NAME": "workspaces",
+          "CONSTRAINT_NAME": "PRIMARY",
+          "COLUMN_NAME": "id",
+          "ORDINAL_POSITION": 1,
+          "REFERENCED_TABLE_NAME": null,
+          "REFERENCED_COLUMN_NAME": null
+        }
+      ],
+      "checks": [
+        {
+          "TABLE_NAME": "workspaces",
+          "CONSTRAINT_NAME": "CONSTRAINT_1",
+          "CHECK_CLAUSE": "`kind` = 'public' and `owner_user_id` is null and `id` = '00000000-0000-0000-0000-000000000001' or `kind` = 'personal' and `owner_user_id` is not null"
+        }
+      ]
+    },
+    {
+      "name": "workspace_members",
+      "fields": [
+        {
+          "name": "workspace_id",
+          "type": "char(36)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "user_id",
+          "type": "char(36)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "role",
+          "type": "varchar(16)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        }
+      ],
+      "keys": [
+        {
+          "TABLE_NAME": "workspace_members",
+          "CONSTRAINT_NAME": "1",
+          "COLUMN_NAME": "workspace_id",
+          "ORDINAL_POSITION": 1,
+          "REFERENCED_TABLE_NAME": "workspaces",
+          "REFERENCED_COLUMN_NAME": "id"
+        },
+        {
+          "TABLE_NAME": "workspace_members",
+          "CONSTRAINT_NAME": "2",
+          "COLUMN_NAME": "user_id",
+          "ORDINAL_POSITION": 1,
+          "REFERENCED_TABLE_NAME": "users",
+          "REFERENCED_COLUMN_NAME": "id"
+        },
+        {
+          "TABLE_NAME": "workspace_members",
+          "CONSTRAINT_NAME": "3",
+          "COLUMN_NAME": "workspace_id",
+          "ORDINAL_POSITION": 1,
+          "REFERENCED_TABLE_NAME": "workspaces",
+          "REFERENCED_COLUMN_NAME": "id"
+        },
+        {
+          "TABLE_NAME": "workspace_members",
+          "CONSTRAINT_NAME": "3",
+          "COLUMN_NAME": "user_id",
+          "ORDINAL_POSITION": 2,
+          "REFERENCED_TABLE_NAME": "workspaces",
+          "REFERENCED_COLUMN_NAME": "owner_user_id"
+        },
+        {
+          "TABLE_NAME": "workspace_members",
+          "CONSTRAINT_NAME": "PRIMARY",
+          "COLUMN_NAME": "workspace_id",
+          "ORDINAL_POSITION": 1,
+          "REFERENCED_TABLE_NAME": null,
+          "REFERENCED_COLUMN_NAME": null
+        },
+        {
+          "TABLE_NAME": "workspace_members",
+          "CONSTRAINT_NAME": "PRIMARY",
+          "COLUMN_NAME": "user_id",
+          "ORDINAL_POSITION": 2,
+          "REFERENCED_TABLE_NAME": null,
+          "REFERENCED_COLUMN_NAME": null
+        },
+        {
+          "TABLE_NAME": "workspace_members",
+          "CONSTRAINT_NAME": "workspace_id",
+          "COLUMN_NAME": "workspace_id",
+          "ORDINAL_POSITION": 1,
+          "REFERENCED_TABLE_NAME": null,
+          "REFERENCED_COLUMN_NAME": null
+        }
+      ],
+      "checks": [
+        {
+          "TABLE_NAME": "workspace_members",
+          "CONSTRAINT_NAME": "CONSTRAINT_1",
+          "CHECK_CLAUSE": "`role` = 'owner'"
+        }
+      ]
+    }
+  ],
+  "local_verification": {
+    "status": "passed",
+    "tests": 14,
+    "failures": 0,
+    "errors": 0,
+    "passed_migrations": [
+      "1",
+      "2",
+      "3"
+    ],
+    "restored_tables": 21,
+    "external_restic_restore_verified": false,
+    "deployed_application_verified": false,
+    "real_social_login_verified": false,
+    "real_email_delivery_verified": false
   }
 }

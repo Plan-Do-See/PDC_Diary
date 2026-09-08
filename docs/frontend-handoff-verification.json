@@ -1,0 +1,40 @@
+{
+  "checked_at_utc": "2026-09-08T10:57:56.955Z",
+  "url": "https://plandosee.app/docs/frontend-integration.md",
+  "http_status": 200,
+  "tls_authorized": true,
+  "dns_override": false,
+  "tls_verification_bypassed": false,
+  "local_sha256": "0327bb5e2cb65997673ac39791332854ca925f76cdda94b2c55362e5c80c0683",
+  "public_sha256": "0327bb5e2cb65997673ac39791332854ca925f76cdda94b2c55362e5c80c0683",
+  "bytes": 12765,
+  "status": "passed",
+  "openapi": {
+    "version": "0.2.0",
+    "paths": 42,
+    "operations": 59,
+    "schemas": 38,
+    "examples_validated": 43,
+    "source_check": "59 controller/framework operations matched",
+    "status": "passed"
+  },
+  "notion": {
+    "page_id": "3d50def9-f626-812d-b0b6-f38859f63762",
+    "readback_matched": true
+  },
+  "git": {
+    "planning_changes": "uncommitted_unpushed",
+    "backend": "no_first_commit"
+  },
+  "runtime_changed": false,
+  "api_db_contracts_changed": false,
+  "original_requirements_changed": false,
+  "prior_document_probe": {
+    "status": "tool_error_before_validation",
+    "reason": "TLS socket reference was released at response end",
+    "correction": "Capture TLS authorization when response starts; repeat the same GET",
+    "server_outage_inferred": false
+  },
+  "prior_29_check_evidence": "workspaces/PDC_Diary_Infra/releases/public-https-verification.json",
+  "prior_29_checks_rerun_this_document_task": false
+}

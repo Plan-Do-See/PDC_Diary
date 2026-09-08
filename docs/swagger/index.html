@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>PDS Diary · API 문서</title>
+  <link rel="stylesheet" href="swagger-ui.css">
+  <style>body{margin:0;background:#fafafa}header{font:15px/1.7 system-ui,sans-serif;background:#12283a;color:#fff;padding:24px max(24px,calc((100vw - 1440px)/2))}h1{font-size:24px;margin:0 0 8px}header p{margin:5px 0}header a{color:#9ee9d7;margin-right:20px}.swagger-ui .topbar{display:none}</style>
+</head>
+<body>
+  <header>
+    <h1>PDS Diary · 프론트 연동 문서</h1>
+    <p>공개 과제 · 개인 계정 · 이메일 인증 · 계획 → 실행 → 돌아보기</p>
+    <p>백엔드 DB·API, 공개 HTTPS 연결과 테스트 메일 수신을 확인했습니다. 프론트는 준비 중이며, 소셜 연동은 프론트 완성 후 진행합니다.</p>
+    <a href="frontend-integration.md">프론트 연동 안내</a><a href="openapi.json" download="openapi.json">OpenAPI 내려받기</a>
+  </header>
+  <div id="swagger-ui"></div>
+  <script src="swagger-ui-bundle.js"></script>
+  <script src="swagger-ui-standalone-preset.js"></script>
+  <script>
+    window.ui = SwaggerUIBundle({
+      url: 'openapi.json', dom_id: '#swagger-ui', deepLinking: true,
+      presets: [SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset], layout: 'StandaloneLayout',
+      validatorUrl: null, supportedSubmitMethods: [], persistAuthorization: false,
+      displayRequestDuration: false, defaultModelsExpandDepth: 1, docExpansion: 'none', filter: true
+    });
+  </script>
+</body>
+</html>

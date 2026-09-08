@@ -2,10 +2,10 @@
   "version": "1.3",
   "date": "2026-09-08",
   "hub_url": "https://app.notion.com/p/3d50def9f6268037adfbcef233c6d20c",
-  "status": "published_and_read_back",
+  "status": "synchronized",
   "scope": "노션 문서 저장·연결·요구사항 원문 보존 확인. 앱 구현·배포·기능 검증 완료를 뜻하지 않음.",
   "verification": {
-    "child_pages": 8,
+    "child_pages": 9,
     "hub_order": [
       "01 · 목표와 범위",
       "02 · 기능과 화면 흐름",
@@ -14,12 +14,18 @@
       "05 · 배포와 월 비용",
       "06 · 구현 순서와 제출",
       "07 · 필수 RULE 44개와 증거",
-      "08 · 개발·배포 준비물"
+      "08 · 개발·배포 준비물",
+      "09 · 배포 과정과 면접 설명 — Docker·Caddy·HTTPS"
     ],
     "requirements_found": 44,
     "requirements_missing": [],
     "unsupported_blocks": 0,
-    "all_pages_read_back": true
+    "all_pages_read_back": true,
+    "latest_implementation_sync": "2026-09-08",
+    "local_tests_passed": 14,
+    "latest_documentation_sync": "2026-09-08",
+    "swagger_operations_rendered": 59,
+    "openapi_examples_validated": 43
   },
   "pages": [
     {
@@ -93,33 +99,53 @@
       "parent_verified": true,
       "backlink_verified": true,
       "content_read_back": true
+    },
+    {
+      "id": "3d50def9-f626-8114-b1b2-cf7b997b3ee7",
+      "url": "https://app.notion.com/p/3d50def9f6268114b1b2cf7b997b3ee7?pvs=204",
+      "title": "09 · 배포 과정과 면접 설명 — Docker·Caddy·HTTPS",
+      "hub_link": true,
+      "parent_verified": true,
+      "backlink_verified": true,
+      "content_read_back": true
     }
   ],
   "last_sync": {
     "date": "2026-09-08",
-    "change": "사용자 지정 Plan-Do-See/PDC_Diary에 README 작성, 현재 구상 저장소 주소와 노션 개요·저장소 문서 동기화",
-    "local_files": [
-      "README.md",
-      "docs/latest-review.md",
-      "docs/repository-layout.md",
-      "docs/pds-design.md",
-      "docs/notion-content.json"
-    ],
-    "changed_page_ids": [
-      "3d50def9-f626-8037-adfb-cef233c6d20c",
+    "status": "synchronized",
+    "scope": "Corrected frontend handoff deployment statements; documented Git publication state and security documentation recommendation",
+    "readback_verified": true,
+    "pages": [
       "3d50def9-f626-812d-b0b6-f38859f63762"
     ],
-    "notion_read_back": true,
-    "status": "synchronized"
+    "local_files": [
+      "README.md",
+      "docs/frontend-integration.md",
+      "docs/swagger/README.md",
+      "docs/backend-decisions.md",
+      "docs/backend-verification.md",
+      "docs/repository-layout.md",
+      "docs/deployment-status.md",
+      "docs/frontend-handoff-verification.json",
+      "docs/notion-content.json",
+      "docs/notion-publication.json",
+      "D:/workspace/PDC_Diary_Spring/README.md"
+    ],
+    "verification": {
+      "public_document_sha256_matched": true,
+      "openapi_source_check": "passed",
+      "runtime_changed": false,
+      "original_44_requirements_changed": false
+    }
   },
   "domain": {
     "name": "plandosee.app",
     "purchase_status": "reported_purchased_by_user",
     "web_url": "https://plandosee.app",
     "api_base_url": "https://plandosee.app/api/v1",
-    "dns_status": "unverified",
-    "https_status": "unverified",
-    "deployment_status": "unverified",
+    "dns_status": "both_authoritative_A_records_verified",
+    "https_status": "trusted_certificate_public_requests_verified",
+    "deployment_status": "backend_database_smtp_public_https_and_swagger_verified_frontend_pending",
     "actual_price_and_renewal": "unverified"
   },
   "sync_history": [
@@ -196,6 +222,671 @@
       ],
       "notion_read_back": true,
       "status": "synchronized"
+    },
+    {
+      "date": "2026-09-08",
+      "change": "사용자 선택: 공개 과제 공간과 로그인하는 개인 계정 영역을 이번에 함께 구현. 인증 수단·공유 정책은 미정, 기존 무인증 과제 조건 유지.",
+      "local_files": [
+        "RULES.md",
+        "README.md",
+        "docs/backend-decisions.md",
+        "docs/pds-design.md",
+        "docs/latest-review.md",
+        "docs/preparation-guide.md",
+        "docs/repository-layout.md",
+        "contracts/pds-schema-v2.json",
+        "docs/notion-content.json"
+      ],
+      "changed_page_ids": [
+        "3d50def9-f626-8037-adfb-cef233c6d20c",
+        "3d50def9-f626-81e7-b3fb-ec5cfbec42d7",
+        "3d50def9-f626-81e9-9553-ce5ca31af063",
+        "3d50def9-f626-812d-b0b6-f38859f63762",
+        "3d50def9-f626-814f-b233-f0405491bee1",
+        "3d50def9-f626-81ad-b938-f61a437009d5",
+        "3d50def9-f626-8110-8e50-c012568ab789",
+        "3d50def9-f626-8101-8078-c6147dc52e17",
+        "3d50def9-f626-8108-b778-ed9f330b70a6"
+      ],
+      "notion_read_back": true,
+      "status": "synchronized",
+      "verification": {
+        "notion_pages_read_back": 9,
+        "notion_expected_content_match": "all pages matched after normalizing Notion escaping and empty blocks",
+        "original_notion_requirement_rows_preserved": true,
+        "original_requirement_count": 44,
+        "requirements_json_unchanged_from_head": true,
+        "contract_status": "design",
+        "authentication_physical_schema": "pending",
+        "runtime_tests": "not_run"
+      }
+    },
+    {
+      "date": "2026-09-08",
+      "change": "이메일 가입·카카오/네이버/구글 로그인, 개인 전용·향후 공동 편집 고려, WTR Pro 보유·초기 약 10명, 자주 설명·항상 노션 기록을 반영. JDBC/Spring Security/SMTP/n8n 및 추가 기능은 추천으로 구분.",
+      "local_files": [
+        "AGENTS.md",
+        "RULES.md",
+        "README.md",
+        "docs/backend-decisions.md",
+        "docs/backend-recommendations.md",
+        "docs/pds-design.md",
+        "docs/latest-review.md",
+        "docs/preparation-guide.md",
+        "docs/repository-layout.md",
+        "contracts/pds-schema-v2.json",
+        "docs/notion-content.json"
+      ],
+      "changed_page_ids": [
+        "3d50def9-f626-8037-adfb-cef233c6d20c",
+        "3d50def9-f626-81e7-b3fb-ec5cfbec42d7",
+        "3d50def9-f626-81e9-9553-ce5ca31af063",
+        "3d50def9-f626-812d-b0b6-f38859f63762",
+        "3d50def9-f626-814f-b233-f0405491bee1",
+        "3d50def9-f626-81ad-b938-f61a437009d5",
+        "3d50def9-f626-8110-8e50-c012568ab789",
+        "3d50def9-f626-8101-8078-c6147dc52e17",
+        "3d50def9-f626-8108-b778-ed9f330b70a6"
+      ],
+      "notion_read_back": true,
+      "status": "synchronized",
+      "verification": {
+        "notion_pages_read_back": 9,
+        "notion_content_matches": true,
+        "original_requirements": 44,
+        "original_requirement_rows_preserved": true,
+        "requirements_json_unchanged_from_head": true,
+        "contract_status": "design",
+        "runtime_tests": "not_run",
+        "physical_schema": "pending"
+      }
+    },
+    {
+      "date": "2026-09-08",
+      "status": "synchronized",
+      "scope": "cloud first, adopted recommendations, MariaDB 3919 and Brevo example; backend implementation in progress",
+      "readback_verified": true,
+      "pages": [
+        "3d50def9-f626-8037-adfb-cef233c6d20c",
+        "3d50def9-f626-81e7-b3fb-ec5cfbec42d7",
+        "3d50def9-f626-81e9-9553-ce5ca31af063",
+        "3d50def9-f626-812d-b0b6-f38859f63762",
+        "3d50def9-f626-814f-b233-f0405491bee1",
+        "3d50def9-f626-81ad-b938-f61a437009d5",
+        "3d50def9-f626-8110-8e50-c012568ab789",
+        "3d50def9-f626-8101-8078-c6147dc52e17",
+        "3d50def9-f626-8108-b778-ed9f330b70a6"
+      ]
+    },
+    {
+      "date": "2026-09-08",
+      "status": "synchronized",
+      "scope": "backend implementation, 14 local tests, isolated MariaDB backup and restore, portable infrastructure, Brevo SMTP example and remaining external setup",
+      "readback_verified": true,
+      "pages": [
+        "3d50def9-f626-8037-adfb-cef233c6d20c",
+        "3d50def9-f626-81e7-b3fb-ec5cfbec42d7",
+        "3d50def9-f626-81e9-9553-ce5ca31af063",
+        "3d50def9-f626-812d-b0b6-f38859f63762",
+        "3d50def9-f626-814f-b233-f0405491bee1",
+        "3d50def9-f626-81ad-b938-f61a437009d5",
+        "3d50def9-f626-8110-8e50-c012568ab789",
+        "3d50def9-f626-8101-8078-c6147dc52e17",
+        "3d50def9-f626-8108-b778-ed9f330b70a6"
+      ],
+      "verification": {
+        "notion_pages_read_back": 9,
+        "notion_expected_content_match": true,
+        "local_tests_passed": 14,
+        "local_tests_failed": 0,
+        "local_database": "MariaDB 12.3.3 / loopback 3307 isolated test schema",
+        "restored_tables_matched": 21,
+        "existing_mariadb_port_3919": "greeting read only; no login, migration or data writes",
+        "cloud_deployment": "not_run",
+        "real_smtp_and_oauth": "not_run",
+        "external_backup_restore": "not_run",
+        "full_44_acceptance": "pending"
+      }
+    },
+    {
+      "date": "2026-09-08",
+      "status": "synchronized",
+      "scope": "User has not selected a cloud; low-cost provider comparison and conditional Lightsail Seoul 2GB recommendation",
+      "readback_verified": true,
+      "pages": [
+        "3d50def9-f626-8037-adfb-cef233c6d20c",
+        "3d50def9-f626-81ad-b938-f61a437009d5",
+        "3d50def9-f626-8108-b778-ed9f330b70a6"
+      ],
+      "local_files": [
+        "docs/cloud-options.md",
+        "docs/backend-recommendations.md",
+        "docs/latest-review.md",
+        "docs/preparation-guide.md",
+        "docs/pds-design.md",
+        "docs/notion-content.json"
+      ],
+      "verification": {
+        "notion_pages_read_back": 3,
+        "notion_expected_content_match": true,
+        "prices": "official public pages checked on 2026-09-08",
+        "purchases": "not_performed",
+        "deployments": "not_performed",
+        "capacity_and_latency": "not_measured",
+        "contracts": "unchanged",
+        "original_requirements": "unchanged"
+      }
+    },
+    {
+      "date": "2026-09-08",
+      "status": "synchronized",
+      "scope": "Brevo domain registration reported complete; social provider external setup deferred until frontend completion; Oracle Always Free recommendation; planning repository Swagger and frontend API documentation",
+      "readback_verified": true,
+      "pages": [
+        "3d50def9-f626-8037-adfb-cef233c6d20c",
+        "3d50def9-f626-812d-b0b6-f38859f63762",
+        "3d50def9-f626-814f-b233-f0405491bee1",
+        "3d50def9-f626-81ad-b938-f61a437009d5",
+        "3d50def9-f626-8110-8e50-c012568ab789",
+        "3d50def9-f626-8108-b778-ed9f330b70a6",
+        "3d50def9-f626-81e7-b3fb-ec5cfbec42d7",
+        "3d50def9-f626-81e9-9553-ce5ca31af063",
+        "3d50def9-f626-8101-8078-c6147dc52e17"
+      ],
+      "local_files": [
+        "RULES.md",
+        "README.md",
+        ".env.example",
+        "package.json",
+        "pnpm-lock.yaml",
+        "contracts/openapi.yaml",
+        "contracts/openapi.json",
+        "contracts/api-publication.json",
+        "contracts/pds-schema-v2.json",
+        "docs/user-preparation.md",
+        "docs/frontend-integration.md",
+        "docs/swagger/README.md",
+        "docs/swagger/index.html",
+        "scripts/sync-api-contract.mjs",
+        "scripts/check-api-docs.mjs",
+        "scripts/serve-api-docs.mjs",
+        "docs/cloud-options.md",
+        "docs/backend-decisions.md",
+        "docs/backend-recommendations.md",
+        "docs/latest-review.md",
+        "docs/preparation-guide.md",
+        "docs/pds-design.md",
+        "docs/repository-layout.md",
+        "docs/backend-verification.md",
+        "docs/requirements.json",
+        "docs/notion-content.json",
+        "docs/notion-publication.json"
+      ],
+      "verification": {
+        "notion_pages_read_back": 9,
+        "notion_expected_content_match": true,
+        "openapi_version": "0.2.0",
+        "paths": 42,
+        "operations": 59,
+        "schemas": 38,
+        "examples_validated": 43,
+        "source_route_check": "59 controller/framework operations matched",
+        "swagger_browser": {
+          "operations_rendered": 59,
+          "login_example_rendered": true,
+          "page_errors": 0
+        },
+        "runtime_tests": "previously passed 14; not rerun for documentation changes",
+        "purchases": "not_performed",
+        "deployments": "not_performed",
+        "smtp_delivery": "not_run",
+        "social_callbacks": "deferred_until_frontend_complete",
+        "original_requirements": "44 source requirements unchanged"
+      }
+    },
+    {
+      "date": "2026-09-08",
+      "status": "synchronized",
+      "scope": "Vultr US$250 trial research and official public plan API price verification; provider remains unselected",
+      "readback_verified": true,
+      "pages": [
+        "3d50def9-f626-81ad-b938-f61a437009d5"
+      ],
+      "local_files": [
+        "docs/cloud-options.md",
+        "docs/latest-review.md",
+        "docs/notion-content.json",
+        "docs/notion-publication.json"
+      ],
+      "verification": {
+        "notion_pages_read_back": 1,
+        "notion_expected_content_match": true,
+        "official_trial_banner": "US$250 for 30 days",
+        "official_pricing_api": "https://api.vultr.com/v2/plans?per_page=500",
+        "actual_account_promotion": "not_verified",
+        "actual_region_capacity": "not_tested",
+        "promotion_landing_page": "not_read_Cloudflare_challenge",
+        "purchase": "not_performed",
+        "deployment": "not_performed",
+        "source_contracts": "unchanged",
+        "runtime_tests": "not_rerun_documentation_research_only"
+      }
+    },
+    {
+      "date": "2026-09-08",
+      "status": "synchronized",
+      "scope": "User final cloud provider selection is Vultr; replace prior Oracle/Google recommendations and intermediate AWS selection; preserve public/private API and migration requirements",
+      "readback_verified": true,
+      "pages": [
+        "3d50def9-f626-8037-adfb-cef233c6d20c",
+        "3d50def9-f626-81e7-b3fb-ec5cfbec42d7",
+        "3d50def9-f626-81e9-9553-ce5ca31af063",
+        "3d50def9-f626-812d-b0b6-f38859f63762",
+        "3d50def9-f626-814f-b233-f0405491bee1",
+        "3d50def9-f626-81ad-b938-f61a437009d5",
+        "3d50def9-f626-8110-8e50-c012568ab789",
+        "3d50def9-f626-8101-8078-c6147dc52e17",
+        "3d50def9-f626-8108-b778-ed9f330b70a6"
+      ],
+      "local_files": [
+        "RULES.md",
+        "README.md",
+        "docs/pds-design.md",
+        "docs/preparation-guide.md",
+        "docs/backend-decisions.md",
+        "docs/backend-recommendations.md",
+        "docs/repository-layout.md",
+        "docs/latest-review.md",
+        "docs/cloud-options.md",
+        "docs/user-preparation.md",
+        "docs/vultr-setup.md",
+        "docs/notion-content.json",
+        "docs/notion-publication.json",
+        "workspaces/PDC_Diary_Infra/README.md",
+        "D:/workspace/PDC_Diary_Spring/README.md"
+      ],
+      "verification": {
+        "notion_pages_read_back": 9,
+        "notion_expected_content_match": true,
+        "cloud_provider": "Vultr_user_confirmed",
+        "plan": "proposed_not_ordered",
+        "credit_application": "not_verified",
+        "cloud_deployment": "not_run",
+        "runtime_tests": "not_rerun_docs_only",
+        "api_and_db_contracts": "unchanged"
+      }
+    },
+    {
+      "date": "2026-09-08",
+      "status": "synchronized",
+      "scope": "User expects migration within one month and does not need a smaller cloud server; propose Vultr AMD High Performance 16GB for trial and prepare WTR migration; clarify resource deletion stops billing",
+      "readback_verified": true,
+      "pages": [
+        "3d50def9-f626-8037-adfb-cef233c6d20c",
+        "3d50def9-f626-81e7-b3fb-ec5cfbec42d7",
+        "3d50def9-f626-81e9-9553-ce5ca31af063",
+        "3d50def9-f626-812d-b0b6-f38859f63762",
+        "3d50def9-f626-814f-b233-f0405491bee1",
+        "3d50def9-f626-81ad-b938-f61a437009d5",
+        "3d50def9-f626-8110-8e50-c012568ab789",
+        "3d50def9-f626-8101-8078-c6147dc52e17",
+        "3d50def9-f626-8108-b778-ed9f330b70a6"
+      ],
+      "local_files": [
+        "RULES.md",
+        "README.md",
+        "docs/pds-design.md",
+        "docs/preparation-guide.md",
+        "docs/backend-decisions.md",
+        "docs/backend-recommendations.md",
+        "docs/repository-layout.md",
+        "docs/latest-review.md",
+        "docs/cloud-options.md",
+        "docs/vultr-setup.md",
+        "docs/user-preparation.md",
+        "docs/notion-content.json",
+        "docs/notion-publication.json",
+        "workspaces/PDC_Diary_Infra/README.md",
+        "D:/workspace/PDC_Diary_Spring/README.md"
+      ],
+      "verification": {
+        "notion_pages_read_back": 9,
+        "notion_expected_content_match": true,
+        "original_requirements": 44,
+        "original_requirements_unchanged": true,
+        "official_plan_api": "https://api.vultr.com/v2/plans?per_page=500",
+        "actual_quote_capacity_and_credits": "not_verified",
+        "instance_creation": "not_run",
+        "automatic_deletion_or_reminder": "not_created",
+        "runtime_tests": "not_rerun_docs_only"
+      }
+    },
+    {
+      "date": "2026-09-08",
+      "status": "synchronized",
+      "scope": "Vultr Step 2 settings and next-step checklist from user screenshots; local Ed25519 key preparation; actual cloud deployment and credit remain unverified",
+      "readback_verified": true,
+      "pages": [
+        "3d50def9-f626-8037-adfb-cef233c6d20c",
+        "3d50def9-f626-81ad-b938-f61a437009d5",
+        "3d50def9-f626-8108-b778-ed9f330b70a6"
+      ],
+      "local_files": [
+        ".gitignore",
+        "docs/vultr-setup.md",
+        "docs/user-preparation.md",
+        "docs/pds-design.md",
+        "docs/latest-review.md",
+        "docs/notion-content.json",
+        "docs/notion-publication.json",
+        "workspaces/PDC_Diary_Infra/README.md"
+      ],
+      "verification": {
+        "notion_pages_read_back": 3,
+        "notion_expected_content_match": true,
+        "notion_normalization": "Markdown escaping, native mention serialization and blank-line normalization; corrected unintended public-key filename auto-link",
+        "original_requirements": 44,
+        "original_requirements_unchanged": true,
+        "local_public_key_generated_and_git_ignored": true,
+        "actual_quote": "user_screenshot_USD_115.20_monthly_0.158_hourly_with_backups",
+        "actual_capacity_and_credits": "not_verified",
+        "instance_creation": "not_run",
+        "runtime_tests": "not_rerun_docs_and_local_key_only",
+        "automatic_deletion_or_reminder": "not_created"
+      }
+    },
+    {
+      "date": "2026-09-08",
+      "status": "synchronized",
+      "scope": "Prepared portable Mac SSH access toolkit; latest user steering defers additional-device enrollment and continues Vultr with the existing Windows key; distinguish cloud/NAS SSH use",
+      "readback_verified": true,
+      "pages": [
+        "3d50def9-f626-8037-adfb-cef233c6d20c",
+        "3d50def9-f626-81ad-b938-f61a437009d5",
+        "3d50def9-f626-8108-b778-ed9f330b70a6"
+      ],
+      "local_files": [
+        "docs/remote-access.md",
+        "docs/vultr-setup.md",
+        "docs/user-preparation.md",
+        "docs/pds-design.md",
+        "docs/latest-review.md",
+        "docs/repository-layout.md",
+        "docs/notion-content.json",
+        "docs/notion-publication.json",
+        "docs/downloads/pds-access-kit.zip",
+        "scripts/build-access-kit.ps1",
+        "workspaces/PDC_Diary_Infra/README.md",
+        "workspaces/PDC_Diary_Infra/access"
+      ],
+      "verification": {
+        "notion_pages_read_back": 3,
+        "notion_expected_content_match": true,
+        "notion_unintended_filename_link_fixed": true,
+        "original_requirements": 44,
+        "original_requirements_unchanged": true,
+        "local_access_tests": "passed_with_explicit_skips",
+        "native_mac": "not_run",
+        "actual_ssh_and_firewall": "not_run",
+        "additional_device_setup": "deferred",
+        "api_db_contract": "unchanged",
+        "runtime_backend_tests": "not_rerun_access_tools_only"
+      }
+    },
+    {
+      "date": "2026-09-08",
+      "status": "synchronized",
+      "scope": "User-provided server 45.76.27.48 confirmed in Chicago despite earlier Seoul selection; hold remote changes and prepare correct-region instance workflow",
+      "readback_verified": true,
+      "pages": [
+        "3d50def9-f626-8037-adfb-cef233c6d20c",
+        "3d50def9-f626-81ad-b938-f61a437009d5",
+        "3d50def9-f626-8108-b778-ed9f330b70a6"
+      ],
+      "local_files": [
+        "docs/vultr-setup.md",
+        "docs/user-preparation.md",
+        "docs/pds-design.md",
+        "docs/latest-review.md",
+        "docs/notion-content.json",
+        "docs/notion-publication.json",
+        "workspaces/PDC_Diary_Infra/README.md",
+        "workspaces/PDC_Diary_Infra/releases/release.json"
+      ],
+      "verification": {
+        "notion_pages_read_back": 3,
+        "notion_expected_content_match": true,
+        "region": "Chicago_confirmed_by_user_server_details_screenshot",
+        "mismatch_cause": "undetermined",
+        "ssh_scan": "no_key_returned",
+        "ssh_authentication": "not_attempted",
+        "server_modification": "none",
+        "docker_installation": "not_run",
+        "deletion_or_replacement_order": "not_run",
+        "api_db_contract": "unchanged",
+        "original_requirements": 44,
+        "original_requirements_unchanged": true
+      }
+    },
+    {
+      "date": "2026-09-08",
+      "status": "synchronized",
+      "scope": "New Vultr 158.247.203.145 host bootstrap: Console host fingerprint, approved in-place SSH key ACL fix, public-key login, Korea region, Docker/Compose and hello-world verified; app deployment pending",
+      "readback_verified": true,
+      "pages": [
+        "3d50def9-f626-8037-adfb-cef233c6d20c",
+        "3d50def9-f626-81ad-b938-f61a437009d5",
+        "3d50def9-f626-8108-b778-ed9f330b70a6",
+        "3d50def9-f626-81e7-b3fb-ec5cfbec42d7",
+        "3d50def9-f626-81e9-9553-ce5ca31af063",
+        "3d50def9-f626-812d-b0b6-f38859f63762",
+        "3d50def9-f626-814f-b233-f0405491bee1",
+        "3d50def9-f626-8110-8e50-c012568ab789",
+        "3d50def9-f626-8101-8078-c6147dc52e17"
+      ],
+      "local_files": [
+        "docs/vultr-setup.md",
+        "docs/user-preparation.md",
+        "docs/pds-design.md",
+        "docs/latest-review.md",
+        "workspaces/PDC_Diary_Infra/README.md",
+        "RULES.md",
+        "docs/server-bootstrap-status.md",
+        "docs/notion-content.json",
+        "docs/notion-publication.json",
+        "workspaces/PDC_Diary_Infra/releases/release.json",
+        "workspaces/PDC_Diary_Infra/releases/host-bootstrap-verification.json",
+        "workspaces/PDC_Diary_Infra/scripts/host-preflight.sh",
+        "workspaces/PDC_Diary_Infra/scripts/bootstrap-docker.sh",
+        "docs/preparation-guide.md",
+        "README.md",
+        "docs/backend-recommendations.md",
+        "docs/backend-decisions.md",
+        "docs/repository-layout.md"
+      ],
+      "verification": {
+        "notion_pages_read_back": 9,
+        "notion_expected_content_match": true,
+        "server_ip": "158.247.203.145",
+        "region": "kr_from_cloud_init_city_unverified",
+        "ssh_authentication": "passed",
+        "docker_installation": "passed_29.8.0",
+        "compose": "5.5.1",
+        "hello_world": "passed",
+        "docker_service": "active_enabled",
+        "application_deployment": "not_run",
+        "key_copy": "not_run",
+        "key_acl": "explicit_user_approval_then_verified",
+        "chicago_deletion": "not_run_by_agent_unknown_user_status",
+        "api_db_contract": "unchanged",
+        "original_requirements": 44,
+        "original_requirements_unchanged": true,
+        "duplicated_status_in_other_pages": "corrected_without_changing_requirements"
+      }
+    },
+    {
+      "date": "2026-09-08",
+      "status": "synchronized",
+      "scope": "DB/API/Caddy deployment, 15 smoke checks, 21-table restore, Brevo inbox confirmation; Chicago deletion and unimplemented frontend per user; DNS/HTTPS pending",
+      "readback_verified": true,
+      "pages": [
+        "3d50def9-f626-8037-adfb-cef233c6d20c",
+        "3d50def9-f626-81e7-b3fb-ec5cfbec42d7",
+        "3d50def9-f626-81e9-9553-ce5ca31af063",
+        "3d50def9-f626-812d-b0b6-f38859f63762",
+        "3d50def9-f626-814f-b233-f0405491bee1",
+        "3d50def9-f626-81ad-b938-f61a437009d5",
+        "3d50def9-f626-8110-8e50-c012568ab789",
+        "3d50def9-f626-8101-8078-c6147dc52e17",
+        "3d50def9-f626-8108-b778-ed9f330b70a6"
+      ],
+      "local_files": [
+        "README.md",
+        "RULES.md",
+        "docs/server-bootstrap-status.md",
+        "docs/user-preparation.md",
+        "docs/vultr-setup.md",
+        "docs/pds-design.md",
+        "docs/latest-review.md",
+        "docs/backend-verification.md",
+        "docs/frontend-integration.md",
+        "docs/backend-decisions.md",
+        "docs/backend-recommendations.md",
+        "docs/repository-layout.md",
+        "docs/preparation-guide.md",
+        "docs/swagger/README.md",
+        "workspaces/PDC_Diary_Infra/README.md",
+        "docs/deployment-status.md",
+        "docs/notion-content.json",
+        "docs/notion-publication.json",
+        "docs/requirements.json",
+        "contracts/api-publication.json",
+        "workspaces/PDC_Diary_Infra/releases/release.json",
+        "workspaces/PDC_Diary_Infra/releases/deployment-verification.json"
+      ],
+      "verification": {
+        "notion_pages_read_back": 9,
+        "notion_expected_content_match": true,
+        "api_checks": 15,
+        "restored_tables": 21,
+        "SMTP_accepted": true,
+        "inbox_delivery": "user_confirmed_Naver_inbox",
+        "public_HTTPS": false,
+        "frontend": "not_implemented_per_user",
+        "original_requirements": 44,
+        "original_requirements_unchanged": true
+      }
+    },
+    {
+      "date": "2026-09-08",
+      "change": "2026-09-08 사용자 DNS 화면과 권한 DNS 직접 조회에서 pdcvultr.plandosee.app의 A=158.247.203.145를 확인했고, 목표 주소 plandosee.app에는 A 응답 없이 SOA만 반환됐다. 등록 주소와 목표 주소의 불일치를 확인했다. 해당 A 레코드의 이름을 @로 수정하도록 안내했으며, 실제 수정·공개 HTTPS·Swagger `/docs/` 검증은 대기 중이다. Cloudflare의 “Proxying is required…” 배너는 프록시를 통한 보호·캐시 기능 안내다. DNS only도 유효한 DNS 동작이며 해당 배너가 기본 도메인의 A 레코드 누락을 설명하지 않는다. 초기 HTTPS 확인까지 DNS only·TTL Auto와 서버 IP를 유지하는 안을 안내했다. [Cloudflare 프록시 상태](https://developers.cloudflare.com/dns/proxy-status/) · [기본 도메인 @](https://developers.cloudflare.com/dns/concepts/)",
+      "local_files": [
+        "docs\\deployment-status.md",
+        "docs\\latest-review.md",
+        "docs\\pds-design.md",
+        "docs\\server-bootstrap-status.md",
+        "docs\\user-preparation.md",
+        "docs\\vultr-setup.md",
+        "docs/notion-content.json",
+        "docs/notion-publication.json",
+        "workspaces/PDC_Diary_Infra/releases/deployment-verification.json"
+      ],
+      "changed_page_ids": [
+        "3d50def9-f626-81ad-b938-f61a437009d5",
+        "3d50def9-f626-8108-b778-ed9f330b70a6"
+      ],
+      "notion_read_back": true,
+      "status": "synchronized"
+    },
+    {
+      "date": "2026-09-08",
+      "change": "2026-09-08 HTTPS 연결 확인: 사용자가 DNS 이름을 @로 수정한 뒤 Cloudflare 권한 DNS 두 곳에서 plandosee.app의 A=158.247.203.145를 확인했다. Caddy가 정식 Let's Encrypt 인증서를 자동 발급했고, 외부에서 인증서 검증을 켠 HTTPS API·Swagger 200 응답과 브라우저 문서 표시를 확인했다. 재시작·DNS 우회·인증서 검증 해제 없이 복구됐다. 공개 검증: 2026-09-08T10:37:45.780Z 실제 도메인·TLS 신뢰 검증을 유지한 외부 검사 29개가 통과했다. 공개 200·개인 401·CSRF 없는 변경 403·유효한 CSRF와 잘못된 입력 400, Secure/HttpOnly/SameSite=Lax 쿠키, HTTP→HTTPS 308, Swagger 6개 파일의 로컬 SHA-256 일치를 확인했다. 브라우저에서도 최신 Swagger 설명과 서비스 정보 항목이 표시됐다. 사용자 기록·추가 메일은 생성하지 않았다. [공개 Swagger](https://plandosee.app/docs/) · [API 상태 정보](https://plandosee.app/api/v1/meta)",
+      "local_files": [
+        "README.md",
+        "RULES.md",
+        "workspaces/PDC_Diary_Infra/README.md",
+        "docs\\backend-decisions.md",
+        "docs\\backend-recommendations.md",
+        "docs\\backend-verification.md",
+        "docs\\deployment-status.md",
+        "docs\\frontend-integration.md",
+        "docs\\latest-review.md",
+        "docs\\pds-design.md",
+        "docs\\preparation-guide.md",
+        "docs\\repository-layout.md",
+        "docs\\server-bootstrap-status.md",
+        "docs\\user-preparation.md",
+        "docs\\vultr-setup.md",
+        "docs\\swagger\\README.md",
+        "docs/deployment-status.md",
+        "docs/swagger/index.html",
+        "contracts/openapi.yaml",
+        "contracts/openapi.json",
+        "contracts/api-publication.json",
+        "docs/requirements.json",
+        "docs/notion-content.json",
+        "docs/notion-publication.json",
+        "../PDC_Diary_Spring/contracts/openapi.yaml",
+        "../PDC_Diary_Spring/README.md",
+        "workspaces/PDC_Diary_Infra/releases/release.json",
+        "workspaces/PDC_Diary_Infra/releases/deployment-verification.json",
+        "workspaces/PDC_Diary_Infra/releases/public-https-verification.json",
+        "workspaces/PDC_Diary_Infra/scripts/verify-public-https.mjs"
+      ],
+      "changed_page_ids": [
+        "3d50def9-f626-81e9-9553-ce5ca31af063",
+        "3d50def9-f626-814f-b233-f0405491bee1",
+        "3d50def9-f626-812d-b0b6-f38859f63762",
+        "3d50def9-f626-8101-8078-c6147dc52e17",
+        "3d50def9-f626-8037-adfb-cef233c6d20c",
+        "3d50def9-f626-81e7-b3fb-ec5cfbec42d7",
+        "3d50def9-f626-81ad-b938-f61a437009d5",
+        "3d50def9-f626-8108-b778-ed9f330b70a6",
+        "3d50def9-f626-8110-8e50-c012568ab789"
+      ],
+      "notion_read_back": true,
+      "status": "synchronized"
+    },
+    {
+      "date": "2026-09-08",
+      "change": "사용자 요청으로 배포 과정·Caddy/Nginx/Let’s Encrypt 역할·장애 해결·면접 설명을 새 노션 하위 페이지에 작성. 로컬 학습 문서와 목차 동기화. 운영 환경 변경 없음.",
+      "local_files": [
+        "docs/deployment-interview-guide.md",
+        "docs/notion-content.json",
+        "docs/notion-publication.json",
+        "README.md",
+        "docs/deployment-status.md",
+        "docs/repository-layout.md"
+      ],
+      "changed_page_ids": [
+        "3d50def9-f626-8037-adfb-cef233c6d20c",
+        "3d50def9-f626-81ad-b938-f61a437009d5",
+        "3d50def9-f626-8114-b1b2-cf7b997b3ee7"
+      ],
+      "notion_read_back": true,
+      "status": "synchronized"
+    },
+    {
+      "date": "2026-09-08",
+      "change": "프론트 인계 MD·README의 오래된 배포 상태를 수정하고 공개 파일 해시와 API 계약을 확인. 보안 문서 배치 안은 사용자 미확정 AI 추천으로 기록. Git 커밋·push는 아직 하지 않음.",
+      "local_files": [
+        "README.md",
+        "docs/frontend-integration.md",
+        "docs/swagger/README.md",
+        "docs/backend-decisions.md",
+        "docs/backend-verification.md",
+        "docs/repository-layout.md",
+        "docs/deployment-status.md",
+        "docs/frontend-handoff-verification.json",
+        "docs/notion-content.json",
+        "docs/notion-publication.json",
+        "D:/workspace/PDC_Diary_Spring/README.md"
+      ],
+      "changed_page_ids": [
+        "3d50def9-f626-812d-b0b6-f38859f63762"
+      ],
+      "notion_read_back": true,
+      "status": "synchronized"
     }
   ],
   "documentation_policy": {
@@ -216,5 +907,485 @@
     "confirmed_by": "user_and_local_origin",
     "readme_committed": false,
     "readme_pushed": false
+  },
+  "authentication_scope": {
+    "date": "2026-09-08",
+    "user_decision": "public_assignment_and_personal_accounts_in_current_implementation",
+    "email_signup": true,
+    "login_providers": [
+      "kakao",
+      "naver",
+      "google"
+    ],
+    "sharing_policy": "personal_owner_only_now_collaboration_future",
+    "implementation_status": "backend_code_implemented_external_provider_setup_pending",
+    "verification_status": "local_backend_tests_passed_14_real_smtp_and_social_callbacks_not_run",
+    "recommendation_document": "docs/backend-recommendations.md",
+    "recommendations": "accepted_by_user",
+    "social_external_integration_phase": "after_frontend_complete_per_user_instruction"
+  },
+  "user_reported_host": {
+    "model": "WTR Pro",
+    "cpu": "AMD Ryzen 7 5825U",
+    "ram_gb": 32,
+    "disks_tb": [
+      6,
+      6,
+      2
+    ],
+    "disk_type": "surveillance HDD (user-reported)",
+    "continuous_operation": "user states 24h capable; availability not measured",
+    "os": null,
+    "verified_on_device": false
+  },
+  "working_preference": {
+    "updates": "frequent_explanations_and_intermediate_results",
+    "notion": "record_each_work_stage_decisions_changes_verification_and_next_steps",
+    "recommendations": "distinguish_from_user_decisions"
+  },
+  "infrastructure": {
+    "deployment_strategy": "cloud_first",
+    "migration_target": "user_owned_WTR_Pro",
+    "infra_repository": "workspaces/PDC_Diary_Infra",
+    "initial_users_estimate": 10,
+    "cloud_provider": "Vultr",
+    "cloud_budget": "not_supplied",
+    "cloud_deployment": "backend_database_smtp_public_https_and_swagger_verified_frontend_pending",
+    "existing_mariadb_port": 3919,
+    "local_test_port": 3307,
+    "transactional_email_example": "Brevo SMTP; authenticated domain per user; server SMTP test passed and Naver inbox confirmed by user",
+    "cloud_recommendation": {
+      "provider": "Vultr",
+      "provider_status": "selected_by_user",
+      "region": "Seoul_intended_Korea_kr_observed_city_not_verified",
+      "plan": "vhp-8c-16gb-amd",
+      "plan_status": "new_server_CPU_RAM_disk_verified_exact_provider_plan_ID_not_read",
+      "vcpu": 8,
+      "ram_gb": 16,
+      "disk_gb": 350,
+      "architecture": "linux/amd64",
+      "monthly_usd_server": 96,
+      "automatic_backup_optional_surcharge_percent": 20,
+      "external_backup_storage": "unselected_not_purchased",
+      "actual_quote_and_capacity": "screenshot_quote_observed_capacity_at_deploy_unverified",
+      "trial_credit_usd_advertised": 250,
+      "trial_days_advertised": 30,
+      "actual_credit_and_expiry": "unverified",
+      "cloud_deployment": "backend_database_smtp_public_https_and_swagger_verified_frontend_pending",
+      "user_overall_monthly_budget": "not_supplied",
+      "automatic_backup_optional_monthly_total_usd": 115.2,
+      "os": "Ubuntu 26.04.1 LTS",
+      "os_status": "verified_over_SSH",
+      "automatic_backup_recommendation": "keep_enabled_as_in_user_screenshot",
+      "monthly_usd_server_with_automatic_backups": 115.2,
+      "screenshot_hourly_usd_with_automatic_backups": 0.158
+    },
+    "email_setup": {
+      "provider": "Brevo SMTP",
+      "domain_registration": "completed_per_user_report",
+      "authenticated_status": "confirmed_per_user",
+      "sender": "PlanDoSee <no-reply@plandosee.app>",
+      "smtp_credentials": "server_authentication_verified_no_values_recorded",
+      "delivery": "Naver_inbox_confirmed_per_user",
+      "secret_template": ".env.example",
+      "private_local_file": ".env.brevo.local",
+      "secret_handling": "local ignored file and server root-only config; no credentials in Git, Notion, or chat"
+    },
+    "vultr_research": {
+      "date": "2026-09-08",
+      "status": "provider_selected_Korean_server_backend_HTTPS_Swagger_SMTP_verified_credit_and_expiry_unverified",
+      "trial_credit_usd": 250,
+      "trial_days": 30,
+      "trial_condition": "official banner and general terms; exact user coupon eligibility, scope, start, expiry and actual application remain unverified",
+      "trial_recommendation": "AMD High Performance vhp-8c-16gb-amd for trial; WTR migration expected within one month; exact expiry/date and eligibility unverified",
+      "continued_free_option": "Oracle signup failed per user; prior free cloud alternatives retained as research only; WTR later migration remains intended",
+      "stopped_instances_billed": true,
+      "automatic_backups_surcharge_percent": 20,
+      "external_smtp_ports_permitted": [
+        465,
+        587
+      ],
+      "pricing_source": "https://api.vultr.com/v2/plans?per_page=500",
+      "plans": [
+        {
+          "id": "vc2-1c-2gb",
+          "vcpu": 1,
+          "ram_mb": 2048,
+          "disk_gb": 55,
+          "monthly_usd": 10,
+          "hourly_usd": 0.014,
+          "icn_in_locations": true,
+          "icn_specific_price_override": false,
+          "actual_capacity": "not_tested"
+        },
+        {
+          "id": "vc2-2c-4gb",
+          "vcpu": 2,
+          "ram_mb": 4096,
+          "disk_gb": 80,
+          "monthly_usd": 20,
+          "hourly_usd": 0.027,
+          "icn_in_locations": true,
+          "icn_specific_price_override": false,
+          "actual_capacity": "not_tested"
+        },
+        {
+          "id": "vhp-1c-2gb-amd",
+          "vcpu": 1,
+          "ram_mb": 2048,
+          "disk_gb": 50,
+          "monthly_usd": 12,
+          "hourly_usd": 0.016,
+          "icn_in_locations": true,
+          "icn_specific_price_override": false,
+          "actual_capacity": "not_tested"
+        },
+        {
+          "id": "vhp-2c-4gb-amd",
+          "vcpu": 2,
+          "ram_mb": 4096,
+          "disk_gb": 100,
+          "monthly_usd": 24,
+          "hourly_usd": 0.033,
+          "icn_in_locations": true,
+          "icn_specific_price_override": false,
+          "actual_capacity": "not_tested"
+        },
+        {
+          "id": "vhp-4c-8gb-amd",
+          "vcpu": 4,
+          "ram_mb": 8192,
+          "disk_gb": 180,
+          "monthly_usd": 48,
+          "hourly_usd": 0.066,
+          "icn_in_locations": true,
+          "icn_specific_price_override": false,
+          "actual_capacity": "not_tested"
+        },
+        {
+          "id": "vhp-8c-16gb-amd",
+          "vcpu": 8,
+          "ram_mb": 16384,
+          "disk_gb": 350,
+          "monthly_usd": 96,
+          "hourly_usd": 0.132,
+          "icn_in_locations": true,
+          "icn_specific_price_override": false,
+          "actual_capacity": "not_tested"
+        }
+      ]
+    },
+    "cloud_provider_confirmed_by": "latest_user_instruction",
+    "account_history": {
+      "oracle_signup": "failed_per_user_report_reason_unknown",
+      "aws_free_trial": "never_used_per_user",
+      "google_cloud_free_trial": "never_used_per_user"
+    },
+    "migration_window": {
+      "target": "user_owned_WTR_Pro",
+      "user_expectation": "within_one_month",
+      "confirmed_calendar_date": null,
+      "cloud_downsize": "not_needed_per_user",
+      "approach": "Vultr trial then tested WTR restore, data validation, DNS cutover and old resource deletion before credit expiry; actual readiness pending",
+      "rehearsal_target": "approximately_one_week_before_actual_credit_expiry",
+      "automatic_deletion": "not_created"
+    },
+    "vultr_console_setup": {
+      "status": "backend_database_smtp_public_https_and_swagger_verified_frontend_pending",
+      "observed_date": "2026-09-08",
+      "observed_user_screenshots": [
+        "codex-clipboard-77a76d76-82a8-4021-96b3-4be4a9f911ff.png",
+        "codex-clipboard-cf528dc2-bcaf-4ed3-b575-1c0cf85678eb.png",
+        "codex-clipboard-f761ae9a-a9a9-4af3-808f-7cfa82a37ed7.png"
+      ],
+      "hostname_proposed": "pds-cloud-01",
+      "label_proposed": "pds-cloud-01",
+      "ssh_key_label": "pds-vultr-admin",
+      "local_public_key_file": ".local/vultr/pds-vultr-ed25519.pub",
+      "local_key_generated": true,
+      "local_key_git_ignored": true,
+      "local_key_directory_acl_inheritance_disabled": true,
+      "public_key_fingerprint": "SHA256:h8vLe2AcBNhdDpyWVmIc/lpqclnT9kbC+ajW/p/Pl2o",
+      "vultr_ssh_key_registration": "server_accepts_key_Vultr_account_key_list_not_read",
+      "firewall_group_proposed": "pds-web",
+      "firewall_rules_proposed": [
+        {
+          "protocol": "tcp",
+          "port": 22,
+          "source": "My IP / operator public IPv4 /32"
+        },
+        {
+          "protocol": "tcp",
+          "port": 80,
+          "source": "0.0.0.0/0"
+        },
+        {
+          "protocol": "tcp",
+          "port": 443,
+          "source": "0.0.0.0/0"
+        }
+      ],
+      "startup_script": null,
+      "public_ipv4": true,
+      "public_ipv6": false,
+      "vpc": false,
+      "automatic_backups": true,
+      "ddos_protection": false,
+      "limited_user_login": true,
+      "cloud_init_user_data": false,
+      "quantity": 1,
+      "next_user_input": "No further DNS input required; frontend and external backup preparation remain",
+      "server_ip": "158.247.203.145",
+      "ssh_connection": "host_fingerprint_pinned_public_key_authentication_passed",
+      "docker_on_vultr": "29.8.0_Compose_5.5.1_hello_world_passed",
+      "official_os_source": "https://docs.docker.com/engine/install/ubuntu/",
+      "setup_guide": "docs/vultr-setup.md",
+      "region_confirmation_required": "Korea_kr_confirmed_city_label_not_verified",
+      "private_key_acl": {
+        "user_approved": true,
+        "owner": "Administrator",
+        "access": [
+          "Administrator",
+          "SYSTEM"
+        ],
+        "key_copied": false,
+        "fingerprint_unchanged": true
+      },
+      "actual_automatic_backups": "unverified_for_new_instance",
+      "actual_firewall": "unverified"
+    },
+    "remote_admin_access": {
+      "status": "toolkit_prepared_additional_devices_deferred_until_needed",
+      "current_admin_device": "existing_Windows_PC_for_Vultr",
+      "ssh_scope": "server_administration_for_both_Vultr_and_NAS",
+      "private_key_policy": "separate_key_per_device_no_private_key_transfer",
+      "client_ssh_config": "dedicated_PDS_config_existing_user_config_unchanged",
+      "firewall": "existing_pds_web_TCP_22_authorized_network_IPv4_32_rules_added_without_removing_other_PCs_TCP_80_443_public",
+      "source": "workspaces/PDC_Diary_Infra/access",
+      "guide": "docs/remote-access.md",
+      "portable_archive": "docs/downloads/pds-access-kit.zip",
+      "archive_sha256": "0D20632BECAE607A94F32E44926A07A5EA07C206BDE60A0DB8D69C1C30DE7803",
+      "archive_source_hashes_match": true,
+      "archive_has_secrets": false,
+      "local_verification": {
+        "date": "2026-09-08",
+        "status": "passed_with_explicit_skips",
+        "environment": "Windows Git Bash 5.3.15 + bundled OpenSSH; Node.js 24.19.0 test driver",
+        "checks": [
+          "new-key setup and repeat preserve the key and unrelated SSH config",
+          "real OpenSSH parses the isolated config and host verification settings",
+          "invalid input is rejected before config changes; WTR keeps cloud config",
+          "generated enrollment backs up existing content and is idempotent",
+          "existing key restrictions survive; malformed or multiline keys cannot alter authorization"
+        ],
+        "skipped": [
+          "symbolic-link runtime check: Git Bash ln copied the file on this Windows mount"
+        ],
+        "syntax_checks": [
+          "pds-access.sh",
+          "add-public-key.sh"
+        ],
+        "native_macos": "not_run_mac_unavailable",
+        "actual_server_ssh": "not_run_no_server_ip_or_access",
+        "actual_vultr_firewall": "not_modified",
+        "actual_network_lookup": "not_run",
+        "api_db_contract": "unchanged",
+        "original_44_requirements": "unchanged"
+      },
+      "additional_device_enrollment": "not_run",
+      "server_authorized_keys_changes": "not_run",
+      "vultr_firewall_changes": "not_run"
+    },
+    "actual_instance": {
+      "ip": "158.247.203.145",
+      "provider": "Vultr",
+      "region": "kr",
+      "region_source": "cloud-init query v1.region",
+      "intended_region": "Seoul",
+      "city": "not_verified",
+      "availability_zone": null,
+      "hostname": "pds-cloud-01",
+      "vcpu": 8,
+      "ram_bytes": 16220078080,
+      "disk_bytes": 375809638400,
+      "disk_gib": 350,
+      "os": "Ubuntu 26.04.1 LTS",
+      "architecture": "x86_64",
+      "ssh_user": "linuxuser",
+      "automatic_backups": "not_verified_for_new_instance",
+      "source": "user_supplied_IP_console_host_fingerprint_and_remote_SSH_readback_2026-09-08T09:06:35Z",
+      "status": "backend_database_smtp_public_https_and_swagger_verified_frontend_pending",
+      "host_key_fingerprint": "SHA256:If3Z8M4Qx4O/Y16H+xBqNipYfE7pKNup3+E3mI6ieZY",
+      "host_key_verification": "matched_user_Vultr_Console_and_pinned_known_hosts",
+      "ssh_authentication": "public_key_passed",
+      "sudo_noninteractive": true,
+      "docker_installation": "passed",
+      "docker_version": "29.8.0",
+      "compose_version": "5.5.1",
+      "docker_service_active": true,
+      "docker_service_enabled": true,
+      "hello_world": "passed",
+      "app_deployment": "DB_API_Caddy_and_public_HTTPS_Swagger_verified_frontend_not_implemented",
+      "container_count_after_verification": 3,
+      "reboot_required": false,
+      "full_os_upgrade": "not_run_10_existing_packages_not_upgraded_in_apt_output",
+      "vultr_firewall_configuration": "not_verified",
+      "verification": "releases/host-bootstrap-verification.json",
+      "latest_application_verification": "releases/deployment-verification.json"
+    },
+    "former_instances": [
+      {
+        "ip": "45.76.27.48",
+        "provider": "Vultr",
+        "region": "Chicago",
+        "label": "pds-cloud-01",
+        "vcpu": 8,
+        "ram_mb": 16384,
+        "storage_gb": 350,
+        "os": "Ubuntu 26.04 LTS x64",
+        "ssh_user": "linuxuser",
+        "automatic_backups": "enabled",
+        "source": "user_server_details_screenshot_2026-09-08",
+        "intended_region": "Seoul",
+        "region_mismatch_cause": "undetermined",
+        "status": "superseded_by_user_created_new_instance",
+        "host_key_scan": "attempted_no_key_returned_reason_unconfirmed",
+        "ssh_authentication": "not_attempted",
+        "docker_installation": "not_run",
+        "app_deployment": "not_run",
+        "user_data_presence": "not_verified",
+        "replacement_instance": "not_created_by_agent",
+        "deletion": "deleted_per_user",
+        "replacement_ip": "158.247.203.145",
+        "deletion_by_agent": "not_run",
+        "deletion_actual": "deleted_per_user",
+        "deletion_independently_verified": false
+      }
+    ],
+    "application_deployment": {
+      "evidence": "workspaces/PDC_Diary_Infra/releases/deployment-verification.json",
+      "frontend": {
+        "status": "not_implemented_per_user",
+        "deployed": false
+      },
+      "dns": {
+        "provider": "Cloudflare",
+        "user_says_configured": true,
+        "authoritative_A_result": "158.247.203.145",
+        "records_details_question_pending": false,
+        "checked_at_utc": "2026-09-08T10:37:45.780Z",
+        "observed_record": {
+          "name": "plandosee.app",
+          "type": "A",
+          "address": "158.247.203.145",
+          "source": "both authoritative DNS servers"
+        },
+        "expected_record": {
+          "name": "plandosee.app",
+          "cloudflare_name": "@",
+          "type": "A",
+          "address": "158.247.203.145"
+        },
+        "authoritative_server": "aleena.ns.cloudflare.com",
+        "diagnosis": "resolved_after_user_changed_record_name_to_apex",
+        "next_step": "none_for_current_DNS_connection",
+        "record_change_verified": true,
+        "proxy_banner": "feature_notice_not_DNS_failure",
+        "previous_observation": {
+          "checked_at": "2026-09-08T10:32:48Z",
+          "record": {
+            "name": "pdcvultr.plandosee.app",
+            "type": "A",
+            "address": "158.247.203.145",
+            "proxy": "DNS only",
+            "ttl": "Auto",
+            "source": "user screenshot and authoritative DNS"
+          },
+          "apex_result": "no_A_answer_SOA_only",
+          "diagnosis": "confirmed_registered_subdomain_differs_from_target_apex"
+        },
+        "authoritative_servers": [
+          "aleena.ns.cloudflare.com",
+          "rene.ns.cloudflare.com"
+        ]
+      },
+      "public_https_verified": true,
+      "api_image_digest": "sha256:5f9394bdd9d0c752df23beaeb4a212b7e5c669bf72a063b2467d9e02e76f45f0",
+      "initial_restore": {
+        "status": "passed",
+        "checked_at": "2026-09-08T10:20:03Z",
+        "tables_compared": 21,
+        "row_counts_equal": true,
+        "full_checksums_equal": true,
+        "dump_sha256": "8c24f4b5d477b340700bd51af170ad34045dc4033a35d3b6b7556e177dc73a5b",
+        "private_server_dump": "/opt/pds/backups/bootstrap-20260908T102003Z.sql",
+        "scratch_schema_removed": true,
+        "external_backup_verified": false,
+        "prior_attempt": "Compared only 1 table because nested Docker exec consumed loop stdin; invalid as whole-schema proof. Replaced streaming loop with array and asserted full inventory."
+      },
+      "public_docs_verified": true
+    },
+    "api_public_https": "verified"
+  },
+  "api_documentation": {
+    "version": "0.2.0",
+    "source": "PDC_Diary_Spring/contracts/openapi.yaml",
+    "mirrors": [
+      "contracts/openapi.yaml",
+      "contracts/openapi.json"
+    ],
+    "frontend_guide": "docs/frontend-integration.md",
+    "swagger": "docs/swagger/README.md",
+    "paths": 42,
+    "operations": 59,
+    "schemas": 38,
+    "examples_validated": 43,
+    "status": "public_HTTPS_and_browser_verified_not_git_pushed",
+    "api_execution_in_ui": false,
+    "public_url": "https://plandosee.app/docs/",
+    "frontend_guide_public_url": "https://plandosee.app/docs/frontend-integration.md",
+    "latest_handoff_verification": "docs/frontend-handoff-verification.json"
+  },
+  "deployment_interview_guide": {
+    "page_id": "3d50def9-f626-8114-b1b2-cf7b997b3ee7",
+    "url": "https://app.notion.com/p/3d50def9f6268114b1b2cf7b997b3ee7?pvs=204",
+    "title": "09 · 배포 과정과 면접 설명 — Docker·Caddy·HTTPS",
+    "local_file": "docs/deployment-interview-guide.md",
+    "scope": "Evidence-based deployment learning guide and interview preparation",
+    "verified_at_utc": "2026-09-08T10:49:26.255Z",
+    "sections": 12,
+    "tables": 6,
+    "mermaid_diagrams": 1,
+    "code_blocks": 5,
+    "new_page_readback_matched": true,
+    "hub_child_link_verified": true,
+    "backlink_verified": true,
+    "infra_crosslink_verified": true,
+    "unknown_blocks": 0,
+    "runtime_changes": false,
+    "requirements_and_API_DB_contract_changes": false,
+    "evidence_sources": [
+      "docs/deployment-status.md",
+      "workspaces/PDC_Diary_Infra/releases/host-bootstrap-verification.json",
+      "workspaces/PDC_Diary_Infra/releases/deployment-verification.json",
+      "workspaces/PDC_Diary_Infra/releases/public-https-verification.json",
+      "workspaces/PDC_Diary_Infra/compose.yaml",
+      "workspaces/PDC_Diary_Infra/caddy/backend.Caddyfile",
+      "workspaces/PDC_Diary_Infra/scripts/deploy-initial-backend.sh",
+      "workspaces/PDC_Diary_Infra/scripts/verify-initial-restore.sh"
+    ]
+  },
+  "security_documentation_proposal": {
+    "status": "AI_recommendation_user_decision_pending",
+    "recommended_design_location": "PDC_Diary/docs/security/",
+    "implementation_locations": [
+      "PDC_Diary_Spring",
+      "PDC_Diary_Web",
+      "PDC_Diary_Infra"
+    ],
+    "separate_private_repository_when": "Separate access control for unresolved vulnerability details or independent cross-project security ownership is needed",
+    "change_size": "not_assessed",
+    "security_audit_performed": false,
+    "repository_created": false
   }
 }

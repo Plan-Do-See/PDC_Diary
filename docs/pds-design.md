@@ -1,5 +1,22 @@
 # PDS Diary 기능·구현 설계서
 
+최신 배포 증거: [DB·백엔드·메일 배포 진행](deployment-status.md) — 내부 API·21개 표 복원·메일 수신 확인, 공개 DNS/HTTPS·API·Swagger 확인 완료, 프론트는 미구현.
+
+
+2026-09-08 배포 진행: Vultr `158.247.203.145`의 `/opt/pds`에 MariaDB 12.3.3·Spring Boot API·Caddy를 배포했다. V1~V3와 21개 표·131개 열·키 항목 94개·CHECK 26개를 확인했고, 내부 API 15개 점검과 별도 임시 스키마의 21개 표 복원 대조가 통과했다. Brevo STARTTLS 인증·테스트 메일 접수와 Spring 메일 상태 검사가 성공했으며, 사용자가 네이버 받은편지함 도착을 확인했다.
+
+현재 남은 작업: 프론트는 사용자 확인상 미구현이며 기본 주소 /는 준비 중 안내와 HTTP 503을 반환한다. 소셜 외부 설정은 프론트 완성 뒤 진행한다. 외부 암호화 백업 저장소·예약/복구와 전체 과제 인수 검증은 남아 있다. Chicago 45.76.27.48은 사용자가 직접 삭제했다고 확인했다.
+
+이전 Chicago 관찰 기록: 사용자 제공 서버 상세 화면에서 45.76.27.48 / pds-cloud-01 / Chicago / 8vCPU·16384MB·350GB NVMe / Ubuntu 26.04 LTS x64 / linuxuser / 자동 백업 Enabled를 확인했다. 이전 배포 선택 화면의 Seoul과 실제 생성 지역이 다르며 원인은 미확정이다. 이 인스턴스에는 Docker·앱·DB 설치를 진행하지 않았다. 이후 사용자가 해당 Chicago 서버를 직접 삭제했다고 확인했다.
+
+현재 적용 순서: 다른 PC·Mac의 SSH 키·방화벽 등록은 필요할 때까지 보류하고, 현재 Windows PC의 키로 Vultr 서버 구성을 이어간다. SSH는 Vultr와 NAS 모두에서 서버 관리에 쓰일 수 있다. Mac용 준비 도구는 보관만 하며 추가 PC 등록·실제 방화벽 변경은 실행하지 않았다.
+
+2026-09-08 다중 PC 관리 준비: Mac용 SSH 키 생성·독립 접속 설정·공인 IPv4 확인 도구와 기존 서버 공개키 추가 도구를 작성하고 비밀값 없는 ZIP으로 묶었다. PC별 키·네트워크별 SSH /32 규칙을 사용하며 웹 80/443과 내부 DB 경계는 유지한다. Windows Bash/OpenSSH의 핵심 동작 검사는 통과했고 실제 Mac·서버·방화벽은 미검증이다. [접속 준비·검증 범위](remote-access.md).
+
+2026-09-08 사용자 화면 확인: 서울 vhp-8c-16gb-amd(8vCPU·16GB·350GB), Ubuntu 26.04 LTS x64, 자동 백업 ON, 수량 1, 합계 월 US$115.20/시간당 US$0.158이 선택되어 있다. Ubuntu 26.04는 Docker 공식 지원 대상으로 확인했다. pds-vultr-admin 전용 SSH 공개키를 로컬에 생성했고 Git 제외·Windows 폴더 접근 권한 제한을 확인했다. 현재 새 서버의 공개키 인증은 성공했다. Vultr 계정 키 목록·방화벽 적용·실제 크레딧 적용/만료일은 미확인이다. 설정 권장값은 pds-web 방화벽(TCP 22 My IP, 80/443 Anywhere), hostname/label pds-cloud-01, Limited User Login ON, Public IPv4 ON, IPv6/VPC/DDoS/Cloud-Init OFF이며 Startup Script는 선택하지 않는다.
+
+항목별 선택값·SSH 키 등록·방화벽·배포 이후 준비와 WTR 이전 순서는 [Vultr 설정 안내](vultr-setup.md)에 정리했다. 이번 변경은 설정 안내와 로컬 키 준비이며 서버 배포 또는 기존 실행 검사의 재실행이 아니다.
+
 2026-09-08 / v1.3 / Context7 및 공식 문서 재검토 완료, 구현·배포 검증 전
 
 ## 계획을 고치는 다이어리
@@ -13,9 +30,9 @@ PDS Diary · 기능 명세 / 필수 RULE / 인프라 제안 · 2026.09.08 · v1.
 | 결정할 것 | 이 설계의 권장안 |
 | --- | --- |
 | 프레임워크 | 웹 Next.js + TypeScript / Android Kotlin + Jetpack Compose / Spring Boot API. |
-| 저장 / 배포 | MariaDB 12.3 LTS + Docker Compose. SSR 운영 예산은 서울 4GB·백업 포함 월 $25부터. |
+| 저장 / 배포 | MariaDB + Docker Compose. 클라우드 우선, WTR Pro 후속 이전 준비. |
 | 실제 사용 자료 | 본인 계획 1개 이상 / 그 계획의 할 일 5개 이상 / 실제 실행 3건 이상. |
-| 범위와 시간 | 로그인 없이 전체 기능 제공. 준비된 환경 기준 8~10시간 계획. |
+| 범위와 시간 | 공개 과제 공간은 무인증 전체 기능·8~10시간 계획. 개인 계정 영역도 이번에 추가하며 추가 일정은 미산정. |
 
 ### 현재 확정한 것과 아직 확인하지 않은 것
 
@@ -26,6 +43,8 @@ PDS Diary · 기능 명세 / 필수 RULE / 인프라 제안 · 2026.09.08 · v1.
 문서 관리: 사용자 지시에 따라 PDF를 삭제했다. 이 Markdown·JSON 계약과 노션을 함께 갱신하며, 사용자가 다시 요청하기 전에는 PDF를 생성·갱신·검증하지 않는다.
 
 ## 웹과 앱, 하나의 업무 API
+
+2026-09-08 사용자 후속 결정으로 공개 과제 공간과 로그인하는 개인 계정 영역을 이번에 함께 구현합니다. 아래 무인증 화면·제출 규칙은 공개 과제 공간에 적용합니다. API는 공개 /api/v1/public, 개인 /api/v1/me, 인증 /api/v1/auth로 분리했습니다. 개인 영역은 이메일 가입·카카오·네이버·구글 로그인, 현재 본인만 접근·향후 공동 편집 확장 고려로 확정했습니다. [백엔드 구성 결정](backend-decisions.md)에 사용자 선택·AUTH-01~07 검증을, [구성 추천](backend-recommendations.md)에 JDBC·Spring Security·메일·WTR Pro 검토와 추가 기능 제안을 구분해 기록합니다.
 
 웹과 Android의 화면 구현은 분리하고, 저장·집계·중복 방지 규칙은 서버에서 공유합니다.
 
@@ -43,11 +62,11 @@ Next.js 서버는 초기 화면을 만들기 위해 Spring API를 호출합니�
 
 Next.js SSR에는 Node.js 런타임이 필요합니다. 정적 웹만 있던 이전 구상보다 메모리 사용 주체가 늘어나므로 서버 예산과 부하 검증을 갱신했습니다. UI 소스는 웹·Android 각각 관리하고 API 계약·DB·계산 규칙을 공유합니다. [4][19]
 
-Spring Boot 공식 문서는 4.1.1이며 Java 21은 지원 범위입니다. MariaDB 12.3은 LTS입니다. Flyway 표에는 MariaDB 10.11까지만 명시되어 있으므로, 정확한 버전 조합은 첫 구현 단계에서 migration·JDBC·트랜잭션을 시험해 고정합니다. [1][17][22]
+Spring Boot 4.1.1·Java 21을 사용합니다. Flyway MariaDB 공식 문서에는 12.3.2 검증이 명시되어 있습니다. 개발 DB는 3919 포트에서 12.3.3 응답을 확인했습니다. 프로젝트의 실제 migration·JDBC·트랜잭션 검증은 별도로 기록합니다. [Flyway MariaDB](https://documentation.red-gate.com/flyway/reference/database-driver-reference/mariadb)
 
 ## 화면은 다섯 곳으로 연결
 
-모든 화면과 저장·수정·삭제 기능은 로그인 없이 사용할 수 있어야 합니다.
+공개 과제 공간의 모든 화면과 저장·수정·삭제 기능은 로그인 없이 사용할 수 있어야 합니다. 개인 계정 영역은 로그인과 접근 권한을 요구하며 공개 공간과 구분합니다.
 
 > 지금은 로그인이 없어 링크를 아는 사람은 누구나 볼 수 있습니다. 남이 봐도 괜찮은 내용만 넣으세요
 
@@ -153,7 +172,7 @@ T06-C28~C33, C83 · 대상 집합과 계산식을 먼저 고정합니다.
 
 ## 아홉 표로 관계를 명확하게
 
-contracts/pds-schema-v2.json · 현재 status=design, 실제 DB 대조 전
+contracts/pds-schema-v2.json · 현재 status=design, 실제 DB 대조 전. 아래 아홉 표는 기존 업무 도메인 초안이며, 계정·인증·자료 소유/범위와 요청 키 분리 제약은 후속 설계 대상입니다. `access_scope_extension`의 경계와 미정 항목을 포함해 확정한 뒤 구현합니다.
 
 | 표 | 핵심 항목 | 관계·보장 |
 | --- | --- | --- |
@@ -195,9 +214,11 @@ T06-C34~C36 · 새로고침과 내보내기의 동일성
 | /tasks/:id/complete, /tasks/:id/reopen | 요청 키·cycle 기반 완료와 되돌리기 |
 | /tasks/:id/executions | 실제 실행 저장·조회 |
 | /review, /reflections, /carry-forwards | 집계·근거, 회고 저장, 다음 계획 연결 |
-| /export | 전체 도메인 자료를 JSON 파일 한 개로 반환 |
+| /export | 접근이 허용된 해당 공간의 전체 도메인 자료를 JSON 파일 한 개로 반환 |
 
 ### 내보내기와 복원 확인
+
+공개 내보내기에는 공개 과제 공간 자료만, 개인 내보내기에는 해당 계정에 허용된 자료만 포함합니다. 목록·검색·상세·이력·변경·집계·근거·관계·요청 키 응답도 동일한 접근 범위를 적용하며 계정·인증 비밀정보는 내보내지 않습니다.
 
 한 REPEATABLE READ 트랜잭션에서 계획·모든 버전·할 일(삭제 표시 포함)·태그·실행·완료 사건·회고·전송 관계·현재 집계 조건을 UTF-8 JSON으로 내보냅니다. schema_version, exported_at, timezone, duration_unit을 포함하고 자격증명·환경변수·내부 응답 캐시는 제외합니다.
 
@@ -209,9 +230,9 @@ T06-C01, C57, C58, C82 · 공개 데이터와 비밀 자격증명을 분리합�
 
 ### 로그인 없는 기능과 공개 범위
 
-결과물은 계정 없이 열리고 요구된 쓰기 기능도 모두 동작합니다. 이 단계에는 사용자별 소유권 보호가 없어 다른 방문자도 내용을 바꿀 수 있습니다. 첫 화면의 지정 문구 아래에 편집도 공개됨을 알립니다. 민감한 일기나 타인의 이름·연락처는 입력하지 않습니다.
+공개 과제 결과물은 계정 없이 열리고 요구된 쓰기 기능도 모두 동작합니다. 공개 공간은 다른 방문자도 내용을 바꿀 수 있습니다. 제출 주소의 첫 화면에 지정 문구를 그대로 표시하고 공개 과제 공간의 열람·편집 안내임을 구분합니다. 공개 공간에는 민감한 일기나 타인의 이름·연락처를 입력하지 않습니다. 이번에 추가하는 개인 영역은 인증된 계정의 권한을 검사하며 공개 경로로 개인 자료를 조회·변경할 수 없어야 합니다.
 
-브라우저·네이티브 앱은 공개 API만 호출합니다. DB 3306 포트를 외부에 열지 않고, Spring Boot의 최소 권한 DB 계정과 migration 계정을 분리합니다. 공개 진입점은 Caddy의 HTTPS이며 관리 기능·DB·백업은 비공개로 둡니다. 로그인을 요구하는 Spring Security 기본 설정을 그대로 적용하지 않습니다.
+브라우저·네이티브 앱은 Spring API를 호출하며 서버가 공개/개인 범위와 권한을 검사합니다. DB 3306 포트를 외부에 열지 않고, Spring Boot의 최소 권한 DB 계정과 migration 계정을 분리합니다. 공개 진입점은 Caddy의 HTTPS이며 관리 기능·DB·백업은 비공개로 둡니다. 인증 구성 시 공개 과제 기능에 로그인 장벽을 붙이지 않습니다. 인증 라이브러리·세션/토큰 방식은 아직 확정하지 않았습니다.
 
 ### 문자열은 그대로 보이고 스크립트는 실행되지 않게
 
@@ -231,7 +252,7 @@ DB 비밀번호는 Spring 서버 비공개 설정에만 둡니다. NEXT_PUBLIC_ 
 
 ## 통과는 실제 결과로 판단
 
-검증 그룹은 전체 조건표와 연결됩니다. 현재 실행 결과는 모두 미확인입니다.
+검증 그룹은 전체 조건표와 연결됩니다. 로컬 백엔드 증거는 [검증 기록](backend-verification.md)에 있습니다. 아래 V01~V10의 배포/화면/사용자 실제 자료 인수 검증은 아직 남아 있습니다.
 
 | 검사 | 최소 수행과 통과 기준 |
 | --- | --- |
@@ -254,7 +275,7 @@ evidence/manifest.json에 T06 ID, 검사 그룹, 저장소별 커밋과 배포 �
 
 ## 8~10시간 안의 구현 순서
 
-Next.js·Java·Docker 경험과 환경·본인 자료 준비가 전제입니다. 8~10h는 웹 과제 목표이며 Android 개발은 별도입니다.
+Next.js·Java·Docker 경험과 환경·본인 자료 준비가 전제입니다. 8~10h는 공개 웹 과제 목표이며 이번에 추가하는 개인 계정·인증·접근 분리 검증 시간은 별도 산정합니다. Android 개발도 별도입니다.
 
 | 시간 | 작업 | 완료 관문 |
 | --- | --- | --- |
@@ -419,7 +440,7 @@ Android 화면은 웹 화면과 별도로 구현합니다. 전체 JSON은 동일
 
 ### 현재 범위와 이후 확장
 
-웹의 44개 과제 조건 통과 후 Android에서 같은 기능과 자료를 검증합니다. Android 개발·기기 시험·서명 배포는 웹 8~10시간 예상과 별도입니다. 앱의 공개 안내도 유지하며 로그인은 7번 과제에서 다룹니다.
+웹의 44개 과제 조건 통과 후 Android에서 같은 기능과 자료를 검증합니다. Android 개발·기기 시험·서명 배포는 공개 웹 과제 8~10시간 예상과 별도입니다. 앱도 공개 과제 안내·무인증 기능을 유지하며 개인 영역은 동일한 서버 인증·권한 경계를 따릅니다. 이메일·카카오·네이버·구글과 개인 전용 범위는 확정했고, Android 로그인 인계·자격증명 전달 방식은 별도 설계·시험 대상입니다.
 
 iOS는 현재 개발·배포 대상에서 제외합니다. Windows·macOS에서는 먼저 웹을 사용하고, 데스크톱 네이티브 앱은 이후 별도 범위로 결정합니다. 공통 REST API를 유지하므로 향후 클라이언트를 추가할 수 있습니다. n8n은 확정 구성에 넣지 않고 외부 자동화가 필요할 때 검토합니다.
 
@@ -430,7 +451,7 @@ iOS는 현재 개발·배포 대상에서 제외합니다. Windows·macOS에서�
 | 저장소 | 책임과 산출물 |
 | --- | --- |
 | PDC_Diary | 기존 명세 저장소: RULE, 44개 조건, Markdown/JSON 설계, 노션 동기화, 증거와 제출 URL. |
-| PDC_Diary_Backend | Spring Boot 서비스·SQL·migration·OpenAPI·DB 계약 정본. API 컨테이너 이미지. |
+| PDC_Diary_Spring | Spring Boot 서비스·SQL·migration·OpenAPI·DB 계약 정본. API 컨테이너 이미지. |
 | PDC_Diary_Web | Next.js·React·TypeScript, SSR·Client Component·웹 테스트. Node.js 컨테이너 이미지. |
 | PDC_Diary_Android | Kotlin·Compose·API 접근·네이티브 파일 저장·앱 테스트. Android 빌드 산출물. |
 | PDC_Diary_Infra | Caddy·Compose·배포·백업·복구·release.json. 실제 secret·DB 파일·백업은 Git 제외. |
@@ -451,14 +472,16 @@ iOS는 현재 개발·배포 대상에서 제외합니다. Windows·macOS에서�
 
 ## 소형 서버 하나로 시작
 
+WTR Pro는 Ryzen 7 5825U·RAM 32GB·6TB×2·2TB×1이며 CCTV용 하드로 24시간 사용 가능하다는 사용자 진술이다. 초기 이용자는 약 10명 예상이다. 실제 가용성·OS·외부 접속·월 예산은 미확인이다. 초기 운영은 클라우드, WTR Pro는 후속 이전 대상이다. 2026-09-08 후속 결정: 사용자가 JDBC·Spring Security·웹 JDBC 세션·외부 SMTP와 휴지통 복원(REC-01)·계획 틀 복제(REC-02)·선택형 알림(REC-03)을 모두 채택했다. n8n은 후속 알림·운영 자동화로 검토하고 인증 메일은 Spring에서 외부 SMTP로 전송한다. 클라우드부터 구현하고 WTR Pro로 이전할 수 있도록 준비한다.
+
 2026-09-08 공식 가격표 기준. 한국 사용자를 우선한다는 가정의 월 운영비 비교입니다.
 
-도메인: plandosee.app 구매 완료(사용자 진술). 웹 https://plandosee.app, 공통 API https://plandosee.app/api/v1로 계획합니다. DNS·HTTPS·배포 연결과 실제 결제액·갱신 가격은 미확인입니다.
+도메인: plandosee.app 구매 완료(사용자 진술). 웹 https://plandosee.app, 공통 API https://plandosee.app/api/v1로 계획합니다. DNS·HTTPS·백엔드·Swagger 연결은 확인했습니다. 프론트·실제 결제액·갱신 가격은 미확인입니다.
 
 | 선택 | 서버 + 백업 기본액 | 이 프로젝트의 판단 |
 | --- | --- | --- |
 | 절약 후보 · 검증 후<br>Lightsail 서울 2GB | Linux 2 vCPU / 60GB SSD<br>서버 $12 + 객체 저장소 $1<br>= 월 $13부터 | Next.js SSR·Spring·DB를 함께 실행. 부하 시험 통과 시 채택할 절약안. 충분한 용량으로 확정하지 않음. [13][14] |
-| 잠정 예산 기준<br>Lightsail 서울 4GB | Linux 2 vCPU / 80GB SSD<br>서버 $24 + 객체 저장소 $1<br>= 월 $25부터 | Node.js 런타임 추가를 고려한 예산안. 4GB도 성능 측정 전이며 더 비싼 구성을 구매한 것은 아님. [13] |
+| 증설 대안<br>Lightsail 서울 4GB | Linux 2 vCPU / 80GB SSD<br>서버 $24 + 객체 저장소 $1<br>= 월 $25부터 | 2GB 통합 부하 검사에서 부족할 때 검토한다. 4GB도 성능 측정 전이며 구매하지 않았다. [13] |
 | 저가 해외 대안<br>Hetzner CX23 4GB | 유럽 서버 기본 €5.49<br>IPv4·백업·세금 별도 | 공식 상품 페이지에 현재 구매 불가로 표시. 지금의 배포 기준으로 채택하지 않음. 한국 지연도 미측정. [15][16] |
 
 $1 객체 저장소는 5GB 저장·25GB 전송 한도입니다. 기본액은 이 한도와 서버 번들 전송량 내 사용 가정이며 세금·환율·도메인·초과량은 별도입니다. 스냅샷은 과금 대상 GB당 월 $0.05 추가: 20GB면 $1입니다. 무료 체험은 정상 월 비용에서 빼지 않았습니다. [13]
@@ -516,3 +539,23 @@ Context7 조회는 이전 백엔드·DB 검토 근거입니다. 이번 웹·Andr
 [23] [Context7 · Official Repository](https://github.com/upstash/context7) · MCP 조회 절차
 
 [24] [Android · Storage Access Framework](https://developer.android.com/training/data-storage/shared/documents-files) · 사용자 지정 JSON 파일 저장
+
+## 채택한 백엔드 구성과 클라우드 이전
+
+2026-09-08 후속 결정: 사용자가 JDBC·Spring Security·웹 JDBC 세션·외부 SMTP와 휴지통 복원(REC-01)·계획 틀 복제(REC-02)·선택형 알림(REC-03)을 모두 채택했다. n8n은 후속 알림·운영 자동화로 검토하고 인증 메일은 Spring에서 외부 SMTP로 전송한다. 클라우드부터 구현하고 WTR Pro로 이전할 수 있도록 준비한다.
+
+메일 설정 예시는 Brevo SMTP(smtp-relay.brevo.com:587, STARTTLS) 기준으로 준비한다. SMTP 로그인과 SMTP 키는 환경 변수로 주입한다. 발신 도메인 인증(Brevo code·DKIM·DMARC), 트랜잭션 발송 활성화, Gmail·네이버 실제 수신 확인은 남아 있다. 외부 서비스를 써도 받은편지함 도착을 보장하지 않으며, WTR 이전 후에도 같은 외부 SMTP를 유지한다.
+
+백엔드 구현 결과(2026-09-08): PDC_Diary_Spring에 계정·공간·세션·도메인 API와 Flyway V1~V3, 휴지통 복원·틀 복제·선택형 이메일 알림을 작성했다. MariaDB 12.3.3 로컬 검사 14개와 21개 표 덤프→복원 대조가 통과했다. Compose 구조 검사도 통과했다. 실제 외부 OAuth·Brevo 수신·클라우드/WTR·웹/Android 검증은 남아 있다. [검증 기록](backend-verification.md)을 따른다.
+
+## 저가 클라우드 후속 추천 · 제공자 미선정
+
+최종 사용자 선택은 Vultr다. 한 달 안에 WTR Pro로 이전할 것이라는 사용자 예상에 맞춰, 체험용 서울 AMD High Performance 8vCPU·16GB(월 US$96)를 추천한다. 작은 클라우드 서버로 축소하는 경로는 준비하지 않는다. 실제 이전일·크레딧 적용·앱 배포는 확인 전이다.
+
+[가격·조건 비교와 추천 근거](cloud-options.md)를 따른다. 기존 Docker Compose·MariaDB 덤프와 WTR 이전 절차를 유지하며 API·DB 계약 변경은 없다.
+
+## 무료 호스팅·메일 준비·프론트 API 후속 지시
+
+2026-09-08 최신 결정: 사용자가 최종 클라우드 제공자로 Vultr를 선택했다. 사용자는 작은 클라우드 서버로 줄일 필요가 없고 한 달 안에 이전할 것으로 예상한다고 밝혔다. WTR Pro로의 이전을 목표로 서울(icn) Shared CPU AMD High Performance 8vCPU·RAM 16GB·350GB 한 대를 체험용으로 추천하며 공식 카탈로그의 서버 요금은 월 US$96이다. US$250·최대 30일 프로모션의 실제 적용/만료는 확인 전이다. 새 한국 서버의 DB·백엔드·Caddy 배포와 SMTP 시험을 확인했다. 공개 HTTPS·API·Swagger는 확인했고 프론트는 미구현이다. Brevo 도메인 Authenticated는 사용자 진술로 확인했다. 발신자 PlanDoSee <no-reply@plandosee.app>의 서버 SMTP 시험을 통과했고, 사용자가 네이버 받은편지함 도착을 확인했다. 소셜 제공자 앱 등록·키·콜백·검수는 프론트 완성 뒤 한 번에 진행한다. 클라우드부터 운영하고 WTR Pro로 후속 이전하는 방침을 유지한다. 구상 저장소의 OpenAPI 0.2.0·Swagger UI·프론트 안내는 42개 경로·59개 작업·38개 모델·예시 43개와 소스 대조/브라우저 검사를 통과했다.
+
+[사용자 준비물 한 번에 보기](user-preparation.md) · [프론트 연동 안내](frontend-integration.md) · [Swagger 실행](swagger/README.md) · [무료 호스팅 비교](cloud-options.md)

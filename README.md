@@ -1,17 +1,23 @@
 # PlanDoSee
 
+배포 이해·면접 준비: [로컬 설명서](docs/deployment-interview-guide.md) · [노션 학습 페이지](https://app.notion.com/p/3d50def9f6268114b1b2cf7b997b3ee7?pvs=204)
+
+최신 배포 증거: [DB·백엔드·메일 배포 진행](docs/deployment-status.md) — 내부 API·21개 표 복원·메일 수신 확인, 공개 DNS/HTTPS·API·Swagger 확인 완료, 프론트는 미구현.
+
+
 **계획 → 실제 실행 → 돌아보기 → 다음 계획**
 
 내가 세운 계획과 실제로 한 일을 비교하고, 고칠 점 한 줄을 다음 계획에 반영하는 다이어리입니다.
 
 `Plan-Do-See/PDC_Diary`는 프로젝트의 **요구사항·기술 구상·데이터 계약·검증 기준**을 관리하는 구상 저장소입니다. 웹·백엔드·Android·인프라 구현은 각각 별도 저장소로 구성합니다.
 
-[노션 문서 목차](https://app.notion.com/p/3d50def9f6268037adfbcef233c6d20c) · [필수 RULE](RULES.md) · [개발·배포 준비물](docs/preparation-guide.md)
+[노션 문서 목차](https://app.notion.com/p/3d50def9f6268037adfbcef233c6d20c) · [필수 RULE](RULES.md) · [개발·배포 준비물](docs/preparation-guide.md) · [Swagger/API](docs/swagger/README.md) · [프론트 연동](docs/frontend-integration.md)
 
-> 현재는 설계·요구사항 정리 단계입니다. 이 저장소에는 실행 가능한 앱이 없으며, 실제 DB·기능·배포 검증은 아직 수행하지 않았습니다.
+> 이 저장소는 설계·계약·검증 기록을 관리합니다. 별도 백엔드의 DB·API·HTTPS·Swagger 배포와 부분 검증은 완료했습니다. 프론트 구현·소셜 외부 연결·전체 과제 인수 검증은 남아 있으며, 이번 로컬 변경은 아직 Git에 커밋·push하지 않았습니다.
 
-- 서비스 도메인: `plandosee.app` — 구매 완료(사용자 확인), DNS·HTTPS·배포 연결 미확인
-- 웹 과제 계획: 준비된 환경 기준 **8~10시간**. Android 개발·기기 검사·배포는 별도
+- 서비스 도메인: `plandosee.app` — 구매 완료(사용자 확인), DNS·HTTPS·백엔드 연결 확인, 프론트 미구현
+- 웹 과제 계획: 준비된 환경 기준 **8~10시간**. 이번에 추가하는 개인 계정·인증과 Android 개발·검증 일정은 별도
+- 이번 구현 범위: **공개 과제 공간 + 개인 계정 영역**. 이메일 가입·카카오·네이버·구글 로그인, 개인 기록 우선·향후 공동 편집 고려 — [백엔드 구성 결정](docs/backend-decisions.md)
 
 ## 만들 기능
 
@@ -42,14 +48,14 @@ flowchart LR
 
 초기 웹 조회는 SSR, 편집·DnD 등 상호작용은 Client Component가 담당합니다. 저장·집계·날짜 판정·중복 방지는 공통 Spring API에서 처리합니다. MariaDB·Flyway 등 정확한 버전 조합은 실제 호환 시험 후 고정합니다.
 
-배포는 서버 1대에서 시작하는 구상입니다. Caddy가 웹 요청은 Next.js로, `/api/v1`은 Spring Boot로 전달합니다. 비용·용량 판단은 [인프라 계획](docs/latest-review.md)을 참고합니다.
+배포는 클라우드 서버 1대에서 시작하고 동일 컨테이너·MariaDB 덤프/복원·환경 설정으로 WTR Pro 이전을 준비합니다. 2026-09-08 후속 결정: 사용자가 JDBC·Spring Security·웹 JDBC 세션·외부 SMTP와 휴지통 복원(REC-01)·계획 틀 복제(REC-02)·선택형 알림(REC-03)을 모두 채택했다. n8n은 후속 알림·운영 자동화로 검토하고 인증 메일은 Spring에서 외부 SMTP로 전송한다. 클라우드부터 구현하고 WTR Pro로 이전할 수 있도록 준비한다. [구성 결정](docs/backend-decisions.md)을 참고합니다.
 
 ## 저장소 분리 계획
 
 | 저장소 | 담당 |
 |---|---|
 | **PDC_Diary · 현재 저장소** | RULE · 설계 · 계약 초안 · 노션 동기화 · 검증 증거 |
-| PDC_Diary_Backend | 공통 API · DB migration · OpenAPI · 최종 DB 계약 |
+| PDC_Diary_Spring | 공통 API · DB migration · OpenAPI · 최종 DB 계약 |
 | PDC_Diary_Web | Next.js 웹 화면·SSR·웹 테스트 |
 | PDC_Diary_Android | Kotlin·Compose 앱·네이티브 기능·기기 테스트 |
 | PDC_Diary_Infra | 배포·백업·복구·실행 버전 관리 |
@@ -68,7 +74,7 @@ Windows·macOS에서는 우선 웹을 제공하고 네이티브 앱은 이후 �
 | [44개 요구사항 원문](docs/requirements.json) | T06 항목과 검증 방법 연결 |
 | [DB 계약 초안](contracts/pds-schema-v2.json) | 표·필드·관계·제약·시간대·단위 |
 
-DB 계약은 현재 `design` 상태이며 실제 DB와 대조하기 전입니다. 백엔드 구현 시작 시 계약 정본을 해당 저장소로 이관하고, 이 저장소에서는 고정된 릴리스를 참조합니다.
+DB 계약은 최종 배포 검증 전의 `design` 상태이며 로컬 MariaDB 관측·14개 검사는 별도 기록했습니다. 정본은 백엔드 저장소에 있고, 구상 저장소에 동일한 DB·OpenAPI 미러와 출처 해시를 유지합니다.
 
 ## 구현 순서와 완료 기준
 
@@ -86,6 +92,18 @@ DB 계약은 현재 `design` 상태이며 실제 DB와 대조하기 전입니다
 
 > 지금은 로그인이 없어 링크를 아는 사람은 누구나 볼 수 있습니다. 남이 봐도 괜찮은 내용만 넣으세요
 
-현재 과제에서는 열람·수정을 포함한 모든 기능을 로그인 없이 제공합니다. 민감한 내용·타인 개인정보·비밀키를 저장소나 공개 자료에 넣지 않습니다. 접근 제어는 7번 과제에서 다룹니다.
+공개 과제 공간에서는 열람·수정을 포함한 모든 필수 기능을 로그인 없이 제공합니다. 위 안내는 공개 과제 공간에 해당하며, 이번에 함께 구현하는 개인 계정 영역은 로그인과 접근 권한을 검사합니다. 개인 기록이 공개 목록·집계·내보내기 등에 섞이지 않게 분리합니다. 민감한 내용·타인 개인정보·비밀키를 저장소나 공개 자료에 넣지 않습니다.
 
 계획·기술·기능·일정이 바뀌면 **로컬 Markdown·JSON과 노션을 같은 작업에서 갱신하고 재조회로 확인**합니다. PDF는 관리 대상에서 제외하며, 재요청 전에는 생성하지 않습니다. 노션 페이지와 동기화 기록은 [문서 연결 정보](docs/notion-publication.json)에 보관합니다.
+
+## 백엔드 구현 결과 · 2026-09-08
+
+백엔드 구현 결과(2026-09-08): PDC_Diary_Spring에 계정·공간·세션·도메인 API와 Flyway V1~V3, 휴지통 복원·틀 복제·선택형 이메일 알림을 작성했다. MariaDB 12.3.3 로컬 검사 14개와 21개 표 덤프→복원 대조가 통과했다. Compose 구조 검사도 통과했다. 실제 외부 OAuth·Brevo 수신·클라우드/WTR·웹/Android 검증은 남아 있다. [검증 기록](docs/backend-verification.md)을 따른다.
+
+백엔드 정본은 `D:/workspace/PDC_Diary_Spring`, 독립 인프라 저장소는 `D:/workspace/PDC_Diary/workspaces/PDC_Diary_Infra`입니다. API·DB 계약과 배포/이전 절차를 준비했습니다. 원격 push·서버 구매·실제 배포는 수행하지 않았습니다.
+
+## 무료 호스팅·메일 준비·프론트 API 후속 지시
+
+2026-09-08 최신 결정: 사용자가 최종 클라우드 제공자로 Vultr를 선택했다. 사용자는 작은 클라우드 서버로 줄일 필요가 없고 한 달 안에 이전할 것으로 예상한다고 밝혔다. WTR Pro로의 이전을 목표로 서울(icn) Shared CPU AMD High Performance 8vCPU·RAM 16GB·350GB 한 대를 체험용으로 추천하며 공식 카탈로그의 서버 요금은 월 US$96이다. US$250·최대 30일 프로모션의 실제 적용/만료는 확인 전이다. 새 한국 서버의 DB·백엔드·Caddy 배포와 SMTP 시험을 확인했다. 공개 HTTPS·API·Swagger는 확인했고 프론트는 미구현이다. Brevo 도메인 Authenticated는 사용자 진술로 확인했다. 발신자 PlanDoSee <no-reply@plandosee.app>의 서버 SMTP 시험을 통과했고, 사용자가 네이버 받은편지함 도착을 확인했다. 소셜 제공자 앱 등록·키·콜백·검수는 프론트 완성 뒤 한 번에 진행한다. 클라우드부터 운영하고 WTR Pro로 후속 이전하는 방침을 유지한다. 구상 저장소의 OpenAPI 0.2.0·Swagger UI·프론트 안내는 42개 경로·59개 작업·38개 모델·예시 43개와 소스 대조/브라우저 검사를 통과했다.
+
+[사용자 준비물 한 번에 보기](docs/user-preparation.md) · [프론트 연동 안내](docs/frontend-integration.md) · [Swagger 실행](docs/swagger/README.md) · [무료 호스팅 비교](docs/cloud-options.md)
