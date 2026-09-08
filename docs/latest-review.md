@@ -1,6 +1,6 @@
 # 프로그램·인프라 최신 결정
 
-2026-09-08 / v1.3 / 설계 갱신. 사용자가 `plandosee.app` 구매를 알렸다. 앱 구현·신규 원격 저장소 생성·서버 배포·인프라 결제는 미실행.
+2026-09-08 / v1.3 / 설계 갱신. 사용자가 `plandosee.app` 구매를 알렸다. 구상 저장소는 `Plan-Do-See/PDC_Diary`로 확인했으며 [README](../README.md)에 개요·문서 안내를 정리했다. 앱 구현·서버 배포·인프라 결제는 미실행.
 
 서비스 도메인은 `plandosee.app`으로 확정했다. 웹 주소는 `https://plandosee.app`, 공통 API 기본 주소는 `https://plandosee.app/api/v1`로 계획한다. DNS·HTTPS·배포 연결은 미확인이며 도메인 확정을 서비스 공개 완료로 보지 않는다. 실제 결제액·갱신 가격은 확인하지 않았다.
 
@@ -40,7 +40,7 @@ Android UI는 Kotlin·Compose로 따로 구현한다. 서버와 같은 API 계�
 
 ## 저장소와 완료 범위
 
-PDC_Diary는 명세·증거, PDC_Diary_Backend는 API·DB 계약, PDC_Diary_Web은 Next.js, PDC_Diary_Android는 Kotlin·Compose, PDC_Diary_Infra는 배포를 담당한다. 새 원격 저장소는 아직 생성하지 않았다. 상세는 [저장소 구성](repository-layout.md)에 있다.
+Plan-Do-See/PDC_Diary는 명세·증거, PDC_Diary_Backend는 API·DB 계약, PDC_Diary_Web은 Next.js, PDC_Diary_Android는 Kotlin·Compose, PDC_Diary_Infra는 배포를 담당한다. 네 구현 저장소는 분리 계획이며 이번 문서 작업에서 생성하지 않았다. 상세는 [저장소 구성](repository-layout.md)에 있다.
 
 웹의 44개 필수 과제 조건은 축소하지 않았다. 원문 조건 파일은 v1.2와 바이트 단위로 같다. 웹 8~10시간 목표와 Android 개발·기기 시험·배포는 별도다. 로그인은 과제 7에서 다루고 현재 공개 안내·무인증 기능은 유지한다. n8n 도입은 확정하지 않았다.
 

@@ -97,15 +97,17 @@
   ],
   "last_sync": {
     "date": "2026-09-08",
-    "change": "공식 문서와 현재 환경 확인을 바탕으로 개발 PC·프로젝트 의존성·배포 계정/서버·Android·실제 자료 준비물 안내 추가",
+    "change": "사용자 지정 Plan-Do-See/PDC_Diary에 README 작성, 현재 구상 저장소 주소와 노션 개요·저장소 문서 동기화",
     "local_files": [
-      "docs/preparation-guide.md",
+      "README.md",
       "docs/latest-review.md",
+      "docs/repository-layout.md",
+      "docs/pds-design.md",
       "docs/notion-content.json"
     ],
     "changed_page_ids": [
       "3d50def9-f626-8037-adfb-cef233c6d20c",
-      "3d50def9-f626-8108-b778-ed9f330b70a6"
+      "3d50def9-f626-812d-b0b6-f38859f63762"
     ],
     "notion_read_back": true,
     "status": "synchronized"
@@ -179,6 +181,21 @@
       ],
       "notion_read_back": true,
       "status": "synchronized"
+    },
+    {
+      "date": "2026-09-08",
+      "change": "공식 문서와 현재 환경 확인을 바탕으로 개발 PC·프로젝트 의존성·배포 계정/서버·Android·실제 자료 준비물 안내 추가",
+      "local_files": [
+        "docs/preparation-guide.md",
+        "docs/latest-review.md",
+        "docs/notion-content.json"
+      ],
+      "changed_page_ids": [
+        "3d50def9-f626-8037-adfb-cef233c6d20c",
+        "3d50def9-f626-8108-b778-ed9f330b70a6"
+      ],
+      "notion_read_back": true,
+      "status": "synchronized"
     }
   ],
   "documentation_policy": {
@@ -191,5 +208,13 @@
     "pdf_regeneration": "only_if_user_explicitly_requests_again",
     "former_pdf_scripts": "not_in_active_workflow",
     "markdown_source": "docs/pds-design.md"
+  },
+  "planning_repository": {
+    "name": "Plan-Do-See/PDC_Diary",
+    "url": "https://github.com/Plan-Do-See/PDC_Diary",
+    "readme": "README.md",
+    "confirmed_by": "user_and_local_origin",
+    "readme_committed": false,
+    "readme_pushed": false
   }
 }
