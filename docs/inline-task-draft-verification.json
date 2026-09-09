@@ -1,0 +1,58 @@
+{
+  "status": "pass",
+  "checks": [
+    "required_tag",
+    "inline_add_to_correct_parent",
+    "no_page_navigation",
+    "close_reopen_preserves_draft",
+    "advanced_fields_preserved",
+    "continuous_entry",
+    "script_literal_not_executed"
+  ],
+  "sizes": [
+    {
+      "scheme": "light",
+      "width": 736,
+      "rootWidth": 736,
+      "overflow": false
+    },
+    {
+      "scheme": "light",
+      "width": 360,
+      "rootWidth": 360,
+      "overflow": false
+    },
+    {
+      "scheme": "light",
+      "width": 320,
+      "rootWidth": 320,
+      "overflow": false
+    },
+    {
+      "scheme": "dark",
+      "width": 736,
+      "rootWidth": 736,
+      "overflow": false
+    },
+    {
+      "scheme": "dark",
+      "width": 360,
+      "rootWidth": 360,
+      "overflow": false
+    },
+    {
+      "scheme": "dark",
+      "width": 320,
+      "rootWidth": 320,
+      "overflow": false
+    }
+  ],
+  "page_errors": [],
+  "production_changed": false,
+  "synthetic_only": true,
+  "checked_at": "2026-09-09T08:24:43.559Z",
+  "notion_sync": "readback_verified",
+  "original44_and_unnumbered18_changed": false,
+  "api_db_contract_changed": false,
+  "host_tweak_panel": "not_tested"
+}
