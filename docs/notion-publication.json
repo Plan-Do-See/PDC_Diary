@@ -53,7 +53,8 @@
       "hierarchy_ui_readback": "2026-09-09T06:37:49.515Z",
       "hierarchy_screen_readback": "2026-09-09T06:52:23.658Z",
       "do_screen_readback": "2026-09-09T07:16:12.27Z",
-      "hierarchy_implementation_readback": "2026-09-09T07:53:01.346Z"
+      "hierarchy_implementation_readback": "2026-09-09T07:53:01.346Z",
+      "hierarchy_deployment_readback": "2026-09-09T08:12:25.966Z"
     },
     {
       "id": "3d50def9-f626-812d-b0b6-f38859f63762",
@@ -125,7 +126,8 @@
       "content_read_back": true,
       "web_release_readback": "2026-09-09T02:56:26.667Z",
       "last_read_back_at": "2026-09-09T03:41:28.19Z",
-      "hierarchy_implementation_readback": "2026-09-09T07:53:01.346Z"
+      "hierarchy_implementation_readback": "2026-09-09T07:53:01.346Z",
+      "hierarchy_deployment_readback": "2026-09-09T08:12:25.966Z"
     },
     {
       "id": "3d60def9-f626-8126-8438-fb2bdd7bd6ba",
@@ -140,7 +142,8 @@
       "hierarchy_ui_readback": "2026-09-09T06:37:49.515Z",
       "hierarchy_screen_readback": "2026-09-09T06:52:23.658Z",
       "do_screen_readback": "2026-09-09T07:16:12.27Z",
-      "hierarchy_implementation_readback": "2026-09-09T07:53:01.346Z"
+      "hierarchy_implementation_readback": "2026-09-09T07:53:01.346Z",
+      "hierarchy_deployment_readback": "2026-09-09T08:12:25.966Z"
     },
     {
       "id": "3d60def9-f626-81b9-a208-e7aa1067c14b",
@@ -2388,12 +2391,13 @@
   },
   "hierarchy_implementation": {
     "status": "synchronized",
-    "readback_at": "2026-09-09T07:53:01.346Z",
+    "readback_at": "2026-09-09T08:12:25.966Z",
     "page_ids": [
       "3d50def9-f626-81e9-9553-ce5ca31af063",
       "3d60def9-f626-8126-8438-fb2bdd7bd6ba",
       "3d50def9-f626-8114-b1b2-cf7b997b3ee7"
     ],
-    "deployment": "awaiting_release_approval"
+    "deployment": "deployed",
+    "release": "20260909T0759Z"
   }
 }

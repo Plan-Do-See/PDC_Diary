@@ -287,7 +287,7 @@
     "api_db_contract_changed": false,
     "public_https_verification": "../PDC_Diary_Nextjs/docs/public-web-verification.json",
     "release": "../PDC_Diary_Nextjs/docs/web-release.json",
-    "web_commit": "e1c00fd14d52c7d653d522ddab8b13ccaa02874d",
+    "web_commit": "91b6724ee4e9cefd78c8d2e0a9b435d14c5ff465",
     "social_work": "paused_by_user_until_explicit_request",
     "ux_update": {
       "checked_at": "2026-09-09T03:38:07.757Z",
@@ -348,12 +348,13 @@
       "notion_readback_at": "2026-09-09T06:16:10.274Z"
     },
     "hierarchy_implementation": {
-      "status": "implemented_local_checks_passed_awaiting_release_approval",
+      "status": "implemented_deployed_scoped_checks_passed",
       "evidence": "../PDC_Diary_Nextjs/docs/hierarchy-implementation-verification.json",
       "api_db_contract_changed": false,
-      "notion_sync": "readback_verified",
+      "notion_sync": "synchronized",
       "web_code_commit": "91b6724ee4e9cefd78c8d2e0a9b435d14c5ff465",
-      "notion_readback_at": "2026-09-09T07:53:01.346Z"
+      "notion_readback_at": "2026-09-09T08:12:25.966Z",
+      "release": "20260909T0759Z"
     }
   }
 }
