@@ -1,0 +1,35 @@
+{
+  "date": "2026-09-09",
+  "status": "required_workflow_documented_and_synchronized",
+  "readback_at_utc": "2026-09-09T03:21:04.839Z",
+  "notion_page_id": "3d60def9-f626-81ba-ba77-c91a701c2f01",
+  "notion_url": "https://app.notion.com/p/3d60def9f62681baba77c91a701c2f01",
+  "user_instruction": "Make the recommended direct-reading and targeted-search alternative govern the assistant behavior",
+  "rule_location": "RULES.md#AI 작업 시 문맥 확인 절차",
+  "startup_rule": "AGENTS.md",
+  "scope": "Design, implementation, validation and delivery",
+  "verified_entrypoints": {
+    "planning": "AGENTS.md reads central RULES.md",
+    "backend": "D:/workspace/PDC_Diary_Spring/AGENTS.md already requires central RULES.md",
+    "frontend": "D:/workspace/PDC_Diary_Nextjs/AGENTS.md already requires central RULES.md"
+  },
+  "required_steps": [
+    "Read applicable AGENTS and all central RULES plus current relevant design/contracts",
+    "Find related repositories and adopted decisions",
+    "Read actual current sources and resolve conflicts",
+    "State key sources, applicable conditions and change scope before edits",
+    "Re-read required current sources after resume/compaction/design changes",
+    "Run change-appropriate checks and synchronize records"
+  ],
+  "new_vector_rag_required": false,
+  "automated_ci_enforcement_implemented": false,
+  "new_session_behavior_test": "not_run; instruction files and source references verified",
+  "product_code_changed": false,
+  "original_44_requirements_changed": false,
+  "files": {
+    "AGENTS.md": "05674fa8631aa48086a1f8d50f946497f74f550acd29294d6128fe90354f1705",
+    "RULES.md": "be4a8006dea6a27b5117bbf2e3d52011dfc5bd311f21d2249293834d4f5e71b1",
+    "docs/context-management.md": "1a112bfb6160d1570150fc4aacb3fcfe0396f8afac4a58b20b05649f4a48a8f3"
+  },
+  "unsynchronized_items": []
+}

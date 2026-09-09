@@ -1,0 +1,126 @@
+{
+  "checked_at": "2026-09-09T08:08:42.592Z",
+  "status": "pass",
+  "checks": [
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "path": "/plans",
+      "status": 200
+    },
+    {
+      "path": "/tasks",
+      "status": 200
+    },
+    {
+      "path": "/review",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/meta",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/public/plans",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/public/tasks",
+      "status": 200
+    }
+  ],
+  "dimensions": [
+    {
+      "path": "/plans",
+      "width": 1280,
+      "scroll": 1280
+    },
+    {
+      "path": "/plans",
+      "width": 696,
+      "scroll": 696
+    },
+    {
+      "path": "/plans",
+      "width": 390,
+      "scroll": 390
+    },
+    {
+      "path": "/plans",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "path": "/tasks",
+      "width": 1280,
+      "scroll": 1280
+    },
+    {
+      "path": "/tasks",
+      "width": 696,
+      "scroll": 696
+    },
+    {
+      "path": "/tasks",
+      "width": 390,
+      "scroll": 390
+    },
+    {
+      "path": "/tasks",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "path": "/review",
+      "width": 1280,
+      "scroll": 1280
+    },
+    {
+      "path": "/review",
+      "width": 696,
+      "scroll": 696
+    },
+    {
+      "path": "/review",
+      "width": 390,
+      "scroll": 390
+    },
+    {
+      "path": "/review",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "path": "/account/login",
+      "width": 1280,
+      "scroll": 1280
+    },
+    {
+      "path": "/account/login",
+      "width": 696,
+      "scroll": 696
+    },
+    {
+      "path": "/account/login",
+      "width": 390,
+      "scroll": 390
+    },
+    {
+      "path": "/account/login",
+      "width": 320,
+      "scroll": 320
+    }
+  ],
+  "hierarchy": "plan_and_task_inspector",
+  "public_notice": true,
+  "today_filter": true,
+  "review_metric_evidence": true,
+  "private_login_redirect": true,
+  "public_source_http": 200,
+  "fresh_browser_context": true,
+  "production_writes": false,
+  "consoleErrors": [],
+  "page_errors": []
+}

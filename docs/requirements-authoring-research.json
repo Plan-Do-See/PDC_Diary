@@ -1,0 +1,70 @@
+{
+  "date": "2026-09-09",
+  "status": "research_recommendation_synchronized",
+  "readback_at_utc": "2026-09-09T03:27:42.167Z",
+  "local_document": "docs/requirements-authoring-research.md",
+  "document_sha256": "b9afcd90e376d4632219ba0618f5f2ef59bc1bb656cf1c150fe9a6498197a05b",
+  "notion_page_id": "3d60def9-f626-81ba-ba77-c91a701c2f01",
+  "notion_section": "요구사항을 정교하게 만드는 방법 · 연구 제안",
+  "user_request": "Research how to elicit precise goals and constraints, including prompting and competing AIs",
+  "recommended_workflow": [
+    "source-grounded goal clarification",
+    "structured atomic requirements",
+    "state and failure analysis",
+    "acceptance tests and evidence",
+    "independent counterexample review when justified",
+    "task-specific evaluation"
+  ],
+  "sources": [
+    {
+      "url": "https://www.nasa.gov/reference/appendix-c-how-to-write-a-good-requirement/",
+      "kind": "official requirements guidance"
+    },
+    {
+      "url": "https://alistairmavin.com/ears/",
+      "kind": "notation originator"
+    },
+    {
+      "url": "https://arxiv.org/html/2601.16699v1",
+      "kind": "primary empirical research",
+      "limitation": "IDE requirements; participant perception; not objective completeness"
+    },
+    {
+      "url": "https://arxiv.org/html/2508.17536v2",
+      "kind": "primary empirical research",
+      "limitation": "NLP tasks and specified debate protocols; not requirements authoring benchmark"
+    },
+    {
+      "url": "https://aclanthology.org/2026.findings-eacl.268/",
+      "kind": "primary research",
+      "limitation": "problem drift study; not universal failure of multi-agent reviews"
+    },
+    {
+      "url": "https://developers.openai.com/api/docs/guides/evaluation-best-practices",
+      "kind": "official evaluation guidance"
+    },
+    {
+      "url": "https://cucumber.io/docs/gherkin/reference/",
+      "kind": "official scenario syntax"
+    },
+    {
+      "url": "https://lamport.azurewebsites.net/tla/high-level-view.html",
+      "kind": "formal-methods originator"
+    }
+  ],
+  "readback_checks": {
+    "report_section": true,
+    "reusable_prompt": true,
+    "existing_context_workflow_preserved": true
+  },
+  "workflow_adopted": false,
+  "existing_rules_changed": false,
+  "product_code_changed": false,
+  "multi_agent_experiment": "not_run",
+  "benchmark": "not_run",
+  "formal_verification": "not_run",
+  "unsynchronized_items": [],
+  "learning_category_url": "https://app.notion.com/p/3d60def9f62681c2bca2cf1e7c4263f6",
+  "learning_publication": "docs/learning/requirements-engineering/publication.json",
+  "learning_sync_at_utc": "2026-09-09T03:40:49.296Z"
+}

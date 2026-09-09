@@ -1,0 +1,78 @@
+{
+  "date": "2026-09-09",
+  "status": "synchronized",
+  "user_request": "HTML knowledge graph must be embedded and usable inside the Notion RAG learning page",
+  "notion_page_id": "3d40def9-f626-816a-b473-d0eb05d73ef1",
+  "notion_url": "https://app.notion.com/p/3d40def9f626816ab473d0eb05d73ef1",
+  "readback_at_utc": "2026-09-09T03:16:31.986Z",
+  "location": "학습 → AI·데이터 → RAG",
+  "reused_existing_rag_page": true,
+  "user_confirmed": "Mandatory Notion HTML embed; learning documentation and existing repository responsibilities",
+  "ai_recommendation": "RAG setup sequence and conceptual architecture; no retrieval stack selected",
+  "design_decisions_changed": false,
+  "rag_implemented": false,
+  "private_repository_contents_uploaded": false,
+  "local_document": "docs/learning/rag.md",
+  "html_artifact": "docs/learning/rag-knowledge-graph.html",
+  "document_sha256": "bba98335c6c3d30d54cc5f2336087dd25fe2e4baaddc58f5e4256a211073fa4b",
+  "html_sha256": "acab6cde6603cd50e3855fcfb78ef74721bcb3e7ac68e3dc5291338198758b61",
+  "html_bytes": 15296,
+  "checks": {
+    "notion_readback_sections": 7,
+    "existing_synced_reference_preserved": true,
+    "existing_learning_database_preserved": true,
+    "notion_learning_text_visually_checked": true,
+    "notion_mermaid_rendering_visually_checked": true,
+    "local_html_four_views_checked": true,
+    "local_html_node_detail_checked": "Optimization shows performance improvement and optimization analysis/design",
+    "local_html_keyboard_checked": "ArrowRight moves overview to preparation",
+    "local_html_console_errors_observed": 0,
+    "local_html_desktop_horizontal_overflow": false,
+    "local_html_javascript_syntax": "passed",
+    "source_network_calls": "none; external navigation limited to cited reference links",
+    "new_notion_html_embed_checked": true,
+    "mobile_layout_test": "not_run",
+    "product_tests": "not_run; no product code changed",
+    "public_anonymous_access_test": "not_run; no sharing settings changed",
+    "notion_html_four_views_checked": true,
+    "notion_html_node_details_checked": [
+      "Spring API/DB contract description",
+      "필수 RULE required path description"
+    ],
+    "notion_page_reload_retained_embed": true,
+    "html_at_top_of_learning_content": true,
+    "old_pending_status_removed": true
+  },
+  "upload_attempts": [
+    {
+      "route": "create_file_upload + one multipart POST",
+      "result": "Node fetch failed; server acceptance unconfirmed"
+    },
+    {
+      "route": "create_attachment inline authored UTF-8 HTML",
+      "result": "HTTP 403 Cloudflare block; no successful upload source returned"
+    },
+    {
+      "route": "create_file_upload + Windows curl one multipart POST, default sandbox",
+      "result": "Connection failed; HTTP 000"
+    },
+    {
+      "route": "Fresh create_file_upload + Windows curl one multipart POST, approved network access",
+      "result": "HTTP 200; uploaded 15296 bytes of text/html"
+    }
+  ],
+  "unsynchronized_items": [],
+  "scope_note": "Learning text, flow diagram and standalone HTML graph synchronized to Notion. Existing shared skill tree and learning database preserved. No RAG service or product code changes.",
+  "previous_status": "text_synchronized_html_pending",
+  "html_upload": {
+    "file_upload_id": "3d60def9-f626-8162-be8d-00b267b28802",
+    "filename": "rag-knowledge-graph.html",
+    "content_type": "text/html",
+    "bytes": 15296,
+    "status": "uploaded",
+    "attachment_id": "0ad8be11-610c-4725-a1c3-56f640238c44",
+    "block_id": "7c693df2-859c-4109-a00e-43bbd5adb628",
+    "uploaded_at_utc": "2026-09-09T03:03:07.857Z"
+  },
+  "necessity_review": "docs/rag-necessity-review.json"
+}

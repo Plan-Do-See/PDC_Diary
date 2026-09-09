@@ -1,11 +1,11 @@
 {
   "version": "1.3",
-  "date": "2026-09-08",
+  "date": "2026-09-09",
   "hub_url": "https://app.notion.com/p/3d50def9f6268037adfbcef233c6d20c",
   "status": "synchronized",
   "scope": "노션 문서 저장·연결·요구사항 원문 보존 확인. 앱 구현·배포·기능 검증 완료를 뜻하지 않음.",
   "verification": {
-    "child_pages": 9,
+    "child_pages": 10,
     "hub_order": [
       "01 · 목표와 범위",
       "02 · 기능과 화면 흐름",
@@ -15,7 +15,8 @@
       "06 · 구현 순서와 제출",
       "07 · 필수 RULE 44개와 증거",
       "08 · 개발·배포 준비물",
-      "09 · 배포 과정과 면접 설명 — Docker·Caddy·HTTPS"
+      "09 · 배포 과정과 면접 설명 — Docker·Caddy·HTTPS",
+      "10 · Next.js 프론트 구현 구상"
     ],
     "requirements_found": 44,
     "requirements_missing": [],
@@ -23,9 +24,10 @@
     "all_pages_read_back": true,
     "latest_implementation_sync": "2026-09-08",
     "local_tests_passed": 14,
-    "latest_documentation_sync": "2026-09-08",
+    "latest_documentation_sync": "2026-09-09",
     "swagger_operations_rendered": 59,
-    "openapi_examples_validated": 43
+    "openapi_examples_validated": 43,
+    "latest_frontend_planning_sync": "2026-09-09"
   },
   "pages": [
     {
@@ -35,7 +37,8 @@
       "hub_link": true,
       "parent_verified": true,
       "backlink_verified": true,
-      "content_read_back": true
+      "content_read_back": true,
+      "web_release_readback": "2026-09-09T02:50:38.922Z"
     },
     {
       "id": "3d50def9-f626-81e9-9553-ce5ca31af063",
@@ -44,7 +47,13 @@
       "hub_link": true,
       "parent_verified": true,
       "backlink_verified": true,
-      "content_read_back": true
+      "content_read_back": true,
+      "web_release_readback": "2026-09-09T02:50:38.922Z",
+      "last_read_back_at": "2026-09-09T03:41:28.19Z",
+      "hierarchy_ui_readback": "2026-09-09T06:37:49.515Z",
+      "hierarchy_screen_readback": "2026-09-09T06:52:23.658Z",
+      "do_screen_readback": "2026-09-09T07:16:12.27Z",
+      "hierarchy_implementation_readback": "2026-09-09T07:53:01.346Z"
     },
     {
       "id": "3d50def9-f626-812d-b0b6-f38859f63762",
@@ -53,7 +62,8 @@
       "hub_link": true,
       "parent_verified": true,
       "backlink_verified": true,
-      "content_read_back": true
+      "content_read_back": true,
+      "web_release_readback": "2026-09-09T02:50:38.922Z"
     },
     {
       "id": "3d50def9-f626-814f-b233-f0405491bee1",
@@ -71,7 +81,8 @@
       "hub_link": true,
       "parent_verified": true,
       "backlink_verified": true,
-      "content_read_back": true
+      "content_read_back": true,
+      "web_release_readback": "2026-09-09T02:50:38.922Z"
     },
     {
       "id": "3d50def9-f626-8110-8e50-c012568ab789",
@@ -80,7 +91,9 @@
       "hub_link": true,
       "parent_verified": true,
       "backlink_verified": true,
-      "content_read_back": true
+      "content_read_back": true,
+      "web_release_readback": "2026-09-09T02:56:25.917Z",
+      "last_read_back_at": "2026-09-09T03:41:28.19Z"
     },
     {
       "id": "3d50def9-f626-8101-8078-c6147dc52e17",
@@ -89,7 +102,8 @@
       "hub_link": true,
       "parent_verified": true,
       "backlink_verified": true,
-      "content_read_back": true
+      "content_read_back": true,
+      "web_release_readback": "2026-09-09T02:50:38.922Z"
     },
     {
       "id": "3d50def9-f626-8108-b778-ed9f330b70a6",
@@ -98,7 +112,8 @@
       "hub_link": true,
       "parent_verified": true,
       "backlink_verified": true,
-      "content_read_back": true
+      "content_read_back": true,
+      "web_release_readback": "2026-09-09T02:50:38.923Z"
     },
     {
       "id": "3d50def9-f626-8114-b1b2-cf7b997b3ee7",
@@ -107,37 +122,46 @@
       "hub_link": true,
       "parent_verified": true,
       "backlink_verified": true,
+      "content_read_back": true,
+      "web_release_readback": "2026-09-09T02:56:26.667Z",
+      "last_read_back_at": "2026-09-09T03:41:28.19Z",
+      "hierarchy_implementation_readback": "2026-09-09T07:53:01.346Z"
+    },
+    {
+      "id": "3d60def9-f626-8126-8438-fb2bdd7bd6ba",
+      "title": "10 · Next.js 프론트 구현 구상",
+      "url": "https://app.notion.com/p/3d60def9f62681268438fb2bdd7bd6ba",
+      "hub_link": true,
+      "parent_verified": true,
+      "backlink_verified": true,
+      "content_read_back": true,
+      "web_release_readback": "2026-09-09T02:56:27.442Z",
+      "last_read_back_at": "2026-09-09T03:41:28.19Z",
+      "hierarchy_ui_readback": "2026-09-09T06:37:49.515Z",
+      "hierarchy_screen_readback": "2026-09-09T06:52:23.658Z",
+      "do_screen_readback": "2026-09-09T07:16:12.27Z",
+      "hierarchy_implementation_readback": "2026-09-09T07:53:01.346Z"
+    },
+    {
+      "id": "3d60def9-f626-81b9-a208-e7aa1067c14b",
+      "title": "11 · 보안 설계와 점검 — Spring",
+      "url": "https://app.notion.com/p/3d60def9f62681b9a208e7aa1067c14b",
+      "hub_link": true,
+      "parent_verified": true,
+      "backlink_verified": true,
+      "content_read_back": true
+    },
+    {
+      "id": "3d60def9-f626-81ba-ba77-c91a701c2f01",
+      "title": "12 · 여러 저장소의 문맥 관리와 RAG",
+      "url": "https://app.notion.com/p/3d60def9f62681baba77c91a701c2f01?pvs=204",
+      "hub_link": true,
+      "parent_verified": true,
+      "backlink_verified": true,
       "content_read_back": true
     }
   ],
-  "last_sync": {
-    "date": "2026-09-08",
-    "status": "synchronized",
-    "scope": "Corrected frontend handoff deployment statements; documented Git publication state and security documentation recommendation",
-    "readback_verified": true,
-    "pages": [
-      "3d50def9-f626-812d-b0b6-f38859f63762"
-    ],
-    "local_files": [
-      "README.md",
-      "docs/frontend-integration.md",
-      "docs/swagger/README.md",
-      "docs/backend-decisions.md",
-      "docs/backend-verification.md",
-      "docs/repository-layout.md",
-      "docs/deployment-status.md",
-      "docs/frontend-handoff-verification.json",
-      "docs/notion-content.json",
-      "docs/notion-publication.json",
-      "D:/workspace/PDC_Diary_Spring/README.md"
-    ],
-    "verification": {
-      "public_document_sha256_matched": true,
-      "openapi_source_check": "passed",
-      "runtime_changed": false,
-      "original_44_requirements_changed": false
-    }
-  },
+  "last_sync": "2026-09-09T03:40:49.296Z",
   "domain": {
     "name": "plandosee.app",
     "purchase_status": "reported_purchased_by_user",
@@ -887,6 +911,214 @@
       ],
       "notion_read_back": true,
       "status": "synchronized"
+    },
+    {
+      "local_files": [
+        "docs/spring-security-review.md",
+        "docs/repository-layout.md",
+        "docs/pds-design.md",
+        "docs/latest-review.md",
+        "docs/swagger/README.md",
+        "docs/notion-content.json",
+        "../PDC_Diary_Security/spring/security-review.md"
+      ],
+      "change": "2026-09-09 사용자 확정: PDC_Diary_Security에 Spring·Next.js 등 항목별 보안점검과 설계를 기록한다. Spring 소스/설정 대조와 40개 점검표를 작성했고, Caddy의 Swagger 문서 인증 부재와 정적 보안 문제 2건(자원 사용 한도·reset/동시 로그인 경합)을 정리했다. 코드·운영 설정·비밀번호·DB 변경과 새 실행 시험은 하지 않았다. 공개 과제 조건과 API/DB 계약은 유지한다.",
+      "status": "synchronized",
+      "notion_read_back": true,
+      "date": "2026-09-09",
+      "changed_page_ids": [
+        "3d60def9-f626-81b9-a208-e7aa1067c14b",
+        "3d50def9-f626-8037-adfb-cef233c6d20c",
+        "3d50def9-f626-812d-b0b6-f38859f63762"
+      ]
+    },
+    {
+      "date": "2026-09-08",
+      "status": "synchronized",
+      "scope": "Corrected frontend handoff deployment statements; documented Git publication state and security documentation recommendation",
+      "readback_verified": true,
+      "pages": [
+        "3d50def9-f626-812d-b0b6-f38859f63762"
+      ],
+      "local_files": [
+        "README.md",
+        "docs/frontend-integration.md",
+        "docs/swagger/README.md",
+        "docs/backend-decisions.md",
+        "docs/backend-verification.md",
+        "docs/repository-layout.md",
+        "docs/deployment-status.md",
+        "docs/frontend-handoff-verification.json",
+        "docs/notion-content.json",
+        "docs/notion-publication.json",
+        "D:/workspace/PDC_Diary_Spring/README.md"
+      ],
+      "verification": {
+        "public_document_sha256_matched": true,
+        "openapi_source_check": "passed",
+        "runtime_changed": false,
+        "original_44_requirements_changed": false
+      }
+    },
+    {
+      "date": "2026-09-09",
+      "status": "synchronized",
+      "scope": "Context management and RAG proposal documentation only",
+      "readback_verified": true,
+      "pages": [
+        "3d60def9-f626-81ba-ba77-c91a701c2f01",
+        "3d50def9-f626-8037-adfb-cef233c6d20c",
+        "3d50def9-f626-812d-b0b6-f38859f63762"
+      ],
+      "local_files": [
+        "docs/context-management.md",
+        "docs/context-management-verification.json",
+        "README.md",
+        "docs/repository-layout.md",
+        "docs/notion-content.json",
+        "docs/notion-publication.json"
+      ],
+      "verification": {
+        "normalized_notion_body_match": true,
+        "mandatory_files_unchanged": true,
+        "runtime_changed": false
+      }
+    },
+    {
+      "date": "2026-09-09",
+      "status": "synchronized",
+      "scope": "User-confirmed five GitHub repositories, visibility and Optimization responsibility",
+      "readback_verified": true,
+      "pages": [
+        "3d50def9-f626-8037-adfb-cef233c6d20c",
+        "3d50def9-f626-812d-b0b6-f38859f63762",
+        "3d60def9-f626-81ba-ba77-c91a701c2f01"
+      ],
+      "local_files": [
+        "README.md",
+        "docs/repository-layout.md",
+        "docs/context-management.md",
+        "docs/pds-design.md",
+        "docs/latest-review.md",
+        "docs/repository-inventory.json",
+        "docs/context-management-verification.json",
+        "docs/notion-content.json",
+        "docs/notion-publication.json"
+      ],
+      "verification": {
+        "normalized_context_body_match": true,
+        "repository_entries": 5,
+        "mandatory_files_unchanged": true,
+        "runtime_changed": false
+      }
+    },
+    {
+      "date": "2026-09-09",
+      "status": "text_synchronized_html_pending",
+      "scope": "Separate RAG learning page and local interactive HTML graph",
+      "readback_verified": true,
+      "pages": [
+        "3d40def9-f626-816a-b473-d0eb05d73ef1"
+      ],
+      "local_files": [
+        "docs/learning/rag.md",
+        "docs/learning/rag-knowledge-graph.html",
+        "docs/learning/rag-verification.json",
+        "docs/rag-explanation.md",
+        "docs/notion-content.json",
+        "docs/notion-publication.json"
+      ],
+      "unsynchronized_items": [
+        {
+          "item": "New RAG HTML embed on Notion",
+          "status": "not_attached",
+          "reason": "Attachment tool returned HTTP 403 / Cloudflare block",
+          "local_artifact": "docs/learning/rag-knowledge-graph.html"
+        }
+      ],
+      "readback_at_utc": "2026-09-09T02:55:45.11Z"
+    },
+    {
+      "date": "2026-09-09",
+      "status": "synchronized",
+      "scope": "Mandatory RAG HTML embed completed and verified inside Notion",
+      "readback_verified": true,
+      "pages": [
+        "3d40def9-f626-816a-b473-d0eb05d73ef1"
+      ],
+      "local_files": [
+        "docs/learning/rag.md",
+        "docs/learning/rag-knowledge-graph.html",
+        "docs/learning/rag-verification.json",
+        "docs/rag-explanation.md",
+        "docs/notion-content.json",
+        "docs/notion-publication.json"
+      ],
+      "unsynchronized_items": [],
+      "readback_at_utc": "2026-09-09T03:03:07.857Z"
+    },
+    {
+      "date": "2026-09-09",
+      "status": "synchronized",
+      "scope": "RAG necessity review based on local Markdown size; existing HTML embed preserved",
+      "readback_verified": true,
+      "pages": [
+        "3d60def9f62681baba77c91a701c2f01",
+        "3d40def9f626816ab473d0eb05d73ef1"
+      ],
+      "local_files": [
+        "docs/context-management.md",
+        "docs/learning/rag.md",
+        "docs/rag-necessity-review.json",
+        "docs/learning/rag-verification.json",
+        "docs/notion-content.json",
+        "docs/notion-publication.json"
+      ],
+      "unsynchronized_items": [],
+      "readback_at_utc": "2026-09-09T03:16:31.986Z"
+    },
+    {
+      "date": "2026-09-09",
+      "status": "synchronized",
+      "scope": "Direct source reading and targeted search made mandatory work procedure",
+      "pages": [
+        "3d60def9-f626-81ba-ba77-c91a701c2f01"
+      ],
+      "readback_verified": true,
+      "local_files": [
+        "AGENTS.md",
+        "RULES.md",
+        "docs/context-management.md",
+        "docs/context-workflow-verification.json",
+        "docs/notion-content.json",
+        "docs/notion-publication.json"
+      ],
+      "unsynchronized_items": [],
+      "readback_at_utc": "2026-09-09T03:21:04.839Z"
+    },
+    {
+      "date": "2026-09-09",
+      "status": "synchronized",
+      "scope": "Research and reusable prompt for precise requirements authoring; recommendation only",
+      "pages": [
+        "3d60def9-f626-81ba-ba77-c91a701c2f01"
+      ],
+      "readback_verified": true,
+      "local_files": [
+        "docs/requirements-authoring-research.md",
+        "docs/requirements-authoring-research.json",
+        "docs/notion-content.json",
+        "docs/notion-publication.json"
+      ],
+      "unsynchronized_items": [],
+      "readback_at_utc": "2026-09-09T03:27:42.167Z"
+    },
+    {
+      "date": "2026-09-09T03:40:49.296Z",
+      "scope": "요구사항 공학 학습 대분류와 5개 소분류",
+      "status": "synchronized",
+      "category_url": "https://app.notion.com/p/3d60def9f62681c2bca2cf1e7c4263f6",
+      "verified": "6개 학습 페이지 재조회, 관계·순서·학습 분야 보기, 브라우저 흐름도·목차·NASA 문서 열기, 로컬 파일 확인"
     }
   ],
   "documentation_policy": {
@@ -1273,7 +1505,7 @@
         "user_says_configured": true,
         "authoritative_A_result": "158.247.203.145",
         "records_details_question_pending": false,
-        "checked_at_utc": "2026-09-08T10:37:45.780Z",
+        "checked_at_utc": "2026-09-08T10:37:45.78Z",
         "observed_record": {
           "name": "plandosee.app",
           "type": "A",
@@ -1376,16 +1608,792 @@
     ]
   },
   "security_documentation_proposal": {
-    "status": "AI_recommendation_user_decision_pending",
-    "recommended_design_location": "PDC_Diary/docs/security/",
-    "implementation_locations": [
-      "PDC_Diary_Spring",
-      "PDC_Diary_Web",
-      "PDC_Diary_Infra"
+    "user_decision": "Separate repository for per-component security designs",
+    "previous_recommendation": "PDC_Diary/docs/security/",
+    "status": "superseded_by_user_decision_2026-09-09",
+    "runtime_changes": false,
+    "canonical_repository": "PDC_Diary_Security",
+    "layout": [
+      "spring",
+      "nextjs"
     ],
-    "separate_private_repository_when": "Separate access control for unresolved vulnerability details or independent cross-project security ownership is needed",
-    "change_size": "not_assessed",
-    "security_audit_performed": false,
-    "repository_created": false
+    "security_audit_performed": "Spring_static_review_with_explicit_limits"
+  },
+  "frontend_implementation_plan": {
+    "date": "2026-09-09",
+    "status": "plan_documentation_synchronized_app_not_implemented",
+    "repository": "PDC_Diary_Nextjs",
+    "local_summary": "docs/frontend-implementation-plan.md",
+    "local_plan": "../PDC_Diary_Nextjs/docs/implementation-plan.md",
+    "local_traceability": "../PDC_Diary_Nextjs/docs/requirements-traceability.json",
+    "local_verification": "../PDC_Diary_Nextjs/docs/planning-verification.json",
+    "page_id": "3d60def9-f626-8126-8438-fb2bdd7bd6ba",
+    "url": "https://app.notion.com/p/3d60def9f62681268438fb2bdd7bd6ba",
+    "title": "10 · Next.js 프론트 구현 구상",
+    "readback_at_utc": "2026-09-09T00:30:58.607Z",
+    "normalized_plan_content_matched": true,
+    "normalization": "Notion whitespace/markup, plain text fence language, auto-links and bullet separator serialization normalized; plan body text preserved.",
+    "changed_pages": [
+      {
+        "id": "3d50def9f62681e99553ce5ca31af063",
+        "title": "02 · 기능과 화면 흐름",
+        "url": "https://app.notion.com/p/3d50def9f62681e99553ce5ca31af063?pvs=204",
+        "content_read_back": true,
+        "unknown_blocks": 0
+      },
+      {
+        "id": "3d50def9f626812db0b6f38859f63762",
+        "title": "03 · 기술과 저장소",
+        "url": "https://app.notion.com/p/3d50def9f626812db0b6f38859f63762?pvs=204",
+        "content_read_back": true,
+        "unknown_blocks": 0
+      },
+      {
+        "id": "3d50def9f62681108e50c012568ab789",
+        "title": "06 · 구현 순서와 제출",
+        "url": "https://app.notion.com/p/3d50def9f62681108e50c012568ab789?pvs=204",
+        "content_read_back": true,
+        "unknown_blocks": 0
+      },
+      {
+        "id": "3d50def9f6268108b778ed9f330b70a6",
+        "title": "08 · 개발·배포 준비물",
+        "url": "https://app.notion.com/p/3d50def9f6268108b778ed9f330b70a6?pvs=204",
+        "content_read_back": true,
+        "unknown_blocks": 0
+      },
+      {
+        "id": "3d60def9f62681268438fb2bdd7bd6ba",
+        "title": "10 · Next.js 프론트 구현 구상",
+        "url": "https://app.notion.com/p/3d60def9f62681268438fb2bdd7bd6ba?pvs=204",
+        "content_read_back": true,
+        "unknown_blocks": 0
+      }
+    ],
+    "hub_link_read_back": true,
+    "original_44_unchanged": true,
+    "unnumbered_18_mapped": true,
+    "auth_rec_10_mapped": true,
+    "api_doc_check": {
+      "openapi": "0.2.0",
+      "paths": 42,
+      "operations": 59,
+      "examplesValidated": 43,
+      "sourceCheck": "59 controller/framework operations matched",
+      "schemas": 38
+    },
+    "server_status": "normal_per_user_no_probe",
+    "runtime_changed": false,
+    "api_db_contract_changed": false,
+    "frontend_acceptance": "not_run",
+    "unsynchronized_items": []
+  },
+  "landing_design_draft": {
+    "status": "synchronized",
+    "readback_at_utc": "2026-09-09T01:13:33.668Z",
+    "pages": [
+      {
+        "id": "3d60def9-f626-8126-8438-fb2bdd7bd6ba",
+        "title": "10 · Next.js 프론트 구현 구상",
+        "url": "https://app.notion.com/p/3d60def9f62681268438fb2bdd7bd6ba?pvs=204",
+        "readback_at_utc": "2026-09-09T01:10:16.728Z",
+        "section_verified": "랜딩 디자인 초안 01 검증"
+      },
+      {
+        "id": "3d50def9-f626-81e9-9553-ce5ca31af063",
+        "title": "02 · 기능과 화면 흐름",
+        "url": "https://app.notion.com/p/3d50def9f62681e99553ce5ca31af063?pvs=204",
+        "readback_at_utc": "2026-09-09T01:10:16.729Z",
+        "section_verified": "랜딩 화면 초안"
+      },
+      {
+        "id": "3d50def9-f626-812d-b0b6-f38859f63762",
+        "title": "03 · 기술과 저장소",
+        "url": "https://app.notion.com/p/3d50def9f626812db0b6f38859f63762?pvs=204",
+        "readback_at_utc": "2026-09-09T01:10:16.729Z",
+        "section_verified": "랜딩 초안 실행 기반"
+      }
+    ],
+    "unsynchronized_items": [],
+    "local_design": "../PDC_Diary_Nextjs/docs/landing-design-draft.md",
+    "local_verification": "../PDC_Diary_Nextjs/docs/landing-design-verification.json",
+    "preview_url": "http://127.0.0.1:3100",
+    "api_db_contract_changed": false,
+    "full_acceptance": "not_run"
+  },
+  "frontend_f0": {
+    "status": "synchronized",
+    "readback_at_utc": "2026-09-09T01:58:28.644Z",
+    "pages": [
+      {
+        "id": "3d60def9-f626-8126-8438-fb2bdd7bd6ba",
+        "title": "10 · Next.js 프론트 구현 구상",
+        "url": "https://app.notion.com/p/3d60def9f62681268438fb2bdd7bd6ba?pvs=204",
+        "readback_at_utc": "2026-09-09T01:54:02.42Z",
+        "section_verified": "공개 계획 흐름 실제 검증"
+      },
+      {
+        "id": "3d50def9-f626-81e9-9553-ce5ca31af063",
+        "title": "02 · 기능과 화면 흐름",
+        "url": "https://app.notion.com/p/3d50def9f62681e99553ce5ca31af063?pvs=204",
+        "readback_at_utc": "2026-09-09T01:54:02.42Z",
+        "section_verified": "채택한 디자인으로 공개 계획 구현"
+      },
+      {
+        "id": "3d50def9-f626-812d-b0b6-f38859f63762",
+        "title": "03 · 기술과 저장소",
+        "url": "https://app.notion.com/p/3d50def9f626812db0b6f38859f63762?pvs=204",
+        "readback_at_utc": "2026-09-09T01:54:02.42Z",
+        "section_verified": "공개 계획 API 연결"
+      },
+      {
+        "id": "3d50def9-f626-8110-8e50-c012568ab789",
+        "title": "06 · 구현 순서와 제출",
+        "url": "https://app.notion.com/p/3d50def9f62681108e50c012568ab789?pvs=204",
+        "readback_at_utc": "2026-09-09T01:54:02.42Z",
+        "section_verified": "프론트 첫 구현 단위 검증"
+      }
+    ],
+    "unsynchronized_items": [],
+    "local_document": "../PDC_Diary_Nextjs/docs/f0-implementation.md",
+    "local_verification": "../PDC_Diary_Nextjs/docs/f0-verification.json",
+    "phase": "F0 public plan flow and F1 plan revision/history only",
+    "production_deployed": false,
+    "full_acceptance": "not_run"
+  },
+  "spring_security_review": {
+    "date": "2026-09-09",
+    "status": "documentation_synchronized_static_audit_runtime_unverified",
+    "repository": "PDC_Diary_Security",
+    "local_review": "../PDC_Diary_Security/spring/security-review.md",
+    "local_summary": "docs/spring-security-review.md",
+    "local_verification": "../PDC_Diary_Security/spring/verification.json",
+    "page_id": "3d60def9-f626-81b9-a208-e7aa1067c14b",
+    "url": "https://app.notion.com/p/3d60def9f62681b9a208e7aa1067c14b",
+    "scan_id": "52d717e4-10a0-47d0-9a83-a61e2137ded9",
+    "source_revision": "bbbb8fd7335cc7f5d9526af06f3ff4e80502ee20",
+    "checklist_count": 40,
+    "static_findings": 2,
+    "notion_readback": true,
+    "normalized_content_match": true,
+    "readback_date_utc": "2026-09-09T02:04:35.1149358Z",
+    "runtime_changes": false,
+    "runtime_tests": "not_run",
+    "original_44_unchanged": true,
+    "api_db_contract_changed": false,
+    "unsynchronized_items": [],
+    "scan_status": "complete",
+    "scan_completed_at_utc": "2026-09-09T02:01:57.824514Z",
+    "raw_report_copy": "not_performed_auto_review_rejected",
+    "token_usage": {
+      "cacheWriteInputTokens": 0,
+      "cachedInputTokens": 8196608,
+      "coverage": "complete",
+      "inputTokens": 8645936,
+      "outputTokens": 73032,
+      "reasoningOutputTokens": 8623,
+      "source": "codex_rollout",
+      "threadCount": 5,
+      "totalTokens": 8718968
+    }
+  },
+  "context_management": {
+    "date": "2026-09-09",
+    "status": "proposal_documentation_synchronized",
+    "user_request": "Prevent missed constraints and implementation context across repositories; assess RAG necessity.",
+    "recommendation": "Canonical sources and mandatory reads, current-state/history separation, retrieval with revision provenance, contract/regression gates; evaluate before choosing a vector store.",
+    "user_adopted_rag_stack": false,
+    "rag_implemented": false,
+    "retrieval_evaluation": "not_run",
+    "external_upload": "not_run",
+    "original_requirements_and_contracts_changed": false,
+    "runtime_changed": false,
+    "git_commit_or_push": "not_run",
+    "readback_at_utc": "2026-09-09T02:16:59.489Z",
+    "local_document": "docs/context-management.md",
+    "local_verification": "docs/context-management-verification.json",
+    "pages": [
+      {
+        "id": "3d60def9-f626-81ba-ba77-c91a701c2f01",
+        "title": "12 · 여러 저장소의 문맥 관리와 RAG",
+        "url": "https://app.notion.com/p/3d60def9f62681baba77c91a701c2f01?pvs=204",
+        "content_read_back": true
+      },
+      {
+        "id": "3d50def9-f626-8037-adfb-cef233c6d20c",
+        "title": "플랜두씨 다이어리",
+        "url": "https://app.notion.com/p/3d50def9f6268037adfbcef233c6d20c?pvs=204",
+        "content_read_back": true
+      },
+      {
+        "id": "3d50def9-f626-812d-b0b6-f38859f63762",
+        "title": "03 · 기술과 저장소",
+        "url": "https://app.notion.com/p/3d50def9f626812db0b6f38859f63762?pvs=204",
+        "content_read_back": true
+      }
+    ],
+    "unsynchronized_items": [],
+    "normalized_notion_body_match": true,
+    "latest_repository_inventory_update": {
+      "date": "2026-09-09",
+      "status": "synchronized",
+      "source": "user_supplied_GitHub_screenshot_and_role_clarification",
+      "inventory": "docs/repository-inventory.json",
+      "repositories": [
+        {
+          "name": "PDC_Diary",
+          "visibility": "public",
+          "role": "전체 구상·RULE·결정·문서/노션 연결",
+          "kind": "planning"
+        },
+        {
+          "name": "PDC_Diary_Spring",
+          "visibility": "public",
+          "role": "백엔드 구현·API/DB 계약·migration·테스트",
+          "kind": "backend"
+        },
+        {
+          "name": "PDC_Diary_Nextjs",
+          "visibility": "public",
+          "role": "프런트엔드 구현·SSR·화면·웹 테스트",
+          "kind": "frontend"
+        },
+        {
+          "name": "PDC_Diary_Security",
+          "visibility": "private",
+          "role": "영역별 보안 분석·점검·보호 설계",
+          "kind": "security_analysis"
+        },
+        {
+          "name": "PDC_Diary_Optimization",
+          "visibility": "private",
+          "role": "성능 개선 분석·설계 및 최적화 분석·설계",
+          "kind": "performance_analysis"
+        }
+      ],
+      "remote_access_independently_verified": false,
+      "readback_at_utc": "2026-09-09T02:26:38.282Z",
+      "pages": [
+        {
+          "id": "3d50def9-f626-8037-adfb-cef233c6d20c",
+          "title": "플랜두씨 다이어리",
+          "url": "https://app.notion.com/p/3d50def9f6268037adfbcef233c6d20c?pvs=204",
+          "content_read_back": true
+        },
+        {
+          "id": "3d50def9-f626-812d-b0b6-f38859f63762",
+          "title": "03 · 기술과 저장소",
+          "url": "https://app.notion.com/p/3d50def9f626812db0b6f38859f63762?pvs=204",
+          "content_read_back": true
+        },
+        {
+          "id": "3d60def9-f626-81ba-ba77-c91a701c2f01",
+          "title": "12 · 여러 저장소의 문맥 관리와 RAG",
+          "url": "https://app.notion.com/p/3d60def9f62681baba77c91a701c2f01?pvs=204",
+          "content_read_back": true
+        }
+      ],
+      "rag_implemented": false,
+      "runtime_changed": false,
+      "original_44_and_contracts_changed": false,
+      "unsynchronized_items": []
+    },
+    "current_document_sha256": "6CEC23B5A35ED61A41C69DF38C3E0D0B57F13AFC64A588C7A28197C8E767EDEB",
+    "current_document_readback_at_utc": "2026-09-09T02:26:38.282Z"
+  },
+  "repository_inventory_update": {
+    "date": "2026-09-09",
+    "status": "synchronized",
+    "source": "user_supplied_GitHub_screenshot_and_role_clarification",
+    "inventory": "docs/repository-inventory.json",
+    "repositories": [
+      {
+        "name": "PDC_Diary",
+        "visibility": "public",
+        "role": "전체 구상·RULE·결정·문서/노션 연결",
+        "kind": "planning"
+      },
+      {
+        "name": "PDC_Diary_Spring",
+        "visibility": "public",
+        "role": "백엔드 구현·API/DB 계약·migration·테스트",
+        "kind": "backend"
+      },
+      {
+        "name": "PDC_Diary_Nextjs",
+        "visibility": "public",
+        "role": "프런트엔드 구현·SSR·화면·웹 테스트",
+        "kind": "frontend"
+      },
+      {
+        "name": "PDC_Diary_Security",
+        "visibility": "private",
+        "role": "영역별 보안 분석·점검·보호 설계",
+        "kind": "security_analysis"
+      },
+      {
+        "name": "PDC_Diary_Optimization",
+        "visibility": "private",
+        "role": "성능 개선 분석·설계 및 최적화 분석·설계",
+        "kind": "performance_analysis"
+      }
+    ],
+    "remote_access_independently_verified": false,
+    "readback_at_utc": "2026-09-09T02:26:38.282Z",
+    "pages": [
+      {
+        "id": "3d50def9-f626-8037-adfb-cef233c6d20c",
+        "title": "플랜두씨 다이어리",
+        "url": "https://app.notion.com/p/3d50def9f6268037adfbcef233c6d20c?pvs=204",
+        "content_read_back": true
+      },
+      {
+        "id": "3d50def9-f626-812d-b0b6-f38859f63762",
+        "title": "03 · 기술과 저장소",
+        "url": "https://app.notion.com/p/3d50def9f626812db0b6f38859f63762?pvs=204",
+        "content_read_back": true
+      },
+      {
+        "id": "3d60def9-f626-81ba-ba77-c91a701c2f01",
+        "title": "12 · 여러 저장소의 문맥 관리와 RAG",
+        "url": "https://app.notion.com/p/3d60def9f62681baba77c91a701c2f01?pvs=204",
+        "content_read_back": true
+      }
+    ],
+    "rag_implemented": false,
+    "runtime_changed": false,
+    "original_44_and_contracts_changed": false,
+    "unsynchronized_items": []
+  },
+  "rag_explanation": {
+    "date": "2026-09-09",
+    "status": "explanation_documented_and_read_back",
+    "user_request": "Explain RAG mechanism, components and prerequisites directly in chat",
+    "local_document": "docs/rag-explanation.md",
+    "notion_page_id": "3d60def9-f626-81ba-ba77-c91a701c2f01",
+    "notion_url": "https://app.notion.com/p/3d60def9f62681baba77c91a701c2f01?pvs=204",
+    "readback_at_utc": "2026-09-09T02:35:30.151Z",
+    "normalized_section_match": true,
+    "normalization": "Whitespace, escaped punctuation and automatic link wrappers",
+    "design_decisions_changed": false,
+    "rag_implemented": false,
+    "uploads_or_embeddings_performed": false,
+    "runtime_tests": "not_run",
+    "unsynchronized_items": [],
+    "document_sha256": "dee5185f97d00f298b16ee7dee0ec8372987796404b6d21defab75576aafe4da"
+  },
+  "frontend_web_release": {
+    "checked_at": "2026-09-09T02:51:36.944Z",
+    "status": "synchronized",
+    "pages": [
+      "3d50def9-f626-81e7-b3fb-ec5cfbec42d7",
+      "3d50def9-f626-81e9-9553-ce5ca31af063",
+      "3d50def9-f626-812d-b0b6-f38859f63762",
+      "3d50def9-f626-81ad-b938-f61a437009d5",
+      "3d50def9-f626-8110-8e50-c012568ab789",
+      "3d50def9-f626-8101-8078-c6147dc52e17",
+      "3d50def9-f626-8108-b778-ed9f330b70a6",
+      "3d50def9-f626-8114-b1b2-cf7b997b3ee7",
+      "3d60def9-f626-8126-8438-fb2bdd7bd6ba"
+    ],
+    "release": "20260909T0310Z",
+    "social_work": "paused_by_user_until_explicit_request",
+    "original_44_unchanged": true,
+    "full_acceptance": "not_run",
+    "evidence": "../PDC_Diary_Nextjs/docs/full-verification.json",
+    "source_commit": "8168aae52ce15878e7b7bb7fe5ea7861989e7b14",
+    "source_url": "https://github.com/Plan-Do-See/PDC_Diary_Nextjs/tree/8168aae52ce15878e7b7bb7fe5ea7861989e7b14",
+    "final_readback_at": "2026-09-09T02:57:07.864Z"
+  },
+  "rag_learning_page": {
+    "date": "2026-09-09",
+    "status": "synchronized",
+    "user_request": "HTML knowledge graph must be embedded and usable inside the Notion RAG learning page",
+    "notion_page_id": "3d40def9-f626-816a-b473-d0eb05d73ef1",
+    "notion_url": "https://app.notion.com/p/3d40def9f626816ab473d0eb05d73ef1",
+    "readback_at_utc": "2026-09-09T03:16:31.986Z",
+    "location": "학습 → AI·데이터 → RAG",
+    "reused_existing_rag_page": true,
+    "user_confirmed": "Mandatory Notion HTML embed; learning documentation and existing repository responsibilities",
+    "ai_recommendation": "RAG setup sequence and conceptual architecture; no retrieval stack selected",
+    "design_decisions_changed": false,
+    "rag_implemented": false,
+    "private_repository_contents_uploaded": false,
+    "local_document": "docs/learning/rag.md",
+    "html_artifact": "docs/learning/rag-knowledge-graph.html",
+    "document_sha256": "bba98335c6c3d30d54cc5f2336087dd25fe2e4baaddc58f5e4256a211073fa4b",
+    "html_sha256": "acab6cde6603cd50e3855fcfb78ef74721bcb3e7ac68e3dc5291338198758b61",
+    "html_bytes": 15296,
+    "checks": {
+      "notion_readback_sections": 7,
+      "existing_synced_reference_preserved": true,
+      "existing_learning_database_preserved": true,
+      "notion_learning_text_visually_checked": true,
+      "notion_mermaid_rendering_visually_checked": true,
+      "local_html_four_views_checked": true,
+      "local_html_node_detail_checked": "Optimization shows performance improvement and optimization analysis/design",
+      "local_html_keyboard_checked": "ArrowRight moves overview to preparation",
+      "local_html_console_errors_observed": 0,
+      "local_html_desktop_horizontal_overflow": false,
+      "local_html_javascript_syntax": "passed",
+      "source_network_calls": "none; external navigation limited to cited reference links",
+      "new_notion_html_embed_checked": true,
+      "mobile_layout_test": "not_run",
+      "product_tests": "not_run; no product code changed",
+      "public_anonymous_access_test": "not_run; no sharing settings changed",
+      "notion_html_four_views_checked": true,
+      "notion_html_node_details_checked": [
+        "Spring API/DB contract description",
+        "필수 RULE required path description"
+      ],
+      "notion_page_reload_retained_embed": true,
+      "html_at_top_of_learning_content": true,
+      "old_pending_status_removed": true
+    },
+    "upload_attempts": [
+      {
+        "route": "create_file_upload + one multipart POST",
+        "result": "Node fetch failed; server acceptance unconfirmed"
+      },
+      {
+        "route": "create_attachment inline authored UTF-8 HTML",
+        "result": "HTTP 403 Cloudflare block; no successful upload source returned"
+      },
+      {
+        "route": "create_file_upload + Windows curl one multipart POST, default sandbox",
+        "result": "Connection failed; HTTP 000"
+      },
+      {
+        "route": "Fresh create_file_upload + Windows curl one multipart POST, approved network access",
+        "result": "HTTP 200; uploaded 15296 bytes of text/html"
+      }
+    ],
+    "unsynchronized_items": [],
+    "scope_note": "Learning text, flow diagram and standalone HTML graph synchronized to Notion. Existing shared skill tree and learning database preserved. No RAG service or product code changes.",
+    "previous_status": "text_synchronized_html_pending",
+    "html_upload": {
+      "file_upload_id": "3d60def9-f626-8162-be8d-00b267b28802",
+      "filename": "rag-knowledge-graph.html",
+      "content_type": "text/html",
+      "bytes": 15296,
+      "status": "uploaded",
+      "attachment_id": "0ad8be11-610c-4725-a1c3-56f640238c44",
+      "block_id": "7c693df2-859c-4109-a00e-43bbd5adb628",
+      "uploaded_at_utc": "2026-09-09T03:03:07.857Z"
+    }
+  },
+  "rag_necessity_review": {
+    "date": "2026-09-09",
+    "readback_at_utc": "2026-09-09T03:16:31.986Z",
+    "status": "synchronized",
+    "decision_type": "AI recommendation; not a user adoption decision",
+    "recommendation": "No demonstrated requirement for separate vector RAG; use required source files, targeted filesystem search and validation first",
+    "measurements_before_document_update": [
+      {
+        "repo": "PDC_Diary",
+        "markdown_files": 26,
+        "characters": 178370,
+        "utf8_bytes": 322341
+      },
+      {
+        "repo": "PDC_Diary_Spring",
+        "markdown_files": 3,
+        "characters": 7378,
+        "utf8_bytes": 10601
+      },
+      {
+        "repo": "PDC_Diary_Nextjs",
+        "markdown_files": 9,
+        "characters": 33221,
+        "utf8_bytes": 60342
+      }
+    ],
+    "two_repo_characters": 185748,
+    "three_repo_characters": 218969,
+    "scope": "rg --files normal Markdown search; dependency/build/target/.next/vendor/workspaces excluded; default hidden and ignored exclusions apply; JSON, source, conversation and tool outputs excluded",
+    "effective_context_limit": "not_measured",
+    "token_count": "not_measured",
+    "retrieval_quality_cost_comparison": "not_run",
+    "rag_implemented": false,
+    "notion_pages": [
+      {
+        "id": "3d60def9f62681baba77c91a701c2f01",
+        "title": "12 · 여러 저장소의 문맥 관리와 RAG"
+      },
+      {
+        "id": "3d40def9f626816ab473d0eb05d73ef1",
+        "title": "🔎 RAG"
+      }
+    ],
+    "document_hashes": {
+      "docs/context-management.md": "86afa620eda534ab4a612d2c5f3c2086bcf5730dcb2be76c9092b4b0c556eb2c",
+      "docs/learning/rag.md": "bba98335c6c3d30d54cc5f2336087dd25fe2e4baaddc58f5e4256a211073fa4b"
+    },
+    "unsynchronized_items": []
+  },
+  "context_workflow_rule": {
+    "date": "2026-09-09",
+    "status": "required_workflow_documented_and_synchronized",
+    "readback_at_utc": "2026-09-09T03:21:04.839Z",
+    "notion_page_id": "3d60def9-f626-81ba-ba77-c91a701c2f01",
+    "notion_url": "https://app.notion.com/p/3d60def9f62681baba77c91a701c2f01",
+    "user_instruction": "Make the recommended direct-reading and targeted-search alternative govern the assistant behavior",
+    "rule_location": "RULES.md#AI 작업 시 문맥 확인 절차",
+    "startup_rule": "AGENTS.md",
+    "scope": "Design, implementation, validation and delivery",
+    "verified_entrypoints": {
+      "planning": "AGENTS.md reads central RULES.md",
+      "backend": "D:/workspace/PDC_Diary_Spring/AGENTS.md already requires central RULES.md",
+      "frontend": "D:/workspace/PDC_Diary_Nextjs/AGENTS.md already requires central RULES.md"
+    },
+    "required_steps": [
+      "Read applicable AGENTS and all central RULES plus current relevant design/contracts",
+      "Find related repositories and adopted decisions",
+      "Read actual current sources and resolve conflicts",
+      "State key sources, applicable conditions and change scope before edits",
+      "Re-read required current sources after resume/compaction/design changes",
+      "Run change-appropriate checks and synchronize records"
+    ],
+    "new_vector_rag_required": false,
+    "automated_ci_enforcement_implemented": false,
+    "new_session_behavior_test": "not_run; instruction files and source references verified",
+    "product_code_changed": false,
+    "original_44_requirements_changed": false,
+    "files": {
+      "AGENTS.md": "05674fa8631aa48086a1f8d50f946497f74f550acd29294d6128fe90354f1705",
+      "RULES.md": "be4a8006dea6a27b5117bbf2e3d52011dfc5bd311f21d2249293834d4f5e71b1",
+      "docs/context-management.md": "1a112bfb6160d1570150fc4aacb3fcfe0396f8afac4a58b20b05649f4a48a8f3"
+    },
+    "unsynchronized_items": []
+  },
+  "requirements_authoring_research": {
+    "date": "2026-09-09",
+    "status": "research_recommendation_synchronized",
+    "readback_at_utc": "2026-09-09T03:27:42.167Z",
+    "local_document": "docs/requirements-authoring-research.md",
+    "document_sha256": "88d5c79c883369ecd352bccabd666d1a70f8b36d59a4152ba500fed824c6663c",
+    "notion_page_id": "3d60def9-f626-81ba-ba77-c91a701c2f01",
+    "notion_section": "요구사항을 정교하게 만드는 방법 · 연구 제안",
+    "user_request": "Research how to elicit precise goals and constraints, including prompting and competing AIs",
+    "recommended_workflow": [
+      "source-grounded goal clarification",
+      "structured atomic requirements",
+      "state and failure analysis",
+      "acceptance tests and evidence",
+      "independent counterexample review when justified",
+      "task-specific evaluation"
+    ],
+    "sources": [
+      {
+        "url": "https://www.nasa.gov/reference/appendix-c-how-to-write-a-good-requirement/",
+        "kind": "official requirements guidance"
+      },
+      {
+        "url": "https://alistairmavin.com/ears/",
+        "kind": "notation originator"
+      },
+      {
+        "url": "https://arxiv.org/html/2601.16699v1",
+        "kind": "primary empirical research",
+        "limitation": "IDE requirements; participant perception; not objective completeness"
+      },
+      {
+        "url": "https://arxiv.org/html/2508.17536v2",
+        "kind": "primary empirical research",
+        "limitation": "NLP tasks and specified debate protocols; not requirements authoring benchmark"
+      },
+      {
+        "url": "https://aclanthology.org/2026.findings-eacl.268/",
+        "kind": "primary research",
+        "limitation": "problem drift study; not universal failure of multi-agent reviews"
+      },
+      {
+        "url": "https://developers.openai.com/api/docs/guides/evaluation-best-practices",
+        "kind": "official evaluation guidance"
+      },
+      {
+        "url": "https://cucumber.io/docs/gherkin/reference/",
+        "kind": "official scenario syntax"
+      },
+      {
+        "url": "https://lamport.azurewebsites.net/tla/high-level-view.html",
+        "kind": "formal-methods originator"
+      }
+    ],
+    "readback_checks": {
+      "report_section": true,
+      "reusable_prompt": true,
+      "existing_context_workflow_preserved": true
+    },
+    "workflow_adopted": false,
+    "existing_rules_changed": false,
+    "product_code_changed": false,
+    "multi_agent_experiment": "not_run",
+    "benchmark": "not_run",
+    "formal_verification": "not_run",
+    "unsynchronized_items": []
+  },
+  "requirements_learning_category": {
+    "category_id": "3d60def9-f626-81c2-bca2-cf1e7c4263f6",
+    "category_url": "https://app.notion.com/p/3d60def9f62681c2bca2cf1e7c4263f6",
+    "subcategory_ids": [
+      "3d60def9-f626-8101-b946-cf1927220b29",
+      "3d60def9-f626-8154-9336-ced4ba79d786",
+      "3d60def9-f626-81a8-b0bf-d826fc7a1b95",
+      "3d60def9-f626-8172-9e9f-f46ee0085202",
+      "3d60def9-f626-815c-a350-fb3732b46595"
+    ],
+    "subcategory_urls": [
+      "https://app.notion.com/p/3d60def9f6268101b946cf1927220b29?pvs=204",
+      "https://app.notion.com/p/3d60def9f62681549336ced4ba79d786?pvs=204",
+      "https://app.notion.com/p/3d60def9f62681a8b0bfd826fc7a1b95?pvs=204",
+      "https://app.notion.com/p/3d60def9f62681729e9ff46ee0085202?pvs=204",
+      "https://app.notion.com/p/3d60def9f626815ca350fb3732b46595?pvs=204"
+    ],
+    "hub_url": "https://app.notion.com/p/3d40def9f62680948714e974ff5ac038",
+    "view_url": "view://3d60def9-f626-81a5-bfe6-000c4216b941",
+    "verification_file": "docs/learning/requirements-engineering/publication.json",
+    "status": "synchronized",
+    "checks": {
+      "category_visible_in_learning_view": true,
+      "subcategories_count": 5,
+      "subcategory_relation_verified": true,
+      "subcategory_order": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "all_six_learning_pages_read_back": true,
+      "project_reference_read_back": true,
+      "browser_diagram_rendered": true,
+      "browser_toc_five_items": true,
+      "browser_nasa_page_opened": true,
+      "local_mirror_checked": true,
+      "local_files_exist": true
+    },
+    "verified_at_utc": "2026-09-09T03:40:49.296Z"
+  },
+  "frontend_ux_update": {
+    "status": "synchronized",
+    "date": "2026-09-09",
+    "readback_at": "2026-09-09T03:41:28.19Z",
+    "pages": [
+      {
+        "id": "3d50def9-f626-81e9-9553-ce5ca31af063",
+        "title": "02 · 기능과 화면 흐름",
+        "read_back": true
+      },
+      {
+        "id": "3d60def9-f626-8126-8438-fb2bdd7bd6ba",
+        "title": "10 · Next.js 프론트 구현 구상",
+        "read_back": true
+      },
+      {
+        "id": "3d50def9-f626-8110-8e50-c012568ab789",
+        "title": "06 · 구현 순서와 제출",
+        "read_back": true
+      },
+      {
+        "id": "3d50def9-f626-8114-b1b2-cf7b997b3ee7",
+        "title": "09 · 배포 과정과 면접 설명 — Docker·Caddy·HTTPS",
+        "read_back": true
+      }
+    ],
+    "release": "20260909T0328Z",
+    "web_code_commit": "9c1066482416ff2aa1156994dd755bc986202c54",
+    "evidence": "../PDC_Diary_Nextjs/docs/ux-verification.json",
+    "scope": "UI six requests including email guidance-only find-id; five recommendations are not implemented; original44/unnumbered18 unchanged; social paused"
+  },
+  "back_label_update": {
+    "status": "synchronized",
+    "readback_at": "2026-09-09T05:17:38.668Z",
+    "pages": [
+      "3d60def9-f626-8126-8438-fb2bdd7bd6ba",
+      "3d50def9-f626-81e9-9553-ce5ca31af063"
+    ],
+    "change": "Browser Comment 1: ← 돌아가기 only",
+    "evidence": "../PDC_Diary_Nextjs/docs/back-label-verification.json"
+  },
+  "task_search_ui_update": {
+    "status": "synchronized",
+    "readback_at": "2026-09-09T05:48:15.724Z",
+    "pages": [
+      "3d60def9-f626-8126-8438-fb2bdd7bd6ba",
+      "3d50def9-f626-81e9-9553-ce5ca31af063",
+      "3d50def9-f626-8114-b1b2-cf7b997b3ee7"
+    ],
+    "change": "Do compact search and today/week categories; remove delayed-only and blocked-only controls",
+    "evidence": "../PDC_Diary_Nextjs/docs/task-search-verification.json"
+  },
+  "review_layout_update": {
+    "status": "synchronized",
+    "readback_at": "2026-09-09T06:16:10.274Z",
+    "pages": [
+      "3d60def9-f626-8126-8438-fb2bdd7bd6ba",
+      "3d50def9-f626-81e9-9553-ce5ca31af063",
+      "3d50def9-f626-8114-b1b2-cf7b997b3ee7"
+    ],
+    "change": "See compact statistics/composer with writing context and preserved drafts",
+    "evidence": "../PDC_Diary_Nextjs/docs/review-layout-verification.json"
+  },
+  "hierarchy_ui_proposal": {
+    "date": "2026-09-09",
+    "status": "synchronized",
+    "kind": "design_proposal_not_implemented",
+    "read_back_at": "2026-09-09T06:37:49.515Z",
+    "page_ids": [
+      "3d50def9-f626-81e9-9553-ce5ca31af063",
+      "3d60def9-f626-8126-8438-fb2bdd7bd6ba"
+    ],
+    "document": "../../PDC_Diary_Nextjs/docs/plan-task-hierarchy.md",
+    "checks": {
+      "notion_readback": true,
+      "rules_requirements_contract_byte_unchanged": true,
+      "requirements_count": 44,
+      "app_changed": false,
+      "browser_tests_run": false,
+      "build_run": false,
+      "deployed": false
+    },
+    "remaining": "구상에 따른 화면 구현과 사용성·기능 검증",
+    "note": "소셜 보류·실제 사용자 자료/최종 인수 미완료 유지"
+  },
+  "hierarchy_screen_draft": {
+    "status": "synchronized",
+    "read_back_at": "2026-09-09T06:52:23.658Z",
+    "page_ids": [
+      "3d50def9-f626-81e9-9553-ce5ca31af063",
+      "3d60def9-f626-8126-8438-fb2bdd7bd6ba"
+    ],
+    "kind": "interactive_screen_draft",
+    "artifact": "plan-task-draft.html",
+    "production_changed": false,
+    "synthetic_only": true,
+    "verification": "PDC_Diary_Nextjs/docs/hierarchy-screen-verification.json"
+  },
+  "do_screen_draft": {
+    "status": "synchronized",
+    "read_back_at": "2026-09-09T07:16:12.27Z",
+    "page_ids": [
+      "3d50def9-f626-81e9-9553-ce5ca31af063",
+      "3d60def9-f626-8126-8438-fb2bdd7bd6ba"
+    ],
+    "artifact": "do-execution-draft.html",
+    "kind": "interactive_do_screen_draft",
+    "synthetic_only": true,
+    "production_changed": false,
+    "verification": "docs/do-screen-verification.json"
+  },
+  "hierarchy_implementation": {
+    "status": "synchronized",
+    "readback_at": "2026-09-09T07:53:01.346Z",
+    "page_ids": [
+      "3d50def9-f626-81e9-9553-ce5ca31af063",
+      "3d60def9-f626-8126-8438-fb2bdd7bd6ba",
+      "3d50def9-f626-8114-b1b2-cf7b997b3ee7"
+    ],
+    "deployment": "awaiting_release_approval"
   }
 }

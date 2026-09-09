@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "status": "backend_deployed_limited_smoke_verified_frontend_and_final_acceptance_pending",
+  "status": "web_deployed_external_oauth_and_final_acceptance_pending",
   "source": "사용자가 2026-09-08 제공한 T06 과제 조건",
   "requirements": [
     {
@@ -255,6 +255,105 @@
       "original_acceptance_not_completed": true,
       "public_Swagger": true,
       "external_checks": 29
+    }
+  },
+  "frontend_planning": {
+    "date": "2026-09-09",
+    "repository": "PDC_Diary_Nextjs",
+    "status": "web_deployed_external_oauth_and_final_acceptance_pending",
+    "plan": "docs/frontend-implementation-plan.md",
+    "traceability": "../PDC_Diary_Nextjs/docs/requirements-traceability.json",
+    "original_44_requirements_changed": false,
+    "unnumbered_requirements_changed": false,
+    "implementation_status": "public_private_web_implemented",
+    "acceptance_status": "not_run",
+    "server_status": "production_web_verified"
+  },
+  "landing_design_draft": {
+    "date": "2026-09-09",
+    "repository": "PDC_Diary_Nextjs",
+    "document": "../PDC_Diary_Nextjs/docs/landing-design-draft.md",
+    "verification": "../PDC_Diary_Nextjs/docs/landing-design-verification.json",
+    "api_db_contract_changed": false,
+    "full_acceptance": "not_run"
+  },
+  "frontend_implementation": {
+    "date": "2026-09-09",
+    "repository": "PDC_Diary_Nextjs",
+    "phase": "F0-F4 implemented; F5 web deployed, external OAuth/final acceptance pending",
+    "local_verification": "../PDC_Diary_Nextjs/docs/full-implementation.md",
+    "design_adopted_by_user": true,
+    "full_acceptance": "not_run",
+    "api_db_contract_changed": false,
+    "public_https_verification": "../PDC_Diary_Nextjs/docs/public-web-verification.json",
+    "release": "../PDC_Diary_Nextjs/docs/web-release.json",
+    "web_commit": "e1c00fd14d52c7d653d522ddab8b13ccaa02874d",
+    "social_work": "paused_by_user_until_explicit_request",
+    "ux_update": {
+      "checked_at": "2026-09-09T03:38:07.757Z",
+      "status": "implemented_deployed_scoped_checks_passed",
+      "evidence": "docs/ux-verification.json",
+      "user_requests": [
+        "login_helper_menu",
+        "back_navigation",
+        "priority_tags",
+        "compact_list_and_mobile",
+        "inline_completion",
+        "see_hours_minutes"
+      ],
+      "find_id": "email_login_guidance_only; no identity-proof recovery endpoint",
+      "recommendations_not_implemented": [
+        "calendar",
+        "daily_period_grouping_and_visible_today_default",
+        "recurring_schedule",
+        "manual_dnd_order",
+        "today_overdue_upcoming_summary"
+      ],
+      "social_work": "paused_by_user_until_explicit_request",
+      "api_db_contract": "unchanged; minutes and cycle/idempotency semantics preserved",
+      "final_acceptance": "not_run; real user records not verified",
+      "web_code_commit": "9c1066482416ff2aa1156994dd755bc986202c54",
+      "notion_sync": "synchronized",
+      "notion_readback_at": "2026-09-09T03:41:28.190Z"
+    },
+    "back_label_update": {
+      "date": "2026-09-09",
+      "user_confirmed": "돌아가기만 표시",
+      "api_db_contract_changed": false,
+      "evidence": "../PDC_Diary_Nextjs/docs/back-label-verification.json",
+      "web_code_commit": "310cb7aef90690a686c4eb1c08c99131115df700",
+      "notion_sync": "synchronized"
+    },
+    "task_search_update": {
+      "date": "2026-09-09",
+      "status": "implemented_deployed_scoped_checks_passed",
+      "user_confirmed": [
+        "Remove delayed-only and blocked-only controls",
+        "Compact search UI referencing web examples",
+        "Today and this-week deadline categories"
+      ],
+      "evidence": "../PDC_Diary_Nextjs/docs/task-search-verification.json",
+      "api_db_contract_changed": false,
+      "web_code_commit": "62fdcc3f941d8e486e94aa0932dede48073550c7",
+      "notion_sync": "synchronized",
+      "notion_readback_at": "2026-09-09T05:48:15.724Z"
+    },
+    "review_layout_update": {
+      "date": "2026-09-09",
+      "status": "implemented_deployed_scoped_checks_passed",
+      "web_code_commit": "e1c00fd14d52c7d653d522ddab8b13ccaa02874d",
+      "evidence": "../PDC_Diary_Nextjs/docs/review-layout-verification.json",
+      "api_db_contract_changed": false,
+      "notion_sync": "synchronized",
+      "notion_readback_at": "2026-09-09T06:16:10.274Z"
+    },
+    "hierarchy_implementation": {
+      "status": "implemented_local_checks_passed_awaiting_release_approval",
+      "evidence": "../PDC_Diary_Nextjs/docs/hierarchy-implementation-verification.json",
+      "api_db_contract_changed": false,
+      "notion_sync": "readback_verified",
+      "web_code_commit": "91b6724ee4e9cefd78c8d2e0a9b435d14c5ff465",
+      "notion_readback_at": "2026-09-09T07:53:01.346Z"
     }
   }
 }

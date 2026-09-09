@@ -1,5 +1,7 @@
 # Swagger 문서 보기
 
+2026-09-09 보안 점검: 현재 로컬 Caddy 설정의 `/docs/*`는 비밀번호 없이 제공된다. API 실행 버튼 비활성화는 문서 접근 보호를 대신하지 않는다. [문서 전체 경로 보호 설계](../../../PDC_Diary_Security/spring/security-review.md#swagger-비밀번호-설계)를 작성했으며 실제 인증 설정·비밀번호 적용은 하지 않았다. 보호된 운영 문서를 필수 무인증 제출 URL로 사용하지 않는다.
+
 최신 배포 증거: [DB·백엔드·메일 배포 진행](../deployment-status.md) — 내부 API·21개 표 복원·메일 수신 확인, 공개 DNS/HTTPS·API·Swagger 확인 완료, 프론트는 미구현.
 
 

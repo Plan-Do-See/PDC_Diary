@@ -1,0 +1,193 @@
+{
+  "date": "2026-09-09",
+  "status": "documentation_verified_repository_inventory_updated_rag_not_implemented",
+  "user_request": "Record the current five GitHub repositories and Optimization analysis/design responsibility",
+  "recommendation": "Canonical sources and mandatory reads, current-state/history separation, retrieval with revision provenance, contract/regression gates; evaluate before choosing a vector store.",
+  "user_adopted_rag_stack": false,
+  "document": "docs/context-management.md",
+  "document_sha256": "6CEC23B5A35ED61A41C69DF38C3E0D0B57F13AFC64A588C7A28197C8E767EDEB",
+  "local_links": {
+    "checked": 4,
+    "missing": []
+  },
+  "preserved_files": [
+    {
+      "path": "RULES.md",
+      "hash": "CF888661BCFF5FEA514BE707FFD0650512B581239938CD3A25A0EC93C4CA61CF",
+      "unchanged": true
+    },
+    {
+      "path": "AGENTS.md",
+      "hash": "198B91AD6F676E6E458E654C2740037A3DEF695774CAC468DB1039D483CC5DE5",
+      "unchanged": true
+    },
+    {
+      "path": "docs/requirements.json",
+      "hash": "AC1FAE9733CD7F2D571F002B7FBB4B58DC1B8A5686C0D80A56212FCA17BC54BF",
+      "unchanged": true
+    },
+    {
+      "path": "contracts/pds-schema-v2.json",
+      "hash": "E3D02F0EF162E7152B59CF1B4C3BCBCEFA18ED3698DF822153AA2CAFAEC3C72E",
+      "unchanged": true
+    },
+    {
+      "path": "contracts/openapi.yaml",
+      "hash": "55531CA542FACEF18A898826BECD4B817E82B99F5B59C98C82F096A080895CF9",
+      "unchanged": true
+    },
+    {
+      "path": "contracts/openapi.json",
+      "hash": "55531CA542FACEF18A898826BECD4B817E82B99F5B59C98C82F096A080895CF9",
+      "unchanged": true
+    }
+  ],
+  "notion": {
+    "pages": [
+      {
+        "id": "3d50def9-f626-8037-adfb-cef233c6d20c",
+        "title": "플랜두씨 다이어리",
+        "url": "https://app.notion.com/p/3d50def9f6268037adfbcef233c6d20c?pvs=204",
+        "content_read_back": true
+      },
+      {
+        "id": "3d50def9-f626-812d-b0b6-f38859f63762",
+        "title": "03 · 기술과 저장소",
+        "url": "https://app.notion.com/p/3d50def9f626812db0b6f38859f63762?pvs=204",
+        "content_read_back": true
+      },
+      {
+        "id": "3d60def9-f626-81ba-ba77-c91a701c2f01",
+        "title": "12 · 여러 저장소의 문맥 관리와 RAG",
+        "url": "https://app.notion.com/p/3d60def9f62681baba77c91a701c2f01?pvs=204",
+        "content_read_back": true
+      }
+    ],
+    "normalized_body_match": true,
+    "normalization": "Whitespace, table tag spacing, automatic link wrappers, Markdown escapes and text-fence serialization only",
+    "readback_at_utc": "2026-09-09T02:26:38.282Z",
+    "unknown_blocks": 0
+  },
+  "observations": [
+    "README and repository-layout contain recent implementation notes alongside older not-implemented descriptions",
+    "sync-api-contract.mjs records source commit and content hashes",
+    "Spring, Nextjs and Infra root AGENTS paths exist; Security root AGENTS path does not exist"
+  ],
+  "not_run": [
+    "retrieval benchmark",
+    "vector index or embeddings",
+    "MCP setup",
+    "application tests",
+    "production changes",
+    "full document restructuring",
+    "commit or push"
+  ],
+  "proposal_not_active": [
+    "docs/context-map.json",
+    "per-repository docs/context.md",
+    "per-repository context.lock.json",
+    "automatic context preparation and CI enforcement"
+  ],
+  "unsynchronized_items": [],
+  "latest_repository_inventory": {
+    "file": "docs/repository-inventory.json",
+    "sha256": "F94CE22725C3DBF7D21C70C7288BCD797702664BF725D834BF5D9126F58CED0F",
+    "source": "user_supplied_GitHub_screenshot_and_role_clarification",
+    "count": 5,
+    "remote_access_independently_verified": false
+  },
+  "history": [
+    {
+      "date": "2026-09-09",
+      "status": "documentation_verified_rag_not_implemented",
+      "user_request": "Prevent missed constraints and implementation context across repositories; assess RAG necessity.",
+      "recommendation": "Canonical sources and mandatory reads, current-state/history separation, retrieval with revision provenance, contract/regression gates; evaluate before choosing a vector store.",
+      "user_adopted_rag_stack": false,
+      "document": "docs/context-management.md",
+      "document_sha256": "3D399FAB6DC0A43C135B2BFB4C6814BAD046D473A11AEBBCC3F8DCEF498CFD62",
+      "local_links": {
+        "checked": 3,
+        "missing": []
+      },
+      "preserved_files": [
+        {
+          "path": "RULES.md",
+          "hash": "CF888661BCFF5FEA514BE707FFD0650512B581239938CD3A25A0EC93C4CA61CF",
+          "unchanged": true
+        },
+        {
+          "path": "AGENTS.md",
+          "hash": "198B91AD6F676E6E458E654C2740037A3DEF695774CAC468DB1039D483CC5DE5",
+          "unchanged": true
+        },
+        {
+          "path": "docs/requirements.json",
+          "hash": "AC1FAE9733CD7F2D571F002B7FBB4B58DC1B8A5686C0D80A56212FCA17BC54BF",
+          "unchanged": true
+        },
+        {
+          "path": "contracts/pds-schema-v2.json",
+          "hash": "E3D02F0EF162E7152B59CF1B4C3BCBCEFA18ED3698DF822153AA2CAFAEC3C72E",
+          "unchanged": true
+        },
+        {
+          "path": "contracts/openapi.yaml",
+          "hash": "55531CA542FACEF18A898826BECD4B817E82B99F5B59C98C82F096A080895CF9",
+          "unchanged": true
+        },
+        {
+          "path": "contracts/openapi.json",
+          "hash": "55531CA542FACEF18A898826BECD4B817E82B99F5B59C98C82F096A080895CF9",
+          "unchanged": true
+        }
+      ],
+      "notion": {
+        "pages": [
+          {
+            "id": "3d60def9-f626-81ba-ba77-c91a701c2f01",
+            "title": "12 · 여러 저장소의 문맥 관리와 RAG",
+            "url": "https://app.notion.com/p/3d60def9f62681baba77c91a701c2f01?pvs=204",
+            "content_read_back": true
+          },
+          {
+            "id": "3d50def9-f626-8037-adfb-cef233c6d20c",
+            "title": "플랜두씨 다이어리",
+            "url": "https://app.notion.com/p/3d50def9f6268037adfbcef233c6d20c?pvs=204",
+            "content_read_back": true
+          },
+          {
+            "id": "3d50def9-f626-812d-b0b6-f38859f63762",
+            "title": "03 · 기술과 저장소",
+            "url": "https://app.notion.com/p/3d50def9f626812db0b6f38859f63762?pvs=204",
+            "content_read_back": true
+          }
+        ],
+        "normalized_body_match": true,
+        "normalization": "Whitespace, table tag spacing, automatic link wrappers, Markdown escapes and text-fence serialization only",
+        "readback_at_utc": "2026-09-09T02:16:59.489Z",
+        "unknown_blocks": 0
+      },
+      "observations": [
+        "README and repository-layout contain recent implementation notes alongside older not-implemented descriptions",
+        "sync-api-contract.mjs records source commit and content hashes",
+        "Spring, Nextjs and Infra root AGENTS paths exist; Security root AGENTS path does not exist"
+      ],
+      "not_run": [
+        "retrieval benchmark",
+        "vector index or embeddings",
+        "MCP setup",
+        "application tests",
+        "production changes",
+        "full document restructuring",
+        "commit or push"
+      ],
+      "proposal_not_active": [
+        "docs/context-map.json",
+        "per-repository docs/context.md",
+        "per-repository context.lock.json",
+        "automatic context preparation and CI enforcement"
+      ],
+      "unsynchronized_items": []
+    }
+  ]
+}

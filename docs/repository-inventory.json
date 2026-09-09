@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "date": "2026-09-09",
+  "status": "user_confirmed_inventory",
+  "source": {
+    "type": "user_supplied_screenshot_and_message",
+    "screenshot": "codex-clipboard-f58cc20d-ef8c-481c-96b2-431e067c0f3d.png",
+    "repository_count_visible": 5,
+    "remote_access_independently_verified": false
+  },
+  "repositories": [
+    {
+      "name": "PDC_Diary",
+      "visibility": "public",
+      "role": "전체 구상·RULE·결정·문서/노션 연결",
+      "kind": "planning"
+    },
+    {
+      "name": "PDC_Diary_Spring",
+      "visibility": "public",
+      "role": "백엔드 구현·API/DB 계약·migration·테스트",
+      "kind": "backend"
+    },
+    {
+      "name": "PDC_Diary_Nextjs",
+      "visibility": "public",
+      "role": "프런트엔드 구현·SSR·화면·웹 테스트",
+      "kind": "frontend"
+    },
+    {
+      "name": "PDC_Diary_Security",
+      "visibility": "private",
+      "role": "영역별 보안 분석·점검·보호 설계",
+      "kind": "security_analysis"
+    },
+    {
+      "name": "PDC_Diary_Optimization",
+      "visibility": "private",
+      "role": "성능 개선 분석·설계 및 최적화 분석·설계",
+      "kind": "performance_analysis"
+    }
+  ],
+  "additional_components": [
+    {
+      "name": "PDC_Diary_Infra",
+      "state": "existing_local_independent_git",
+      "local_path": "workspaces/PDC_Diary_Infra",
+      "local_git_exists": true,
+      "listed_in_supplied_github_inventory": false
+    },
+    {
+      "name": "PDC_Diary_Android",
+      "state": "planned",
+      "listed_in_supplied_github_inventory": false
+    }
+  ],
+  "local_observations": {
+    "optimization_expected_sibling_path": "../PDC_Diary_Optimization",
+    "expected_path_exists": false,
+    "other_clone_locations": "not_searched"
+  },
+  "analysis_routing": {
+    "status": "recommendation_not_rag_implementation",
+    "optimization_design_owner": "PDC_Diary_Optimization",
+    "security_design_owner": "PDC_Diary_Security",
+    "code_and_tests_owner": "affected_implementation_or_infra_repository",
+    "read_when_modifying": "global RULE + target domain contracts + related accepted security/performance decisions",
+    "private_corpus_policy": "preserve authorization; do not copy private source content into public documentation or retrieval output"
+  },
+  "changes": {
+    "repository_creation": false,
+    "visibility_change": false,
+    "clone": false,
+    "runtime_change": false,
+    "rag_installation": false,
+    "commit_or_push": false
+  }
+}

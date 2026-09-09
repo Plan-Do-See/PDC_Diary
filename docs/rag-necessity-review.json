@@ -1,0 +1,49 @@
+{
+  "date": "2026-09-09",
+  "readback_at_utc": "2026-09-09T03:16:31.986Z",
+  "status": "synchronized",
+  "decision_type": "AI recommendation; not a user adoption decision",
+  "recommendation": "No demonstrated requirement for separate vector RAG; use required source files, targeted filesystem search and validation first",
+  "measurements_before_document_update": [
+    {
+      "repo": "PDC_Diary",
+      "markdown_files": 26,
+      "characters": 178370,
+      "utf8_bytes": 322341
+    },
+    {
+      "repo": "PDC_Diary_Spring",
+      "markdown_files": 3,
+      "characters": 7378,
+      "utf8_bytes": 10601
+    },
+    {
+      "repo": "PDC_Diary_Nextjs",
+      "markdown_files": 9,
+      "characters": 33221,
+      "utf8_bytes": 60342
+    }
+  ],
+  "two_repo_characters": 185748,
+  "three_repo_characters": 218969,
+  "scope": "rg --files normal Markdown search; dependency/build/target/.next/vendor/workspaces excluded; default hidden and ignored exclusions apply; JSON, source, conversation and tool outputs excluded",
+  "effective_context_limit": "not_measured",
+  "token_count": "not_measured",
+  "retrieval_quality_cost_comparison": "not_run",
+  "rag_implemented": false,
+  "notion_pages": [
+    {
+      "id": "3d60def9f62681baba77c91a701c2f01",
+      "title": "12 · 여러 저장소의 문맥 관리와 RAG"
+    },
+    {
+      "id": "3d40def9f626816ab473d0eb05d73ef1",
+      "title": "🔎 RAG"
+    }
+  ],
+  "document_hashes": {
+    "docs/context-management.md": "86afa620eda534ab4a612d2c5f3c2086bcf5730dcb2be76c9092b4b0c556eb2c",
+    "docs/learning/rag.md": "bba98335c6c3d30d54cc5f2336087dd25fe2e4baaddc58f5e4256a211073fa4b"
+  },
+  "unsynchronized_items": []
+}

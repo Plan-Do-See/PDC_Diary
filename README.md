@@ -1,5 +1,17 @@
 # PlanDoSee
 
+2026-09-09 최신 상태: 공개/개인 웹을 [운영 주소](https://plandosee.app)에 배포했다. 계획/이력·할 일·실행/완료·검색/필터/정렬·돌아보기/근거·다음 계획·전체 JSON·휴지통/복제·이메일 계정·알림 설정을 연결했다. 타입/Windows·Linux 빌드, 단위13·격리 API/DB17·운영 HTTPS16개를 통과했다. 사용자 최신 지시로 소셜 로그인은 명시적으로 다시 요청할 때까지 작업을 보류한다. 실제 사용자 1/5/3·최종 DB 계약·전체 인수는 미완료. 상세: [웹 구현·검증](../PDC_Diary_Nextjs/docs/full-implementation.md). 아래 이전 단계 기록은 당시 상태다.
+
+문서·AI 문맥 관리 검토: [여러 저장소의 문맥 관리와 RAG 도입안](docs/context-management.md) — 필수 자료 직접 읽기·정본/버전 관리·검색·검증을 결합하는 AI 추천. RAG 시스템은 아직 도입하지 않았습니다.
+
+2026-09-09 공개 계획 구현: 사용자 채택 랜딩에서 [실제 계획 생성·수정·이력](../PDC_Diary_Nextjs/docs/f0-implementation.md)으로 연결했다. 격리 API/DB 대조·빌드/타입·단위 9개·브라우저 검증 완료. 나머지 업무·인증·운영 배포·전체 과제 검증은 남아 있다.
+
+2026-09-09 사용자 확정: PDC_Diary_Security에 Spring·Next.js 등 항목별 보안점검과 설계를 기록한다. Spring 소스/설정 대조와 40개 점검표를 작성했고, Caddy의 Swagger 문서 인증 부재와 정적 보안 문제 2건(자원 사용 한도·reset/동시 로그인 경합)을 정리했다. 코드·운영 설정·비밀번호·DB 변경과 새 실행 시험은 하지 않았다. 공개 과제 조건과 API/DB 계약은 유지한다. [보안 점검 안내](docs/spring-security-review.md).
+
+2026-09-09 최신: [Next.js 랜딩 디자인 초안](../PDC_Diary_Nextjs/docs/landing-design-draft.md) 제작·로컬 빌드/브라우저 확인. 실제 업무 저장·인증·웹 배포는 미완료다. 노션 10·02·03에 결과를 동기화했다.
+
+2026-09-09 사용자 요청으로 `PDC_Diary_Nextjs`에 프론트 구현 구상을 작성했다. 서버 정상은 사용자 확인이며 이번에 재점검하지 않았다. 공개 Plan→Do→See→다음 Plan과 개인 화면, 이메일·세 소셜·휴지통·복제·알림을 기존 계약에 연결했다. 화면/폴더/단계/시간은 AI 제안이며 앱 코드는 미구현이다. [Next.js 구상 요약](docs/frontend-implementation-plan.md)과 형제 저장소의 상세 계획·44개 추적·검증 기록을 따른다.
+
 배포 이해·면접 준비: [로컬 설명서](docs/deployment-interview-guide.md) · [노션 학습 페이지](https://app.notion.com/p/3d50def9f6268114b1b2cf7b997b3ee7?pvs=204)
 
 최신 배포 증거: [DB·백엔드·메일 배포 진행](docs/deployment-status.md) — 내부 API·21개 표 복원·메일 수신 확인, 공개 DNS/HTTPS·API·Swagger 확인 완료, 프론트는 미구현.
@@ -50,15 +62,21 @@ flowchart LR
 
 배포는 클라우드 서버 1대에서 시작하고 동일 컨테이너·MariaDB 덤프/복원·환경 설정으로 WTR Pro 이전을 준비합니다. 2026-09-08 후속 결정: 사용자가 JDBC·Spring Security·웹 JDBC 세션·외부 SMTP와 휴지통 복원(REC-01)·계획 틀 복제(REC-02)·선택형 알림(REC-03)을 모두 채택했다. n8n은 후속 알림·운영 자동화로 검토하고 인증 메일은 Spring에서 외부 SMTP로 전송한다. 클라우드부터 구현하고 WTR Pro로 이전할 수 있도록 준비한다. [구성 결정](docs/backend-decisions.md)을 참고합니다.
 
-## 저장소 분리 계획
+## 현재 GitHub 저장소
 
-| 저장소 | 담당 |
-|---|---|
-| **PDC_Diary · 현재 저장소** | RULE · 설계 · 계약 초안 · 노션 동기화 · 검증 증거 |
-| PDC_Diary_Spring | 공통 API · DB migration · OpenAPI · 최종 DB 계약 |
-| PDC_Diary_Web | Next.js 웹 화면·SSR·웹 테스트 |
-| PDC_Diary_Android | Kotlin·Compose 앱·네이티브 기능·기기 테스트 |
-| PDC_Diary_Infra | 배포·백업·복구·실행 버전 관리 |
+2026-09-09 사용자 제공 GitHub 화면 기준으로 현재 원격 저장소는 아래 5개다. 공개 범위는 화면에서 확인했으며 새 시크릿 창의 접근 검사를 이번에 실행한 것은 아니다.
+
+| 저장소 | 공개 범위 | 담당 |
+| --- | --- | --- |
+| PDC_Diary | Public | 전체 구상·RULE·결정·문서/노션 연결 |
+| PDC_Diary_Spring | Public | 백엔드 구현·API/DB 계약·migration·테스트 |
+| PDC_Diary_Nextjs | Public | 프런트엔드 구현·SSR·화면·웹 테스트 |
+| PDC_Diary_Security | Private | 영역별 보안 분석·점검·보호 설계 |
+| PDC_Diary_Optimization | Private | 성능 개선 분석·설계 및 최적화 분석·설계 |
+
+`PDC_Diary_Infra`는 기존 로컬 독립 Git 작업 영역(`workspaces/PDC_Diary_Infra`)으로 유지하며 제공된 GitHub 목록에는 없다. Android 저장소는 향후 분리 계획으로 유지한다. 두 항목을 현재 GitHub 저장소 5개에 포함하지 않는다.
+
+Optimization은 분석·설계를 담당하고 실제 코드 변경과 검사는 해당 구현 저장소에 연결합니다. [저장소 목록 JSON](docs/repository-inventory.json) · [문맥 관리안](docs/context-management.md).
 
 Windows·macOS에서는 우선 웹을 제공하고 네이티브 앱은 이후 검토합니다. iOS는 현재 개발·배포 범위에서 제외합니다.
 

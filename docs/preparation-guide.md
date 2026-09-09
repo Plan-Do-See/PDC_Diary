@@ -1,5 +1,7 @@
 # 개발·배포 준비물
 
+2026-09-09 최신 상태: 공개/개인 웹을 [운영 주소](https://plandosee.app)에 배포했다. 계획/이력·할 일·실행/완료·검색/필터/정렬·돌아보기/근거·다음 계획·전체 JSON·휴지통/복제·이메일 계정·알림 설정을 연결했다. 타입/Windows·Linux 빌드, 단위13·격리 API/DB17·운영 HTTPS16개를 통과했다. 사용자 최신 지시로 소셜 로그인은 명시적으로 다시 요청할 때까지 작업을 보류한다. 실제 사용자 1/5/3·최종 DB 계약·전체 인수는 미완료. 상세: [웹 구현·검증](../../PDC_Diary_Nextjs/docs/full-implementation.md). 아래 이전 단계 기록은 당시 상태다.
+
 최신 배포 증거: [DB·백엔드·메일 배포 진행](deployment-status.md) — 내부 API·21개 표 복원·메일 수신 확인, 공개 DNS/HTTPS·API·Swagger 확인 완료, 프론트는 미구현.
 
 
@@ -51,7 +53,7 @@ Spring Boot 자체를 일반 설치 프로그램처럼 설치할 필요는 없�
 | --- | --- |
 | PDC_Diary | RULE·설계 Markdown·44개 조건·증거·노션 연결 |
 | PDC_Diary_Spring | Gradle Wrapper·Spring MVC/Validation/JDBC·MariaDB 드라이버·Flyway·JUnit/Testcontainers·Dockerfile |
-| PDC_Diary_Web | Next.js App Router·React·TypeScript·패키지 잠금 파일·lint·브라우저 테스트·Dockerfile |
+| PDC_Diary_Nextjs | Next.js App Router·React·TypeScript·패키지 잠금 파일·lint·브라우저 테스트·Dockerfile |
 | PDC_Diary_Android | Kotlin·Compose·ViewModel·API 연결·앱 빌드·기기 테스트·서명 설정 |
 | PDC_Diary_Infra | compose.yaml·Caddyfile·배포/백업/복구 스크립트·release.json·.env.example |
 
