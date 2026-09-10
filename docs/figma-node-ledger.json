@@ -1,0 +1,233 @@
+{
+  "fileKey": "UrFtdh7olajlLI2WP80X4P",
+  "url": "https://www.figma.com/design/UrFtdh7olajlLI2WP80X4P",
+  "authorization": "실제 웹 기록 포함 전송·제작 사용자 승인",
+  "status": "captures_transferred_component_integration_pending_mcp_quota",
+  "userNextAction": "사용자가 Figma 요금제 확인·변경 예정. 변경 완료는 미확인.",
+  "collections": {
+    "primitives": "VariableCollectionId:2:2",
+    "semantic": "VariableCollectionId:2:3"
+  },
+  "primitiveVariables": [
+    "VariableID:2:4",
+    "VariableID:2:5",
+    "VariableID:2:6",
+    "VariableID:2:7",
+    "VariableID:2:8",
+    "VariableID:2:9"
+  ],
+  "semanticVariables": [
+    "VariableID:4:2",
+    "VariableID:4:3",
+    "VariableID:4:4",
+    "VariableID:4:5",
+    "VariableID:4:6",
+    "VariableID:4:7"
+  ],
+  "textStyles": [
+    {
+      "name": "PlanDoSee/Body/Korean",
+      "id": "S:fc841ea4a8ee3dfaa781337f34ebdb3ab554405a,",
+      "font": {
+        "family": "Noto Sans KR",
+        "style": "Regular",
+        "variationSettings": {
+          "wght": 400
+        }
+      }
+    },
+    {
+      "name": "PlanDoSee/Heading/Korean",
+      "id": "S:db879287b86ae6df956d9c6422fce6616503a2ff,",
+      "font": {
+        "family": "Noto Sans KR",
+        "style": "Bold",
+        "variationSettings": {
+          "wght": 700
+        }
+      }
+    },
+    {
+      "name": "PlanDoSee/Body/Latin",
+      "id": "S:797646cbcc6a59bf61368a17ee0926bc77ece17d,",
+      "font": {
+        "family": "DM Sans",
+        "style": "Regular",
+        "variationSettings": {
+          "wght": 400,
+          "opsz": 14
+        }
+      }
+    },
+    {
+      "name": "PlanDoSee/Brand/Latin",
+      "id": "S:09e0ff02c51f6026f8cfc1abf3d02e5985afcb94,",
+      "font": {
+        "family": "DM Sans",
+        "style": "Bold",
+        "variationSettings": {
+          "wght": 700,
+          "opsz": 14
+        }
+      }
+    }
+  ],
+  "pages": [
+    {
+      "id": "0:1",
+      "name": "01 · Desktop",
+      "note": "All raw captures currently on this page; needs organization"
+    },
+    {
+      "id": "11:4",
+      "name": "02 · Mobile",
+      "note": "Empty pending organization"
+    },
+    {
+      "id": "11:5",
+      "name": "03 · 공통 요소와 사용 안내"
+    }
+  ],
+  "guide": {
+    "frame": "13:2",
+    "children": [
+      "13:3",
+      "13:4",
+      "13:5",
+      "13:6"
+    ]
+  },
+  "swatches": {
+    "frame": "13:7",
+    "children": [
+      "13:8",
+      "13:9",
+      "13:10",
+      "13:11",
+      "13:12",
+      "13:13"
+    ]
+  },
+  "button": {
+    "component": "30:4",
+    "text": "30:3",
+    "property": "Label#30:0",
+    "status": "created_unverified"
+  },
+  "captures": [
+    {
+      "name": "landing",
+      "route": "/",
+      "nodeId": "7:2",
+      "width": 1256,
+      "id": "39b9d2c6-dac4-4b70-b0c6-cbc47dfd9e30"
+    },
+    {
+      "name": "plans",
+      "route": "/plans",
+      "width": 1304,
+      "id": "d3b4c5bf-1ae0-4de5-84fb-438a61760792",
+      "nodeId": "12:2"
+    },
+    {
+      "name": "tasks",
+      "route": "/tasks",
+      "width": 1304,
+      "id": "cebc8b3b-fb67-458c-9d1d-8af24c01472c",
+      "nodeId": "14:2"
+    },
+    {
+      "name": "review",
+      "route": "/review",
+      "width": 1304,
+      "id": "4951f72d-e54c-42a5-95ad-18f69adfc5d2",
+      "nodeId": "17:2"
+    },
+    {
+      "name": "login",
+      "route": "/account/login",
+      "width": 1280,
+      "id": "5d154400-bc20-48ec-90d1-2ebc46468d57",
+      "oldNodeId": "15:2",
+      "nodeId": "32:2"
+    },
+    {
+      "name": "plans-inline",
+      "route": "/plans?figmastate=inline",
+      "width": 1304,
+      "id": "b9887c58-8d9f-4472-8e54-0fa7564801e2",
+      "nodeId": "16:2"
+    },
+    {
+      "name": "mobile-plans",
+      "route": "/plans",
+      "width": 390,
+      "id": "c36c2129-8054-448c-8af1-05b794031531",
+      "oldNodeId": "18:2",
+      "nodeId": "33:2"
+    },
+    {
+      "name": "mobile-inline",
+      "route": "/plans?figmastate=inline",
+      "width": 390,
+      "id": "9280a698-8a34-4950-a31a-99350968c3db",
+      "oldNodeId": "22:2",
+      "nodeId": "34:2"
+    },
+    {
+      "name": "mobile-tasks",
+      "route": "/tasks",
+      "width": 390,
+      "id": "abf2c26d-7cee-4315-80e1-be16bb02b3b6",
+      "oldNodeId": "26:2",
+      "nodeId": "38:2"
+    },
+    {
+      "name": "mobile-review",
+      "route": "/review",
+      "width": 390,
+      "id": "96e26769-1ea2-43ce-b1c2-08c8972e0b60",
+      "oldNodeId": "23:2",
+      "nodeId": "35:2"
+    },
+    {
+      "name": "mobile-login",
+      "route": "/account/login",
+      "width": 390,
+      "id": "f21a5f8c-092e-452b-a8c1-01d49471592c",
+      "oldNodeId": "24:2",
+      "nodeId": "37:2"
+    },
+    {
+      "name": "mobile-landing",
+      "route": "/",
+      "width": 390,
+      "id": "c27ff601-6144-4f8c-a1d4-12e02b723e41",
+      "oldNodeId": "25:2",
+      "nodeId": "36:2"
+    }
+  ],
+  "supersededCaptureNodes": [
+    "15:2",
+    "18:2",
+    "22:2",
+    "23:2",
+    "24:2",
+    "25:2",
+    "26:2"
+  ],
+  "verifiedFigmaScreenshots": [
+    "13:2",
+    "16:2"
+  ],
+  "pending": [
+    "Verify corrected captures in Figma",
+    "Remove superseded captures",
+    "Create tag/input components",
+    "Bind remaining tokens and connect component instances",
+    "Organize pages and name screens",
+    "Correct native date input rendered values",
+    "Final screenshots and QA"
+  ],
+  "operatingWebModified": false
+}
