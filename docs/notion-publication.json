@@ -57,7 +57,8 @@
       "hierarchy_deployment_readback": "2026-09-09T08:12:25.966Z",
       "inline_task_draft_readback": "2026-09-09T08:24:43.559Z",
       "inline_task_readback_at": "2026-09-09T08:48:23.160Z",
-      "figma_web_sync_readback_at": "2026-09-10T00:36:38.432Z"
+      "figma_web_sync_readback_at": "2026-09-10T00:36:38.432Z",
+      "figma_git_push_readback_at": "2026-09-10T00:41:25.089Z"
     },
     {
       "id": "3d50def9-f626-812d-b0b6-f38859f63762",
@@ -132,7 +133,8 @@
       "hierarchy_implementation_readback": "2026-09-09T07:53:01.346Z",
       "hierarchy_deployment_readback": "2026-09-09T08:12:25.966Z",
       "inline_task_readback_at": "2026-09-09T08:48:23.160Z",
-      "inline_task_submission_readback_at": "2026-09-09T08:53:53.378Z"
+      "inline_task_submission_readback_at": "2026-09-09T08:53:53.378Z",
+      "figma_git_push_readback_at": "2026-09-10T00:41:25.089Z"
     },
     {
       "id": "3d60def9-f626-8126-8438-fb2bdd7bd6ba",
@@ -151,7 +153,8 @@
       "hierarchy_deployment_readback": "2026-09-09T08:12:25.966Z",
       "inline_task_draft_readback": "2026-09-09T08:24:43.559Z",
       "inline_task_readback_at": "2026-09-09T08:48:23.160Z",
-      "figma_web_sync_readback_at": "2026-09-10T00:36:38.432Z"
+      "figma_web_sync_readback_at": "2026-09-10T00:36:38.432Z",
+      "figma_git_push_readback_at": "2026-09-10T00:41:25.089Z"
     },
     {
       "id": "3d60def9-f626-81b9-a208-e7aa1067c14b",
@@ -2432,9 +2435,10 @@
   "inline_task_submission": {
     "web_deployed": true,
     "web_source_pushed": true,
-    "design_push": "blocked_by_auto_review_pending_explicit_user_authorization",
-    "readback_at": "2026-09-09T08:53:53.378Z",
-    "evidence": "docs/inline-task-submission-status.md"
+    "design_push": "pushed",
+    "readback_at": "2026-09-10T00:41:25.089Z",
+    "evidence": "docs/inline-task-submission-status.md",
+    "design_push_commit": "14685c2"
   },
   "figma_web_sync": {
     "status": "captures_transferred_component_integration_pending_mcp_quota",
@@ -2443,6 +2447,13 @@
     "readback_at": "2026-09-10T00:36:38.432Z",
     "user_next_action": "사용자가 Figma 요금제 확인·변경 예정; 완료 미확인",
     "capture_screens": 12,
-    "superseded_captures": 7
+    "superseded_captures": 7,
+    "git_push": {
+      "status": "pushed",
+      "repository": "https://github.com/Plan-Do-See/PDC_Diary",
+      "branch": "main",
+      "commit": "14685c2",
+      "notion_readback_at": "2026-09-10T00:41:25.089Z"
+    }
   }
 }

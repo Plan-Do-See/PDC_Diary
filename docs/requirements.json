@@ -363,7 +363,8 @@
       "notion_sync": "synchronized",
       "notion_readback_at": "2026-09-09T08:48:23.160Z",
       "web_code_commit": "b377d4cb9d3b1ff3fbaa2a45824d28e95dde732f",
-      "release": "20260909T0840Z"
+      "release": "20260909T0840Z",
+      "design_document_push": "pushed_14685c2"
     }
   }
 }
