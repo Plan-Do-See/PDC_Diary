@@ -365,6 +365,39 @@
       "web_code_commit": "b377d4cb9d3b1ff3fbaa2a45824d28e95dde732f",
       "release": "20260909T0840Z",
       "design_document_push": "pushed_14685c2"
+    },
+    "soft_modern_theme": {
+      "date": "2026-09-11",
+      "status": "implemented_local_checks_passed_not_deployed",
+      "user_confirmed": [
+        "Modern cute theme",
+        "Clear modern typeface",
+        "Rounded UI",
+        "Preserve project principles",
+        "Implement in actual web",
+        "Exclude Figma from workflow"
+      ],
+      "api_db_contract_changed": false,
+      "branch": "codex/soft-modern-theme",
+      "evidence": "../PDC_Diary_Nextjs/docs/soft-modern-theme-verification.json",
+      "notion_sync": "synchronized",
+      "notion_readback_at": "2026-09-11T01:30:46.077Z"
+    },
+    "task_block_dnd_brief": {
+      "status": "proposal_brief_not_implemented",
+      "document": "docs/task-block-dnd-brief.md",
+      "notion_sync": "synchronized",
+      "readback_at": "2026-09-11T01:40:10.912Z",
+      "user_confirmed": "할 일 블록과 DND 작업 브리핑 요청",
+      "ai_proposal": "같은 계획 안의 전체 사용자 순서에서 재배치; 서버 DB에 순서/버전 저장",
+      "api_db_contract_changed": false
+    },
+    "task_block_order": {
+      "status": "local_pass_upload_approval_required",
+      "document": "docs/task-block-order.md",
+      "notion_sync": "synchronized",
+      "verification": "docs/task-order-verification.json",
+      "notion_readback_at": "2026-09-11T02:36:39.124Z"
     }
   }
 }

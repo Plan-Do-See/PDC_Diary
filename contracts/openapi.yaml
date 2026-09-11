@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "PDS Diary · 프론트 연동 API",
-    "version": "0.2.0",
-    "description": "현재 백엔드 소스와 대조한 OpenAPI 3.1 문서. 공개 과제는 익명, 개인 공간은 PDS_SESSION으로 접근합니다. 모든 변경 요청은 익명 사용자도 CSRF 토큰과 같은 세션 쿠키가 필요합니다. 각 경로에 /api/v1이 포함됩니다. 소셜 외부 등록·통합 검증은 프론트 완성 후 진행합니다. 백엔드·DB 배포, 공개 HTTPS·Swagger와 SMTP 시험수신은 확인했습니다. 이메일 인증 전체 동선·소셜 외부 연동은 미검증입니다. 예시는 가상 자료이며 사용자 실제 기록이 아닙니다."
+    "version": "0.3.0",
+    "description": "API 0.3.0: 기존 공개/개인 기능에 계획 안의 할 일 사용자 순서 저장을 추가. 새로운 계약의 로컬 검증과 운영 배포 상태는 task-block-order 문서를 따른다. 소셜은 사용자 재요청 전 보류. 예시는 실제 사용자 기록이 아니다."
   },
   "servers": [
     {
@@ -808,11 +808,12 @@
                 "due",
                 "priority",
                 "estimate",
-                "newest"
+                "newest",
+                "manual"
               ],
               "default": "due"
             },
-            "description": "due: due_date↑ priority↑ created_at↑ id↑ / priority: priority↑ due_date↑ created_at↑ id↑ / estimate: estimated_minutes↓ due_date↑ created_at↑ id↑ / newest: created_at↓ id↑"
+            "description": "due: due_date↑ priority↑ created_at↑ id↑ / priority: priority↑ due_date↑ created_at↑ id↑ / estimate: estimated_minutes↓ due_date↑ created_at↑ id↑ / newest: created_at↓ id↑ / manual: plan_id, sort_position, id 오름차순"
           },
           {
             "in": "query",
@@ -1036,11 +1037,12 @@
                 "due",
                 "priority",
                 "estimate",
-                "newest"
+                "newest",
+                "manual"
               ],
               "default": "due"
             },
-            "description": "due: due_date↑ priority↑ created_at↑ id↑ / priority: priority↑ due_date↑ created_at↑ id↑ / estimate: estimated_minutes↓ due_date↑ created_at↑ id↑ / newest: created_at↓ id↑"
+            "description": "due: due_date↑ priority↑ created_at↑ id↑ / priority: priority↑ due_date↑ created_at↑ id↑ / estimate: estimated_minutes↓ due_date↑ created_at↑ id↑ / newest: created_at↓ id↑ / manual: plan_id, sort_position, id 오름차순"
           },
           {
             "in": "query",
@@ -4167,6 +4169,293 @@
           }
         }
       }
+    },
+    "/api/v1/public/plans/{id}/task-order": {
+      "get": {
+        "summary": "공개 · 계획의 할 일 순서 조회",
+        "description": "같은 공간의 plan_id. order_version과 전체 미삭제 tasks를 같은 읽기 스냅샷에서 반환.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "고정 plan_id. revision 행 id를 사용하지 않음."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskOrder"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [],
+        "operationId": "get_api_v1_public_plans_id_task_order",
+        "tags": [
+          "공개 공간"
+        ]
+      },
+      "post": {
+        "summary": "공개 · 계획의 할 일 순서 저장",
+        "description": "순서 버전과 전체 미삭제 task_ids를 검증 후 원자 저장. 같은 Idempotency-Key/본문 재시도는 재적용하지 않으며 응답 재사용 후 GET으로 최신 순서를 확인한다. 소속/완료/실행/계획 이력은 변경하지 않는다. 충돌409. 새로운 작업은 새 키.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "같은 공간의 고정 plan_id"
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "Reuse for retries with the same body; scope checked before cached response. Mismatch returns 409."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskOrder"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "csrf": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskOrderInput"
+              },
+              "example": {
+                "expected_order_version": 1,
+                "task_ids": []
+              }
+            }
+          }
+        },
+        "operationId": "post_api_v1_public_plans_id_task_order",
+        "tags": [
+          "공개 공간"
+        ]
+      }
+    },
+    "/api/v1/me/plans/{id}/task-order": {
+      "get": {
+        "summary": "개인 · 계획의 할 일 순서 조회",
+        "description": "같은 공간의 plan_id. order_version과 전체 미삭제 tasks를 같은 읽기 스냅샷에서 반환.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "고정 plan_id. revision 행 id를 사용하지 않음."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskOrder"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "operationId": "get_api_v1_me_plans_id_task_order",
+        "tags": [
+          "개인 공간"
+        ]
+      },
+      "post": {
+        "summary": "개인 · 계획의 할 일 순서 저장",
+        "description": "순서 버전과 전체 미삭제 task_ids를 검증 후 원자 저장. 같은 Idempotency-Key/본문 재시도는 재적용하지 않으며 응답 재사용 후 GET으로 최신 순서를 확인한다. 소속/완료/실행/계획 이력은 변경하지 않는다. 충돌409. 새로운 작업은 새 키.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "같은 공간의 고정 plan_id"
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "description": "Reuse for retries with the same body; scope checked before cached response. Mismatch returns 409."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskOrder"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Http400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Http401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Http403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Http404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Http409"
+          },
+          "429": {
+            "$ref": "#/components/responses/Http429"
+          },
+          "500": {
+            "description": "서버/프록시 실패. JSON/본문 모양 보장 없음. 실패를 0건으로 대신 표시하지 않음."
+          }
+        },
+        "security": [
+          {
+            "session": [],
+            "csrf": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskOrderInput"
+              },
+              "example": {
+                "expected_order_version": 1,
+                "task_ids": []
+              }
+            }
+          }
+        },
+        "operationId": "post_api_v1_me_plans_id_task_order",
+        "tags": [
+          "개인 공간"
+        ]
+      }
     }
   },
   "components": {
@@ -4692,6 +4981,11 @@
           "updated_at": {
             "type": "string",
             "format": "date-time"
+          },
+          "sort_position": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647
           }
         },
         "required": [
@@ -4708,7 +5002,8 @@
           "row_version",
           "deleted_at",
           "created_at",
-          "updated_at"
+          "updated_at",
+          "sort_position"
         ]
       },
       "task_tags": {
@@ -5116,7 +5411,7 @@
         "type": "object",
         "properties": {
           "schema_version": {
-            "const": "2.1",
+            "const": "2.2",
             "type": "string"
           },
           "exported_at": {
@@ -5181,6 +5476,12 @@
             "items": {
               "$ref": "#/components/schemas/carry_forwards"
             }
+          },
+          "plan_task_orders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/plan_task_orders"
+            }
           }
         },
         "required": [
@@ -5196,7 +5497,8 @@
           "execution_logs",
           "completion_events",
           "reflections",
-          "carry_forwards"
+          "carry_forwards",
+          "plan_task_orders"
         ],
         "description": "한 공간의 전체 도메인 자료. 삭제·이력 포함. 기간·plan_id는 review에만 적용. 계정·세션·토큰·메일·요청 응답 캐시 제외."
       },
@@ -5503,6 +5805,82 @@
             ]
           }
         }
+      },
+      "plan_task_orders": {
+        "type": "object",
+        "properties": {
+          "workspace_id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
+          },
+          "plan_id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
+          },
+          "order_version": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647
+          }
+        },
+        "required": [
+          "workspace_id",
+          "plan_id",
+          "order_version"
+        ]
+      },
+      "TaskOrder": {
+        "type": "object",
+        "properties": {
+          "plan_id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f-]{36}$"
+          },
+          "order_version": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647
+          },
+          "tasks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Task"
+            }
+          }
+        },
+        "required": [
+          "plan_id",
+          "order_version",
+          "tasks"
+        ],
+        "description": "같은 읽기 스냅샷의 순서 버전과 해당 계획의 모든 미삭제 할 일. 서버 사용자 순서."
+      },
+      "TaskOrderInput": {
+        "type": "object",
+        "properties": {
+          "expected_order_version": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647
+          },
+          "task_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f-]{36}$"
+            },
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "expected_order_version",
+          "task_ids"
+        ],
+        "description": "해당 계획의 전체 미삭제 할 일 ID를 원하는 순서대로. 누락/외부/중복 ID 금지. 빈 계획은 빈 배열."
       }
     },
     "responses": {

@@ -1,6 +1,6 @@
 {
   "version": "1.3",
-  "date": "2026-09-09",
+  "date": "2026-09-11",
   "hub_url": "https://app.notion.com/p/3d50def9f6268037adfbcef233c6d20c",
   "status": "synchronized",
   "scope": "노션 문서 저장·연결·요구사항 원문 보존 확인. 앱 구현·배포·기능 검증 완료를 뜻하지 않음.",
@@ -24,7 +24,7 @@
     "all_pages_read_back": true,
     "latest_implementation_sync": "2026-09-08",
     "local_tests_passed": 14,
-    "latest_documentation_sync": "2026-09-09",
+    "latest_documentation_sync": "2026-09-11",
     "swagger_operations_rendered": 59,
     "openapi_examples_validated": 43,
     "latest_frontend_planning_sync": "2026-09-09"
@@ -58,7 +58,9 @@
       "inline_task_draft_readback": "2026-09-09T08:24:43.559Z",
       "inline_task_readback_at": "2026-09-09T08:48:23.160Z",
       "figma_web_sync_readback_at": "2026-09-10T00:36:38.432Z",
-      "figma_git_push_readback_at": "2026-09-10T00:41:25.089Z"
+      "figma_git_push_readback_at": "2026-09-10T00:41:25.089Z",
+      "soft_modern_theme_readback": "2026-09-11T01:30:46.077Z",
+      "task_order_readback": "2026-09-11T02:36:39.124Z"
     },
     {
       "id": "3d50def9-f626-812d-b0b6-f38859f63762",
@@ -77,7 +79,8 @@
       "hub_link": true,
       "parent_verified": true,
       "backlink_verified": true,
-      "content_read_back": true
+      "content_read_back": true,
+      "task_order_readback": "2026-09-11T02:36:39.124Z"
     },
     {
       "id": "3d50def9-f626-81ad-b938-f61a437009d5",
@@ -87,7 +90,8 @@
       "parent_verified": true,
       "backlink_verified": true,
       "content_read_back": true,
-      "web_release_readback": "2026-09-09T02:50:38.922Z"
+      "web_release_readback": "2026-09-09T02:50:38.922Z",
+      "task_order_readback": "2026-09-11T02:36:39.124Z"
     },
     {
       "id": "3d50def9-f626-8110-8e50-c012568ab789",
@@ -154,7 +158,10 @@
       "inline_task_draft_readback": "2026-09-09T08:24:43.559Z",
       "inline_task_readback_at": "2026-09-09T08:48:23.160Z",
       "figma_web_sync_readback_at": "2026-09-10T00:36:38.432Z",
-      "figma_git_push_readback_at": "2026-09-10T00:41:25.089Z"
+      "figma_git_push_readback_at": "2026-09-10T00:41:25.089Z",
+      "soft_modern_theme_readback": "2026-09-11T01:30:46.077Z",
+      "task_block_dnd_readback": "2026-09-11T01:40:10.912Z",
+      "task_order_readback": "2026-09-11T02:36:39.124Z"
     },
     {
       "id": "3d60def9-f626-81b9-a208-e7aa1067c14b",
@@ -2441,11 +2448,11 @@
     "design_push_commit": "14685c2"
   },
   "figma_web_sync": {
-    "status": "captures_transferred_component_integration_pending_mcp_quota",
+    "status": "excluded_from_workflow_by_user",
     "file_url": "https://www.figma.com/design/UrFtdh7olajlLI2WP80X4P",
     "notion_sync": "synchronized",
-    "readback_at": "2026-09-10T00:36:38.432Z",
-    "user_next_action": "사용자가 Figma 요금제 확인·변경 예정; 완료 미확인",
+    "readback_at": "2026-09-11T01:30:46.077Z",
+    "user_next_action": null,
     "capture_screens": 12,
     "superseded_captures": 7,
     "git_push": {
@@ -2454,6 +2461,40 @@
       "branch": "main",
       "commit": "14685c2",
       "notion_readback_at": "2026-09-10T00:41:25.089Z"
-    }
+    },
+    "previous_status": "captures_transferred_component_integration_pending_mcp_quota",
+    "user_decision_date": "2026-09-11"
+  },
+  "soft_modern_theme": {
+    "status": "synchronized",
+    "phase": "implemented_local_checks_passed_not_deployed",
+    "page_ids": [
+      "3d50def9-f626-81e9-9553-ce5ca31af063",
+      "3d60def9-f626-8126-8438-fb2bdd7bd6ba"
+    ],
+    "readback_at": "2026-09-11T01:30:46.077Z"
+  },
+  "task_block_dnd_brief": {
+    "status": "proposal_brief_not_implemented",
+    "document": "docs/task-block-dnd-brief.md",
+    "notion_sync": "synchronized",
+    "readback_at": "2026-09-11T01:40:10.912Z",
+    "user_confirmed": "할 일 블록과 DND 작업 브리핑 요청",
+    "ai_proposal": "같은 계획 안의 전체 사용자 순서에서 재배치; 서버 DB에 순서/버전 저장",
+    "api_db_contract_changed": false
+  },
+  "task_order": {
+    "status": "local_pass_upload_approval_required",
+    "phase": "implementation_in_progress",
+    "readback_at": "2026-09-11T02:36:39.124Z",
+    "page_ids": [
+      "3d50def9-f626-81e9-9553-ce5ca31af063",
+      "3d50def9-f626-814f-b233-f0405491bee1",
+      "3d60def9-f626-8126-8438-fb2bdd7bd6ba"
+    ],
+    "notion_sync": "synchronized",
+    "verification": "docs/task-order-verification.json",
+    "deployment_plan": "docs/task-order-deployment-plan.md",
+    "release_manifest": "docs/task-order-release.json"
   }
 }

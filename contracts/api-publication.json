@@ -1,14 +1,14 @@
 {
   "version": 1,
-  "synced_at": "2026-09-08T10:36:38.297Z",
+  "synced_at": "2026-09-11T02:35:12.342Z",
   "source_repository": "https://github.com/Plan-Do-See/PDC_Diary_Spring",
   "source_path": "contracts/openapi.yaml",
-  "source_commit": null,
-  "source_state": "deployed_API_source_unchanged_documentation_status_updated",
-  "openapi_version": "0.2.0",
-  "sha256": "55531ca542facef18a898826becd4b817e82b99f5b59c98c82f096a080895cf9",
-  "paths": 42,
-  "operations": 59,
+  "source_commit": "a3b8a07b01d643c1cd4791d2d3e1f79b14e15234",
+  "source_state": "working_tree_snapshot_not_deployed_release",
+  "openapi_version": "0.3.0",
+  "sha256": "45a6810690097fe6462bf79aaab615100353ed9bc17dd067c32c8283624ed3e6",
+  "paths": 44,
+  "operations": 63,
   "source_files": [
     {
       "path": "src/main/java/app/plandosee/diary/MetaController.java",
@@ -76,11 +76,11 @@
     },
     {
       "path": "src/main/java/app/plandosee/diary/diary/DiaryController.java",
-      "sha256": "214c160bc0dd936d30a019f9b3a7767c0f128ba931a80a198f7edbde700c700c"
+      "sha256": "e1b9428110142edf5d60687d604bcf13fc39dca38a653776e559d843b7ec85c1"
     },
     {
       "path": "src/main/java/app/plandosee/diary/diary/DiaryService.java",
-      "sha256": "eb4a79bedd1cf7971be8c6546c5ebb3d94aaddf7ef5c37fbd5788c48bfbb158a"
+      "sha256": "d2b372c4ef931b18ef58c0dcdb25ef371057efcf1463813dcc8f70e92a9460c8"
     },
     {
       "path": "src/main/java/app/plandosee/diary/diary/Inputs.java",
@@ -88,7 +88,7 @@
     },
     {
       "path": "src/main/java/app/plandosee/diary/diary/ReviewService.java",
-      "sha256": "646d0b7f424af7607fb83e3ae69d96f5256457fb15f844f61614223ca849361d"
+      "sha256": "2491bf94f0c227cb9afca4a753b69c04bc9d784f9bdbab1569923c1e1757ac30"
     },
     {
       "path": "src/main/resources/application.yaml",
@@ -105,16 +105,10 @@
     {
       "path": "src/main/resources/db/migration/V3__opt_in_reminders.sql",
       "sha256": "5b65f71c3c9f2cea7bd29b92b7d388522afcb045e7929b0150df90a429eae0db"
+    },
+    {
+      "path": "src/main/resources/db/migration/V4__task_order.sql",
+      "sha256": "53a9b8722af6fa0912ccbb1bce808bcf5266e6a5adbe9749a2e4b9bb23b890e6"
     }
-  ],
-  "deployment": {
-    "image_digest": "sha256:5f9394bdd9d0c752df23beaeb4a212b7e5c669bf72a063b2467d9e02e76f45f0",
-    "documentation_files_installed": true,
-    "public_docs_url": "https://plandosee.app/docs/",
-    "public_docs_verified": true,
-    "api_contract_unchanged": true,
-    "public_https_verified": true,
-    "verified_at": "2026-09-08T10:37:45.780Z",
-    "documentation_only_changes": true
-  }
+  ]
 }

@@ -1,0 +1,2174 @@
+{
+  "database_version" : "12.3.3-MariaDB",
+  "checked_at_utc" : "2026-09-11T02:02:31.933948200Z",
+  "scope" : "isolated pds_test; does not certify production deployment",
+  "columns" : [ {
+    "TABLE_NAME" : "auth_tokens",
+    "COLUMN_NAME" : "token_hash",
+    "COLUMN_TYPE" : "char(64)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "auth_tokens",
+    "COLUMN_NAME" : "user_id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "auth_tokens",
+    "COLUMN_NAME" : "purpose",
+    "COLUMN_TYPE" : "varchar(16)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "utf8mb4",
+    "COLLATION_NAME" : "utf8mb4_uca1400_ai_ci",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "auth_tokens",
+    "COLUMN_NAME" : "expires_at",
+    "COLUMN_TYPE" : "datetime(6)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "auth_tokens",
+    "COLUMN_NAME" : "used_at",
+    "COLUMN_TYPE" : "datetime(6)",
+    "IS_NULLABLE" : "YES",
+    "COLUMN_DEFAULT" : "NULL",
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "carry_forwards",
+    "COLUMN_NAME" : "workspace_id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "carry_forwards",
+    "COLUMN_NAME" : "id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "carry_forwards",
+    "COLUMN_NAME" : "reflection_id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "carry_forwards",
+    "COLUMN_NAME" : "target_plan_id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "carry_forwards",
+    "COLUMN_NAME" : "improvement_snapshot",
+    "COLUMN_TYPE" : "text",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "utf8mb4",
+    "COLLATION_NAME" : "utf8mb4_unicode_ci",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "carry_forwards",
+    "COLUMN_NAME" : "created_at",
+    "COLUMN_TYPE" : "datetime(6)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "completion_events",
+    "COLUMN_NAME" : "workspace_id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "completion_events",
+    "COLUMN_NAME" : "id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "completion_events",
+    "COLUMN_NAME" : "task_id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "completion_events",
+    "COLUMN_NAME" : "cycle",
+    "COLUMN_TYPE" : "int(11)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "completion_events",
+    "COLUMN_NAME" : "request_key",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "completion_events",
+    "COLUMN_NAME" : "created_at",
+    "COLUMN_TYPE" : "datetime(6)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "email_credentials",
+    "COLUMN_NAME" : "user_id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "email_credentials",
+    "COLUMN_NAME" : "email",
+    "COLUMN_TYPE" : "varchar(254)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "email_credentials",
+    "COLUMN_NAME" : "password_hash",
+    "COLUMN_TYPE" : "varchar(255)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "utf8mb4",
+    "COLLATION_NAME" : "utf8mb4_uca1400_ai_ci",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "email_credentials",
+    "COLUMN_NAME" : "verified_at",
+    "COLUMN_TYPE" : "datetime(6)",
+    "IS_NULLABLE" : "YES",
+    "COLUMN_DEFAULT" : "NULL",
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "execution_logs",
+    "COLUMN_NAME" : "workspace_id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "execution_logs",
+    "COLUMN_NAME" : "id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "execution_logs",
+    "COLUMN_NAME" : "task_id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "execution_logs",
+    "COLUMN_NAME" : "started_at",
+    "COLUMN_TYPE" : "datetime(6)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "execution_logs",
+    "COLUMN_NAME" : "ended_at",
+    "COLUMN_TYPE" : "datetime(6)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "execution_logs",
+    "COLUMN_NAME" : "actual_minutes",
+    "COLUMN_TYPE" : "int(11)",
+    "IS_NULLABLE" : "YES",
+    "COLUMN_DEFAULT" : "NULL",
+    "EXTRA" : "STORED GENERATED",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : "timestampdiff(MINUTE,`started_at`,`ended_at`)"
+  }, {
+    "TABLE_NAME" : "execution_logs",
+    "COLUMN_NAME" : "blocker_reason",
+    "COLUMN_TYPE" : "text",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "utf8mb4",
+    "COLLATION_NAME" : "utf8mb4_unicode_ci",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "execution_logs",
+    "COLUMN_NAME" : "note",
+    "COLUMN_TYPE" : "text",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "utf8mb4",
+    "COLLATION_NAME" : "utf8mb4_unicode_ci",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "execution_logs",
+    "COLUMN_NAME" : "completion_event_id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "YES",
+    "COLUMN_DEFAULT" : "NULL",
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "execution_logs",
+    "COLUMN_NAME" : "request_key",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "execution_logs",
+    "COLUMN_NAME" : "created_at",
+    "COLUMN_TYPE" : "datetime(6)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "flyway_schema_history",
+    "COLUMN_NAME" : "installed_rank",
+    "COLUMN_TYPE" : "int(11)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "flyway_schema_history",
+    "COLUMN_NAME" : "version",
+    "COLUMN_TYPE" : "varchar(50)",
+    "IS_NULLABLE" : "YES",
+    "COLUMN_DEFAULT" : "NULL",
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "utf8mb4",
+    "COLLATION_NAME" : "utf8mb4_unicode_ci",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "flyway_schema_history",
+    "COLUMN_NAME" : "description",
+    "COLUMN_TYPE" : "varchar(200)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "utf8mb4",
+    "COLLATION_NAME" : "utf8mb4_unicode_ci",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "flyway_schema_history",
+    "COLUMN_NAME" : "type",
+    "COLUMN_TYPE" : "varchar(20)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "utf8mb4",
+    "COLLATION_NAME" : "utf8mb4_unicode_ci",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "flyway_schema_history",
+    "COLUMN_NAME" : "script",
+    "COLUMN_TYPE" : "varchar(1000)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "utf8mb4",
+    "COLLATION_NAME" : "utf8mb4_unicode_ci",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "flyway_schema_history",
+    "COLUMN_NAME" : "checksum",
+    "COLUMN_TYPE" : "int(11)",
+    "IS_NULLABLE" : "YES",
+    "COLUMN_DEFAULT" : "NULL",
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "flyway_schema_history",
+    "COLUMN_NAME" : "installed_by",
+    "COLUMN_TYPE" : "varchar(100)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "utf8mb4",
+    "COLLATION_NAME" : "utf8mb4_unicode_ci",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "flyway_schema_history",
+    "COLUMN_NAME" : "installed_on",
+    "COLUMN_TYPE" : "timestamp",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : "current_timestamp()",
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "flyway_schema_history",
+    "COLUMN_NAME" : "execution_time",
+    "COLUMN_TYPE" : "int(11)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "flyway_schema_history",
+    "COLUMN_NAME" : "success",
+    "COLUMN_TYPE" : "tinyint(1)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "login_identities",
+    "COLUMN_NAME" : "id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "login_identities",
+    "COLUMN_NAME" : "user_id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "login_identities",
+    "COLUMN_NAME" : "provider",
+    "COLUMN_TYPE" : "varchar(16)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "login_identities",
+    "COLUMN_NAME" : "subject",
+    "COLUMN_TYPE" : "varchar(255)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "utf8mb4",
+    "COLLATION_NAME" : "utf8mb4_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "login_identities",
+    "COLUMN_NAME" : "created_at",
+    "COLUMN_TYPE" : "datetime(6)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "mail_outbox",
+    "COLUMN_NAME" : "id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "mail_outbox",
+    "COLUMN_NAME" : "encrypted_message",
+    "COLUMN_TYPE" : "longtext",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "utf8mb4",
+    "COLLATION_NAME" : "utf8mb4_unicode_ci",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "mail_outbox",
+    "COLUMN_NAME" : "attempts",
+    "COLUMN_TYPE" : "int(11)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : "0",
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "mail_outbox",
+    "COLUMN_NAME" : "state",
+    "COLUMN_TYPE" : "varchar(16)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : "'pending'",
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "utf8mb4",
+    "COLLATION_NAME" : "utf8mb4_unicode_ci",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "mail_outbox",
+    "COLUMN_NAME" : "next_attempt_at",
+    "COLUMN_TYPE" : "datetime(6)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "mail_outbox",
+    "COLUMN_NAME" : "created_at",
+    "COLUMN_TYPE" : "datetime(6)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "mail_outbox",
+    "COLUMN_NAME" : "sent_at",
+    "COLUMN_TYPE" : "datetime(6)",
+    "IS_NULLABLE" : "YES",
+    "COLUMN_DEFAULT" : "NULL",
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "mutation_requests",
+    "COLUMN_NAME" : "workspace_id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "mutation_requests",
+    "COLUMN_NAME" : "request_key",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "mutation_requests",
+    "COLUMN_NAME" : "operation",
+    "COLUMN_TYPE" : "varchar(64)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "utf8mb4",
+    "COLLATION_NAME" : "utf8mb4_unicode_ci",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "mutation_requests",
+    "COLUMN_NAME" : "payload_hash",
+    "COLUMN_TYPE" : "char(64)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "mutation_requests",
+    "COLUMN_NAME" : "response_status",
+    "COLUMN_TYPE" : "int(11)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "mutation_requests",
+    "COLUMN_NAME" : "response_json",
+    "COLUMN_TYPE" : "longtext",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "utf8mb4",
+    "COLLATION_NAME" : "utf8mb4_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "mutation_requests",
+    "COLUMN_NAME" : "created_at",
+    "COLUMN_TYPE" : "datetime(6)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "notification_preferences",
+    "COLUMN_NAME" : "user_id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "notification_preferences",
+    "COLUMN_NAME" : "enabled",
+    "COLUMN_TYPE" : "tinyint(1)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : "0",
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "notification_preferences",
+    "COLUMN_NAME" : "reflection_enabled",
+    "COLUMN_TYPE" : "tinyint(1)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : "0",
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "notification_preferences",
+    "COLUMN_NAME" : "local_time",
+    "COLUMN_TYPE" : "time",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : "'09:00:00'",
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "notification_preferences",
+    "COLUMN_NAME" : "days_before",
+    "COLUMN_TYPE" : "smallint(6)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : "1",
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "notification_preferences",
+    "COLUMN_NAME" : "last_local_date",
+    "COLUMN_TYPE" : "date",
+    "IS_NULLABLE" : "YES",
+    "COLUMN_DEFAULT" : "NULL",
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "plans",
+    "COLUMN_NAME" : "workspace_id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "plans",
+    "COLUMN_NAME" : "id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "plans",
+    "COLUMN_NAME" : "created_at",
+    "COLUMN_TYPE" : "datetime(6)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "plan_revisions",
+    "COLUMN_NAME" : "workspace_id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "plan_revisions",
+    "COLUMN_NAME" : "id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "plan_revisions",
+    "COLUMN_NAME" : "plan_id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "plan_revisions",
+    "COLUMN_NAME" : "revision",
+    "COLUMN_TYPE" : "int(11)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "plan_revisions",
+    "COLUMN_NAME" : "title",
+    "COLUMN_TYPE" : "text",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "utf8mb4",
+    "COLLATION_NAME" : "utf8mb4_unicode_ci",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "plan_revisions",
+    "COLUMN_NAME" : "start_date",
+    "COLUMN_TYPE" : "date",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "plan_revisions",
+    "COLUMN_NAME" : "end_date",
+    "COLUMN_TYPE" : "date",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "plan_revisions",
+    "COLUMN_NAME" : "priority",
+    "COLUMN_TYPE" : "smallint(6)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "plan_revisions",
+    "COLUMN_NAME" : "success_criteria",
+    "COLUMN_TYPE" : "text",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "utf8mb4",
+    "COLLATION_NAME" : "utf8mb4_unicode_ci",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "plan_revisions",
+    "COLUMN_NAME" : "estimated_minutes",
+    "COLUMN_TYPE" : "int(11)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "plan_revisions",
+    "COLUMN_NAME" : "improvement_text",
+    "COLUMN_TYPE" : "text",
+    "IS_NULLABLE" : "YES",
+    "COLUMN_DEFAULT" : "NULL",
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "utf8mb4",
+    "COLLATION_NAME" : "utf8mb4_unicode_ci",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "plan_revisions",
+    "COLUMN_NAME" : "created_at",
+    "COLUMN_TYPE" : "datetime(6)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "plan_task_orders",
+    "COLUMN_NAME" : "workspace_id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "plan_task_orders",
+    "COLUMN_NAME" : "plan_id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "plan_task_orders",
+    "COLUMN_NAME" : "order_version",
+    "COLUMN_TYPE" : "int(11)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : "1",
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "rate_limits",
+    "COLUMN_NAME" : "bucket",
+    "COLUMN_TYPE" : "char(64)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "rate_limits",
+    "COLUMN_NAME" : "window_start",
+    "COLUMN_TYPE" : "datetime(6)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "rate_limits",
+    "COLUMN_NAME" : "attempts",
+    "COLUMN_TYPE" : "int(11)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "reflections",
+    "COLUMN_NAME" : "workspace_id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "reflections",
+    "COLUMN_NAME" : "id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "reflections",
+    "COLUMN_NAME" : "source_plan_id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "reflections",
+    "COLUMN_NAME" : "period_start",
+    "COLUMN_TYPE" : "date",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "reflections",
+    "COLUMN_NAME" : "period_end",
+    "COLUMN_TYPE" : "date",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "reflections",
+    "COLUMN_NAME" : "note",
+    "COLUMN_TYPE" : "text",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "utf8mb4",
+    "COLLATION_NAME" : "utf8mb4_unicode_ci",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "reflections",
+    "COLUMN_NAME" : "improvement_text",
+    "COLUMN_TYPE" : "text",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "utf8mb4",
+    "COLLATION_NAME" : "utf8mb4_unicode_ci",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "reflections",
+    "COLUMN_NAME" : "created_at",
+    "COLUMN_TYPE" : "datetime(6)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "spring_session",
+    "COLUMN_NAME" : "PRIMARY_ID",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "utf8mb4",
+    "COLLATION_NAME" : "utf8mb4_unicode_ci",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "spring_session",
+    "COLUMN_NAME" : "SESSION_ID",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "utf8mb4",
+    "COLLATION_NAME" : "utf8mb4_unicode_ci",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "spring_session",
+    "COLUMN_NAME" : "CREATION_TIME",
+    "COLUMN_TYPE" : "bigint(20)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "spring_session",
+    "COLUMN_NAME" : "LAST_ACCESS_TIME",
+    "COLUMN_TYPE" : "bigint(20)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "spring_session",
+    "COLUMN_NAME" : "MAX_INACTIVE_INTERVAL",
+    "COLUMN_TYPE" : "int(11)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "spring_session",
+    "COLUMN_NAME" : "EXPIRY_TIME",
+    "COLUMN_TYPE" : "bigint(20)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "spring_session",
+    "COLUMN_NAME" : "PRINCIPAL_NAME",
+    "COLUMN_TYPE" : "varchar(100)",
+    "IS_NULLABLE" : "YES",
+    "COLUMN_DEFAULT" : "NULL",
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "utf8mb4",
+    "COLLATION_NAME" : "utf8mb4_unicode_ci",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "spring_session_attributes",
+    "COLUMN_NAME" : "SESSION_PRIMARY_ID",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "utf8mb4",
+    "COLLATION_NAME" : "utf8mb4_unicode_ci",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "spring_session_attributes",
+    "COLUMN_NAME" : "ATTRIBUTE_NAME",
+    "COLUMN_TYPE" : "varchar(200)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "utf8mb4",
+    "COLLATION_NAME" : "utf8mb4_unicode_ci",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "spring_session_attributes",
+    "COLUMN_NAME" : "ATTRIBUTE_BYTES",
+    "COLUMN_TYPE" : "blob",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "tasks",
+    "COLUMN_NAME" : "workspace_id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "tasks",
+    "COLUMN_NAME" : "id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "tasks",
+    "COLUMN_NAME" : "plan_id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "tasks",
+    "COLUMN_NAME" : "title",
+    "COLUMN_TYPE" : "text",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "utf8mb4",
+    "COLLATION_NAME" : "utf8mb4_unicode_ci",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "tasks",
+    "COLUMN_NAME" : "description",
+    "COLUMN_TYPE" : "text",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "utf8mb4",
+    "COLLATION_NAME" : "utf8mb4_unicode_ci",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "tasks",
+    "COLUMN_NAME" : "due_date",
+    "COLUMN_TYPE" : "date",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "tasks",
+    "COLUMN_NAME" : "priority",
+    "COLUMN_TYPE" : "smallint(6)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "tasks",
+    "COLUMN_NAME" : "estimated_minutes",
+    "COLUMN_TYPE" : "int(11)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "tasks",
+    "COLUMN_NAME" : "status",
+    "COLUMN_TYPE" : "varchar(64)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "utf8mb4",
+    "COLLATION_NAME" : "utf8mb4_unicode_ci",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "tasks",
+    "COLUMN_NAME" : "cycle",
+    "COLUMN_TYPE" : "int(11)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "tasks",
+    "COLUMN_NAME" : "row_version",
+    "COLUMN_TYPE" : "int(11)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "tasks",
+    "COLUMN_NAME" : "deleted_at",
+    "COLUMN_TYPE" : "datetime(6)",
+    "IS_NULLABLE" : "YES",
+    "COLUMN_DEFAULT" : "NULL",
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "tasks",
+    "COLUMN_NAME" : "created_at",
+    "COLUMN_TYPE" : "datetime(6)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "tasks",
+    "COLUMN_NAME" : "updated_at",
+    "COLUMN_TYPE" : "datetime(6)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "tasks",
+    "COLUMN_NAME" : "sort_position",
+    "COLUMN_TYPE" : "int(11)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "task_tags",
+    "COLUMN_NAME" : "workspace_id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "task_tags",
+    "COLUMN_NAME" : "task_id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "task_tags",
+    "COLUMN_NAME" : "tag",
+    "COLUMN_TYPE" : "varchar(64)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "utf8mb4",
+    "COLLATION_NAME" : "utf8mb4_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "task_tags",
+    "COLUMN_NAME" : "created_at",
+    "COLUMN_TYPE" : "datetime(6)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "users",
+    "COLUMN_NAME" : "id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "users",
+    "COLUMN_NAME" : "display_name",
+    "COLUMN_TYPE" : "varchar(100)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "utf8mb4",
+    "COLLATION_NAME" : "utf8mb4_uca1400_ai_ci",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "users",
+    "COLUMN_NAME" : "created_at",
+    "COLUMN_TYPE" : "datetime(6)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "workspaces",
+    "COLUMN_NAME" : "id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "workspaces",
+    "COLUMN_NAME" : "kind",
+    "COLUMN_TYPE" : "varchar(16)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "utf8mb4",
+    "COLLATION_NAME" : "utf8mb4_uca1400_ai_ci",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "workspaces",
+    "COLUMN_NAME" : "owner_user_id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "YES",
+    "COLUMN_DEFAULT" : "NULL",
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "workspaces",
+    "COLUMN_NAME" : "created_at",
+    "COLUMN_TYPE" : "datetime(6)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : null,
+    "COLLATION_NAME" : null,
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "workspace_members",
+    "COLUMN_NAME" : "workspace_id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "workspace_members",
+    "COLUMN_NAME" : "user_id",
+    "COLUMN_TYPE" : "char(36)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "ascii",
+    "COLLATION_NAME" : "ascii_bin",
+    "GENERATION_EXPRESSION" : null
+  }, {
+    "TABLE_NAME" : "workspace_members",
+    "COLUMN_NAME" : "role",
+    "COLUMN_TYPE" : "varchar(16)",
+    "IS_NULLABLE" : "NO",
+    "COLUMN_DEFAULT" : null,
+    "EXTRA" : "",
+    "CHARACTER_SET_NAME" : "utf8mb4",
+    "COLLATION_NAME" : "utf8mb4_uca1400_ai_ci",
+    "GENERATION_EXPRESSION" : null
+  } ],
+  "keys" : [ {
+    "TABLE_NAME" : "auth_tokens",
+    "CONSTRAINT_NAME" : "1",
+    "COLUMN_NAME" : "user_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : "users",
+    "REFERENCED_COLUMN_NAME" : "id"
+  }, {
+    "TABLE_NAME" : "auth_tokens",
+    "CONSTRAINT_NAME" : "PRIMARY",
+    "COLUMN_NAME" : "token_hash",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "carry_forwards",
+    "CONSTRAINT_NAME" : "1",
+    "COLUMN_NAME" : "workspace_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : "reflections",
+    "REFERENCED_COLUMN_NAME" : "workspace_id"
+  }, {
+    "TABLE_NAME" : "carry_forwards",
+    "CONSTRAINT_NAME" : "1",
+    "COLUMN_NAME" : "reflection_id",
+    "ORDINAL_POSITION" : 2,
+    "REFERENCED_TABLE_NAME" : "reflections",
+    "REFERENCED_COLUMN_NAME" : "id"
+  }, {
+    "TABLE_NAME" : "carry_forwards",
+    "CONSTRAINT_NAME" : "2",
+    "COLUMN_NAME" : "workspace_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : "plans",
+    "REFERENCED_COLUMN_NAME" : "workspace_id"
+  }, {
+    "TABLE_NAME" : "carry_forwards",
+    "CONSTRAINT_NAME" : "2",
+    "COLUMN_NAME" : "target_plan_id",
+    "ORDINAL_POSITION" : 2,
+    "REFERENCED_TABLE_NAME" : "plans",
+    "REFERENCED_COLUMN_NAME" : "id"
+  }, {
+    "TABLE_NAME" : "carry_forwards",
+    "CONSTRAINT_NAME" : "PRIMARY",
+    "COLUMN_NAME" : "id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "carry_forwards",
+    "CONSTRAINT_NAME" : "reflection_id",
+    "COLUMN_NAME" : "reflection_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "carry_forwards",
+    "CONSTRAINT_NAME" : "target_plan_id",
+    "COLUMN_NAME" : "target_plan_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "carry_forwards",
+    "CONSTRAINT_NAME" : "workspace_id",
+    "COLUMN_NAME" : "workspace_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "carry_forwards",
+    "CONSTRAINT_NAME" : "workspace_id",
+    "COLUMN_NAME" : "id",
+    "ORDINAL_POSITION" : 2,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "completion_events",
+    "CONSTRAINT_NAME" : "1",
+    "COLUMN_NAME" : "workspace_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : "tasks",
+    "REFERENCED_COLUMN_NAME" : "workspace_id"
+  }, {
+    "TABLE_NAME" : "completion_events",
+    "CONSTRAINT_NAME" : "1",
+    "COLUMN_NAME" : "task_id",
+    "ORDINAL_POSITION" : 2,
+    "REFERENCED_TABLE_NAME" : "tasks",
+    "REFERENCED_COLUMN_NAME" : "id"
+  }, {
+    "TABLE_NAME" : "completion_events",
+    "CONSTRAINT_NAME" : "id",
+    "COLUMN_NAME" : "id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "completion_events",
+    "CONSTRAINT_NAME" : "id",
+    "COLUMN_NAME" : "task_id",
+    "ORDINAL_POSITION" : 2,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "completion_events",
+    "CONSTRAINT_NAME" : "PRIMARY",
+    "COLUMN_NAME" : "id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "completion_events",
+    "CONSTRAINT_NAME" : "task_id",
+    "COLUMN_NAME" : "task_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "completion_events",
+    "CONSTRAINT_NAME" : "task_id",
+    "COLUMN_NAME" : "cycle",
+    "ORDINAL_POSITION" : 2,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "completion_events",
+    "CONSTRAINT_NAME" : "workspace_id",
+    "COLUMN_NAME" : "workspace_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "completion_events",
+    "CONSTRAINT_NAME" : "workspace_id",
+    "COLUMN_NAME" : "id",
+    "ORDINAL_POSITION" : 2,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "completion_events",
+    "CONSTRAINT_NAME" : "workspace_id_3",
+    "COLUMN_NAME" : "workspace_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "completion_events",
+    "CONSTRAINT_NAME" : "workspace_id_3",
+    "COLUMN_NAME" : "request_key",
+    "ORDINAL_POSITION" : 2,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "completion_events",
+    "CONSTRAINT_NAME" : "workspace_id_4",
+    "COLUMN_NAME" : "workspace_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "completion_events",
+    "CONSTRAINT_NAME" : "workspace_id_4",
+    "COLUMN_NAME" : "id",
+    "ORDINAL_POSITION" : 2,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "completion_events",
+    "CONSTRAINT_NAME" : "workspace_id_4",
+    "COLUMN_NAME" : "task_id",
+    "ORDINAL_POSITION" : 3,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "email_credentials",
+    "CONSTRAINT_NAME" : "1",
+    "COLUMN_NAME" : "user_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : "users",
+    "REFERENCED_COLUMN_NAME" : "id"
+  }, {
+    "TABLE_NAME" : "email_credentials",
+    "CONSTRAINT_NAME" : "email",
+    "COLUMN_NAME" : "email",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "email_credentials",
+    "CONSTRAINT_NAME" : "PRIMARY",
+    "COLUMN_NAME" : "user_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "execution_logs",
+    "CONSTRAINT_NAME" : "1",
+    "COLUMN_NAME" : "workspace_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : "tasks",
+    "REFERENCED_COLUMN_NAME" : "workspace_id"
+  }, {
+    "TABLE_NAME" : "execution_logs",
+    "CONSTRAINT_NAME" : "1",
+    "COLUMN_NAME" : "task_id",
+    "ORDINAL_POSITION" : 2,
+    "REFERENCED_TABLE_NAME" : "tasks",
+    "REFERENCED_COLUMN_NAME" : "id"
+  }, {
+    "TABLE_NAME" : "execution_logs",
+    "CONSTRAINT_NAME" : "2",
+    "COLUMN_NAME" : "workspace_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : "completion_events",
+    "REFERENCED_COLUMN_NAME" : "workspace_id"
+  }, {
+    "TABLE_NAME" : "execution_logs",
+    "CONSTRAINT_NAME" : "2",
+    "COLUMN_NAME" : "completion_event_id",
+    "ORDINAL_POSITION" : 2,
+    "REFERENCED_TABLE_NAME" : "completion_events",
+    "REFERENCED_COLUMN_NAME" : "id"
+  }, {
+    "TABLE_NAME" : "execution_logs",
+    "CONSTRAINT_NAME" : "2",
+    "COLUMN_NAME" : "task_id",
+    "ORDINAL_POSITION" : 3,
+    "REFERENCED_TABLE_NAME" : "completion_events",
+    "REFERENCED_COLUMN_NAME" : "task_id"
+  }, {
+    "TABLE_NAME" : "execution_logs",
+    "CONSTRAINT_NAME" : "completion_event_id",
+    "COLUMN_NAME" : "completion_event_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "execution_logs",
+    "CONSTRAINT_NAME" : "PRIMARY",
+    "COLUMN_NAME" : "id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "execution_logs",
+    "CONSTRAINT_NAME" : "workspace_id",
+    "COLUMN_NAME" : "workspace_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "execution_logs",
+    "CONSTRAINT_NAME" : "workspace_id",
+    "COLUMN_NAME" : "id",
+    "ORDINAL_POSITION" : 2,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "execution_logs",
+    "CONSTRAINT_NAME" : "workspace_id_4",
+    "COLUMN_NAME" : "workspace_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "execution_logs",
+    "CONSTRAINT_NAME" : "workspace_id_4",
+    "COLUMN_NAME" : "request_key",
+    "ORDINAL_POSITION" : 2,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "flyway_schema_history",
+    "CONSTRAINT_NAME" : "PRIMARY",
+    "COLUMN_NAME" : "installed_rank",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "login_identities",
+    "CONSTRAINT_NAME" : "1",
+    "COLUMN_NAME" : "user_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : "users",
+    "REFERENCED_COLUMN_NAME" : "id"
+  }, {
+    "TABLE_NAME" : "login_identities",
+    "CONSTRAINT_NAME" : "PRIMARY",
+    "COLUMN_NAME" : "id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "login_identities",
+    "CONSTRAINT_NAME" : "provider",
+    "COLUMN_NAME" : "provider",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "login_identities",
+    "CONSTRAINT_NAME" : "provider",
+    "COLUMN_NAME" : "subject",
+    "ORDINAL_POSITION" : 2,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "mail_outbox",
+    "CONSTRAINT_NAME" : "PRIMARY",
+    "COLUMN_NAME" : "id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "mutation_requests",
+    "CONSTRAINT_NAME" : "1",
+    "COLUMN_NAME" : "workspace_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : "workspaces",
+    "REFERENCED_COLUMN_NAME" : "id"
+  }, {
+    "TABLE_NAME" : "mutation_requests",
+    "CONSTRAINT_NAME" : "PRIMARY",
+    "COLUMN_NAME" : "workspace_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "mutation_requests",
+    "CONSTRAINT_NAME" : "PRIMARY",
+    "COLUMN_NAME" : "request_key",
+    "ORDINAL_POSITION" : 2,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "notification_preferences",
+    "CONSTRAINT_NAME" : "1",
+    "COLUMN_NAME" : "user_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : "users",
+    "REFERENCED_COLUMN_NAME" : "id"
+  }, {
+    "TABLE_NAME" : "notification_preferences",
+    "CONSTRAINT_NAME" : "PRIMARY",
+    "COLUMN_NAME" : "user_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "plans",
+    "CONSTRAINT_NAME" : "1",
+    "COLUMN_NAME" : "workspace_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : "workspaces",
+    "REFERENCED_COLUMN_NAME" : "id"
+  }, {
+    "TABLE_NAME" : "plans",
+    "CONSTRAINT_NAME" : "PRIMARY",
+    "COLUMN_NAME" : "id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "plans",
+    "CONSTRAINT_NAME" : "workspace_id",
+    "COLUMN_NAME" : "workspace_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "plans",
+    "CONSTRAINT_NAME" : "workspace_id",
+    "COLUMN_NAME" : "id",
+    "ORDINAL_POSITION" : 2,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "plan_revisions",
+    "CONSTRAINT_NAME" : "1",
+    "COLUMN_NAME" : "workspace_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : "plans",
+    "REFERENCED_COLUMN_NAME" : "workspace_id"
+  }, {
+    "TABLE_NAME" : "plan_revisions",
+    "CONSTRAINT_NAME" : "1",
+    "COLUMN_NAME" : "plan_id",
+    "ORDINAL_POSITION" : 2,
+    "REFERENCED_TABLE_NAME" : "plans",
+    "REFERENCED_COLUMN_NAME" : "id"
+  }, {
+    "TABLE_NAME" : "plan_revisions",
+    "CONSTRAINT_NAME" : "plan_id",
+    "COLUMN_NAME" : "plan_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "plan_revisions",
+    "CONSTRAINT_NAME" : "plan_id",
+    "COLUMN_NAME" : "revision",
+    "ORDINAL_POSITION" : 2,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "plan_revisions",
+    "CONSTRAINT_NAME" : "PRIMARY",
+    "COLUMN_NAME" : "id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "plan_revisions",
+    "CONSTRAINT_NAME" : "workspace_id",
+    "COLUMN_NAME" : "workspace_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "plan_revisions",
+    "CONSTRAINT_NAME" : "workspace_id",
+    "COLUMN_NAME" : "id",
+    "ORDINAL_POSITION" : 2,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "plan_task_orders",
+    "CONSTRAINT_NAME" : "1",
+    "COLUMN_NAME" : "workspace_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : "plans",
+    "REFERENCED_COLUMN_NAME" : "workspace_id"
+  }, {
+    "TABLE_NAME" : "plan_task_orders",
+    "CONSTRAINT_NAME" : "1",
+    "COLUMN_NAME" : "plan_id",
+    "ORDINAL_POSITION" : 2,
+    "REFERENCED_TABLE_NAME" : "plans",
+    "REFERENCED_COLUMN_NAME" : "id"
+  }, {
+    "TABLE_NAME" : "plan_task_orders",
+    "CONSTRAINT_NAME" : "PRIMARY",
+    "COLUMN_NAME" : "plan_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "rate_limits",
+    "CONSTRAINT_NAME" : "PRIMARY",
+    "COLUMN_NAME" : "bucket",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "reflections",
+    "CONSTRAINT_NAME" : "1",
+    "COLUMN_NAME" : "workspace_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : "plans",
+    "REFERENCED_COLUMN_NAME" : "workspace_id"
+  }, {
+    "TABLE_NAME" : "reflections",
+    "CONSTRAINT_NAME" : "1",
+    "COLUMN_NAME" : "source_plan_id",
+    "ORDINAL_POSITION" : 2,
+    "REFERENCED_TABLE_NAME" : "plans",
+    "REFERENCED_COLUMN_NAME" : "id"
+  }, {
+    "TABLE_NAME" : "reflections",
+    "CONSTRAINT_NAME" : "PRIMARY",
+    "COLUMN_NAME" : "id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "reflections",
+    "CONSTRAINT_NAME" : "workspace_id",
+    "COLUMN_NAME" : "workspace_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "reflections",
+    "CONSTRAINT_NAME" : "workspace_id",
+    "COLUMN_NAME" : "id",
+    "ORDINAL_POSITION" : 2,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "spring_session",
+    "CONSTRAINT_NAME" : "PRIMARY",
+    "COLUMN_NAME" : "PRIMARY_ID",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "spring_session",
+    "CONSTRAINT_NAME" : "SESSION_ID",
+    "COLUMN_NAME" : "SESSION_ID",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "spring_session_attributes",
+    "CONSTRAINT_NAME" : "1",
+    "COLUMN_NAME" : "SESSION_PRIMARY_ID",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : "spring_session",
+    "REFERENCED_COLUMN_NAME" : "PRIMARY_ID"
+  }, {
+    "TABLE_NAME" : "spring_session_attributes",
+    "CONSTRAINT_NAME" : "PRIMARY",
+    "COLUMN_NAME" : "SESSION_PRIMARY_ID",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "spring_session_attributes",
+    "CONSTRAINT_NAME" : "PRIMARY",
+    "COLUMN_NAME" : "ATTRIBUTE_NAME",
+    "ORDINAL_POSITION" : 2,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "tasks",
+    "CONSTRAINT_NAME" : "1",
+    "COLUMN_NAME" : "workspace_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : "plans",
+    "REFERENCED_COLUMN_NAME" : "workspace_id"
+  }, {
+    "TABLE_NAME" : "tasks",
+    "CONSTRAINT_NAME" : "1",
+    "COLUMN_NAME" : "plan_id",
+    "ORDINAL_POSITION" : 2,
+    "REFERENCED_TABLE_NAME" : "plans",
+    "REFERENCED_COLUMN_NAME" : "id"
+  }, {
+    "TABLE_NAME" : "tasks",
+    "CONSTRAINT_NAME" : "PRIMARY",
+    "COLUMN_NAME" : "id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "tasks",
+    "CONSTRAINT_NAME" : "workspace_id",
+    "COLUMN_NAME" : "workspace_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "tasks",
+    "CONSTRAINT_NAME" : "workspace_id",
+    "COLUMN_NAME" : "id",
+    "ORDINAL_POSITION" : 2,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "task_tags",
+    "CONSTRAINT_NAME" : "1",
+    "COLUMN_NAME" : "workspace_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : "tasks",
+    "REFERENCED_COLUMN_NAME" : "workspace_id"
+  }, {
+    "TABLE_NAME" : "task_tags",
+    "CONSTRAINT_NAME" : "1",
+    "COLUMN_NAME" : "task_id",
+    "ORDINAL_POSITION" : 2,
+    "REFERENCED_TABLE_NAME" : "tasks",
+    "REFERENCED_COLUMN_NAME" : "id"
+  }, {
+    "TABLE_NAME" : "task_tags",
+    "CONSTRAINT_NAME" : "PRIMARY",
+    "COLUMN_NAME" : "task_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "task_tags",
+    "CONSTRAINT_NAME" : "PRIMARY",
+    "COLUMN_NAME" : "tag",
+    "ORDINAL_POSITION" : 2,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "users",
+    "CONSTRAINT_NAME" : "PRIMARY",
+    "COLUMN_NAME" : "id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "workspaces",
+    "CONSTRAINT_NAME" : "1",
+    "COLUMN_NAME" : "owner_user_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : "users",
+    "REFERENCED_COLUMN_NAME" : "id"
+  }, {
+    "TABLE_NAME" : "workspaces",
+    "CONSTRAINT_NAME" : "id",
+    "COLUMN_NAME" : "id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "workspaces",
+    "CONSTRAINT_NAME" : "id",
+    "COLUMN_NAME" : "owner_user_id",
+    "ORDINAL_POSITION" : 2,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "workspaces",
+    "CONSTRAINT_NAME" : "owner_user_id",
+    "COLUMN_NAME" : "owner_user_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "workspaces",
+    "CONSTRAINT_NAME" : "PRIMARY",
+    "COLUMN_NAME" : "id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "workspace_members",
+    "CONSTRAINT_NAME" : "1",
+    "COLUMN_NAME" : "workspace_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : "workspaces",
+    "REFERENCED_COLUMN_NAME" : "id"
+  }, {
+    "TABLE_NAME" : "workspace_members",
+    "CONSTRAINT_NAME" : "2",
+    "COLUMN_NAME" : "user_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : "users",
+    "REFERENCED_COLUMN_NAME" : "id"
+  }, {
+    "TABLE_NAME" : "workspace_members",
+    "CONSTRAINT_NAME" : "3",
+    "COLUMN_NAME" : "workspace_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : "workspaces",
+    "REFERENCED_COLUMN_NAME" : "id"
+  }, {
+    "TABLE_NAME" : "workspace_members",
+    "CONSTRAINT_NAME" : "3",
+    "COLUMN_NAME" : "user_id",
+    "ORDINAL_POSITION" : 2,
+    "REFERENCED_TABLE_NAME" : "workspaces",
+    "REFERENCED_COLUMN_NAME" : "owner_user_id"
+  }, {
+    "TABLE_NAME" : "workspace_members",
+    "CONSTRAINT_NAME" : "PRIMARY",
+    "COLUMN_NAME" : "workspace_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "workspace_members",
+    "CONSTRAINT_NAME" : "PRIMARY",
+    "COLUMN_NAME" : "user_id",
+    "ORDINAL_POSITION" : 2,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  }, {
+    "TABLE_NAME" : "workspace_members",
+    "CONSTRAINT_NAME" : "workspace_id",
+    "COLUMN_NAME" : "workspace_id",
+    "ORDINAL_POSITION" : 1,
+    "REFERENCED_TABLE_NAME" : null,
+    "REFERENCED_COLUMN_NAME" : null
+  } ],
+  "checks" : [ {
+    "TABLE_NAME" : "auth_tokens",
+    "CONSTRAINT_NAME" : "CONSTRAINT_1",
+    "CHECK_CLAUSE" : "`purpose` in ('verify','reset')"
+  }, {
+    "TABLE_NAME" : "completion_events",
+    "CONSTRAINT_NAME" : "CONSTRAINT_1",
+    "CHECK_CLAUSE" : "`cycle` >= 1"
+  }, {
+    "TABLE_NAME" : "execution_logs",
+    "CONSTRAINT_NAME" : "CONSTRAINT_1",
+    "CHECK_CLAUSE" : "`ended_at` >= `started_at`"
+  }, {
+    "TABLE_NAME" : "execution_logs",
+    "CONSTRAINT_NAME" : "CONSTRAINT_2",
+    "CHECK_CLAUSE" : "second(`started_at`) = 0 and microsecond(`started_at`) = 0 and second(`ended_at`) = 0 and microsecond(`ended_at`) = 0"
+  }, {
+    "TABLE_NAME" : "execution_logs",
+    "CONSTRAINT_NAME" : "CONSTRAINT_3",
+    "CHECK_CLAUSE" : "`actual_minutes` >= 0"
+  }, {
+    "TABLE_NAME" : "login_identities",
+    "CONSTRAINT_NAME" : "CONSTRAINT_1",
+    "CHECK_CLAUSE" : "`provider` in ('email','google','kakao','naver')"
+  }, {
+    "TABLE_NAME" : "mail_outbox",
+    "CONSTRAINT_NAME" : "CONSTRAINT_1",
+    "CHECK_CLAUSE" : "`state` in ('pending','sent','failed')"
+  }, {
+    "TABLE_NAME" : "mutation_requests",
+    "CONSTRAINT_NAME" : "response_json",
+    "CHECK_CLAUSE" : "json_valid(`response_json`)"
+  }, {
+    "TABLE_NAME" : "notification_preferences",
+    "CONSTRAINT_NAME" : "CONSTRAINT_1",
+    "CHECK_CLAUSE" : "`enabled` in (0,1) and `reflection_enabled` in (0,1)"
+  }, {
+    "TABLE_NAME" : "notification_preferences",
+    "CONSTRAINT_NAME" : "CONSTRAINT_2",
+    "CHECK_CLAUSE" : "`local_time` >= '00:00:00' and `local_time` < '24:00:00' and second(`local_time`) = 0"
+  }, {
+    "TABLE_NAME" : "notification_preferences",
+    "CONSTRAINT_NAME" : "CONSTRAINT_3",
+    "CHECK_CLAUSE" : "`days_before` between 0 and 30"
+  }, {
+    "TABLE_NAME" : "plan_revisions",
+    "CONSTRAINT_NAME" : "CONSTRAINT_1",
+    "CHECK_CLAUSE" : "`revision` >= 1"
+  }, {
+    "TABLE_NAME" : "plan_revisions",
+    "CONSTRAINT_NAME" : "CONSTRAINT_2",
+    "CHECK_CLAUSE" : "`start_date` <= `end_date`"
+  }, {
+    "TABLE_NAME" : "plan_revisions",
+    "CONSTRAINT_NAME" : "CONSTRAINT_3",
+    "CHECK_CLAUSE" : "`priority` in (1,2,3)"
+  }, {
+    "TABLE_NAME" : "plan_revisions",
+    "CONSTRAINT_NAME" : "CONSTRAINT_4",
+    "CHECK_CLAUSE" : "`estimated_minutes` >= 0"
+  }, {
+    "TABLE_NAME" : "plan_revisions",
+    "CONSTRAINT_NAME" : "CONSTRAINT_5",
+    "CHECK_CLAUSE" : "trim(`title`) <> '' and trim(`success_criteria`) <> ''"
+  }, {
+    "TABLE_NAME" : "plan_task_orders",
+    "CONSTRAINT_NAME" : "CONSTRAINT_1",
+    "CHECK_CLAUSE" : "`order_version` >= 1"
+  }, {
+    "TABLE_NAME" : "reflections",
+    "CONSTRAINT_NAME" : "CONSTRAINT_1",
+    "CHECK_CLAUSE" : "`period_start` <= `period_end`"
+  }, {
+    "TABLE_NAME" : "reflections",
+    "CONSTRAINT_NAME" : "CONSTRAINT_2",
+    "CHECK_CLAUSE" : "trim(`improvement_text`) <> ''"
+  }, {
+    "TABLE_NAME" : "tasks",
+    "CONSTRAINT_NAME" : "ck_task_sort_position",
+    "CHECK_CLAUSE" : "`sort_position` >= 1"
+  }, {
+    "TABLE_NAME" : "tasks",
+    "CONSTRAINT_NAME" : "CONSTRAINT_1",
+    "CHECK_CLAUSE" : "`priority` in (1,2,3)"
+  }, {
+    "TABLE_NAME" : "tasks",
+    "CONSTRAINT_NAME" : "CONSTRAINT_2",
+    "CHECK_CLAUSE" : "`estimated_minutes` >= 0"
+  }, {
+    "TABLE_NAME" : "tasks",
+    "CONSTRAINT_NAME" : "CONSTRAINT_3",
+    "CHECK_CLAUSE" : "`status` in ('in_progress','done')"
+  }, {
+    "TABLE_NAME" : "tasks",
+    "CONSTRAINT_NAME" : "CONSTRAINT_4",
+    "CHECK_CLAUSE" : "`cycle` >= 1 and `row_version` >= 1"
+  }, {
+    "TABLE_NAME" : "tasks",
+    "CONSTRAINT_NAME" : "CONSTRAINT_5",
+    "CHECK_CLAUSE" : "trim(`title`) <> ''"
+  }, {
+    "TABLE_NAME" : "task_tags",
+    "CONSTRAINT_NAME" : "CONSTRAINT_1",
+    "CHECK_CLAUSE" : "trim(`tag`) <> ''"
+  }, {
+    "TABLE_NAME" : "workspaces",
+    "CONSTRAINT_NAME" : "CONSTRAINT_1",
+    "CHECK_CLAUSE" : "`kind` = 'public' and `owner_user_id` is null and `id` = '00000000-0000-0000-0000-000000000001' or `kind` = 'personal' and `owner_user_id` is not null"
+  }, {
+    "TABLE_NAME" : "workspace_members",
+    "CONSTRAINT_NAME" : "CONSTRAINT_1",
+    "CHECK_CLAUSE" : "`role` = 'owner'"
+  } ],
+  "migrations" : [ {
+    "version" : "1",
+    "description" : "accounts workspaces and sessions",
+    "script" : "V1__accounts_workspaces_and_sessions.sql",
+    "checksum" : -2116160758,
+    "success" : true
+  }, {
+    "version" : "2",
+    "description" : "scoped diary",
+    "script" : "V2__scoped_diary.sql",
+    "checksum" : 1933036194,
+    "success" : true
+  }, {
+    "version" : "3",
+    "description" : "opt in reminders",
+    "script" : "V3__opt_in_reminders.sql",
+    "checksum" : 1083043978,
+    "success" : true
+  }, {
+    "version" : "4",
+    "description" : "task order",
+    "script" : "V4__task_order.sql",
+    "checksum" : 230391954,
+    "success" : true
+  } ]
+}

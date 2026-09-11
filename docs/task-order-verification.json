@@ -1,0 +1,150 @@
+{
+  "checked_at": "2026-09-11T02:29:08.408Z",
+  "status": "local_pass_upload_approval_required",
+  "backend": {
+    "tests": 20,
+    "failures": 0,
+    "restore_tables": 22,
+    "original_values_preserved_by_V3_to_V4_test": true
+  },
+  "web": {
+    "typecheck": "passed",
+    "unit_tests": 21,
+    "windows_build": "passed",
+    "browser_checks": [
+      "mouse handle drag persists in DB",
+      "reload keeps task IDs and order",
+      "keyboard lift arrow drop",
+      "move menu saves order",
+      "status change independent from dragging",
+      "Do manual order matches Plan",
+      "filtered lists hide drag handles",
+      "responsive sizes no horizontal overflow",
+      "stale UI conflict reloads latest server order",
+      "lost success response explicit same-key retry saves once",
+      "known rejection rolls back optimistic order",
+      "inline creation appends without navigation",
+      "Plan list toggle retained",
+      "mobile touch handle drag persists",
+      "mobile task detail and return preserve hierarchy"
+    ],
+    "sizes": [
+      {
+        "width": 1280,
+        "scroll": 1280,
+        "columns": "602px 602px"
+      },
+      {
+        "width": 1100,
+        "scroll": 1100,
+        "columns": "512px 512px"
+      },
+      {
+        "width": 900,
+        "scroll": 900,
+        "columns": "412px 412px"
+      },
+      {
+        "width": 760,
+        "scroll": 760,
+        "columns": "1fr"
+      },
+      {
+        "width": 390,
+        "scroll": 390,
+        "columns": "1fr"
+      },
+      {
+        "width": 320,
+        "scroll": 320,
+        "columns": "1fr"
+      }
+    ],
+    "page_errors": 0,
+    "page_regression": [
+      {
+        "route": "/",
+        "width": 1280
+      },
+      {
+        "route": "/plans",
+        "width": 1280
+      },
+      {
+        "route": "/tasks",
+        "width": 1280
+      },
+      {
+        "route": "/review",
+        "width": 1280
+      },
+      {
+        "route": "/account/login",
+        "width": 1280
+      },
+      {
+        "route": "/",
+        "width": 390
+      },
+      {
+        "route": "/plans",
+        "width": 390
+      },
+      {
+        "route": "/tasks",
+        "width": 390
+      },
+      {
+        "route": "/review",
+        "width": 390
+      },
+      {
+        "route": "/account/login",
+        "width": 390
+      },
+      {
+        "route": "/",
+        "width": 320
+      },
+      {
+        "route": "/plans",
+        "width": 320
+      },
+      {
+        "route": "/tasks",
+        "width": 320
+      },
+      {
+        "route": "/review",
+        "width": 320
+      },
+      {
+        "route": "/account/login",
+        "width": 320
+      }
+    ]
+  },
+  "contract": {
+    "version": "2.2",
+    "status": "design_not_final_acceptance",
+    "openapi": "0.3.0",
+    "paths": 44,
+    "operations": 63,
+    "schemas": 41,
+    "examples_validated": 45
+  },
+  "synthetic_only": true,
+  "production_writes": false,
+  "source_commits": {
+    "web": "ce7991ad19f751a88e7310eaee25be1202f2f835",
+    "backend": "a3b8a07b01d643c1cd4791d2d3e1f79b14e15234"
+  },
+  "notion_sync": "synchronized",
+  "notion_readback_at": "2026-09-11T02:36:39.124Z",
+  "deployment": {
+    "status": "not_run",
+    "automatic_review": "web push rejected for missing specific payload/destination approval",
+    "user_approval": "requested",
+    "linux_web_build": "not_run"
+  }
+}

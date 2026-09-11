@@ -2,8 +2,8 @@
   "fileKey": "UrFtdh7olajlLI2WP80X4P",
   "url": "https://www.figma.com/design/UrFtdh7olajlLI2WP80X4P",
   "authorization": "실제 웹 기록 포함 전송·제작 사용자 승인",
-  "status": "captures_transferred_component_integration_pending_mcp_quota",
-  "userNextAction": "사용자가 Figma 요금제 확인·변경 예정. 변경 완료는 미확인.",
+  "status": "excluded_from_workflow_by_user",
+  "userNextAction": null,
   "collections": {
     "primitives": "VariableCollectionId:2:2",
     "semantic": "VariableCollectionId:2:3"
@@ -229,5 +229,12 @@
     "Correct native date input rendered values",
     "Final screenshots and QA"
   ],
-  "operatingWebModified": false
+  "operatingWebModified": false,
+  "previousStatus": "captures_transferred_component_integration_pending_mcp_quota",
+  "userDecision": {
+    "date": "2026-09-11",
+    "text": "피그마는 안쓸거야 이제 배제해줘",
+    "existing_file_deleted": false,
+    "unfinished_work": "Historical only; not scheduled to resume"
+  }
 }

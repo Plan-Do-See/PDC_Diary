@@ -1,5 +1,5 @@
 {
-  "schema_version": "2.1",
+  "schema_version": "2.2",
   "document_type": "database_design_contract",
   "status": "design",
   "verified_against_database": false,
@@ -33,7 +33,7 @@
       "workspace_model": "user / login identity / workspace / workspace member; one owner in each personal workspace for now",
       "physical_ddl": "PDC_Diary_Spring/src/main/resources/db/migration/V1__accounts_workspaces_and_sessions.sql; V2 scoped domain; V3 opt-in reminders"
     },
-    "physical_schema_status": "V1-V3 migrated on isolated MariaDB 12.3.3; observed schema in mariadb-12.3.3-observed.json; production not verified",
+    "physical_schema_status": "V1-V4 migrated and compared on isolated MariaDB 12.3.3; production validation separate",
     "invariants": [
       "서버에서 공개/개인 자료 범위와 인증된 주체의 권한 결정; 클라이언트 계정 ID를 신뢰하지 않음",
       "목록·검색·상세·이력·변경·완료·실행·집계·근거·다음 계획 관계·내보내기에 같은 접근 경계 적용",
@@ -294,6 +294,12 @@
           "name": "updated_at",
           "type": "datetime(6) UTC",
           "nullable": false
+        },
+        {
+          "name": "sort_position",
+          "type": "int",
+          "nullable": false,
+          "note": "1 이상. 같은 계획 안의 사용자 순서. 재배치 API로만 변경하며 sort_position, id 순으로 표시."
         }
       ],
       "constraints": [
@@ -304,7 +310,9 @@
         "CHECK(estimated_minutes >= 0)",
         "CHECK(status IN ('in_progress','done'))",
         "CHECK(cycle >= 1 AND row_version >= 1)",
-        "CHECK(trim(title) <> '')"
+        "CHECK(trim(title) <> '')",
+        "CHECK(sort_position >= 1)",
+        "INDEX(workspace_id, plan_id, sort_position, id)"
       ],
       "delete_policy": "deleted_at 설정. 기본 목록과 모든 집계에서 제외; 관련 이력은 유지, 내보내기에 삭제 표시 포함.",
       "tags_rule": "생성·편집 API가 정규화 후 태그 1개 이상을 검증하고 task_tags 교체를 같은 트랜잭션에 포함. 교차 표 최소 개수는 CHECK로 주장하지 않음."
@@ -610,6 +618,33 @@
         "FOREIGN KEY(workspace_id) REFERENCES workspaces(id)"
       ],
       "policy": "도메인 쓰기와 같은 트랜잭션에 최종 응답을 기록한다. 동일 키·동일 작업·동일 본문은 기존 응답, 동일 키로 다른 작업/본문은 409. 실패 트랜잭션은 요청 행도 롤백. 응답에는 비밀값을 넣지 않는다."
+    },
+    {
+      "name": "plan_task_orders",
+      "purpose": "계획 내용 이력과 분리한 할 일 순서 버전",
+      "fields": [
+        {
+          "name": "workspace_id",
+          "type": "char(36) ascii_bin",
+          "nullable": false
+        },
+        {
+          "name": "plan_id",
+          "type": "char(36) ascii_bin",
+          "nullable": false
+        },
+        {
+          "name": "order_version",
+          "type": "int",
+          "nullable": false,
+          "note": "초기1, 할 일 추가/삭제/복원/소속 변경과 재배치 시 +1"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY(plan_id)",
+        "FOREIGN KEY(workspace_id, plan_id) REFERENCES plans(workspace_id, id)",
+        "CHECK(order_version >= 1)"
+      ]
     }
   ],
   "relationships": [
@@ -621,7 +656,8 @@
     "completion_events 1:0..1 execution_logs",
     "plans 1:N reflections",
     "reflections 1:0..1 carry_forwards",
-    "carry_forwards N:1 plans (대상 계획은 UNIQUE로 0..1 연결)"
+    "carry_forwards N:1 plans (대상 계획은 UNIQUE로 0..1 연결)",
+    "plans 1:1 plan_task_orders"
   ],
   "date_rules": {
     "calendar_timezone": "Asia/Seoul",
@@ -678,10 +714,28 @@
       "due": "due_date ASC, priority ASC, created_at ASC, id ASC",
       "priority": "priority ASC, due_date ASC, created_at ASC, id ASC",
       "estimate": "estimated_minutes DESC, due_date ASC, created_at ASC, id ASC",
-      "newest": "created_at DESC, id ASC"
+      "newest": "created_at DESC, id ASC",
+      "manual": "plan_id ASC, sort_position ASC, id ASC"
     },
     "default_sort": "due",
-    "visible": "주 기준 및 전체 동률 처리 순서를 화면에 표시"
+    "visible": "주 기준 및 전체 동률 처리 순서를 화면에 표시",
+    "manual_order": {
+      "decision_date": "2026-09-11",
+      "status": "implemented_locally_verified_deployment_pending",
+      "scope": "same workspace and plan; full non-deleted task list",
+      "snapshot": "GET /api/v1/{public|me}/plans/{id}/task-order returns plan_id, order_version, tasks in one REPEATABLE READ snapshot",
+      "write": "POST same endpoint; expected_order_version and complete unique task_ids, required CSRF and Idempotency-Key",
+      "concurrency": "workspace FOR UPDATE serializes all writes; validate membership and order version; atomic order positions, changed task row_version/updated_at and order_version; replay does not reapply",
+      "conflicts": [
+        "ORDER_VERSION_CONFLICT",
+        "ORDER_MEMBERSHIP_CONFLICT",
+        "IDEMPOTENCY_CONFLICT"
+      ],
+      "initialization": "V4 initializes each plan by existing due_date, priority, created_at, id including deleted rows; original data values preserved",
+      "lifecycle": "new/restored/transferred tasks append; source and target versions increment on transfer; duplicate follows source manual order; completion/execution/plan revisions do not change through reordering",
+      "web": "Plan defaults to 2-column grid with per-plan task lists; mobile 1-column. Do supports dragging only with one plan + manual sort + no narrowing filters. Automatic sorts remain available.",
+      "capacity": "positions and versions 1..2147483647; ORDER_CAPACITY_REACHED rolls back overflow"
+    }
   },
   "export": {
     "access_scope": "공개 과제 또는 인증된 계정에 허용된 해당 공간의 도메인 자료 전체; 다른 공간·계정 자료는 제외",
@@ -700,10 +754,11 @@
       "completion_events",
       "reflections",
       "carry_forwards",
-      "현재 집계와 집계 조건"
+      "현재 집계와 집계 조건",
+      "plan_task_orders"
     ],
     "exclude": "DB 자격증명·환경변수·mutation_requests 내부 응답 캐시·계정/인증 비밀정보·권한 없는 개인 자료. 해당 공간에 허용된 도메인 자료는 전부 포함.",
-    "sort": "개체 배열 ID 기준, task_tags는 (task_id, tag) 기준 결정 정렬",
+    "sort": "개체 배열 ID 기준; task_tags는 (task_id, tag), plan_task_orders는 plan_id 기준. 사용자 순서는 tasks.sort_position으로 보존.",
     "restore_verification": "exported_at 같은 생성 메타데이터만 제외하고 ID·날짜·값·단위·FK 재대조"
   },
   "finalization_gate": [
@@ -737,13 +792,13 @@
       "personal": "/api/v1/me",
       "auth": "/api/v1/auth"
     },
-    "documentation_version": "0.2.0",
+    "documentation_version": "0.3.0",
     "specification_mirrors": [
       "PDC_Diary/contracts/openapi.yaml",
       "PDC_Diary/contracts/openapi.json"
     ],
     "frontend_guide": "PDC_Diary/docs/frontend-integration.md",
-    "documentation_status": "42 paths, 59 operations, 38 schemas; source and examples checked; local Swagger rendered; not a deployed API certification"
+    "documentation_status": "44 paths, 63 operations, 41 schemas; task-order extension implementation in progress; not final DB acceptance"
   },
   "canonical_repository": "PDC_Diary_Spring",
   "canonical_path": "contracts/pds-schema-v2.json",
@@ -751,8 +806,8 @@
   "physical_schema_observation": {
     "file": "mariadb-12.3.3-observed.json",
     "database_version": "12.3.3-MariaDB",
-    "tables_including_flyway": 21,
-    "columns": 131,
+    "tables_including_flyway": 22,
+    "columns": 135,
     "source": "information_schema queried by BackendIntegrationTests.physicalSchemaEvidenceComesFromMariaDb",
     "platform_note": "Windows lower_case_table_names folds SPRING_SESSION names; production Linux container verification remains separate"
   },
@@ -1578,18 +1633,20 @@
   ],
   "local_verification": {
     "status": "passed",
-    "tests": 14,
+    "tests": 20,
     "failures": 0,
     "errors": 0,
     "passed_migrations": [
       "1",
       "2",
-      "3"
+      "3",
+      "4"
     ],
-    "restored_tables": 21,
+    "restored_tables": 22,
     "external_restic_restore_verified": false,
     "deployed_application_verified": false,
     "real_social_login_verified": false,
-    "real_email_delivery_verified": false
+    "real_email_delivery_verified": false,
+    "checked_at": "2026-09-11T02:02:31.933948200Z"
   }
 }
