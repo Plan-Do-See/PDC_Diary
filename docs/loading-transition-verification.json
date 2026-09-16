@@ -1,0 +1,286 @@
+{
+  "checked_at": "2026-09-11T03:46:45.335Z",
+  "source": "production local Edge, actual isolated API/DB; browser RSC request delayed500ms",
+  "before": {
+    "samples": 172,
+    "loaderFrames": 75,
+    "blankFrames": 75,
+    "commonMainRetained": true,
+    "phase": "before",
+    "idleRequests": 0,
+    "requests": [
+      {
+        "path": "/tasks",
+        "type": "fetch"
+      },
+      {
+        "path": "/review",
+        "type": "fetch"
+      },
+      {
+        "path": "/plans",
+        "type": "fetch"
+      },
+      {
+        "path": "/tasks",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/plans",
+        "type": "fetch"
+      }
+    ],
+    "documentRequests": 0
+  },
+  "after": {
+    "samples": 195,
+    "loaderFrames": 0,
+    "blankFrames": 0,
+    "commonMainRetained": true,
+    "phase": "after",
+    "idleRequests": 0,
+    "requests": [
+      {
+        "path": "/tasks",
+        "type": "fetch"
+      },
+      {
+        "path": "/review",
+        "type": "fetch"
+      },
+      {
+        "path": "/plans",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/tasks",
+        "type": "fetch"
+      },
+      {
+        "path": "/plans",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      },
+      {
+        "path": "/api/v1/public/plans/:planId/task-order",
+        "type": "fetch"
+      }
+    ],
+    "documentRequests": 0
+  },
+  "checks": {
+    "LT-01": true,
+    "LT-02": true,
+    "LT-03": true,
+    "LT-04": "NM-01..NM-11 passed"
+  },
+  "typecheck": "passed as part of build",
+  "windows_build": "passed",
+  "notion_sync": "synchronized",
+  "post_requests": 0,
+  "production_changed": false,
+  "limits": [
+    "not a request-count/cache optimization",
+    "four-second idle observation does not establish indefinite absence of polling",
+    "authenticated personal navigation not separately tested"
+  ]
+}

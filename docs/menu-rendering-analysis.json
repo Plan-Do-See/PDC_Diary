@@ -1,0 +1,111 @@
+{
+  "checked_at": "2026-09-11T03:53:04.724Z",
+  "scenario": "open synthetic plan then menu Do -> Plan, read-only",
+  "sameDocument": true,
+  "sameMain": true,
+  "sameCard": false,
+  "returnedCardOpen": false,
+  "documentRequests": 0,
+  "rscRequests": 2,
+  "taskOrderRequests": 17,
+  "requests": [
+    {
+      "type": "fetch",
+      "rsc": true,
+      "path": "/tasks"
+    },
+    {
+      "type": "fetch",
+      "rsc": true,
+      "path": "/plans"
+    },
+    {
+      "type": "fetch",
+      "rsc": false,
+      "path": "/api/v1/public/plans/:planId/task-order"
+    },
+    {
+      "type": "fetch",
+      "rsc": false,
+      "path": "/api/v1/public/plans/:planId/task-order"
+    },
+    {
+      "type": "fetch",
+      "rsc": false,
+      "path": "/api/v1/public/plans/:planId/task-order"
+    },
+    {
+      "type": "fetch",
+      "rsc": false,
+      "path": "/api/v1/public/plans/:planId/task-order"
+    },
+    {
+      "type": "fetch",
+      "rsc": false,
+      "path": "/api/v1/public/plans/:planId/task-order"
+    },
+    {
+      "type": "fetch",
+      "rsc": false,
+      "path": "/api/v1/public/plans/:planId/task-order"
+    },
+    {
+      "type": "fetch",
+      "rsc": false,
+      "path": "/api/v1/public/plans/:planId/task-order"
+    },
+    {
+      "type": "fetch",
+      "rsc": false,
+      "path": "/api/v1/public/plans/:planId/task-order"
+    },
+    {
+      "type": "fetch",
+      "rsc": false,
+      "path": "/api/v1/public/plans/:planId/task-order"
+    },
+    {
+      "type": "fetch",
+      "rsc": false,
+      "path": "/api/v1/public/plans/:planId/task-order"
+    },
+    {
+      "type": "fetch",
+      "rsc": false,
+      "path": "/api/v1/public/plans/:planId/task-order"
+    },
+    {
+      "type": "fetch",
+      "rsc": false,
+      "path": "/api/v1/public/plans/:planId/task-order"
+    },
+    {
+      "type": "fetch",
+      "rsc": false,
+      "path": "/api/v1/public/plans/:planId/task-order"
+    },
+    {
+      "type": "fetch",
+      "rsc": false,
+      "path": "/api/v1/public/plans/:planId/task-order"
+    },
+    {
+      "type": "fetch",
+      "rsc": false,
+      "path": "/api/v1/public/plans/:planId/task-order"
+    },
+    {
+      "type": "fetch",
+      "rsc": false,
+      "path": "/api/v1/public/plans/:planId/task-order"
+    },
+    {
+      "type": "fetch",
+      "rsc": false,
+      "path": "/api/v1/public/plans/:planId/task-order"
+    }
+  ],
+  "application_code_changed": false,
+  "notion_sync": "synchronized",
+  "notion_readback_at": "2026-09-11T03:54:38.908Z"
+}

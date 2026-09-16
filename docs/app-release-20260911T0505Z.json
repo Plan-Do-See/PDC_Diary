@@ -1,0 +1,684 @@
+{
+  "prepared_at": "2026-09-11T05:03:17.605Z",
+  "release": "20260911T0505Z",
+  "status": "deployed_verified",
+  "web": {
+    "repository": "https://github.com/Plan-Do-See/PDC_Diary_Nextjs",
+    "branch": "codex/task-block-order",
+    "commit": "a6e652c5ae13a491eac8f77260bec4645bcfb6ad",
+    "archive": "D:/workspace/PDC_Diary/tmp/pds-web-context-20260911T0505Z.tar.gz",
+    "sha256": "6358587c4dd6d6d8b55474621a6b5ec195920b885f2556dcc97e3b8a9f9eea99",
+    "files": [
+      {
+        "path": "Dockerfile",
+        "sha256": "6e7f6616d432933a48c75d254607015a61e02f552a516ad932d41b816abe785b",
+        "git_sha256": "6e7f6616d432933a48c75d254607015a61e02f552a516ad932d41b816abe785b"
+      },
+      {
+        "path": "next-env.d.ts",
+        "sha256": "1862ac4bbbc5192d4bf562161df66ea547ed3e67173100656ab606ae9797db2b",
+        "git_sha256": "1862ac4bbbc5192d4bf562161df66ea547ed3e67173100656ab606ae9797db2b"
+      },
+      {
+        "path": "next.config.ts",
+        "sha256": "1653e86a61b40415feb7d7f94db7c38eb76fcd8c49633b94ecbfd69a194ef3cd",
+        "git_sha256": "1653e86a61b40415feb7d7f94db7c38eb76fcd8c49633b94ecbfd69a194ef3cd"
+      },
+      {
+        "path": "package-lock.json",
+        "sha256": "fecfaa7aa1539ade4829ca55a478a42c0eed81da4fd7ee1eb50a94eaeb2569b9",
+        "git_sha256": "fecfaa7aa1539ade4829ca55a478a42c0eed81da4fd7ee1eb50a94eaeb2569b9"
+      },
+      {
+        "path": "package.json",
+        "sha256": "3494555694a96ebb0b90e8332dcd6f8289695266840418ecba9a06f82b386708",
+        "git_sha256": "3494555694a96ebb0b90e8332dcd6f8289695266840418ecba9a06f82b386708"
+      },
+      {
+        "path": "public/.gitkeep",
+        "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "git_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+      },
+      {
+        "path": "src/app/(diary)/[...segments]/error.tsx",
+        "sha256": "b88087d0b8329c29c691308654c8a3eddbf5fc15fa4acc1f2ca6d185ac2a88c3",
+        "git_sha256": "b88087d0b8329c29c691308654c8a3eddbf5fc15fa4acc1f2ca6d185ac2a88c3"
+      },
+      {
+        "path": "src/app/(diary)/[...segments]/page.tsx",
+        "sha256": "d4a3353f652d4735bdf46d75d7cb7026b301f54cbf5a3238ead9c52657d16fa9",
+        "git_sha256": "d4a3353f652d4735bdf46d75d7cb7026b301f54cbf5a3238ead9c52657d16fa9"
+      },
+      {
+        "path": "src/app/(diary)/layout.tsx",
+        "sha256": "496d6ec89f835c7074d3e909bee92db5a4851a9abdd228126a5aed8ea74e43c2",
+        "git_sha256": "496d6ec89f835c7074d3e909bee92db5a4851a9abdd228126a5aed8ea74e43c2"
+      },
+      {
+        "path": "src/app/(diary)/plans/[planId]/duplicate/page.tsx",
+        "sha256": "910c7b8cc1633e4558f955a617b6bbf71d5cec16c3cb4a0eb44b9ba332416ec5",
+        "git_sha256": "910c7b8cc1633e4558f955a617b6bbf71d5cec16c3cb4a0eb44b9ba332416ec5"
+      },
+      {
+        "path": "src/app/(diary)/plans/[planId]/edit/page.tsx",
+        "sha256": "db42caedb068f5d391a7e2517a504fb599fb5deb318f409cbc4060971718be80",
+        "git_sha256": "db42caedb068f5d391a7e2517a504fb599fb5deb318f409cbc4060971718be80"
+      },
+      {
+        "path": "src/app/(diary)/plans/[planId]/page.tsx",
+        "sha256": "26787af29184d722e4ba2910b1a54a33329cf9af0606d766518e4f6c54597e8b",
+        "git_sha256": "26787af29184d722e4ba2910b1a54a33329cf9af0606d766518e4f6c54597e8b"
+      },
+      {
+        "path": "src/app/(diary)/plans/error.tsx",
+        "sha256": "6c3545cd5491cba3db0febccb4e3ee3fbe21b497dea8955dd41b9f88e64aa35b",
+        "git_sha256": "6c3545cd5491cba3db0febccb4e3ee3fbe21b497dea8955dd41b9f88e64aa35b"
+      },
+      {
+        "path": "src/app/(diary)/plans/layout.tsx",
+        "sha256": "30f2014dc72c90605c13a5d9a489bf998dec6801f12b9146342237b58eb255e6",
+        "git_sha256": "30f2014dc72c90605c13a5d9a489bf998dec6801f12b9146342237b58eb255e6"
+      },
+      {
+        "path": "src/app/(diary)/plans/new/page.tsx",
+        "sha256": "d8d65e712370274d9736a21db8b252eea93b96c56188f6fdbf6e318169d4d11a",
+        "git_sha256": "d8d65e712370274d9736a21db8b252eea93b96c56188f6fdbf6e318169d4d11a"
+      },
+      {
+        "path": "src/app/(diary)/plans/not-found.tsx",
+        "sha256": "6caf3905329c410af1b7a77b9249fcb08cf9f05c8256db4b9ec7ac3a55eb98ce",
+        "git_sha256": "6caf3905329c410af1b7a77b9249fcb08cf9f05c8256db4b9ec7ac3a55eb98ce"
+      },
+      {
+        "path": "src/app/(diary)/plans/page.tsx",
+        "sha256": "683604a1d6c10b01c1147af2a13e71aac0bd9647bd8ec3db06dbc05ff4a83bd7",
+        "git_sha256": "683604a1d6c10b01c1147af2a13e71aac0bd9647bd8ec3db06dbc05ff4a83bd7"
+      },
+      {
+        "path": "src/app/account/[[...action]]/page.tsx",
+        "sha256": "192a32bdfbbd6e104fd31ce58b115d2cb562c133bb1f284392259fd0514962df",
+        "git_sha256": "192a32bdfbbd6e104fd31ce58b115d2cb562c133bb1f284392259fd0514962df"
+      },
+      {
+        "path": "src/app/fonts/SUIT-LICENSE.txt",
+        "sha256": "30d101ee3c35ef629d622d933d261a27b2f60223e0a3b0f36791e569c2b9daa9",
+        "git_sha256": "30d101ee3c35ef629d622d933d261a27b2f60223e0a3b0f36791e569c2b9daa9"
+      },
+      {
+        "path": "src/app/fonts/SUIT-Variable.woff2",
+        "sha256": "aa894a204d5a6fbae259dac6868d350cbd373a390caee0313f92946af741df23",
+        "git_sha256": "aa894a204d5a6fbae259dac6868d350cbd373a390caee0313f92946af741df23"
+      },
+      {
+        "path": "src/app/fonts/SUITE-LICENSE.txt",
+        "sha256": "4511d445dd33512b573bcb7bea8a690538f46c04f3e72f002fdad7987c8286fa",
+        "git_sha256": "4511d445dd33512b573bcb7bea8a690538f46c04f3e72f002fdad7987c8286fa"
+      },
+      {
+        "path": "src/app/fonts/SUITE-Variable.woff2",
+        "sha256": "fc5e0648d5413b55b79ebbab0f50de561a026574cba3a9c8eb03d5bddd432263",
+        "git_sha256": "fc5e0648d5413b55b79ebbab0f50de561a026574cba3a9c8eb03d5bddd432263"
+      },
+      {
+        "path": "src/app/globals.css",
+        "sha256": "cd7afef6407dcc955097626e8b92281c26b5b45864e0496c7144e8903af91b0f",
+        "git_sha256": "cd7afef6407dcc955097626e8b92281c26b5b45864e0496c7144e8903af91b0f"
+      },
+      {
+        "path": "src/app/layout.tsx",
+        "sha256": "7e0ea740ba250b923a8e013e4e767746e670325123a7981c725236aa7c5e1c06",
+        "git_sha256": "7e0ea740ba250b923a8e013e4e767746e670325123a7981c725236aa7c5e1c06"
+      },
+      {
+        "path": "src/app/page.tsx",
+        "sha256": "ed7302d0c16e7e7ea5f28799892edb53a1fa765c9a35151b57f27da0952c749f",
+        "git_sha256": "ed7302d0c16e7e7ea5f28799892edb53a1fa765c9a35151b57f27da0952c749f"
+      },
+      {
+        "path": "src/components/account.tsx",
+        "sha256": "8d08f20eddde3ea3ac8bd5fb3707bb5d27d752e196e3ec3879c94c12458972f3",
+        "git_sha256": "8d08f20eddde3ea3ac8bd5fb3707bb5d27d752e196e3ec3879c94c12458972f3"
+      },
+      {
+        "path": "src/components/back-navigation.tsx",
+        "sha256": "cd01028cc97b136abcffe363eeb96bcffe6be34e66519feca0f97cf461900f09",
+        "git_sha256": "cd01028cc97b136abcffe363eeb96bcffe6be34e66519feca0f97cf461900f09"
+      },
+      {
+        "path": "src/components/brand-mark.tsx",
+        "sha256": "4d17a3fe131330b857128f343e121ff4494fc7b8dc3864165c1e6f023a249252",
+        "git_sha256": "4d17a3fe131330b857128f343e121ff4494fc7b8dc3864165c1e6f023a249252"
+      },
+      {
+        "path": "src/components/collection-view.tsx",
+        "sha256": "c755500cbaccc0ef0bf1753a5465c4c27c2ad51ff27ad2a8ba8245de845b7878",
+        "git_sha256": "c755500cbaccc0ef0bf1753a5465c4c27c2ad51ff27ad2a8ba8245de845b7878"
+      },
+      {
+        "path": "src/components/diary-workbench.module.css",
+        "sha256": "dc8a832ec1db588f307061adad60602c4832fa55e7ecf3d4c5cff6af5a195304",
+        "git_sha256": "dc8a832ec1db588f307061adad60602c4832fa55e7ecf3d4c5cff6af5a195304"
+      },
+      {
+        "path": "src/components/diary-workbench.tsx",
+        "sha256": "b8ca5b315b02b535131beda346c441187056d5d8e9889eb0a2da89c4dcfe709b",
+        "git_sha256": "b8ca5b315b02b535131beda346c441187056d5d8e9889eb0a2da89c4dcfe709b"
+      },
+      {
+        "path": "src/components/inline-task-form.module.css",
+        "sha256": "3d32c91815fb570a22fff7a6c94f6344fd93f396cc1941780e14b323e8d731af",
+        "git_sha256": "3d32c91815fb570a22fff7a6c94f6344fd93f396cc1941780e14b323e8d731af"
+      },
+      {
+        "path": "src/components/inline-task-form.tsx",
+        "sha256": "531cf3ae10217192f55cd77daecb4b2a91b4dd7f07db4ba34a4dcb274e1ff663",
+        "git_sha256": "531cf3ae10217192f55cd77daecb4b2a91b4dd7f07db4ba34a4dcb274e1ff663"
+      },
+      {
+        "path": "src/components/landing.module.css",
+        "sha256": "75e8740642df33095673ff1714673a07e489f0361ddc1899a6eefb869a152054",
+        "git_sha256": "75e8740642df33095673ff1714673a07e489f0361ddc1899a6eefb869a152054"
+      },
+      {
+        "path": "src/components/landing.tsx",
+        "sha256": "d0089fcb191cfd0655d2018b1f9bd5d920fef4fbe766ed971f5e096c3001a062",
+        "git_sha256": "d0089fcb191cfd0655d2018b1f9bd5d920fef4fbe766ed971f5e096c3001a062"
+      },
+      {
+        "path": "src/components/mutation.tsx",
+        "sha256": "8b50476cf02fbf67d65d7ddf7e18c37aae89fd36bf23bfca61c36f4474cf4535",
+        "git_sha256": "8b50476cf02fbf67d65d7ddf7e18c37aae89fd36bf23bfca61c36f4474cf4535"
+      },
+      {
+        "path": "src/components/plan-connections.tsx",
+        "sha256": "290cff32872dd3583544426950ea9ac7a88fb5de255aa73f94860ef5f09473f3",
+        "git_sha256": "290cff32872dd3583544426950ea9ac7a88fb5de255aa73f94860ef5f09473f3"
+      },
+      {
+        "path": "src/components/plan-form.tsx",
+        "sha256": "02f351397a62cf6082fe0bcb5fb7da6c19f14ec37371de409a66fd6cbdf0ffe1",
+        "git_sha256": "02f351397a62cf6082fe0bcb5fb7da6c19f14ec37371de409a66fd6cbdf0ffe1"
+      },
+      {
+        "path": "src/components/plan-tab-content.tsx",
+        "sha256": "5e29a1634df20fdd5f4e1712f9047091a1afa535db8c4ef7209c5d7211b78f90",
+        "git_sha256": "5e29a1634df20fdd5f4e1712f9047091a1afa535db8c4ef7209c5d7211b78f90"
+      },
+      {
+        "path": "src/components/priority.tsx",
+        "sha256": "6a4fc12e6c95c3f8e7b70cdc65bcaa06b4265bd2dc51d4ea23cb9d726ed333b8",
+        "git_sha256": "6a4fc12e6c95c3f8e7b70cdc65bcaa06b4265bd2dc51d4ea23cb9d726ed333b8"
+      },
+      {
+        "path": "src/components/private-gate.tsx",
+        "sha256": "710919b6653771189241af9c75ed5013bce788136188c294cb5b73f058f0ad8b",
+        "git_sha256": "710919b6653771189241af9c75ed5013bce788136188c294cb5b73f058f0ad8b"
+      },
+      {
+        "path": "src/components/review.module.css",
+        "sha256": "c2b7ca1a026fb9aeb92b02e2881ad9232c5a3b97aeac3a53b418a57783cc9a71",
+        "git_sha256": "c2b7ca1a026fb9aeb92b02e2881ad9232c5a3b97aeac3a53b418a57783cc9a71"
+      },
+      {
+        "path": "src/components/review.tsx",
+        "sha256": "b7dbc8d82a0affba09dc9966431403e2eed89aa57864ea7ce82d2271b797966b",
+        "git_sha256": "b7dbc8d82a0affba09dc9966431403e2eed89aa57864ea7ce82d2271b797966b"
+      },
+      {
+        "path": "src/components/screens/edit-plan.tsx",
+        "sha256": "a3d774d5ff0563b97d26738095021b93f12f67955ef1698ad9bc699d33ab24c5",
+        "git_sha256": "a3d774d5ff0563b97d26738095021b93f12f67955ef1698ad9bc699d33ab24c5"
+      },
+      {
+        "path": "src/components/screens/new-plan.tsx",
+        "sha256": "e30cf5c6f3d0b6a1f28613dde31afeaf358fa5312128881cf4a571d3597e023e",
+        "git_sha256": "e30cf5c6f3d0b6a1f28613dde31afeaf358fa5312128881cf4a571d3597e023e"
+      },
+      {
+        "path": "src/components/screens/plan.tsx",
+        "sha256": "1665672306f741a5947a1f0d5cbd9e43d110a9180e8f566107b611df23ac7ef8",
+        "git_sha256": "1665672306f741a5947a1f0d5cbd9e43d110a9180e8f566107b611df23ac7ef8"
+      },
+      {
+        "path": "src/components/screens/plans.tsx",
+        "sha256": "0680b0bbf1985a4cc44e54c1d72f302d9e9b67ccdfe26fee717ef4983125b908",
+        "git_sha256": "0680b0bbf1985a4cc44e54c1d72f302d9e9b67ccdfe26fee717ef4983125b908"
+      },
+      {
+        "path": "src/components/task-filters.tsx",
+        "sha256": "eee17bc31f0b63c40b47c7c88a35fe0143caaeae0061301fd238c613ce94abc6",
+        "git_sha256": "eee17bc31f0b63c40b47c7c88a35fe0143caaeae0061301fd238c613ce94abc6"
+      },
+      {
+        "path": "src/components/task-order-list.module.css",
+        "sha256": "51e83ae074613c2004f86de163017e43ea41ac4285c7b65f29aad9fcbed36939",
+        "git_sha256": "51e83ae074613c2004f86de163017e43ea41ac4285c7b65f29aad9fcbed36939"
+      },
+      {
+        "path": "src/components/task-order-list.tsx",
+        "sha256": "7340b5e28311dd702a3aeea2b998acd449d36d0ba69a61641b2e28826f2953fc",
+        "git_sha256": "7340b5e28311dd702a3aeea2b998acd449d36d0ba69a61641b2e28826f2953fc"
+      },
+      {
+        "path": "src/components/task-status.tsx",
+        "sha256": "30bac6a1d9f816e43357246312c6d796898a2af9e09079964f147bb08a09384c",
+        "git_sha256": "30bac6a1d9f816e43357246312c6d796898a2af9e09079964f147bb08a09384c"
+      },
+      {
+        "path": "src/components/tasks.tsx",
+        "sha256": "1e03f651c9f301ea5a34a5e9ea68ff7b528cf2236736057f65d0f2fb4e92edf2",
+        "git_sha256": "1e03f651c9f301ea5a34a5e9ea68ff7b528cf2236736057f65d0f2fb4e92edf2"
+      },
+      {
+        "path": "src/components/use-animated-disclosure.ts",
+        "sha256": "a09fa9e6741bf6c1272caa256b2c96889edfad8740dc2bab53b1197b0a8191bf",
+        "git_sha256": "a09fa9e6741bf6c1272caa256b2c96889edfad8740dc2bab53b1197b0a8191bf"
+      },
+      {
+        "path": "src/components/workspace-frame.tsx",
+        "sha256": "48753eec00f0a2ea3c1a4f4c7eaf23d4d2d4c4567d7c9952b2e47897bdeba512",
+        "git_sha256": "48753eec00f0a2ea3c1a4f4c7eaf23d4d2d4c4567d7c9952b2e47897bdeba512"
+      },
+      {
+        "path": "src/components/workspace-navigation.tsx",
+        "sha256": "3a299f19aec70736c36f51b3b91ac87713ae34df568d5ad214ba6db22c33b4b3",
+        "git_sha256": "3a299f19aec70736c36f51b3b91ac87713ae34df568d5ad214ba6db22c33b4b3"
+      },
+      {
+        "path": "src/components/workspace-tab-data.tsx",
+        "sha256": "4d57a104e093f979c24179e38be402cb8dddcf712c1b698a622a744ff973ccc8",
+        "git_sha256": "4d57a104e093f979c24179e38be402cb8dddcf712c1b698a622a744ff973ccc8"
+      },
+      {
+        "path": "src/components/workspace-tabs.tsx",
+        "sha256": "b37955859b769c1b867b3d9bc86290b3205ff5e37d2df6f20d579a4688c7d468",
+        "git_sha256": "b37955859b769c1b867b3d9bc86290b3205ff5e37d2df6f20d579a4688c7d468"
+      },
+      {
+        "path": "src/components/workspace.module.css",
+        "sha256": "b21f2cfce9cd95ef046894c990d3eaaddfa7914a2d7b4b7ade66bb5c0a5f42eb",
+        "git_sha256": "b21f2cfce9cd95ef046894c990d3eaaddfa7914a2d7b4b7ade66bb5c0a5f42eb"
+      },
+      {
+        "path": "src/components/workspace.tsx",
+        "sha256": "c8279febab3593472017f32bceee35bebe2d13480111d41713bbe3be0f74d7de",
+        "git_sha256": "c8279febab3593472017f32bceee35bebe2d13480111d41713bbe3be0f74d7de"
+      },
+      {
+        "path": "src/lib/api/account-server.ts",
+        "sha256": "c2a30a48253c1685dd122234db44d1b628ec70f553f29b84937fa5195948f6d3",
+        "git_sha256": "c2a30a48253c1685dd122234db44d1b628ec70f553f29b84937fa5195948f6d3"
+      },
+      {
+        "path": "src/lib/api/client.ts",
+        "sha256": "80e045e3dcbf267c1e054cccd173ae42ddc9beef7ed6bfe3105f84fa7ab64fca",
+        "git_sha256": "80e045e3dcbf267c1e054cccd173ae42ddc9beef7ed6bfe3105f84fa7ab64fca"
+      },
+      {
+        "path": "src/lib/api/errors.ts",
+        "sha256": "c650461a2f1e8af38743541b25b379c7cbcf71072ab8d2e07f955835ddbf2e27",
+        "git_sha256": "c650461a2f1e8af38743541b25b379c7cbcf71072ab8d2e07f955835ddbf2e27"
+      },
+      {
+        "path": "src/lib/api/generated.ts",
+        "sha256": "75ed9c92804b100409e9892643abeb76a3d11ac75dc0234d4f1636e01003a96a",
+        "git_sha256": "75ed9c92804b100409e9892643abeb76a3d11ac75dc0234d4f1636e01003a96a"
+      },
+      {
+        "path": "src/lib/api/plans-server.ts",
+        "sha256": "cb11875b06b415216ab0a733218e68db9b942dc54c9bf7a06fc0a2cf445b2425",
+        "git_sha256": "cb11875b06b415216ab0a733218e68db9b942dc54c9bf7a06fc0a2cf445b2425"
+      },
+      {
+        "path": "src/lib/api/response-shapes.json",
+        "sha256": "a9abe106056dc94774d586363563068e3e47078003d5f21d4c8bf8ffb211b559",
+        "git_sha256": "a9abe106056dc94774d586363563068e3e47078003d5f21d4c8bf8ffb211b559"
+      },
+      {
+        "path": "src/lib/api/server.ts",
+        "sha256": "0dde5ae116300c9745e6920a4dc03a4a275ac0f9d64e4f62d14ca3d35fdb78e5",
+        "git_sha256": "0dde5ae116300c9745e6920a4dc03a4a275ac0f9d64e4f62d14ca3d35fdb78e5"
+      },
+      {
+        "path": "src/lib/api/validate.ts",
+        "sha256": "96db611a0f630731c48990129f64457108de682c6bd55950dc075a262f83ca91",
+        "git_sha256": "96db611a0f630731c48990129f64457108de682c6bd55950dc075a262f83ca91"
+      },
+      {
+        "path": "src/lib/diary.ts",
+        "sha256": "3f0e42145947ded269531c32b5d6801cf8ee61be9640e37820487f84c823ffeb",
+        "git_sha256": "3f0e42145947ded269531c32b5d6801cf8ee61be9640e37820487f84c823ffeb"
+      },
+      {
+        "path": "src/lib/plans.ts",
+        "sha256": "4c0cf13f89470abfe391d6ea28c8572c8c9acaf77c63db805b2ab59aaacfa665",
+        "git_sha256": "4c0cf13f89470abfe391d6ea28c8572c8c9acaf77c63db805b2ab59aaacfa665"
+      },
+      {
+        "path": "src/lib/presentation.ts",
+        "sha256": "306f7fe2a5489cb9fcd9ef65e3c4d658cbd6f5c667e2ba9881f2f9abb2bcfb20",
+        "git_sha256": "306f7fe2a5489cb9fcd9ef65e3c4d658cbd6f5c667e2ba9881f2f9abb2bcfb20"
+      },
+      {
+        "path": "src/lib/scope.ts",
+        "sha256": "6917d172e2f9e9bc5d07574ee43c5db4c4f1e1f6be85a9c42ca9fc0c405e3f1f",
+        "git_sha256": "6917d172e2f9e9bc5d07574ee43c5db4c4f1e1f6be85a9c42ca9fc0c405e3f1f"
+      },
+      {
+        "path": "src/lib/task-filters.ts",
+        "sha256": "3062df5d0607bd2a8d14eae92cca86dd5f00e6649f49353a079cd4158a817a5f",
+        "git_sha256": "3062df5d0607bd2a8d14eae92cca86dd5f00e6649f49353a079cd4158a817a5f"
+      },
+      {
+        "path": "src/lib/task-order.ts",
+        "sha256": "ce69b91491c73e47968ddbd6c821f6daa415818886e8035e0a891deb32ae4bd3",
+        "git_sha256": "ce69b91491c73e47968ddbd6c821f6daa415818886e8035e0a891deb32ae4bd3"
+      },
+      {
+        "path": "tsconfig.json",
+        "sha256": "d70f4b229419606c8e64905412d436c555bd483f803270f493eda60c6901e9e5",
+        "git_sha256": "d70f4b229419606c8e64905412d436c555bd483f803270f493eda60c6901e9e5"
+      }
+    ],
+    "image": "sha256:5fc579eac58e3baec01700c8289211bfe1cd86e3b73fb7211c9018ab36d5cfac",
+    "runtime": {
+      "user": "node",
+      "read_only": true,
+      "memory_bytes": 1073741824,
+      "health": "healthy"
+    }
+  },
+  "backend": {
+    "repository": "https://github.com/Plan-Do-See/PDC_Diary_Spring",
+    "branch": "codex/task-block-order",
+    "commit": "30d5b35f8c465a144f542b8488c402eadd6224ca",
+    "image": "sha256:613f860110ff5cb76b574ddf4a924dc563094d88d2fd9b33e378fed516fd7ce6",
+    "archive": "D:/workspace/PDC_Diary_Spring/build/jib-image.tar",
+    "sha256": "f36ee120d6888ff4cc594a342ac0bd3e385f0e663dcec8d6ceef054d7e58dad4",
+    "prepared_config_id": "sha256:35cdc7bc60a1130a5727bac0d540d322392ad9f445a20e71a9e4a81ae557d14d",
+    "runtime": {
+      "user": "10001:10001",
+      "read_only": true,
+      "memory_bytes": 1610612736,
+      "status": "running; internal/public API verified"
+    }
+  },
+  "destination": {
+    "host": "158.247.203.145",
+    "path": "/opt/pds",
+    "url": "https://plandosee.app"
+  },
+  "excluded": [
+    "environment files",
+    "keys",
+    "local databases",
+    "personal records",
+    "Figma files"
+  ],
+  "pending": [],
+  "deployed_at": "2026-09-11T05:13:00.197053+00:00",
+  "checked_at": "2026-09-11T05:18:50.626Z",
+  "approval": "User explicitly approved named commits, repositories/branches, deployment files, server destination, backup and V4/API/web rollout",
+  "notion_sync": "synchronized",
+  "notion_readback_at": "2026-09-11T05:18:29.130Z",
+  "database": {
+    "container_unchanged": true,
+    "migrations": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "all_success": true,
+    "tables": 22,
+    "backup_restore_tables_compared": 21,
+    "original_columns_and_rows_preserved": true,
+    "expected_difference": "Flyway V4 history row added; original history retained",
+    "new_order_values_valid": true,
+    "runtime_order_insert_update_granted": true,
+    "backup": "/opt/pds/backups/app-20260911T0505Z/database.sql",
+    "backup_sha256": "c336dba5d90e71220816d83ebb0f9f8a2e16def1a5323cde60d7fdb822340cf6",
+    "temporary_restore_database_removed": true,
+    "backup_kept_private": true,
+    "final_contract_full_certification": false
+  },
+  "documentation": {
+    "files": 6,
+    "openapi": "0.3.0",
+    "paths": 44,
+    "operations": 63,
+    "archive_sha256": "5684547dba779bef6af46c1bf7f475c7677c0baac5ef93c3464099a04166a27b"
+  },
+  "verification": {
+    "http": {
+      "started_at": "2026-09-11T05:12:51.320Z",
+      "origin": "https://plandosee.app",
+      "tls": "default certificate and hostname validation; no insecure override",
+      "writes": "only deliberately invalid public input, no record creation or external mail",
+      "checks": [
+        {
+          "name": "Public HTTPS landing and exact notice",
+          "status": "pass",
+          "actual": 200
+        },
+        {
+          "name": "Published JS/CSS assets load and no known credential markers",
+          "status": "pass",
+          "actual": [
+            {
+              "path": "/_next/static/media/SUIT_Variable-s.p.2a46r9b08pssj.woff2",
+              "sha256": "16f2b58f71ac4e12ac24c49e97f7cc3d6da6ad34fda3dc1f073a45aec3b7c7d1"
+            },
+            {
+              "path": "/_next/static/chunks/0tsr74xle9pn3.css",
+              "sha256": "a1d4d48aec5fa565d05c8266c9f031bf1ac6b5b02201e4581bcf798e78074950"
+            },
+            {
+              "path": "/_next/static/chunks/1z9n8rbid4xie.css",
+              "sha256": "579afff48649c1984cd617b7d69299307cabc3acd0b31c4c63c963e2a113f306"
+            },
+            {
+              "path": "/_next/static/chunks/3mc6dra1m0098.js",
+              "sha256": "d9840d6de414f19d28fbe08cc2ddd0aeb95cf379864950a506592a54f4996f31"
+            },
+            {
+              "path": "/_next/static/chunks/2i51e627rllld.js",
+              "sha256": "a4590375a64190f57d18b357bf576bf111bd5f02f3c93cad0f65fdf176689f46"
+            },
+            {
+              "path": "/_next/static/chunks/1mh6a-0e61pyc.js",
+              "sha256": "c0930af826f989eea00dbaca15c1e4b3d3609b7b0bc5416a661a4948d8c26515"
+            },
+            {
+              "path": "/_next/static/chunks/3ertolydtjaa3.js",
+              "sha256": "23556d5df67eae2b4ad940e5c85fcc58fdc35d17849350052df4fae8336ae9bf"
+            },
+            {
+              "path": "/_next/static/chunks/turbopack-0flduyczoe5pk.js",
+              "sha256": "3aaf7f84028af39f202dc1a4e8df450ab8296af310e127de66c7b3b51376184a"
+            },
+            {
+              "path": "/_next/static/chunks/3fntmmi971322.js",
+              "sha256": "34ed6abf4c6d0d1bb3dc56d3f133d2a5dbc3a3c89c791deab314e27143ac14ce"
+            },
+            {
+              "path": "/_next/static/chunks/03jop33i-ptjo.js",
+              "sha256": "dc225855fe5fc41740ff7332159991979a2029b9cc67f00321c2de705a5186e7"
+            },
+            {
+              "path": "/_next/static/chunks/0cz1d0mv5g_q7.js",
+              "sha256": "0973c1d64c88adc8e3c950410cb58b288f72118d5965b78049438deb8f2f9683"
+            }
+          ]
+        },
+        {
+          "name": "Dynamic page /plans",
+          "status": "pass",
+          "actual": {
+            "status": 200,
+            "cache": "private, no-cache, no-store, max-age=0, must-revalidate"
+          }
+        },
+        {
+          "name": "Dynamic page /tasks",
+          "status": "pass",
+          "actual": {
+            "status": 200,
+            "cache": "private, no-cache, no-store, max-age=0, must-revalidate"
+          }
+        },
+        {
+          "name": "Dynamic page /review",
+          "status": "pass",
+          "actual": {
+            "status": 200,
+            "cache": "private, no-cache, no-store, max-age=0, must-revalidate"
+          }
+        },
+        {
+          "name": "Dynamic page /trash",
+          "status": "pass",
+          "actual": {
+            "status": 200,
+            "cache": "private, no-cache, no-store, max-age=0, must-revalidate"
+          }
+        },
+        {
+          "name": "Dynamic page /account/login",
+          "status": "pass",
+          "actual": {
+            "status": 200,
+            "cache": "private, no-cache, no-store, max-age=0, must-revalidate"
+          }
+        },
+        {
+          "name": "Dynamic page /account/signup",
+          "status": "pass",
+          "actual": {
+            "status": 200,
+            "cache": "private, no-cache, no-store, max-age=0, must-revalidate"
+          }
+        },
+        {
+          "name": "Dynamic page /account/verify",
+          "status": "pass",
+          "actual": {
+            "status": 200,
+            "cache": "private, no-cache, no-store, max-age=0, must-revalidate"
+          }
+        },
+        {
+          "name": "Dynamic page /account/reset",
+          "status": "pass",
+          "actual": {
+            "status": 200,
+            "cache": "private, no-cache, no-store, max-age=0, must-revalidate"
+          }
+        },
+        {
+          "name": "Dynamic page /account/find-id",
+          "status": "pass",
+          "actual": {
+            "status": 200,
+            "cache": "private, no-cache, no-store, max-age=0, must-revalidate"
+          }
+        },
+        {
+          "name": "Anonymous personal page returns login redirect (browser confirmed)",
+          "status": "pass",
+          "actual": {
+            "status": 200,
+            "streamed_redirect": false
+          }
+        },
+        {
+          "name": "Anonymous private API rejected",
+          "status": "pass",
+          "actual": 401
+        },
+        {
+          "name": "Secure session, CSRF 403/400 and no public plan created",
+          "status": "pass",
+          "actual": {
+            "without_csrf": 403,
+            "invalid_with_csrf": 400,
+            "record_ids_unchanged": true
+          }
+        },
+        {
+          "name": "Actual provider availability",
+          "status": "pass",
+          "actual": {
+            "google": false,
+            "kakao": false,
+            "naver": false
+          }
+        },
+        {
+          "name": "Existing API docs route preserved",
+          "status": "pass",
+          "actual": 200
+        },
+        {
+          "name": "HTTP to HTTPS",
+          "status": "pass",
+          "actual": 308
+        }
+      ],
+      "finished_at": "2026-09-11T05:12:52.731Z",
+      "status": "pass",
+      "limits": [
+        "No production account/mail or real user records created",
+        "External OAuth unavailable unless separately configured",
+        "Local DB/browser tests provide write-flow evidence; production write acceptance remains separate"
+      ]
+    },
+    "browser": {
+      "checked_at": "2026-09-11T05:14:35.003Z",
+      "release": "20260911T0505Z",
+      "checks": [
+        "Production existing plan expands, inline draft opens and task-order API responds",
+        "Production three-tab round trips preserve drafts and shell with document/RSC requests 0",
+        "Production back/forward restores tab draft",
+        "Production switch and 1280/760/390/320px layout fit",
+        "Production personal API denies anonymous access; OpenAPI 0.3.0 has 44 paths"
+      ],
+      "document_requests": 0,
+      "rsc_requests": 0,
+      "mutation_requests": 0,
+      "page_errors": [],
+      "existing_public_plan_branch_tested": true,
+      "private_data_or_credentials_logged": false
+    },
+    "previous_browser": {
+      "checked_at": "2026-09-11T05:12:47.504Z",
+      "old_version_loaded_before_release": true,
+      "old_page_menu_navigation_after_release": "passed",
+      "explicit_reload_new_version": "passed",
+      "mutations": 0,
+      "page_errors": []
+    },
+    "public_source_http": {
+      "web": 200,
+      "backend": 200
+    },
+    "source_scan": {
+      "files": 147,
+      "history_commits": 17,
+      "forbidden_files": 0,
+      "findings": 0,
+      "contract_copies_match": true,
+      "scope": "Selected patterns/known credentials before release; not exhaustive secret discovery"
+    },
+    "real_user_records_created": false,
+    "production_valid_mutations_performed": false,
+    "csrf_invalid_requests": 2,
+    "external_mail_test": false
+  },
+  "limitations": [
+    "Real user 1/5/3 and final full acceptance remain incomplete",
+    "Full production final DB contract and external backup restore not certified",
+    "Production DND write flow not exercised; verified previously on isolated real API/DB",
+    "Social login remains paused; Figma/PDF excluded"
+  ]
+}

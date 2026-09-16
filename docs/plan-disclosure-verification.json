@@ -1,0 +1,45 @@
+{
+  "checked_at": "2026-09-11T03:37:25.814Z",
+  "checks": [
+    "PC-01 initially compact heading",
+    "PC-02 heading toggles in place and retains focus URL history",
+    "PC-03 Enter and Space disclosure",
+    "PC-04 drafts survive collapse and another plan",
+    "PC-05 view switch preserves expanded state and draft",
+    "PC-06 DND save refresh preserves disclosure and draft; test order restored",
+    "PC-07 explicit plan detail returns with input and common DOM retained",
+    "PC-08 responsive open content no overflow",
+    "PC-09 direct plan URL reveals owning card"
+  ],
+  "sizes": [
+    1280,
+    760,
+    390,
+    320
+  ],
+  "page_errors": [],
+  "navigation_requests_during_interactions": 0,
+  "synthetic_workspace_only": true,
+  "order_restored": true,
+  "temporary_task_created": false,
+  "production_changed": false,
+  "javascript_disabled_route": {
+    "visible": false,
+    "hidden_ancestors": [
+      {
+        "tag": "DIV",
+        "id": "S:1",
+        "hidden": true,
+        "display": "none"
+      }
+    ],
+    "status": "not_supported_in_observed_streamed_route"
+  },
+  "total_main_frame_navigation_requests": 1,
+  "explicit_direct_url_navigation_requests": 1,
+  "navigation_counter_note": "PC-07 asserted zero before explicit PC-09 direct URL navigation",
+  "typecheck": "passed",
+  "windows_build": "passed",
+  "notion_sync": "synchronized",
+  "notion_readback_at": "2026-09-11T03:40:12.412Z"
+}

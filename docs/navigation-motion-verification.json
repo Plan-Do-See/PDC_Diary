@@ -1,0 +1,123 @@
+{
+  "checked_at": "2026-09-11T03:36:58.850Z",
+  "checks": [
+    "NM-01 Plan Do See client transitions: no document request; same header/main/runtime; active menu",
+    "NM-02 browser back/forward retain shared shell without reload",
+    "NM-03 expansion has measurable intermediate height and restores natural height",
+    "NM-04 collapse animates to closed height; draft remains mounted",
+    "NM-05 reversal starts at current height and last click wins",
+    "NM-06 Enter/Space animation retains header focus",
+    "NM-07 reduced motion uses immediate toggle without height animation",
+    "NM-08 cancel menu navigation preserves unsaved inline task and expanded card",
+    "NM-09 all four widths fit expanded cards and shared menu",
+    "NM-10 explicit leave confirmation allows client navigation",
+    "NM-11 direct public pages render once; unauthenticated personal routes redirect to login"
+  ],
+  "opening": {
+    "start": 67,
+    "mid": 305.15625,
+    "target": 324,
+    "final": 324,
+    "open": true,
+    "remaining": 0
+  },
+  "closing": {
+    "start": 370.938,
+    "mid": 89.265625,
+    "target": 67,
+    "final": 67,
+    "open": false
+  },
+  "reverse": {
+    "before": 116.046875,
+    "after": 116.046875,
+    "open": true,
+    "height": "",
+    "animations": 0
+  },
+  "sizes": [
+    1280,
+    760,
+    390,
+    320
+  ],
+  "direct": [
+    {
+      "route": "/plans",
+      "status": 200,
+      "login_redirect": false
+    },
+    {
+      "route": "/tasks",
+      "status": 200,
+      "login_redirect": false
+    },
+    {
+      "route": "/review",
+      "status": 200,
+      "login_redirect": false
+    },
+    {
+      "route": "/plans/new",
+      "status": 200,
+      "login_redirect": false
+    },
+    {
+      "route": "/plans/d11b1479-2881-42f4-be49-e7be6e116b04",
+      "status": 200,
+      "login_redirect": false
+    },
+    {
+      "route": "/plans/d11b1479-2881-42f4-be49-e7be6e116b04/edit",
+      "status": 200,
+      "login_redirect": false
+    },
+    {
+      "route": "/plans/d11b1479-2881-42f4-be49-e7be6e116b04/duplicate",
+      "status": 200,
+      "login_redirect": false
+    },
+    {
+      "route": "/account/login",
+      "status": 200,
+      "login_redirect": false
+    },
+    {
+      "route": "/me/plans",
+      "status": 200,
+      "login_redirect": true
+    },
+    {
+      "route": "/me/tasks",
+      "status": 200,
+      "login_redirect": true
+    },
+    {
+      "route": "/me/review",
+      "status": 200,
+      "login_redirect": true
+    }
+  ],
+  "menu_document_requests": 0,
+  "mutations": 0,
+  "page_errors": [],
+  "production_changed": false,
+  "typecheck": "passed",
+  "windows_build": "passed",
+  "unit_tests": 21,
+  "existing_disclosure_regression": "PC-01..PC-09 passed",
+  "notion_sync": "synchronized",
+  "notion_readback_at": "2026-09-11T03:40:12.412Z",
+  "domain_contract_changed": false,
+  "remaining": [
+    "authenticated private menu navigation not separately tested",
+    "mid-animation resize and reduced-motion preference change not separately tested",
+    "all-page draft preservation not implemented",
+    "push/deployment awaiting prior specific approval"
+  ],
+  "loading_transition": {
+    "verification": "docs/loading-transition-verification.json",
+    "status": "passed",
+    "readback_at": "2026-09-11T03:46:45.335Z"
+  }
+}

@@ -1,6 +1,6 @@
 {
   "version": "1.3",
-  "date": "2026-09-11",
+  "date": "2026-09-14",
   "hub_url": "https://app.notion.com/p/3d50def9f6268037adfbcef233c6d20c",
   "status": "synchronized",
   "scope": "노션 문서 저장·연결·요구사항 원문 보존 확인. 앱 구현·배포·기능 검증 완료를 뜻하지 않음.",
@@ -56,11 +56,16 @@
       "hierarchy_implementation_readback": "2026-09-09T07:53:01.346Z",
       "hierarchy_deployment_readback": "2026-09-09T08:12:25.966Z",
       "inline_task_draft_readback": "2026-09-09T08:24:43.559Z",
-      "inline_task_readback_at": "2026-09-09T08:48:23.160Z",
+      "inline_task_readback_at": "2026-09-09T08:48:23.16Z",
       "figma_web_sync_readback_at": "2026-09-10T00:36:38.432Z",
       "figma_git_push_readback_at": "2026-09-10T00:41:25.089Z",
       "soft_modern_theme_readback": "2026-09-11T01:30:46.077Z",
-      "task_order_readback": "2026-09-11T02:36:39.124Z"
+      "task_order_readback": "2026-09-11T02:36:39.124Z",
+      "plan_disclosure_readback": "2026-09-11T03:21:11.684Z",
+      "navigation_motion_readback": "2026-09-11T03:40:12.412Z",
+      "loading_transition_readback": "2026-09-11T03:46:45.335Z",
+      "persistent_tabs_readback_at": "2026-09-11T04:41:17.506Z",
+      "app_deployment_readback_at": "2026-09-11T05:18:26.251Z"
     },
     {
       "id": "3d50def9-f626-812d-b0b6-f38859f63762",
@@ -80,7 +85,8 @@
       "parent_verified": true,
       "backlink_verified": true,
       "content_read_back": true,
-      "task_order_readback": "2026-09-11T02:36:39.124Z"
+      "task_order_readback": "2026-09-11T02:36:39.124Z",
+      "app_deployment_readback_at": "2026-09-11T05:18:27.024Z"
     },
     {
       "id": "3d50def9-f626-81ad-b938-f61a437009d5",
@@ -91,7 +97,8 @@
       "backlink_verified": true,
       "content_read_back": true,
       "web_release_readback": "2026-09-09T02:50:38.922Z",
-      "task_order_readback": "2026-09-11T02:36:39.124Z"
+      "task_order_readback": "2026-09-11T02:36:39.124Z",
+      "app_deployment_readback_at": "2026-09-11T05:18:28.286Z"
     },
     {
       "id": "3d50def9-f626-8110-8e50-c012568ab789",
@@ -136,7 +143,7 @@
       "last_read_back_at": "2026-09-09T03:41:28.19Z",
       "hierarchy_implementation_readback": "2026-09-09T07:53:01.346Z",
       "hierarchy_deployment_readback": "2026-09-09T08:12:25.966Z",
-      "inline_task_readback_at": "2026-09-09T08:48:23.160Z",
+      "inline_task_readback_at": "2026-09-09T08:48:23.16Z",
       "inline_task_submission_readback_at": "2026-09-09T08:53:53.378Z",
       "figma_git_push_readback_at": "2026-09-10T00:41:25.089Z"
     },
@@ -156,12 +163,18 @@
       "hierarchy_implementation_readback": "2026-09-09T07:53:01.346Z",
       "hierarchy_deployment_readback": "2026-09-09T08:12:25.966Z",
       "inline_task_draft_readback": "2026-09-09T08:24:43.559Z",
-      "inline_task_readback_at": "2026-09-09T08:48:23.160Z",
+      "inline_task_readback_at": "2026-09-09T08:48:23.16Z",
       "figma_web_sync_readback_at": "2026-09-10T00:36:38.432Z",
       "figma_git_push_readback_at": "2026-09-10T00:41:25.089Z",
       "soft_modern_theme_readback": "2026-09-11T01:30:46.077Z",
       "task_block_dnd_readback": "2026-09-11T01:40:10.912Z",
-      "task_order_readback": "2026-09-11T02:36:39.124Z"
+      "task_order_readback": "2026-09-11T02:36:39.124Z",
+      "plan_disclosure_readback": "2026-09-11T03:21:11.684Z",
+      "navigation_motion_readback": "2026-09-11T03:40:12.412Z",
+      "loading_transition_readback": "2026-09-11T03:46:45.335Z",
+      "menu_rendering_analysis_readback": "2026-09-11T03:54:38.908Z",
+      "persistent_tabs_readback_at": "2026-09-11T04:41:18.543Z",
+      "app_deployment_readback_at": "2026-09-11T05:18:29.13Z"
     },
     {
       "id": "3d60def9-f626-81b9-a208-e7aa1067c14b",
@@ -188,9 +201,9 @@
     "purchase_status": "reported_purchased_by_user",
     "web_url": "https://plandosee.app",
     "api_base_url": "https://plandosee.app/api/v1",
-    "dns_status": "both_authoritative_A_records_verified",
+    "dns_status": "A_211.194.175.156_verified",
     "https_status": "trusted_certificate_public_requests_verified",
-    "deployment_status": "backend_database_smtp_public_https_and_swagger_verified_frontend_pending",
+    "deployment_status": "nas_web_api_database_deployed_verified",
     "actual_price_and_renewal": "unverified"
   },
   "sync_history": [
@@ -1140,6 +1153,19 @@
       "status": "synchronized",
       "category_url": "https://app.notion.com/p/3d60def9f62681c2bca2cf1e7c4263f6",
       "verified": "6개 학습 페이지 재조회, 관계·순서·학습 분야 보기, 브라우저 흐름도·목차·NASA 문서 열기, 로컬 파일 확인"
+    },
+    {
+      "status": "synchronized",
+      "date": "2026-09-14",
+      "notion_read_back": true,
+      "change": "NAS 이전·데이터/권한 대조·DNS/HTTPS 전환 및 원본 서비스 중지",
+      "changed_page_ids": [
+        "3d50def9f6268037adfbcef233c6d20c",
+        "3d50def9f62681adb938f61a437009d5",
+        "3d50def9f6268108b778ed9f330b70a6",
+        "3d50def9f6268114b1b2cf7b997b3ee7",
+        "3d50def9f626812db0b6f38859f63762"
+      ]
     }
   ],
   "documentation_policy": {
@@ -2431,7 +2457,7 @@
   },
   "inline_task_update": {
     "status": "synchronized",
-    "readback_at": "2026-09-09T08:48:23.160Z",
+    "readback_at": "2026-09-09T08:48:23.16Z",
     "page_ids": [
       "3d50def9-f626-81e9-9553-ce5ca31af063",
       "3d60def9-f626-8126-8438-fb2bdd7bd6ba",
@@ -2496,5 +2522,93 @@
     "verification": "docs/task-order-verification.json",
     "deployment_plan": "docs/task-order-deployment-plan.md",
     "release_manifest": "docs/task-order-release.json"
+  },
+  "plan_disclosure": {
+    "status": "local_implementation_verified",
+    "document": "docs/plan-disclosure.md",
+    "notion_sync": "synchronized",
+    "readback_at": "2026-09-11T03:21:11.684Z",
+    "production_changed": false
+  },
+  "navigation_motion": {
+    "status": "local_implementation_verified",
+    "document": "docs/navigation-motion.md",
+    "notion_sync": "synchronized",
+    "readback_at": "2026-09-11T03:40:12.412Z",
+    "production_changed": false
+  },
+  "loading_transition": {
+    "status": "local_implementation_verified",
+    "notion_sync": "synchronized",
+    "readback_at": "2026-09-11T03:46:45.335Z",
+    "document": "docs/navigation-motion.md",
+    "verification": "docs/loading-transition-verification.json",
+    "production_changed": false
+  },
+  "menu_rendering_analysis": {
+    "status": "analysis_only",
+    "readback_at": "2026-09-11T03:54:38.908Z",
+    "notion_sync": "synchronized",
+    "application_code_changed": false,
+    "document": "docs/menu-rendering-analysis.md"
+  },
+  "persistent_tabs": {
+    "status": "local_implementation_verified",
+    "source": "User requested analyzed tab fixes and an animated switch preserving current UI",
+    "requirements": "PT-01..PT-20",
+    "document": "docs/persistent-tabs.md",
+    "verification": "docs/persistent-tabs-verification.json",
+    "notion_sync": "synchronized",
+    "readback_at": "2026-09-11T04:41:18.543Z",
+    "domain_contract_changed": false,
+    "production_changed": false
+  },
+  "app_deployment": {
+    "status": "deployed_verified",
+    "release": "20260911T0505Z",
+    "web_code_commit": "a6e652c5ae13a491eac8f77260bec4645bcfb6ad",
+    "backend_code_commit": "30d5b35f8c465a144f542b8488c402eadd6224ca",
+    "deployed_at": "2026-09-11T14:13:00.197053+09:00",
+    "evidence": "docs/app-release-20260911T0505Z.json",
+    "document": "docs/app-deployment-20260911T0505Z.md",
+    "notion_sync": "synchronized",
+    "notion_readback_at": "2026-09-11T05:18:29.13Z",
+    "production_changed": true,
+    "final_acceptance": "incomplete"
+  },
+  "nas_migration": {
+    "path": "/home/nogravybeef/plandosee",
+    "status": "deployed_verified",
+    "final_acceptance": "incomplete",
+    "document": "docs/nas-migration-2026-09-14.md",
+    "host": "web-server",
+    "ssh": "nogravybeef@100.75.23.19",
+    "notion_readback": [
+      {
+        "id": "3d50def9f6268037adfbcef233c6d20c",
+        "title": "플랜두씨 다이어리",
+        "readback": true
+      },
+      {
+        "id": "3d50def9f62681adb938f61a437009d5",
+        "title": "05 · 배포와 월 비용",
+        "readback": true
+      },
+      {
+        "id": "3d50def9f6268108b778ed9f330b70a6",
+        "title": "08 · 개발·배포 준비물",
+        "readback": true
+      },
+      {
+        "id": "3d50def9f6268114b1b2cf7b997b3ee7",
+        "title": "📘 09 · 배포 과정과 면접 설명 — Docker·Caddy·HTTPS",
+        "readback": true
+      },
+      {
+        "id": "3d50def9f626812db0b6f38859f63762",
+        "title": "03 · 기술과 저장소",
+        "readback": true
+      }
+    ]
   }
 }

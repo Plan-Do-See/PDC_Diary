@@ -1,7 +1,7 @@
 {
   "prepared_at": "2026-09-11T02:34:18.276Z",
   "release": "20260911T0235Z",
-  "status": "prepared_upload_approval_required",
+  "status": "superseded_by_deployed_release",
   "web": {
     "repository": "https://github.com/Plan-Do-See/PDC_Diary_Nextjs",
     "branch": "codex/task-block-order",
@@ -359,7 +359,8 @@
         "sha256": "d70f4b229419606c8e64905412d436c555bd483f803270f493eda60c6901e9e5",
         "git_sha256": "d70f4b229419606c8e64905412d436c555bd483f803270f493eda60c6901e9e5"
       }
-    ]
+    ],
+    "superseded_by": "plan-disclosure plus shared route layout, client menu navigation and height animation; previous bundle omits these changes"
   },
   "backend": {
     "repository": "https://github.com/Plan-Do-See/PDC_Diary_Spring",
@@ -387,5 +388,30 @@
     "Linux web build",
     "production backup and gated V4 migration",
     "API/web deployment and read-only verification"
-  ]
+  ],
+  "persistent_tabs": {
+    "status": "local_implementation_verified",
+    "source": "User requested analyzed tab fixes and an animated switch preserving current UI",
+    "requirements": "PT-01..PT-20",
+    "document": "docs/persistent-tabs.md",
+    "verification": "docs/persistent-tabs-verification.json",
+    "notion_sync": "synchronized",
+    "readback_at": "2026-09-11T04:41:18.543Z",
+    "domain_contract_changed": false,
+    "production_changed": false,
+    "repackage_required": true
+  },
+  "deployed_release": {
+    "status": "deployed_verified",
+    "release": "20260911T0505Z",
+    "web_code_commit": "a6e652c5ae13a491eac8f77260bec4645bcfb6ad",
+    "backend_code_commit": "30d5b35f8c465a144f542b8488c402eadd6224ca",
+    "deployed_at": "2026-09-11T05:13:00.197053+00:00",
+    "evidence": "docs/app-release-20260911T0505Z.json",
+    "document": "docs/app-deployment-20260911T0505Z.md",
+    "notion_sync": "synchronized",
+    "notion_readback_at": "2026-09-11T05:18:29.130Z",
+    "production_changed": true,
+    "final_acceptance": "incomplete"
+  }
 }

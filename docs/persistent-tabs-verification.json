@@ -1,0 +1,313 @@
+{
+  "status": "local_implementation_verified",
+  "source": [
+    {
+      "path": "src/components/workspace-tabs.tsx",
+      "sha256": "b37955859b769c1b867b3d9bc86290b3205ff5e37d2df6f20d579a4688c7d468"
+    },
+    {
+      "path": "src/components/workspace-tab-data.tsx",
+      "sha256": "4d57a104e093f979c24179e38be402cb8dddcf712c1b698a622a744ff973ccc8"
+    },
+    {
+      "path": "src/components/workspace-frame.tsx",
+      "sha256": "48753eec00f0a2ea3c1a4f4c7eaf23d4d2d4c4567d7c9952b2e47897bdeba512"
+    },
+    {
+      "path": "src/components/workspace-navigation.tsx",
+      "sha256": "3a299f19aec70736c36f51b3b91ac87713ae34df568d5ad214ba6db22c33b4b3"
+    },
+    {
+      "path": "src/components/plan-tab-content.tsx",
+      "sha256": "5e29a1634df20fdd5f4e1712f9047091a1afa535db8c4ef7209c5d7211b78f90"
+    },
+    {
+      "path": "src/components/screens/plans.tsx",
+      "sha256": "0680b0bbf1985a4cc44e54c1d72f302d9e9b67ccdfe26fee717ef4983125b908"
+    },
+    {
+      "path": "src/components/diary-workbench.tsx",
+      "sha256": "b8ca5b315b02b535131beda346c441187056d5d8e9889eb0a2da89c4dcfe709b"
+    },
+    {
+      "path": "src/components/task-order-list.tsx",
+      "sha256": "7340b5e28311dd702a3aeea2b998acd449d36d0ba69a61641b2e28826f2953fc"
+    },
+    {
+      "path": "src/components/tasks.tsx",
+      "sha256": "1e03f651c9f301ea5a34a5e9ea68ff7b528cf2236736057f65d0f2fb4e92edf2"
+    },
+    {
+      "path": "src/components/task-filters.tsx",
+      "sha256": "eee17bc31f0b63c40b47c7c88a35fe0143caaeae0061301fd238c613ce94abc6"
+    },
+    {
+      "path": "src/components/review.tsx",
+      "sha256": "b7dbc8d82a0affba09dc9966431403e2eed89aa57864ea7ce82d2271b797966b"
+    },
+    {
+      "path": "src/lib/api/client.ts",
+      "sha256": "80e045e3dcbf267c1e054cccd173ae42ddc9beef7ed6bfe3105f84fa7ab64fca"
+    },
+    {
+      "path": "src/app/globals.css",
+      "sha256": "cd7afef6407dcc955097626e8b92281c26b5b45864e0496c7144e8903af91b0f"
+    },
+    {
+      "path": "src/app/(diary)/[...segments]/page.tsx",
+      "sha256": "d4a3353f652d4735bdf46d75d7cb7026b301f54cbf5a3238ead9c52657d16fa9"
+    }
+  ],
+  "requirements": "PT-01..PT-20",
+  "document": "docs/persistent-tabs.md",
+  "verification": "docs/persistent-tabs-verification.json",
+  "notion_sync": "synchronized",
+  "readback_at": "2026-09-11T04:41:18.543Z",
+  "domain_contract_changed": false,
+  "production_changed": false,
+  "checked_at": "2026-09-11T04:43:11.583Z",
+  "web_base_commit": "e2cabf271c854147c25a3cd96efab7a46932bb11",
+  "uncommitted_source": true,
+  "build": {
+    "next": "16.3.4",
+    "mode": "Windows standalone production",
+    "typescript": "passed",
+    "production_build": "passed",
+    "unit_tests_passed": 21,
+    "unit_tests_failed": 0
+  },
+  "browser_checks": 40,
+  "tab_checks": 20,
+  "disclosure_regression_checks": 9,
+  "motion_regression_checks": 11,
+  "runs": {
+    "persistent-tabs-verification": {
+      "checked_at": "2026-09-11T04:40:27.143Z",
+      "checks": [
+        "PT-01 initial collapsed plans issue no task-order request",
+        "PT-02 only opened plan obtains a fresh order snapshot",
+        "PT-03 Plan card DOM, expansion, draft, list mode, selected detail survive three tabs",
+        "PT-04 Do applied filter URL and unsubmitted search survive",
+        "PT-05 See draft/metric survive; warm tab switches have zero RSC and order requests or discard dialogs",
+        "PT-06 native history restores tab and state",
+        "PT-07 same-shaped selected background slides with an intermediate position",
+        "PT-08 arrow/Home/End switch navigation",
+        "PT-09 responsive menu/cards fit five viewport widths"
+      ],
+      "document_requests": 0,
+      "initial_order_requests": 0,
+      "opened_plan_order_requests": 1,
+      "warm_switch_rsc_requests": 0,
+      "warm_switch_order_requests": 0,
+      "dialogs": 0,
+      "posts": 0,
+      "errors": [],
+      "sizes": [
+        1280,
+        900,
+        760,
+        390,
+        320
+      ],
+      "indicator": {
+        "from": "matrix(1, 0, 0, 1, 214.094, 5)",
+        "mid": "matrix(1, 0, 0, 1, 30.1374, 5)",
+        "to": "matrix(1, 0, 0, 1, 5, 5)"
+      },
+      "production_changed": false
+    },
+    "tab-refresh-verification": {
+      "checked_at": "2026-09-11T04:32:17.799Z",
+      "checks": [
+        "PT-10 actual order save invalidates another tab; Do shows saved DB order without losing draft",
+        "PT-11 stale revisit shows retained DOM immediately and refreshes in background",
+        "PT-12 rapid switches with delayed stale responses keep last selected tab and its draft",
+        "PT-13 filter history restores URL and corresponding server results"
+      ],
+      "errors": [],
+      "refreshes": 12,
+      "synthetic_order_changed_then_restored": true,
+      "production_changed": false
+    },
+    "tab-boundaries-verification": {
+      "checked_at": "2026-09-11T04:32:36.340Z",
+      "checks": [
+        "PT-14 failed background API read keeps original form/DOM; explicit retry recovers",
+        "PT-15 authenticated personal tabs retain their own DOM and expansion",
+        "PT-16 session expiry clears retained personal tabs; logged-out direct route denied; public data excludes private plan",
+        "PT-17 first tab load failure keeps current page/address; retry switches successfully"
+      ],
+      "errors": [],
+      "synthetic_account_only": true,
+      "credentials_logged": false,
+      "new_account_or_records_created": false,
+      "production_changed": false
+    },
+    "tab-history-verification": {
+      "checked_at": "2026-09-11T04:39:03.709Z",
+      "checks": [
+        "PT-18 pending first visit cannot override clicking current tab or browser back",
+        "PT-19 reduced-motion disables switch transition; each tab restores its scroll position"
+      ],
+      "production_changed": false
+    },
+    "tab-independent-verification": {
+      "checked_at": "2026-09-11T04:38:54.268Z",
+      "checks": [
+        "PT-20 menu leaves independent new/trash screens through router; one visible body; direct reload retains correct tab"
+      ],
+      "production_changed": false
+    },
+    "plan-disclosure-verification": {
+      "checked_at": "2026-09-11T04:35:24.679Z",
+      "checks": [
+        "PC-01 initially compact heading",
+        "PC-02 heading toggles in place and retains focus URL history",
+        "PC-03 Enter and Space disclosure",
+        "PC-04 drafts survive collapse and another plan",
+        "PC-05 view switch preserves expanded state and draft",
+        "PC-06 DND save refresh preserves disclosure and draft; test order restored",
+        "PC-07 explicit plan detail returns with input and common DOM retained",
+        "PC-08 responsive open content no overflow",
+        "PC-09 direct plan URL reveals owning card"
+      ],
+      "sizes": [
+        1280,
+        760,
+        390,
+        320
+      ],
+      "page_errors": [],
+      "navigation_requests_during_interactions": 1,
+      "synthetic_workspace_only": true,
+      "order_restored": true,
+      "temporary_task_created": false,
+      "production_changed": false,
+      "javascript_disabled_route": {
+        "visible": true,
+        "hidden_ancestors": [],
+        "status": "visible"
+      }
+    },
+    "tab-motion-regression": {
+      "checked_at": "2026-09-11T04:36:52.126Z",
+      "checks": [
+        "NM-01 Plan Do See client transitions: no document request; same header/main/runtime; active menu",
+        "NM-02 browser back/forward retain shared shell without reload",
+        "NM-03 expansion has measurable intermediate height and restores natural height",
+        "NM-04 collapse animates to closed height; draft remains mounted",
+        "NM-05 reversal starts at current height and last click wins",
+        "NM-06 Enter/Space animation retains header focus",
+        "NM-07 reduced motion uses immediate toggle without height animation",
+        "NM-08 superseded: tab round trip retains input without discard confirmation",
+        "NM-09 all four widths fit expanded cards and shared menu",
+        "NM-10 preserved tab permits client navigation",
+        "NM-11 direct public pages render once; unauthenticated personal routes redirect to login"
+      ],
+      "opening": {
+        "start": 67,
+        "mid": 305.15625,
+        "target": 324,
+        "final": 324,
+        "open": true,
+        "remaining": 0
+      },
+      "closing": {
+        "start": 294.719,
+        "mid": 83.6875,
+        "target": 67,
+        "final": 67,
+        "open": false
+      },
+      "reverse": {
+        "before": 116.046875,
+        "after": 116.046875,
+        "open": true,
+        "height": "",
+        "animations": 0
+      },
+      "sizes": [
+        1280,
+        760,
+        390,
+        320
+      ],
+      "direct": [
+        {
+          "route": "/plans",
+          "status": 200,
+          "login_redirect": false
+        },
+        {
+          "route": "/tasks",
+          "status": 200,
+          "login_redirect": false
+        },
+        {
+          "route": "/review",
+          "status": 200,
+          "login_redirect": false
+        },
+        {
+          "route": "/plans/new",
+          "status": 200,
+          "login_redirect": false
+        },
+        {
+          "route": "/plans/d11b1479-2881-42f4-be49-e7be6e116b04",
+          "status": 200,
+          "login_redirect": false
+        },
+        {
+          "route": "/plans/d11b1479-2881-42f4-be49-e7be6e116b04/edit",
+          "status": 200,
+          "login_redirect": false
+        },
+        {
+          "route": "/plans/d11b1479-2881-42f4-be49-e7be6e116b04/duplicate",
+          "status": 200,
+          "login_redirect": false
+        },
+        {
+          "route": "/account/login",
+          "status": 200,
+          "login_redirect": false
+        },
+        {
+          "route": "/me/plans",
+          "status": 200,
+          "login_redirect": true
+        },
+        {
+          "route": "/me/tasks",
+          "status": 200,
+          "login_redirect": true
+        },
+        {
+          "route": "/me/review",
+          "status": 200,
+          "login_redirect": true
+        }
+      ],
+      "menu_document_requests": 0,
+      "mutations": 0,
+      "page_errors": [],
+      "production_changed": false
+    }
+  },
+  "contracts": {
+    "schema_sha256": "58eb5f1ff7181f84ee27287d699599088bce5c1158bd156fad604bbc96a47535",
+    "schema_three_repositories_equal": true,
+    "openapi_copies_equal": true,
+    "original_44_unchanged": true,
+    "no_migration_in_this_change": true
+  },
+  "limitations": [
+    "Retains only the three list tabs in the current browser session",
+    "Independent edit/new routes, reload and logout do not permanently preserve drafts",
+    "External changes revalidated on stale revisit/focus; no real-time subscription",
+    "No production upload/deployment or old/new asset compatibility test",
+    "No new real user records; full acceptance remains incomplete"
+  ],
+  "verification_data": "Existing isolated synthetic records; order restored with version/audit increments; no credentials in evidence"
+}
