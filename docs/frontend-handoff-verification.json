@@ -35,6 +35,6 @@
     "correction": "Capture TLS authorization when response starts; repeat the same GET",
     "server_outage_inferred": false
   },
-  "prior_29_check_evidence": "workspaces/PDC_Diary_Infra/releases/public-https-verification.json",
+  "prior_29_check_evidence": "../PDC_Diary_Spring/ops/releases/public-https-verification.json",
   "prior_29_checks_rerun_this_document_task": false
 }

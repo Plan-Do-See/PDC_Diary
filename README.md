@@ -1,5 +1,7 @@
 # PlanDoSee
 
+2026-09-17 최신 설계: 기존 주소 호환을 포기할 수 있는 [프론트 전면 개편 명세](docs/frontend-redesign-2026-09-17.md)를 사용자 답변에 맞춰 정리했다. 오늘 할 일 → 스프린트 보드 → 축소형 주간·월간 일정, 별도 통계·회고, 계정/세션/새로고침 상태 경계, 코치마크, 반복 일정이 기준이다. 할 일 본문은 3줄 미리보기를 쓰고, 실행은 [기본 1시간 작업 세션과 전역 상태 바](docs/work-session-design-2026-09-17.md)로 기록한다. 현재는 설계 문서·대화용 시안 단계이며 제품 코드와 운영은 변경하지 않았다. 쉬운 설명은 [새 화면을 만드는 방법](../PDC_Diary_Nextjs/docs/redesign/frontend-redesign-simple-guide.md)에 있다.
+
 2026-09-09 최신 상태: 공개/개인 웹을 [운영 주소](https://plandosee.app)에 배포했다. 계획/이력·할 일·실행/완료·검색/필터/정렬·돌아보기/근거·다음 계획·전체 JSON·휴지통/복제·이메일 계정·알림 설정을 연결했다. 타입/Windows·Linux 빌드, 단위13·격리 API/DB17·운영 HTTPS16개를 통과했다. 사용자 최신 지시로 소셜 로그인은 명시적으로 다시 요청할 때까지 작업을 보류한다. 실제 사용자 1/5/3·최종 DB 계약·전체 인수는 미완료. 상세: [웹 구현·검증](../PDC_Diary_Nextjs/docs/full-implementation.md). 아래 이전 단계 기록은 당시 상태다.
 
 문서·AI 문맥 관리 검토: [여러 저장소의 문맥 관리와 RAG 도입안](docs/context-management.md) — 필수 자료 직접 읽기·정본/버전 관리·검색·검증을 결합하는 AI 추천. RAG 시스템은 아직 도입하지 않았습니다.
@@ -10,7 +12,7 @@
 
 2026-09-09 최신: [Next.js 랜딩 디자인 초안](../PDC_Diary_Nextjs/docs/landing-design-draft.md) 제작·로컬 빌드/브라우저 확인. 실제 업무 저장·인증·웹 배포는 미완료다. 노션 10·02·03에 결과를 동기화했다.
 
-2026-09-09 사용자 요청으로 `PDC_Diary_Nextjs`에 프론트 구현 구상을 작성했다. 서버 정상은 사용자 확인이며 이번에 재점검하지 않았다. 공개 Plan→Do→See→다음 Plan과 개인 화면, 이메일·세 소셜·휴지통·복제·알림을 기존 계약에 연결했다. 화면/폴더/단계/시간은 AI 제안이며 앱 코드는 미구현이다. [Next.js 구상 요약](docs/frontend-implementation-plan.md)과 형제 저장소의 상세 계획·44개 추적·검증 기록을 따른다.
+2026-09-09 사용자 요청으로 `PDC_Diary_Nextjs`에 프론트 구현 구상을 작성했다. 서버 정상은 사용자 확인이며 이번에 재점검하지 않았다. 공개 Plan→Do→See→다음 Plan과 개인 화면, 이메일·세 소셜·휴지통·복제·알림을 기존 계약에 연결했다. 화면/폴더/단계/시간은 AI 제안이며 앱 코드는 미구현이다. [Next.js 구현 계획](../PDC_Diary_Nextjs/docs/redesign/frontend-implementation-plan.md)과 형제 저장소의 상세 계획·44개 추적·검증 기록을 따른다.
 
 배포 이해·면접 준비: [로컬 설명서](docs/deployment-interview-guide.md) · [노션 학습 페이지](https://app.notion.com/p/3d50def9f6268114b1b2cf7b997b3ee7?pvs=204)
 
@@ -69,12 +71,12 @@ flowchart LR
 | 저장소 | 공개 범위 | 담당 |
 | --- | --- | --- |
 | PDC_Diary | Public | 전체 구상·RULE·결정·문서/노션 연결 |
-| PDC_Diary_Spring | Public | 백엔드 구현·API/DB 계약·migration·테스트 |
+| PDC_Diary_Spring | Public | 백엔드 구현·API/DB 계약·migration·테스트·배포/운영 |
 | PDC_Diary_Nextjs | Public | 프런트엔드 구현·SSR·화면·웹 테스트 |
 | PDC_Diary_Security | Private | 영역별 보안 분석·점검·보호 설계 |
 | PDC_Diary_Optimization | Private | 성능 개선 분석·설계 및 최적화 분석·설계 |
 
-`PDC_Diary_Infra`는 기존 로컬 독립 Git 작업 영역(`workspaces/PDC_Diary_Infra`)으로 유지하며 제공된 GitHub 목록에는 없다. Android 저장소는 향후 분리 계획으로 유지한다. 두 항목을 현재 GitHub 저장소 5개에 포함하지 않는다.
+별도 `PDC_Diary_Infra` 저장소는 없다. Docker·Caddy·NAS·배포·백업·복구는 `PDC_Diary_Spring/ops`가 담당한다. 과거 `workspaces/PDC_Diary_Infra`는 commit·원격이 없던 로컬 준비 폴더였고 2026-09-18에 Spring으로 편입했다. Android 저장소는 향후 분리 계획으로 유지한다.
 
 Optimization은 분석·설계를 담당하고 실제 코드 변경과 검사는 해당 구현 저장소에 연결합니다. [저장소 목록 JSON](docs/repository-inventory.json) · [문맥 관리안](docs/context-management.md).
 
@@ -100,7 +102,7 @@ DB 계약은 최종 배포 검증 전의 `design` 상태이며 로컬 MariaDB �
 2. Plan → 할 일 → Do → See → 다음 Plan을 구현하고 실제 본인 자료를 입력합니다.
 3. 배포 후 필수 조건 전체와 새로고침·내보내기·공개 접근·보안·복구를 확인하고 증거를 보관합니다.
 
-**본인 계획 1개 이상 · 같은 계획의 할 일 5개 이상 · 실제 실행 기록 3개 이상**이 필요합니다. 예시·검사용 데이터를 실제 기록으로 세지 않습니다.
+**사용자가 실제로 사용할 계획 1개 이상 · 같은 계획의 할 일 5개 이상 · 실제 실행 기록 3개 이상**이 필요합니다. 사용자 승인 시 AI가 작성·입력할 수 있으며 실제 수행 사실은 사용자가 확인합니다. 검사용 데이터를 실제 수행 증거로 세지 않습니다.
 
 필수 **44개 조건과 번호 없는 조건을 모두 충족**해야 합니다. 미검증·실패가 하나라도 있으면 과제 완료로 표시하지 않습니다. 결과물·소스 URL, 확인 방법 4줄, AI와 본인 판단 3줄도 제출합니다.
 
@@ -118,7 +120,7 @@ DB 계약은 최종 배포 검증 전의 `design` 상태이며 로컬 MariaDB �
 
 백엔드 구현 결과(2026-09-08): PDC_Diary_Spring에 계정·공간·세션·도메인 API와 Flyway V1~V3, 휴지통 복원·틀 복제·선택형 이메일 알림을 작성했다. MariaDB 12.3.3 로컬 검사 14개와 21개 표 덤프→복원 대조가 통과했다. Compose 구조 검사도 통과했다. 실제 외부 OAuth·Brevo 수신·클라우드/WTR·웹/Android 검증은 남아 있다. [검증 기록](docs/backend-verification.md)을 따른다.
 
-백엔드 정본은 `D:/workspace/PDC_Diary_Spring`, 독립 인프라 저장소는 `D:/workspace/PDC_Diary/workspaces/PDC_Diary_Infra`입니다. API·DB 계약과 배포/이전 절차를 준비했습니다. 원격 push·서버 구매·실제 배포는 수행하지 않았습니다.
+백엔드·API/DB 계약·배포/이전 정본은 `PDC_Diary_Spring`이며 운영 파일은 그 안의 `ops/`에 있습니다. 이 문단의 원격 push·서버 구매·실제 배포 미수행 문구는 2026-09-08 당시 기록이며, 최신 운영 상태는 Spring의 NAS 이전 기록을 따릅니다.
 
 ## 무료 호스팅·메일 준비·프론트 API 후속 지시
 

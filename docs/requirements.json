@@ -195,8 +195,8 @@
     },
     {
       "id": "T06-C78",
-      "text": "내가 실제로 세운 계획이 하나 이상 들어 있다.",
-      "verify": "V08: 본인 확인 실제 계획 1개 이상."
+      "text": "내가 실제로 사용할 계획이 하나 이상 들어 있다.",
+      "verify": "V08: 사용자 확인 실제 사용 계획 1개 이상. AI 입력 여부는 제한하지 않음."
     },
     {
       "id": "T06-C79",
@@ -261,7 +261,7 @@
     "date": "2026-09-09",
     "repository": "PDC_Diary_Nextjs",
     "status": "web_deployed_external_oauth_and_final_acceptance_pending",
-    "plan": "docs/frontend-implementation-plan.md",
+    "plan": "../PDC_Diary_Nextjs/docs/redesign/frontend-implementation-plan.md",
     "traceability": "../PDC_Diary_Nextjs/docs/requirements-traceability.json",
     "original_44_requirements_changed": false,
     "unnumbered_requirements_changed": false,

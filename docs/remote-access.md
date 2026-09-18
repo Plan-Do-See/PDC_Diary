@@ -7,9 +7,9 @@
 ## 준비한 파일
 
 - [Mac으로 옮길 ZIP](downloads/pds-access-kit.zip): 안내·두 Bash 스크립트·접속 정책·검증 기록만 포함한다. 개인키·SMTP/API 비밀값·실제 서버 IP는 없다.
-- [전체 사용 안내](../workspaces/PDC_Diary_Infra/access/README-KO.md): 인프라 저장소의 정본. ZIP에도 같은 안내가 포함된다.
-- [접속 정책](../workspaces/PDC_Diary_Infra/access/access-policy.json): PC별 키·허용 포트·현재 적용 상태.
-- [실제 검증 기록](../workspaces/PDC_Diary_Infra/access/verification.json).
+- [전체 사용 안내](../../PDC_Diary_Spring/ops/access/README-KO.md): Spring 운영 폴더의 정본. ZIP에도 같은 안내가 포함된다.
+- [접속 정책](../../PDC_Diary_Spring/ops/access/access-policy.json): PC별 키·허용 포트·현재 적용 상태.
+- [실제 검증 기록](../../PDC_Diary_Spring/ops/access/verification.json).
 
 ZIP을 Mac에 복사해 압축을 푼 뒤 그 폴더에서 다음을 실행한다. `macbook`은 장치를 구분할 이름이다.
 

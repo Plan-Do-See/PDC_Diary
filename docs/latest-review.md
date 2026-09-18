@@ -1,5 +1,11 @@
 # 프로그램·인프라 최신 결정
 
+## 2026-09-18 · 저장소별 인계 정리
+
+사용자 정정에 따라 별도 인프라 저장소가 없음을 확정했다. commit과 원격이 없던 로컬 준비 폴더는 프로젝트 저장소 목록에서 제외했으며, 비밀값·백업·로컬 상태를 제외한 배포·운영 자료를 `PDC_Diary_Spring/ops`로 편입했다. 구상·RULE·요구사항은 `PDC_Diary`, 프론트 구현·승인 시안·UI 상세 문서는 `PDC_Diary_Nextjs`, 백엔드·API·DB·배포·운영은 `PDC_Diary_Spring`, 보안 자료는 `PDC_Diary_Security`가 담당한다.
+
+새 컴퓨터용 저장소별 HANDOFF와 전체 [작업실 안내](WORKSPACE-HANDOFF.md)를 추가했다. 승인 시안 12종의 원본·standalone 미리보기·기존 화면 증거를 Next.js 저장소에 보관하고 `npm run designs:serve -- 8766`으로 목록과 대표 미리보기 HTTP 200을 확인했다. 변경 JSON 7개 파싱, 네 저장소 `git diff --check`, 프론트·API 문서 스크립트 문법 검사는 통과했다. 제품 회귀 검사, DB·운영 재검증, 배포와 노션 동기화는 이번 정리에서 실행하지 않았다.
+
 ## 2026-09-09 · 인라인 할 일 추가 운영 배포 완료
 
 사용자 승인 초안대로 계획 안에서 작은 추가 입력란이 펼쳐지며 저장 후 같은 목록을 갱신하고 제목만 비워 연속 입력한다. 마감·필수 태그·접히는 우선순위/예상 분·계획별 입력 보존을 구현했다. 배포 커밋 b377d4cb9d3b1ff3fbaa2a45824d28e95dde732f, 릴리스 20260909T0840Z.
@@ -122,7 +128,7 @@ RULES.md·현재 설계·관계/집계 계약·웹 코드를 대조한 문서 �
 
 2026-09-09 후속 사용자 요청으로 `PDC_Diary_Nextjs`에 [랜딩 디자인 초안](../../PDC_Diary_Nextjs/docs/landing-design-draft.md)을 제작했다. 아이보리·청록색과 Plan/Do/See→다음 계획 전환은 AI 디자인 제안이다. 프로덕션 빌드·타입·로컬 데스크톱/모바일 조작을 확인했다. 실제 저장·인증·배포와 전체 인수 검증은 미완료이며 [검증 기록](../../PDC_Diary_Nextjs/docs/landing-design-verification.json)을 따른다.
 
-2026-09-09 사용자 요청으로 `PDC_Diary_Nextjs`에 프론트 구현 구상을 작성했다. 서버 정상은 사용자 확인이며 이번에 재점검하지 않았다. 공개 Plan→Do→See→다음 Plan과 개인 화면, 이메일·세 소셜·휴지통·복제·알림을 기존 계약에 연결했다. 화면/폴더/단계/시간은 AI 제안이며 업무 기능은 미구현이다. [Next.js 구상 요약](frontend-implementation-plan.md)과 형제 저장소의 상세 계획·44개 추적·검증 기록을 따른다.
+2026-09-09 사용자 요청으로 `PDC_Diary_Nextjs`에 프론트 구현 구상을 작성했다. 서버 정상은 사용자 확인이며 이번에 재점검하지 않았다. 공개 Plan→Do→See→다음 Plan과 개인 화면, 이메일·세 소셜·휴지통·복제·알림을 기존 계약에 연결했다. 화면/폴더/단계/시간은 AI 제안이며 업무 기능은 미구현이다. [Next.js 구상 요약](../../PDC_Diary_Nextjs/docs/redesign/frontend-implementation-plan.md)과 형제 저장소의 상세 계획·44개 추적·검증 기록을 따른다.
 
 최신 배포 증거: [DB·백엔드·메일 배포 진행](deployment-status.md) — 내부 API·21개 표 복원·메일 수신 확인, 공개 DNS/HTTPS·API·Swagger 확인 완료, 프론트는 미구현.
 
@@ -185,7 +191,7 @@ Android UI는 Kotlin·Compose로 따로 구현한다. 서버와 같은 API 계�
 
 ## 저장소와 완료 범위
 
-Plan-Do-See/PDC_Diary는 명세·증거, PDC_Diary_Spring는 API·DB 계약, PDC_Diary_Nextjs은 Next.js, PDC_Diary_Android는 Kotlin·Compose, PDC_Diary_Infra는 배포를 담당한다. 기존 PDC_Diary_Spring에 백엔드를 생성했고 workspaces/PDC_Diary_Infra에 별도 로컬 Git 저장소를 만들었다. 웹/Android 저장소·인프라 원격 연결은 남아 있다. 상세는 [저장소 구성](repository-layout.md)에 있다.
+Plan-Do-See/PDC_Diary는 구상·RULE·요구사항, PDC_Diary_Spring은 API·DB 계약과 배포·운영, PDC_Diary_Nextjs는 Next.js와 승인 시안, PDC_Diary_Android는 후속 Kotlin·Compose를 담당한다. 별도 Infra 저장소는 없으며 과거 로컬 준비 폴더의 안전한 자료는 2026-09-18에 Spring `ops/`로 편입했다. 상세는 [저장소 구성](repository-layout.md)에 있다.
 
 웹의 44개 필수 과제 조건은 축소하지 않았다. 원문 44개 id·text·verify는 유지하고 별도 backend_progress 상태/증거 링크를 추가했다. 공개 웹 과제 8~10시간 목표와 Android 개발·기기 시험·배포는 별도다. 사용자 후속 결정으로 개인 계정 영역도 이번에 구현하되 인증·접근 분리 검증의 추가 시간은 미산정이다. 공개 과제의 안내·무인증 기능은 유지한다. n8n은 후속 자동화 대상으로 검토하고 인증 메일 경로에서는 사용하지 않는다.
 

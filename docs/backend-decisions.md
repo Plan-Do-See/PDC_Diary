@@ -1,5 +1,25 @@
 # 백엔드 구성 결정
 
+## 2026-09-18 · 회고와 다음 스프린트 연결 — 구현 전 영향 기록
+
+- 회고 작성 화면은 선택한 스프린트의 동일 조회 스냅샷 식별자와 연결 기록을 참조해야 한다. 화면에 표시한 완료·지연·시간 차이·막힘이 저장 시점에 바뀌었으면 조용히 과거 사실로 확정하지 않고 최신 수치 확인 또는 충돌 안내를 제공한다.
+- `문장 제안` 결과는 사용자 판단과 구분되는 저장 전 초안이다. 후속 계약은 제안 출처와 모델/규칙 버전을 보존할 수 있으나, 사용자가 확인·수정해 회고를 저장하기 전 `reflections.improvement_text`에 확정값으로 기록하지 않는다.
+- 다음 스프린트 초안 생성은 원본 회고의 `improvement_text`, `reflection_id`, 원본 `source_plan_id`를 출처로 연결한다. 원본 계획·회고·통계 스냅샷은 변경하지 않는다.
+- 같은 회고에서 다음 스프린트가 중복 생성되지 않도록 기존 `carry_forwards.reflection_id`의 최대 1회 제약과 요청 키를 함께 사용한다. 성공 응답은 대상 계획 ID와 연결 ID를 반환해 재시도 뒤에도 같은 결과를 복원한다.
+- 순차 UI의 `나중에 만들기`는 회고 저장까지만 수행하고 대상 계획이나 `carry_forwards` 행을 만들지 않는다. `지금 만들기`를 고른 뒤 최종 생성 행동을 실행할 때만 계획 초안과 연결을 같은 트랜잭션에서 생성한다.
+- 앱 내 이동 중인 미저장 회고 입력은 브라우저 세션 상태이며 서버의 최종 자료가 아니다. `나중에 이어 하기`를 계정 간 복원 기능으로 확장하려면 별도 명시적 임시 저장 API와 만료·삭제 정책을 먼저 확정해야 한다.
+- 이 절은 승인 전 시안의 후속 구현 영향 기록이다. 이번 단계에서는 Spring, MariaDB migration, OpenAPI, 계약 JSON을 변경하거나 검증 완료로 표시하지 않는다.
+
+## 2026-09-18 · 예상 작업시간 선택 입력 전환 — 구현 전 영향 기록
+
+- 사용자 확정: 할 일의 `estimated_minutes`는 선택 입력이며 작업 시작의 선행 조건이 아니다. 기본 1시간 작업 세션은 `planned_end_at = started_at + 60분`인 자동 종료 기준일 뿐 예상값을 생성·변경하지 않는다.
+- 현재 DB·OpenAPI·`contracts/pds-schema-v2.json`은 `tasks.estimated_minutes NOT NULL`이라 새 결정과 아직 불일치한다. 전체 프론트 시안 승인 뒤 계약 확정 단계에서 nullable 전환, 입력 검증, 정렬의 null 위치, 내보내기·복원 호환을 함께 수정한다.
+- 통계 응답에는 최소한 `estimated_task_count`, `unestimated_task_count`, `estimated_minutes_total`, `comparable_actual_minutes_total`, `difference_minutes`가 필요하다. 기존 전체 실제 합계는 `actual_minutes_total`로 유지해 예상 미입력 할 일의 실행 기록이 사라지지 않게 한다.
+- 예상 대비 차이는 예상시간이 있는 할 일 집합의 확정 실행 기록과만 비교한다. 전체 실제 합계와 비교용 실제 합계를 혼용하지 않으며, 같은 읽기 스냅샷에서 각 합계와 연결 항목을 반환한다.
+- T06-C32의 기존 전체 집계도 삭제하지 않는다. `overall_difference_minutes = actual_minutes_total - estimated_minutes_total`를 별도 계약값으로 유지하고, 공정 비교용 `difference_minutes = comparable_actual_minutes_total - estimated_minutes_total`와 이름·연결 항목을 구분한다.
+- 통계 연결 항목은 화면에서 첫 4개와 이후 10개 단위로 펼친다. 후속 API 계약은 같은 조회 스냅샷의 `total_count`, 현재 항목, `next_cursor` 또는 동등한 안정적 페이지 키를 반환하고 기간·계획·수치·검색 조건을 커서에 묶어 수치와 목록이 어긋나지 않게 해야 한다. 현재 합성 시안은 메모리 자료이므로 실제 서버 페이지 처리 검증을 대신하지 않는다.
+- 이 절은 후속 구현 영향 기록이다. 이번 시안 단계에서는 Spring, MariaDB migration, OpenAPI, 계약 JSON을 변경하거나 검증 완료로 표시하지 않는다.
+
 최신 배포 증거: [DB·백엔드·메일 배포 진행](deployment-status.md) — 내부 API·21개 표 복원·메일 수신 확인, 공개 DNS/HTTPS·API·Swagger 확인 완료, 프론트는 미구현.
 
 

@@ -10,7 +10,7 @@
 
 2026-09-09 후속 사용자 요청으로 `PDC_Diary_Nextjs`에 [랜딩 디자인 초안](../../PDC_Diary_Nextjs/docs/landing-design-draft.md)을 제작했다. 아이보리·청록색과 Plan/Do/See→다음 계획 전환은 AI 디자인 제안이다. 프로덕션 빌드·타입·로컬 데스크톱/모바일 조작을 확인했다. 실제 저장·인증·배포와 전체 인수 검증은 미완료이며 [검증 기록](../../PDC_Diary_Nextjs/docs/landing-design-verification.json)을 따른다.
 
-2026-09-09 사용자 요청으로 `PDC_Diary_Nextjs`에 프론트 구현 구상을 작성했다. 서버 정상은 사용자 확인이며 이번에 재점검하지 않았다. 공개 Plan→Do→See→다음 Plan과 개인 화면, 이메일·세 소셜·휴지통·복제·알림을 기존 계약에 연결했다. 화면/폴더/단계/시간은 AI 제안이며 업무 기능은 미구현이다. [Next.js 구상 요약](frontend-implementation-plan.md)과 형제 저장소의 상세 계획·44개 추적·검증 기록을 따른다.
+2026-09-09 사용자 요청으로 `PDC_Diary_Nextjs`에 프론트 구현 구상을 작성했다. 서버 정상은 사용자 확인이며 이번에 재점검하지 않았다. 공개 Plan→Do→See→다음 Plan과 개인 화면, 이메일·세 소셜·휴지통·복제·알림을 기존 계약에 연결했다. 화면/폴더/단계/시간은 AI 제안이며 업무 기능은 미구현이다. [Next.js 구상 요약](../../PDC_Diary_Nextjs/docs/redesign/frontend-implementation-plan.md)과 형제 저장소의 상세 계획·44개 추적·검증 기록을 따른다.
 
 배포 이해·면접 준비: [로컬 설명서](deployment-interview-guide.md) · [노션 학습 페이지](https://app.notion.com/p/3d50def9f6268114b1b2cf7b997b3ee7?pvs=204)
 
@@ -23,14 +23,14 @@
 | 저장소 | 공개 범위 | 담당 |
 | --- | --- | --- |
 | PDC_Diary | Public | 전체 구상·RULE·결정·문서/노션 연결 |
-| PDC_Diary_Spring | Public | 백엔드 구현·API/DB 계약·migration·테스트 |
+| PDC_Diary_Spring | Public | 백엔드 구현·API/DB 계약·migration·테스트·배포/운영 |
 | PDC_Diary_Nextjs | Public | 프런트엔드 구현·SSR·화면·웹 테스트 |
 | PDC_Diary_Security | Private | 영역별 보안 분석·점검·보호 설계 |
 | PDC_Diary_Optimization | Private | 성능 개선 분석·설계 및 최적화 분석·설계 |
 
-`PDC_Diary_Infra`는 기존 로컬 독립 Git 작업 영역(`workspaces/PDC_Diary_Infra`)으로 유지하며 제공된 GitHub 목록에는 없다. Android 저장소는 향후 분리 계획으로 유지한다. 두 항목을 현재 GitHub 저장소 5개에 포함하지 않는다.
+별도 `PDC_Diary_Infra` 저장소는 없다. 배포·운영 자료는 `PDC_Diary_Spring/ops`가 담당한다. 과거 `workspaces/PDC_Diary_Infra`는 commit·원격이 없던 로컬 준비 폴더였고 2026-09-18에 Spring 저장소로 편입했다. Android 저장소는 향후 분리 계획으로 유지한다.
 
-Optimization의 분석·설계 역할은 사용자 확정이다. 실제 최적화 코드·회귀 검사·전후 측정은 변경 대상 구현/인프라 저장소에 연결하고, Optimization에는 측정 조건·근거·개선안·적용 commit·결과를 연결하는 방식을 추천한다. 성능 제안은 채택/적용/측정 상태를 구분하고 기존 기능·보안·과제 조건을 완화하지 않는다.
+Optimization의 분석·설계 역할은 사용자 확정이다. 실제 최적화 코드·회귀 검사·전후 측정은 변경 대상 구현 저장소에 연결하고, 배포·운영 변경은 Spring의 `ops/`에 연결한다. Optimization에는 측정 조건·근거·개선안·적용 commit·결과를 연결하는 방식을 추천한다. 성능 제안은 채택/적용/측정 상태를 구분하고 기존 기능·보안·과제 조건을 완화하지 않는다.
 
 공개 범위와 출처는 [repository-inventory.json](repository-inventory.json)에 기록한다. Security·Optimization의 비공개 원문은 공개 문서·공개 검색 출력에 복사하지 않는다. 제출용 최종 소스·필수 증거는 기존 무인증 접근 조건을 충족해야 한다.
 
@@ -46,6 +46,7 @@ PDC_Diary_Spring/
   contracts/openapi.yaml
   contracts/pds-schema-v2.json
   Dockerfile
+  ops/                            # Compose·Caddy·NAS·배포·백업·복구·운영 증거
 
 PDC_Diary_Nextjs/
   src/app/                        # 라우팅·SSR 조회
@@ -66,13 +67,6 @@ PDC_Diary_Android/
   app/build.gradle.kts
   gradle/libs.versions.toml
 
-PDC_Diary_Infra/
-  compose.yaml
-  caddy/Caddyfile
-  scripts/deploy/ backup/ restore/
-  environments/.env.example
-  releases/release.json
-  docs/operations.md
 ```
 
 DB 계약 정본을 PDC_Diary_Spring/contracts/pds-schema-v2.json으로 이관했다. 아직 공개 릴리스가 없으므로 명세 저장소에는 동일 내용의 생성 미러를 유지한다. 공개 릴리스 후 특정 버전 참조로 전환한다. 두 복사본을 따로 수정하지 않는다. 웹의 TypeScript·Android의 Kotlin API 모델은 같은 OpenAPI 버전을 소비한다.
@@ -95,9 +89,9 @@ Caddy의 /api/v1은 Spring Boot로, 다른 웹 요청은 Next.js Node.js 서버�
 
 서비스 도메인은 사용자가 구매한 plandosee.app으로 확정했다. 웹은 https://plandosee.app, 웹·Android 공통 API는 https://plandosee.app/api/v1을 사용하도록 계획한다. DNS·HTTPS·백엔드·Swagger 연결은 확인했으며 프론트는 미구현이다.
 
-백엔드 CI는 JUnit·MariaDB 통합 검사·이미지 빌드를, 웹 CI는 lint·타입·컴포넌트·브라우저 검사·next build를, Android CI는 lint·단위·Compose UI 검사·앱 빌드를, 인프라 CI는 설정 검사를 담당한다. 운영 서버에서 빌드하지 않는다. 첫 배포는 로컬 Jib 이미지 tar와 SHA-256 전송 검증을 사용했으며 CI/registry push는 후속 준비다. 서명키·비밀번호는 공개 Git·브라우저·APK·이미지에 넣지 않는다.
+백엔드 CI는 JUnit·MariaDB 통합 검사·이미지 빌드와 `ops/` 설정 검사를, 웹 CI는 lint·타입·컴포넌트·브라우저 검사·next build를, Android CI는 lint·단위·Compose UI 검사·앱 빌드를 담당한다. 운영 서버에서 빌드하지 않는다. 첫 배포는 로컬 Jib 이미지 tar와 SHA-256 전송 검증을 사용했으며 CI/registry push는 후속 준비다. 서명키·비밀번호는 공개 Git·브라우저·APK·이미지에 넣지 않는다.
 
-release.json에는 해당 배포에 참여한 명세·구현·인프라 저장소 commit, 웹·API 이미지 digest, Android 배포 시 앱 버전·빌드 checksum, API 계약·DB migration 버전을 기록한다. Security·Optimization의 분석 근거는 적용한 결정/commit으로 연결한다. 기존 앱에 호환되는 변경을 우선하고 깨지는 변경은 /api/v2로 분리한다. DB 백업 → 호환 migration → 웹/API 교체 → 공개 동선 확인 순서로 배포한다. 앱 이미지 롤백과 DB 역변경을 동일하게 취급하지 않는다.
+release.json에는 해당 배포에 참여한 구상·Spring·웹 저장소 commit, 웹·API 이미지 digest, Android 배포 시 앱 버전·빌드 checksum, API 계약·DB migration 버전을 기록한다. Security·Optimization의 분석 근거는 적용한 결정/commit으로 연결한다. 기존 앱에 호환되는 변경을 우선하고 깨지는 변경은 /api/v2로 분리한다. DB 백업 → 호환 migration → 웹/API 교체 → 공개 동선 확인 순서로 배포한다. 앱 이미지 롤백과 DB 역변경을 동일하게 취급하지 않는다.
 
 필수 RULE은 각 저장소 AGENTS.md에서 명세 버전을 고정해 참조한다. 제출한 모든 소스 URL은 새 시크릿 창에서 접근을 확인한다. 백엔드·DB·HTTPS·Swagger는 배포했으며 원격 저장소 생성·push·최종 배포 commit 연결은 남아 있다.
 
@@ -106,9 +100,9 @@ release.json에는 해당 배포에 참여한 명세·구현·인프라 저장�
 
 ## 실제 로컬 구성
 
-인프라 저장소의 `access/`가 다중 PC·Mac SSH 도구의 정본이다. 구상 저장소 `docs/downloads/pds-access-kit.zip`은 `scripts/build-access-kit.ps1`로 정본의 허용된 파일 5개만 묶는 전달용 산출물이며 키·비밀값은 포함하지 않는다. [다른 PC 접속 안내](remote-access.md).
+Spring 저장소의 `ops/access/`가 다중 PC·Mac SSH 도구의 정본이다. 구상 저장소 `docs/downloads/pds-access-kit.zip`은 `scripts/build-access-kit.ps1`로 정본의 허용된 파일 5개만 묶는 전달용 산출물이며 키·비밀값은 포함하지 않는다. [다른 PC 접속 안내](remote-access.md).
 
-백엔드 `D:/workspace/PDC_Diary_Spring`에 코드·migration·OpenAPI·관측 DB 계약과 14개 로컬 시험을 작성했다. 인프라는 `D:/workspace/PDC_Diary/workspaces/PDC_Diary_Infra`의 독립 Git 저장소이며 명세 저장소에서 ignore한다. 공개 원격 릴리스와 웹/Android 저장소 구현·최종 다섯 commit 연결은 남아 있다. [실제 검증](backend-verification.md).
+백엔드 `PDC_Diary_Spring`에 코드·migration·OpenAPI·관측 DB 계약·운영 파일과 로컬 시험을 둔다. 배포·운영은 같은 저장소의 `ops/`에 있다. [실제 검증](backend-verification.md).
 
 ## 무료 호스팅·메일 준비·프론트 API 후속 지시
 

@@ -50,9 +50,9 @@ RAG는 관련 원문 검색을 돕는 선택지이며 토큰 절약을 위한 �
 | PDC_Diary_Security | Private | 영역별 보안 분석·점검·보호 설계 |
 | PDC_Diary_Optimization | Private | 성능 개선 분석·설계 및 최적화 분석·설계 |
 
-`PDC_Diary_Infra`는 기존 로컬 독립 Git 작업 영역(`workspaces/PDC_Diary_Infra`)으로 유지하며 제공된 GitHub 목록에는 없다. Android 저장소는 향후 분리 계획으로 유지한다. 두 항목을 현재 GitHub 저장소 5개에 포함하지 않는다.
+별도 `PDC_Diary_Infra` 저장소는 없다. Docker·Caddy·NAS·배포·백업·복구의 정본은 `PDC_Diary_Spring/ops`다. 과거 로컬 준비 폴더는 commit과 원격이 없는 상태였으며 2026-09-18에 Spring으로 편입했다. Android 저장소는 향후 분리 계획으로 유지한다.
 
-Optimization의 분석·설계 역할은 사용자 확정이다. 실제 최적화 코드·회귀 검사·전후 측정은 변경 대상 구현/인프라 저장소에 연결하고, Optimization에는 측정 조건·근거·개선안·적용 commit·결과를 연결하는 방식을 추천한다. 성능 제안은 채택/적용/측정 상태를 구분하고 기존 기능·보안·과제 조건을 완화하지 않는다.
+Optimization의 분석·설계 역할은 사용자 확정이다. 실제 최적화 코드·회귀 검사·전후 측정은 변경 대상 구현 저장소에 연결하고, 배포·운영 변경은 Spring `ops/`에 연결한다. Optimization에는 측정 조건·근거·개선안·적용 commit·결과를 연결하는 방식을 추천한다. 성능 제안은 채택/적용/측정 상태를 구분하고 기존 기능·보안·과제 조건을 완화하지 않는다.
 
 RAG 관리안에는 현재 5개 저장소의 역할·공개 범위를 반영한다. 백엔드 변경 시 공통 RULE·백엔드 계약과 해당 도메인에 연결된 Security/Optimization의 채택된 결정·검증 근거를 함께 읽도록 제안한다. 비공개 자료는 권한 있는 작업에서만 조회하고 공개 문서/검색 결과로 복제하지 않는다. 제안 상태인 개선안을 이미 적용된 제약으로 취급하지 않는다. 구조화한 목록은 [repository-inventory.json](repository-inventory.json)을 따른다.
 

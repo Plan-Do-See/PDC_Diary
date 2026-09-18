@@ -18,7 +18,7 @@
     {
       "name": "PDC_Diary_Spring",
       "visibility": "public",
-      "role": "백엔드 구현·API/DB 계약·migration·테스트",
+      "role": "백엔드 구현·API/DB 계약·migration·테스트·배포/운영",
       "kind": "backend"
     },
     {
@@ -42,13 +42,6 @@
   ],
   "additional_components": [
     {
-      "name": "PDC_Diary_Infra",
-      "state": "existing_local_independent_git",
-      "local_path": "workspaces/PDC_Diary_Infra",
-      "local_git_exists": true,
-      "listed_in_supplied_github_inventory": false
-    },
-    {
       "name": "PDC_Diary_Android",
       "state": "planned",
       "listed_in_supplied_github_inventory": false
@@ -57,13 +50,15 @@
   "local_observations": {
     "optimization_expected_sibling_path": "../PDC_Diary_Optimization",
     "expected_path_exists": false,
-    "other_clone_locations": "not_searched"
+    "other_clone_locations": "not_searched",
+    "infrastructure_owner": "PDC_Diary_Spring/ops",
+    "legacy_infra_folder": "workspaces/PDC_Diary_Infra was an uncommitted local staging folder, not a project repository; its safe contents were incorporated into PDC_Diary_Spring/ops on 2026-09-18"
   },
   "analysis_routing": {
     "status": "recommendation_not_rag_implementation",
     "optimization_design_owner": "PDC_Diary_Optimization",
     "security_design_owner": "PDC_Diary_Security",
-    "code_and_tests_owner": "affected_implementation_or_infra_repository",
+    "code_and_tests_owner": "affected implementation repository; deployment and operations belong to PDC_Diary_Spring/ops",
     "read_when_modifying": "global RULE + target domain contracts + related accepted security/performance decisions",
     "private_corpus_policy": "preserve authorization; do not copy private source content into public documentation or retrieval output"
   },

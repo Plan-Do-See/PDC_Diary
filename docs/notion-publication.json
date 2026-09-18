@@ -1,11 +1,11 @@
 {
-  "version": "1.3",
-  "date": "2026-09-14",
+  "version": "1.4",
+  "date": "2026-09-17",
   "hub_url": "https://app.notion.com/p/3d50def9f6268037adfbcef233c6d20c",
   "status": "synchronized",
   "scope": "노션 문서 저장·연결·요구사항 원문 보존 확인. 앱 구현·배포·기능 검증 완료를 뜻하지 않음.",
   "verification": {
-    "child_pages": 10,
+    "child_pages": 13,
     "hub_order": [
       "01 · 목표와 범위",
       "02 · 기능과 화면 흐름",
@@ -16,7 +16,10 @@
       "07 · 필수 RULE 44개와 증거",
       "08 · 개발·배포 준비물",
       "09 · 배포 과정과 면접 설명 — Docker·Caddy·HTTPS",
-      "10 · Next.js 프론트 구현 구상"
+      "10 · Next.js 프론트 구현 구상",
+      "11 · 보안 설계와 점검 — Spring",
+      "12 · 여러 저장소의 문맥 관리와 RAG",
+      "13 · PlanDoSee 새 화면을 만드는 방법"
     ],
     "requirements_found": 44,
     "requirements_missing": [],
@@ -27,7 +30,7 @@
     "latest_documentation_sync": "2026-09-11",
     "swagger_operations_rendered": 59,
     "openapi_examples_validated": 43,
-    "latest_frontend_planning_sync": "2026-09-09"
+    "latest_frontend_planning_sync": "2026-09-17"
   },
   "pages": [
     {
@@ -119,7 +122,8 @@
       "parent_verified": true,
       "backlink_verified": true,
       "content_read_back": true,
-      "web_release_readback": "2026-09-09T02:50:38.922Z"
+      "web_release_readback": "2026-09-09T02:50:38.922Z",
+      "frontend_redesign_readback_at": "2026-09-17"
     },
     {
       "id": "3d50def9-f626-8108-b778-ed9f330b70a6",
@@ -174,7 +178,8 @@
       "loading_transition_readback": "2026-09-11T03:46:45.335Z",
       "menu_rendering_analysis_readback": "2026-09-11T03:54:38.908Z",
       "persistent_tabs_readback_at": "2026-09-11T04:41:18.543Z",
-      "app_deployment_readback_at": "2026-09-11T05:18:29.13Z"
+      "app_deployment_readback_at": "2026-09-11T05:18:29.13Z",
+      "frontend_redesign_readback_at": "2026-09-17"
     },
     {
       "id": "3d60def9-f626-81b9-a208-e7aa1067c14b",
@@ -193,9 +198,19 @@
       "parent_verified": true,
       "backlink_verified": true,
       "content_read_back": true
+    },
+    {
+      "id": "3de0def9-f626-804f-9d4f-f96e1ad11588",
+      "title": "13 · PlanDoSee 새 화면을 만드는 방법",
+      "url": "https://app.notion.com/p/13-PlanDoSee-3de0def9f626804f9d4ff96e1ad11588",
+      "hub_link": true,
+      "parent_verified": true,
+      "backlink_verified": true,
+      "content_read_back": true,
+      "frontend_redesign_readback_at": "2026-09-17"
     }
   ],
-  "last_sync": "2026-09-09T03:40:49.296Z",
+  "last_sync": "2026-09-17",
   "domain": {
     "name": "plandosee.app",
     "purchase_status": "reported_purchased_by_user",
@@ -2610,5 +2625,89 @@
         "readback": true
       }
     ]
+  },
+  "frontend_redesign_20260917": {
+    "status": "synchronized",
+    "date": "2026-09-17",
+    "source": "User-confirmed frontend redesign answers",
+    "local_documents": [
+      "docs/frontend-redesign-2026-09-17.md",
+      "docs/frontend-redesign-simple-guide.md",
+      "docs/frontend-redesign-requirements.json"
+    ],
+    "completed_notion_changes": [
+      "Updated 07 · 필수 RULE 44개와 증거",
+      "Updated 10 · Next.js 프론트 구현 구상",
+      "Created 13 · PlanDoSee 새 화면을 만드는 방법",
+      "Added the latest status and child-page link to the hub"
+    ],
+    "notion_write": "completed_2026-09-17",
+    "readback_verified": true,
+    "new_page_id": "3de0def9f626804f9d4ff96e1ad11588",
+    "new_page_url": "https://app.notion.com/p/13-PlanDoSee-3de0def9f626804f9d4ff96e1ad11588",
+    "verified_pages": [
+      "3d50def9f62681018078c6147dc52e17",
+      "3d60def9f62681268438fb2bdd7bd6ba",
+      "3de0def9f626804f9d4ff96e1ad11588",
+      "3d50def9f6268037adfbcef233c6d20c"
+    ],
+    "unsynchronized_items": [],
+    "implementation_started": false,
+    "production_changed": false
+  },
+  "frontend_redesign_naming_20260917": {
+    "status": "synchronized",
+    "decision": "비로그인 공개 영역은 체험실, 로그인 개인 영역은 내 작업실",
+    "target_pages": [
+      "3d60def9f62681268438fb2bdd7bd6ba",
+      "3de0def9f626804f9d4ff96e1ad11588",
+      "3d50def9f6268037adfbcef233c6d20c"
+    ],
+    "readback_verified": true,
+    "readback_pages": {
+      "3d60def9f62681268438fb2bdd7bd6ba": true,
+      "3de0def9f626804f9d4ff96e1ad11588": true,
+      "3d50def9f6268037adfbcef233c6d20c": true
+    },
+    "unsynchronized_items": [],
+    "implementation_started": false,
+    "production_changed": false
+  },
+  "frontend_redesign_detailed_design_20260917": {
+    "status": "local_complete_notion_sync_blocked_wrong_workspace_connection",
+    "latest_local_revision": "task_tab_start_button_filled_play_icon",
+    "target_pages": [
+      "3d60def9f62681268438fb2bdd7bd6ba",
+      "3de0def9f626804f9d4ff96e1ad11588",
+      "3d50def9f6268037adfbcef233c6d20c"
+    ],
+    "local_documents": [
+      "docs/frontend-redesign-ui-spec-2026-09-17.md",
+      "docs/frontend-component-editing-state-2026-09-17.md",
+      "docs/frontend-redesign-ui-contract.json",
+      "docs/work-session-design-2026-09-17.md",
+      "docs/frontend-redesign-design-verification.json"
+    ],
+    "notion_write": "blocked_2026-09-17_current_connection_is_SKT_ALEPH_and_target_pages_return_object_not_found",
+    "readback_verified": false,
+    "unsynchronized_items": [
+      "프론트 RULE은 사용자의 후속 지시로 언제든지 쉽게 변경·추가·삭제할 수 있고 최신 지시가 우선하지만 AI는 임의로 바꿀 수 없다는 원칙을 10 · Next.js 프론트 구현 구상, 13 · PlanDoSee 새 화면을 만드는 방법, 허브에 쓰지 못함",
+      "펼친 할 일의 24px 헤더 컨트롤, 접힌 hover/press 모션 복원, 해시태그 줄바꿈과 실행 패널 동등 높이 보정 내용을 10 · Next.js 프론트 구현 구상과 13 · PlanDoSee 새 화면을 만드는 방법에 쓰지 못함",
+      "해시태그 하단 정렬, 접힌 진행 상태의 현재 확정값 48px 고정폭 중앙 정렬, 전체 시안 SUIT 기본 글꼴 확정 내용을 10 · Next.js 프론트 구현 구상과 13 · PlanDoSee 새 화면을 만드는 방법에 쓰지 못함",
+      "마감 범위를 목록 없이 전체→오늘→일주일→이번달→전체로 순환하는 단일 버튼으로 변경하고 오른쪽 화살표를 제거한 결정, 접힌 진행 상태의 아이콘 공간·간격 제거와 정중앙 정렬 확인 내용을 대상 Notion 문서에 쓰지 못함",
+      "펼친 헤더를 22px 컨트롤·9px 상태 글자로 축소하고 접힌 상태를 48px로 줄인 결정과 마감 전환에서 작업바 DOM을 유지하는 부분 갱신 내용을 대상 Notion 문서에 쓰지 못함",
+      "우선순위를 헤더의 마감 왼쪽으로 옮겨 접힘 해시태그·펼침 색상 배지로 전환하고 상태 화살표 11px·편집 아이콘 12px, 대표 본문 첫 문장 뒤 줄바꿈, 마감 버튼을 목록 필터 왼쪽의 같은 높이로 이동한 최신 결정을 대상 Notion 문서에 쓰지 못함",
+      "마감 필터 목록 전환 모션, 접힌 상태의 완료=초록·진행 중=주황·예정=중립색, 펼친 활성 실행 패널의 진행중·초록 배경·HH:MM:SS 실시간 시계·중단/30분 연장, 작업 시작 시 진행 중 자동 전환 결정을 대상 Notion 문서에 쓰지 못함",
+      "진행 상태 선택 아이콘 제거와 접힘·펼침 공통 상태색, 작업 시작 전후 고정 치수와 새 작업 탭 진입 모션, 중단 글자 강화, 마감 4단계 색, 테마 대응 얇은 스크롤바 결정을 대상 Notion 문서에 쓰지 못함",
+      "펼친 할 일 헤더의 우선순위 배지 테두리를 제거하고 단계별 배경색과 문구를 유지한 결정을 대상 Notion 문서에 쓰지 못함",
+      "확인 대기 작업 탭의 시간 수정·기록 확인 버튼, 기록 확인 성공/퇴장 모션, 진행 작업바 내부 요소 축소 결정을 대상 Notion 문서에 쓰지 못함",
+      "확인 대기 상태의 펼친 할 일 실행 패널에 시간 수정·기록 확인 두 버튼과 확인 전환 모션을 적용하고 상단 초록 보조 문구를 8px로 축소한 결정을 대상 Notion 문서에 쓰지 못함",
+      "상단 작업 탭의 기록 확인을 기록됨·성공 문구와 초록 강조 220ms 후 320ms 축소·퇴장하는 순차 모션으로 변경한 결정을 대상 Notion 문서에 쓰지 못함",
+      "작업탭은 할 일 안쪽 실행 패널이고 작업바는 상단 전역 줄이라는 용어 정정과 작업탭의 기록 확인이 연결된 작업바 퇴장 모션을 호출하도록 한 결정을 대상 Notion 문서에 쓰지 못함",
+      "작업탭의 1시간 작업 시작 버튼을 채워진 재생 아이콘으로 변경한 결정을 대상 Notion 문서에 쓰지 못함",
+      "현재 Notion 연결은 SKT ALEPH 워크스페이스이며 기존 대상 페이지 3개는 object_not_found; 대상 문서를 볼 수 있는 Notion 연결이 필요함"
+    ],
+    "implementation_started": false,
+    "production_changed": false
   }
 }

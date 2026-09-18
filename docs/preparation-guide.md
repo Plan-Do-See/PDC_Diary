@@ -55,7 +55,7 @@ Spring Boot 자체를 일반 설치 프로그램처럼 설치할 필요는 없�
 | PDC_Diary_Spring | Gradle Wrapper·Spring MVC/Validation/JDBC·MariaDB 드라이버·Flyway·JUnit/Testcontainers·Dockerfile |
 | PDC_Diary_Nextjs | Next.js App Router·React·TypeScript·패키지 잠금 파일·lint·브라우저 테스트·Dockerfile |
 | PDC_Diary_Android | Kotlin·Compose·ViewModel·API 연결·앱 빌드·기기 테스트·서명 설정 |
-| PDC_Diary_Infra | compose.yaml·Caddyfile·배포/백업/복구 스크립트·release.json·.env.example |
+| PDC_Diary_Spring/ops | compose.yaml·Caddyfile·배포/백업/복구 스크립트·release.json·.env.example |
 
 - 백엔드에 `contracts/openapi.yaml`과 `contracts/pds-schema-v2.json` 정본을 둔다. OpenAPI에는 요청·응답·오류·요청 키·동시 수정 충돌 규칙을 정의한다.
 
@@ -124,7 +124,7 @@ Android 구현·기기 검사·배포는 웹 과제 8~10시간과 별도다. iOS
 
 1. GitHub 조직/계정의 저장소 생성·push·Actions·Packages 권한. 서버를 만들 단계에는 AWS 계정·결제수단·예산과 도메인 DNS 관리 접근.
 
-2. 공개해도 되는 본인 계획 1개 이상, 같은 계획의 할 일 5개 이상, 실제 실행 기록 3개 이상, 다음 계획에 반영할 개선점 한 줄.
+2. 공개해도 되고 사용자가 실제로 사용할 계획 1개 이상, 같은 계획의 할 일 5개 이상, 실제 실행 기록 3개 이상, 다음 계획에 반영할 사용자 확인 개선점 한 줄. 사용자 승인 시 AI가 계획·할 일·실행 기록을 작성·입력할 수 있다.
 
 3. Android 단계에는 실제 검사할 기기와 배포 방식. 계정 본인 확인과 결제는 사용자가 진행한다.
 

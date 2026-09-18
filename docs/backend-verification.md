@@ -10,7 +10,7 @@
 사용자는 공개 과제 공간과 개인 계정 영역, 이메일·카카오·네이버·구글, 현재 개인 전용·향후 공동 편집 확장, 모든 추천 기능을 채택했다. 초기 운영은 클라우드이며 WTR Pro(5825U·32GB·6TB×2·2TB×1)는 후속 이전 대상이다. 메일은 Brevo SMTP를 사용한다. 이후 사용자가 도메인 Authenticated 상태를 확인했고 서버 SMTP 시험 메일의 네이버 받은편지함 도착을 확인했다. n8n은 후속 자동화로 검토한다.
 
 - API 정본: `D:/workspace/PDC_Diary_Spring`, 기존 origin `https://github.com/Plan-Do-See/PDC_Diary_Spring.git`. 현재 백엔드 배포는 확인했으며 commit·push·공개 릴리스는 아직 하지 않았다.
-- 인프라: `D:/workspace/PDC_Diary/workspaces/PDC_Diary_Infra`에 독립 Git 저장소 생성. 명세 저장소에서는 이 작업 폴더를 ignore한다. 원격 저장소는 아직 연결하지 않았다.
+- 당시 배포 준비 자료는 commit·원격이 없는 로컬 폴더에 작성됐다. 2026-09-18 사용자 교정에 따라 별도 Infra 저장소로 취급하지 않으며, 안전한 자료는 `PDC_Diary_Spring/ops`에 편입했다.
 - 계약: 백엔드 `contracts/openapi.yaml`, `contracts/pds-schema-v2.json`, 실제 관측 `contracts/mariadb-12.3.3-observed.json`. 명세 DB 계약은 정본과 동일한 생성 미러다. 공개 릴리스가 생기면 특정 버전 참조로 전환한다.
 
 ## 직접 확인한 결과 — 배포 이전 로컬 시험

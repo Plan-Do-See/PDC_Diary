@@ -346,31 +346,31 @@ sudo docker compose config --quiet
 </tr>
 <tr>
 <td>서버 준비 단계의 당시 증거</td>
-<td>workspaces/PDC_Diary_Infra/releases/host-bootstrap-verification.json</td>
+<td>PDC_Diary_Spring/ops/releases/host-bootstrap-verification.json</td>
 </tr>
 <tr>
 <td>이미지·DB·SMTP·복원 증거</td>
-<td>workspaces/PDC_Diary_Infra/releases/deployment-verification.json</td>
+<td>PDC_Diary_Spring/ops/releases/deployment-verification.json</td>
 </tr>
 <tr>
 <td>공개 HTTPS 29개 점검</td>
-<td>workspaces/PDC_Diary_Infra/releases/public-https-verification.json</td>
+<td>PDC_Diary_Spring/ops/releases/public-https-verification.json</td>
 </tr>
 <tr>
 <td>컨테이너·네트워크·볼륨 설정</td>
-<td>workspaces/PDC_Diary_Infra/compose.yaml</td>
+<td>PDC_Diary_Spring/ops/compose.yaml</td>
 </tr>
 <tr>
 <td>실제 Caddy 라우팅</td>
-<td>workspaces/PDC_Diary_Infra/caddy/backend.Caddyfile</td>
+<td>PDC_Diary_Spring/ops/caddy/backend.Caddyfile</td>
 </tr>
 <tr>
 <td>첫 DB/API 배포 순서</td>
-<td>workspaces/PDC_Diary_Infra/scripts/[deploy-initial-backend.sh](http://deploy-initial-backend.sh)</td>
+<td>PDC_Diary_Spring/ops/scripts/[deploy-initial-backend.sh](http://deploy-initial-backend.sh)</td>
 </tr>
 <tr>
 <td>복원 대조와 외부 HTTPS 검사</td>
-<td>scripts/[verify-initial-restore.sh](http://verify-initial-restore.sh), scripts/verify-public-https.mjs — 위 인프라 저장소 내부</td>
+<td>scripts/[verify-initial-restore.sh](http://verify-initial-restore.sh), scripts/verify-public-https.mjs — Spring ops 내부</td>
 </tr>
 <tr>
 <td>OpenAPI 원본·소스 대조 정보</td>

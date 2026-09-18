@@ -112,17 +112,17 @@ Vultr 158.247.203.145의 앱·DB·프록시는 모두 중지했고 원본 볼륨
 - 프론트 구현·웹 이미지 배포·소셜 외부 등록, 외부 비공개 Restic 저장소·자동 백업·복구 검증은 남았다.
 - 원문 44개와 DB/API 필드 계약은 유지한다. 실제 전체 과제 합격 또는 최종 공개 소스 제출 완료를 주장하지 않는다.
 
-기계 판독 증거: `workspaces/PDC_Diary_Infra/releases/deployment-verification.json`. Git commit은 아직 없으며 배포 이미지는 SHA-256으로 기록했다.
+기계 판독 증거: `PDC_Diary_Spring/ops/releases/deployment-verification.json`. 당시 Git commit은 없었으며 배포 이미지는 SHA-256으로 기록했다.
 
 [Jib tar 빌드 공식 안내](https://github.com/GoogleContainerTools/jib/blob/master/jib-gradle-plugin/README.md) · [Compose raw 환경 파일](https://docs.docker.com/reference/compose-file/services/#format)
 
-최종 문서 점검: OpenAPI 42개 경로·59개 작업·38개 모델·43개 예시와 소스 대조를 다시 통과했다. 구상·백엔드·인프라 저장소의 추적 대상 및 Git 제외되지 않은 작업 파일 116개에서 알려진 SMTP 로그인·키의 평문 일치를 찾지 못했다. 이 검사는 전체 Git 이력·이미지·임의 인코딩에 대한 비밀값 점검을 대신하지 않는다. 비밀 파일과 SSH 개인키가 Git 제외 대상임을 확인했다.
+최종 문서 점검: OpenAPI 42개 경로·59개 작업·38개 모델·43개 예시와 소스 대조를 다시 통과했다. 당시 구상·백엔드·로컬 운영 폴더의 추적 대상 및 Git 제외되지 않은 작업 파일 116개에서 알려진 SMTP 로그인·키의 평문 일치를 찾지 못했다. 이 검사는 전체 Git 이력·이미지·임의 인코딩에 대한 비밀값 점검을 대신하지 않는다. 비밀 파일과 SSH 개인키가 Git 제외 대상임을 확인했다.
 
 Cloudflare의 “Proxying is required…” 배너는 프록시를 통한 보호·캐시 기능 안내다. DNS only도 유효한 DNS 동작이며 해당 배너가 기본 도메인의 A 레코드 누락을 설명하지 않는다. 초기 HTTPS 확인까지 DNS only·TTL Auto와 서버 IP를 유지하는 안을 안내했다. [Cloudflare 프록시 상태](https://developers.cloudflare.com/dns/proxy-status/) · [기본 도메인 @](https://developers.cloudflare.com/dns/concepts/)
 
 공개 검증: 2026-09-08T10:37:45.780Z 실제 도메인·TLS 신뢰 검증을 유지한 외부 검사 29개가 통과했다. 공개 200·개인 401·CSRF 없는 변경 403·유효한 CSRF와 잘못된 입력 400, Secure/HttpOnly/SameSite=Lax 쿠키, HTTP→HTTPS 308, Swagger 6개 파일의 로컬 SHA-256 일치를 확인했다. 브라우저에서도 최신 Swagger 설명과 서비스 정보 항목이 표시됐다. 사용자 기록·추가 메일은 생성하지 않았다. [공개 Swagger](https://plandosee.app/docs/) · [API 상태 정보](https://plandosee.app/api/v1/meta)
 
-추가 증거: `workspaces/PDC_Diary_Infra/releases/public-https-verification.json`. 초기 제한 실행 환경에서는 연결이 거부됐지만 같은 시각 승인된 외부 연결과 브라우저에서 정상 응답했다. 이 도구 환경 실패를 서버 장애로 기록하지 않는다.
+추가 증거: `PDC_Diary_Spring/ops/releases/public-https-verification.json`. 초기 제한 실행 환경에서는 연결이 거부됐지만 같은 시각 승인된 외부 연결과 브라우저에서 정상 응답했다. 이 도구 환경 실패를 서버 장애로 기록하지 않는다.
 
 ## 2026-09-08 프론트 인계 문서 재확인
 
